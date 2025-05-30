@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      margin: 0;
+      background: transparent;
+    }
+    #subtitle {
+      font-size: 28px;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+      text-shadow: 2px 2px 4px #000;
+    }
+  </style>
+</head>
+<body>
+  <div id="subtitle">Waiting to display...</div>
+
+  <script>
+    const socket = new WebSocket("ws://localhost:5000/socket.io/?EIO=4&transport=websocket");
+    socket.onmessage = (event) => {
+      const data = event.data;
+      if (data.includes("subtitle")) {
+        const match = data.match(/"subtitle":"(.*?)"/);
+        if (match && match[1]) {
+          document.getElementById("subtitle").innerText = match[1];
+        }
+      }
+    };
+  </script>
+</body>
+</html>
