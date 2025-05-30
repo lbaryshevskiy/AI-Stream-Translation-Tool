@@ -1,0 +1,6 @@
+openai-whisper
+pyaudio
+flask
+flask-socketio
+googletrans==4.0.0-rc1
+ffmpeg-python
