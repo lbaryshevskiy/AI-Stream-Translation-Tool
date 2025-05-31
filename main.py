@@ -75,10 +75,11 @@ def overlay():
     return render_template('overlay.html')
 
 # Run Flask app
-if __name__ == '__main__':
-    @socketio.on('connect')
-    def test_connect():
-        print("✅ Socket connected")
-        socketio.emit("subtitle", "🔥 Hello from server!")
+@socketio.on('connect')
+def test_connect():
+    print("✅ Socket connected")
+    socketio.emit("subtitle", "🔥 Hello from server!")
 
+if __name__ == '__main__':
     socketio.run(app, host='0.0.0.0', port=5100)
+
