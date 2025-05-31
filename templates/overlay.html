@@ -19,17 +19,12 @@
 <body>
   <div id="subtitle">Waiting to display...</div>
 
-  <script>
-    const socket = new WebSocket("ws://localhost:5000/socket.io/?EIO=4&transport=websocket");
-    socket.onmessage = (event) => {
-      const data = event.data;
-      if (data.includes("subtitle")) {
-        const match = data.match(/"subtitle":"(.*?)"/);
-        if (match && match[1]) {
-          document.getElementById("subtitle").innerText = match[1];
-        }
-      }
-    };
-  </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js"></script>
+<script>
+  const socket = io("http://localhost:5000");
+  socket.on("subtitle", function (data) {
+    document.getElementById("subtitle").innerText = data;
+  });
+</script>
 </body>
 </html>
