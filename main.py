@@ -1,5 +1,7 @@
 # main.py
 # MVP: Transcribes microphone audio, translates to English, and sends captions to OBS overlay
+import eventlet
+eventlet.monkey_patch()
 
 import whisper
 import pyaudio
@@ -8,8 +10,6 @@ import threading
 import time
 import os
 import queue
-import eventlet
-eventlet.monkey_patch()
 from flask import Flask, render_template
 from flask_socketio import SocketIO
 from googletrans import Translator
