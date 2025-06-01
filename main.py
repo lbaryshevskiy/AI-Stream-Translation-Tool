@@ -62,7 +62,7 @@ def transcribe_loop():
                 if text:
                     translated = translator.translate(text, dest='en').text
                     print(f"🔊 {text} → 🗣️ {translated}")
-                    socketio.emit('subtitle', translated)
+                    socketio.emit('subtitle', translated, broadcast=True)
             except Exception as e:
                 print(f"Error: {e}")
         time.sleep(1)
