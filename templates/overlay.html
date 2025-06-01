@@ -28,7 +28,8 @@
   });
 
   socket.on("subtitle", function (data) {
-    document.getElementById("subtitle").innerText = data;
+  console.log("🗣️ Subtitle received:", data);
+  document.getElementById("subtitle").innerText = data.text;
   });
 
   socket.on("disconnect", () => {
