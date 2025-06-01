@@ -8,6 +8,8 @@ import threading
 import time
 import os
 import queue
+import eventlet
+eventlet.monkey_patch()
 from flask import Flask, render_template
 from flask_socketio import SocketIO
 from googletrans import Translator
@@ -18,7 +20,7 @@ translator = Translator()
 
 # Flask app and SocketIO setup
 app = Flask(__name__)
-socketio = SocketIO(app, cors_allowed_origins="*")
+socketio = SocketIO(app, cors_allowed_origins="*", async_mode='eventlet')
 
 # Queue for audio chunks
 audio_queue = queue.Queue()
