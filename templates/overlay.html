@@ -19,9 +19,9 @@
 <body>
   <div id="subtitle">Waiting to display...</div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
 <script>
-  const socket = io("http://localhost:5100", {
+  const socket = io();
   transports: ["websocket"],
   reconnection: true,
   });
