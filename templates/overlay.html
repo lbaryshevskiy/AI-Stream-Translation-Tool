@@ -21,7 +21,12 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js"></script>
 <script>
-  const socket = io("http://localhost:5100");
+  const socket = io("http://localhost:5100", {
+  transports: ["websocket"],
+  reconnection: true,
+  });
+
+  console.log("📡 Attempting to connect to socket.io...");
 
   socket.on("connect", () => {
     console.log("✅ Connected to socket.io server");
