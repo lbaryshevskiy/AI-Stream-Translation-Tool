@@ -24,6 +24,7 @@ socketio = SocketIO(app, cors_allowed_origins="*", async_mode='eventlet')
 
 # Queue for audio chunks
 audio_queue = queue.Queue()
+print("🎙️ Got audio chunk:", len(audio_data))
 
 # Audio recording setup
 CHUNK = 1024
