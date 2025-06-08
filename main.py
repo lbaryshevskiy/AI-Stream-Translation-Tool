@@ -24,7 +24,7 @@ socketio = SocketIO(app, cors_allowed_origins="*", async_mode='eventlet')
 
 # Queue for audio chunks
 if not audio_queue.empty():
-    audio_queue = queue.Queue()
+    audio_data = audio_queue.get()
     print("🎙️ Got audio chunk:", len(audio_data))
 
 # Audio recording setup
