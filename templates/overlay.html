@@ -20,17 +20,19 @@
   <div id="subtitle">Waiting to display...</div>
 
 <script src="/socket.io/socket.io.js"></script>
+<script src="https://cdn.socket.io/4.4.1/socket.io.min.js"></script>
 <script>
-  console.log("📡 Attempting to connect to socket.io...");
-
-  const socket = io();
+  const socket = io("http://localhost:5100", {
+    transports: ["websocket"],
+    reconnection: true,
+  });
 
   socket.on("connect", () => {
     console.log("✅ Connected to socket.io server");
   });
 
   socket.on("subtitle", function (data) {
-    console.log("🗣️ Subtitle received:", data);
+    console.log("💬 Subtitle received:", data);
     document.getElementById("subtitle").innerText = data.text;
   });
 
