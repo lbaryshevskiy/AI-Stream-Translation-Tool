@@ -21,18 +21,17 @@
 
 <script src="/socket.io/socket.io.js"></script>
 <script>
-  const socket = io();
-  });
-
   console.log("📡 Attempting to connect to socket.io...");
+
+  const socket = io();
 
   socket.on("connect", () => {
     console.log("✅ Connected to socket.io server");
   });
 
   socket.on("subtitle", function (data) {
-  console.log("🗣️ Subtitle received:", data);
-  document.getElementById("subtitle").innerText = data.text;
+    console.log("🗣️ Subtitle received:", data);
+    document.getElementById("subtitle").innerText = data.text;
   });
 
   socket.on("disconnect", () => {
