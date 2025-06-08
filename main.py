@@ -23,9 +23,8 @@ app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode='eventlet')
 
 # Queue for audio chunks
-if not audio_queue.empty():
-    audio_data = audio_queue.get()
-    print("🎙️ Got audio chunk:", len(audio_data))
+audio_data = audio_Queue.get()
+
 
 # Audio recording setup
 CHUNK = 1024
