@@ -17,14 +17,11 @@ from googletrans import Translator
 # Load Whisper model
 model = whisper.load_model("base")
 translator = Translator()
+audio_queue = queue.Queue()
 
 # Flask app and SocketIO setup
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode='eventlet')
-
-# Queue for audio chunks
-audio_queue = queue.Queue()
-
 
 # Audio recording setup
 CHUNK = 1024
