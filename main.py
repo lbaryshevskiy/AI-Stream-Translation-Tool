@@ -61,6 +61,7 @@ def transcribe_loop():
 
             try:
                 result = model.transcribe(WAVE_OUTPUT_FILENAME)
+                print("🧠 Whisper raw result:", result)
                 text = result['text'].strip()
                 print(f"📝 Raw transcription result: {text}")
                 if text:
