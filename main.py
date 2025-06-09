@@ -51,6 +51,7 @@ def transcribe_loop():
         if not audio_queue.empty():
             audio_data = audio_queue.get()
             print("🎧 Got audio chunk:", len(audio_data))  # 👈 debugging
+            
             with wave.open(WAVE_OUTPUT_FILENAME, 'wb') as wf:
                 wf.setnchannels(CHANNELS)
                 wf.setsampwidth(p.get_sample_size(FORMAT))
