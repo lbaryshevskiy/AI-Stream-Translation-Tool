@@ -23,7 +23,7 @@ app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode='eventlet')
 
 # Queue for audio chunks
-audio_data = audio_Queue.get()
+audio_queue = queue.Queue()
 
 
 # Audio recording setup
