@@ -63,6 +63,7 @@ def transcribe_loop():
             try:
                 result = model.transcribe(WAVE_OUTPUT_FILENAME)
                 text = result['text'].strip()
+                print(f"📝 Raw transcription result: {text}")
                 if text:
                     translated = translator.translate(text, dest='en').text
                     print(f"🎙️ {text} ➜ 🗣️ {translated}")
