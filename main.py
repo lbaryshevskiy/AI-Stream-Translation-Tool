@@ -51,8 +51,7 @@ def transcribe_loop():
     while True:
         if not audio_queue.empty():
             audio_data = audio_queue.get()
-            print("📤 Transmitting:", translated)
-            print("🎧 Got audio chunk:", len(audio_data))  # Safe now
+            print("🎧 Got audio chunk:", len(audio_data))
 
             with wave.open(WAVE_OUTPUT_FILENAME, 'wb') as wf:
                 wf.setnchannels(CHANNELS)
@@ -69,7 +68,7 @@ def transcribe_loop():
                     print(f"🎙️ {text} ➜ 🗣️ {translated}")
                     socketio.emit('subtitle', {'text': translated}, broadcast=True)
             except Exception as e:
-                print(f"Error: {e}")
+                print(f"❌ Error in transcription/translation: {e}")
 
         time.sleep(1)
 
