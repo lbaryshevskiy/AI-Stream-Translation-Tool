@@ -1,17 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <title>AI Subtitles Overlay</title>
   <style>
     body {
       margin: 0;
+      padding: 0;
       background: transparent;
+      overflow: hidden;
     }
+
     #subtitle {
-      font-size: 28px;
+      position: absolute;
+      bottom: 10%;
+      width: 100%;
+      text-align: center;
+      font-size: 2.5em;
       color: white;
       font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 20px;
       text-shadow: 2px 2px 4px #000;
     }
   </style>
@@ -19,25 +26,25 @@
 <body>
   <div id="subtitle">Waiting to display...</div>
 
-<script src="https://cdn.socket.io/4.4.1/socket.io.min.js"></script>
-<script>
-  const socket = io("http://localhost:5100", {
-    transports: ["websocket"],
-    reconnection: true,
-  });
+  <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"></script>
+  <script>
+    const socket = io("http://localhost:5100", {
+      transports: ["websocket"],
+      reconnection: true,
+    });
 
-  socket.on("connect", () => {
-    console.log("✅ Connected to socket.io server");
-  });
+    socket.on("connect", () => {
+      console.log("✅ Connected to socket.io server");
+    });
 
-  socket.on("subtitle", function (data) {
-    console.log("🗣 Subtitle received:", data);
-    document.getElementById("subtitle").innerText = data.text;
-  });
+    socket.on("subtitle", function (data) {
+      console.log("🗨️ Subtitle received:", data);
+      document.getElementById("subtitle").innerText = data.text;
+    });
 
-  socket.on("disconnect", () => {
-    console.log("❌ Disconnected from socket.io server");
-  });
-</script>
+    socket.on("disconnect", () => {
+      console.log("❌ Disconnected from socket.io server");
+    });
+  </script>
 </body>
 </html>
