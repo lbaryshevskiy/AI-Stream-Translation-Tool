@@ -69,7 +69,7 @@ def transcribe_loop():
                 print(f"Error: {e}")
         time.sleep(1)
 
-threading.Thread(target=record_audio, daemon=True).start()
+threading.Thread(target=transcribe_loop, daemon=True).start()
 
 # Serve overlay page
 @app.route('/')
