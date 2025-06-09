@@ -66,11 +66,13 @@ def transcribe_loop():
                 if text:
                     translated = translator.translate(text, dest='en').text
                     print(f"🎙️ {text} ➜ 🗣️ {translated}")
+                    print("📤 Transmitting:", translated)  # ✅ Now it's defined
                     socketio.emit('subtitle', {'text': translated}, broadcast=True)
             except Exception as e:
                 print(f"❌ Error in transcription/translation: {e}")
 
         time.sleep(1)
+
 
 threading.Thread(target=transcribe_loop, daemon=True).start()
 
