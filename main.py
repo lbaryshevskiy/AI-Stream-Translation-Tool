@@ -40,6 +40,7 @@ def record_audio():
         frames = []
         for _ in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
             data = stream.read(CHUNK)
+            print("🎙️ Captured audio chunk")
             frames.append(data)
         audio_queue.put(b''.join(frames))
 
@@ -50,7 +51,7 @@ def transcribe_loop():
     while True:
         if not audio_queue.empty():
             audio_data = audio_queue.get()
-
+            print("📤 Transmitting:", translated)
             print("🎧 Got audio chunk:", len(audio_data))  # Safe now
 
             with wave.open(WAVE_OUTPUT_FILENAME, 'wb') as wf:
