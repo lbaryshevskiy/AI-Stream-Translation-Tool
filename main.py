@@ -4,6 +4,7 @@ import wave
 import threading
 import time
 import queue
+from flask_socketio import SocketIO
 from flask import Flask, render_template
 from flask_socketio import SocketIO
 from googletrans import Translator
