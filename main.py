@@ -23,7 +23,7 @@ translator = Translator()
 
 # --- Flask App Setup ---
 app = Flask(__name__)
-socketio = SocketIO(app, cors_allowed_origins="*")
+socketio = SocketIO(app, cors_allowed_origins="*", async_mode="gevent")
 audio_queue = queue.Queue()
 
 # --- Audio Recording Thread ---
