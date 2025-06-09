@@ -7,6 +7,7 @@ import queue
 from flask import Flask, render_template
 from flask_socketio import SocketIO
 from googletrans import Translator
+pa = pyaudio.PyAudio()
 
 # --- Audio Configuration ---
 CHUNK = 1024
@@ -44,7 +45,7 @@ def transcribe_loop():
             audio_data = audio_queue.get()
             with wave.open(WAVE_OUTPUT_FILENAME, 'wb') as wf:
                 wf.setnchannels(CHANNELS)
-                wf.setsampwidth(p.get_sample_size(FORMAT))
+                wf.setsampwidth(pa.get_sample_size(FORMAT))
                 wf.setframerate(RATE)
                 wf.writeframes(audio_data)
 
