@@ -58,6 +58,7 @@ def transcribe_loop():
                 wf.setsampwidth(p.get_sample_size(FORMAT))
                 wf.setframerate(RATE)
                 wf.writeframes(audio_data)
+                print("💾 Saved WAV file:", WAVE_OUTPUT_FILENAME)
 
             try:
                 result = model.transcribe(WAVE_OUTPUT_FILENAME)
