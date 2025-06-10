@@ -23,10 +23,13 @@ model = whisper.load_model("base")
 translator = Translator()
 audio_queue = queue.Queue()
 
+import engineio.async_drivers.threading as eio_threading
+import engineio.base_server
+
+engineio.base_server.async_drivers = {'threading': eio_threading}
+
 app = Flask(__name__)
-
 print(">>> CONFIRM: async_mode is set to threading ✅")
-
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode="threading")
 
 # --- Flask Web Server ---
