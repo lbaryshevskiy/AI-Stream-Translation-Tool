@@ -128,8 +128,6 @@ lang_menu.pack(pady=(0, 10))
 tk.Label(frame, text="🎙️ Streamsub - AI-Powered Subtitles", font=("Helvetica", 16)).pack(pady=(0, 10))
 tk.Label(frame, text="Paste this in OBS Browser Source:").pack()
 
-tk.Label(frame, text="Select translation language:").pack()
-
 url_entry = tk.Entry(frame, width=40, justify='center')
 url_entry.insert(0, "http://localhost:5100")
 url_entry.config(state='readonly')
