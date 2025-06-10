@@ -1,6 +1,3 @@
-import os
-os.environ["FLASK_SOCKETIO_ASYNC_MODE"] = "threading"
-os.environ["ENGINEIO_ASYNC_MODE"] = "threading"
 import tkinter as tk
 import threading
 import queue
@@ -12,6 +9,7 @@ from flask import Flask, render_template
 from flask_socketio import SocketIO
 from googletrans import Translator
 import webbrowser
+import os
 
 # --- Global Setup ---
 CHUNK = 1024
@@ -30,7 +28,7 @@ app = Flask(__name__)
 import engineio
 print("Engine.IO async mode loader:", engineio.async_drivers.__loader__)
 
-socketio = SocketIO(app, cors_allowed_origins="*", async_mode="threading")
+socketio = SocketIO(app, cors_allowed_origins="*", async_mode='threading', logger=True, engineio_logger=True)
 
 # --- Flask Web Server ---
 @app.route('/')
