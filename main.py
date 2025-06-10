@@ -5,11 +5,14 @@ import time
 import wave
 import whisper
 import pyaudio
+import os
+os.environ["FLASK_SOCKETIO_ASYNC_MODE"] = "threading"
+os.environ["ENGINEIO_ASYNC_MODE"] = "threading"
+
 from flask import Flask, render_template
 from flask_socketio import SocketIO
 from googletrans import Translator
 import webbrowser
-import os
 
 # --- Global Setup ---
 CHUNK = 1024
