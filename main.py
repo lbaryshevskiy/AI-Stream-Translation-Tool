@@ -27,9 +27,6 @@ model = whisper.load_model("base")
 translator = Translator()
 audio_queue = queue.Queue()
 
-import os
-os.environ["FLASK_SOCKETIO_ASYNC_MODE"] = "threading"
-
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*")
 
