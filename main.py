@@ -9,7 +9,6 @@ from flask import Flask, render_template
 from flask_socketio import SocketIO
 from googletrans import Translator
 import webbrowser
-import os
 
 # --- Global Setup ---
 CHUNK = 1024
@@ -25,10 +24,7 @@ translator = Translator()
 audio_queue = queue.Queue()
 
 app = Flask(__name__)
-import engineio
-print("Engine.IO async mode loader:", engineio.async_drivers.__loader__)
-
-socketio = SocketIO(app, cors_allowed_origins="*", async_mode='threading', logger=True, engineio_logger=True)
+socketio = SocketIO(app, cors_allowed_origins="*", async_mode="threading")
 
 # --- Flask Web Server ---
 @app.route('/')
@@ -113,4 +109,5 @@ status_label.pack()
 
 if __name__ == "__main__":
     root.mainloop()
+
 
