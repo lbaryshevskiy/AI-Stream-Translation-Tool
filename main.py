@@ -10,6 +10,10 @@ from flask_socketio import SocketIO
 from googletrans import Translator
 import webbrowser
 
+#Adding a stop button
+stop_event = threading.Event()
+backend_threads = []
+
 # --- Global Setup ---
 CHUNK = 1024
 FORMAT = pyaudio.paInt16
@@ -44,18 +48,22 @@ def test_connect():
 
 def record_audio():
     print("🎤 record_audio() started")
-    stream = pa.open(format=FORMAT, channels=CHANNELS,
-                     rate=RATE, input=True, frames_per_buffer=CHUNK)
-    while True:
+    stream = pa.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK)
+    while not stop_event.is_set():
         frames = []
         for _ in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
+            if stop_event.is_set():
+                break
             data = stream.read(CHUNK)
             frames.append(data)
         audio_queue.put(b''.join(frames))
+    stream.stop_stream()
+    stream.close()
+    print("🛑 record_audio() stopped")
 
 def transcribe_loop():
     print("🧠 transcribe_loop() started")
-    while True:
+    while not stop_event.is_set():
         if not audio_queue.empty():
             audio_data = audio_queue.get()
             with wave.open(WAVE_OUTPUT_FILENAME, 'wb') as wf:
@@ -63,7 +71,6 @@ def transcribe_loop():
                 wf.setsampwidth(pa.get_sample_size(FORMAT))
                 wf.setframerate(RATE)
                 wf.writeframes(audio_data)
-
             try:
                 result = model.transcribe(WAVE_OUTPUT_FILENAME)
                 text = result['text'].strip()
@@ -74,13 +81,24 @@ def transcribe_loop():
             except Exception as e:
                 print(f"❌ Error in transcription/translation: {e}")
         time.sleep(1)
+    print("🛑 transcribe_loop() stopped")
 
 # --- Launch Backend Threads ---
 def start_backend():
+    global backend_threads
     print("🟢 start_backend() triggered")
-    threading.Thread(target=record_audio, daemon=True).start()
-    threading.Thread(target=transcribe_loop, daemon=True).start()
-    threading.Thread(target=lambda: socketio.run(app, host='0.0.0.0', port=5100, debug=False, use_reloader=False, allow_unsafe_werkzeug=True), daemon=True).start()
+    stop_event.clear()
+    backend_threads = [
+        threading.Thread(target=record_audio, daemon=True),
+        threading.Thread(target=transcribe_loop, daemon=True),
+        threading.Thread(target=lambda: socketio.run(app, host='0.0.0.0', port=5100, debug=False, use_reloader=False, allow_unsafe_werkzeug=True), daemon=True),
+    ]
+    for t in backend_threads:
+        t.start()
+
+def stop_backend():
+    print("🔴 stop_backend() triggered")
+    stop_event.set()
 
 # --- GUI ---
 def copy_url():
@@ -110,7 +128,17 @@ url_entry.pack(pady=(5, 5))
 copy_btn = tk.Button(frame, text="📋 Copy URL", command=copy_url)
 copy_btn.pack(pady=5)
 
-start_btn = tk.Button(frame, text="▶️ Start Subtitle App", command=start_backend)
+def toggle_backend():
+    if start_btn["text"].startswith("▶️"):
+        start_backend()
+        start_btn.config(text="⏹ Stop Subtitle App")
+        status_label.config(text="🎙️ Transcription running...")
+    else:
+        stop_backend()
+        start_btn.config(text="▶️ Start Subtitle App")
+        status_label.config(text="⏹ Transcription stopped")
+
+start_btn = tk.Button(frame, text="▶️ Start Subtitle App", command=toggle_backend)
 start_btn.pack(pady=(10, 5))
 
 status_label = tk.Label(frame, text="", fg="green")
