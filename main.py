@@ -102,7 +102,7 @@ url_entry.pack(pady=(5, 5))
 copy_btn = tk.Button(frame, text="📋 Copy URL", command=copy_url)
 copy_btn.pack(pady=5)
 
-start_btn = tk.Button(frame, text="▶️ Start Subtitle App", command=lambda: [start_backend(), launch_overlay()])
+start_btn = tk.Button(frame, text="▶️ Start Subtitle App", command=start_backend)
 start_btn.pack(pady=(10, 5))
 
 status_label = tk.Label(frame, text="", fg="green")
