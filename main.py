@@ -14,6 +14,8 @@ import webbrowser
 stop_event = threading.Event()
 backend_threads = []
 
+selected_lang = tk.StringVar(value="en")  # default to English
+
 # --- Global Setup ---
 CHUNK = 1024
 FORMAT = pyaudio.paInt16
@@ -75,7 +77,7 @@ def transcribe_loop():
                 result = model.transcribe(WAVE_OUTPUT_FILENAME)
                 text = result['text'].strip()
                 if text:
-                    translated = translator.translate(text, dest='en').text
+                    translated = translator.translate(text, dest=selected_lang.get()).text
                     print(f"🎙️ {text} → 💬 {translated}")
                     socketio.emit('subtitle', {'text': translated})
             except Exception as e:
@@ -119,6 +121,12 @@ frame.pack()
 
 tk.Label(frame, text="🎙️ Streamsub - AI-Powered Subtitles", font=("Helvetica", 16)).pack(pady=(0, 10))
 tk.Label(frame, text="Paste this in OBS Browser Source:").pack()
+
+tk.Label(frame, text="Select translation language:").pack()
+
+lang_menu = tk.OptionMenu(frame, selected_lang,
+    "en", "es", "fr", "de", "it", "pt", "ru", "uk", "zh-cn", "ja")
+lang_menu.pack(pady=(0, 10))
 
 url_entry = tk.Entry(frame, width=40, justify='center')
 url_entry.insert(0, "http://localhost:5100")
