@@ -28,10 +28,10 @@ translator = Translator()
 audio_queue = queue.Queue()
 
 app = Flask(__name__)
-socketio = SocketIO(app, cors_allowed_origins="*", async_mode="threading")
 import engineio
-print("Engine.IO async drivers:", engineio.async_drivers.__file__)
-print("Engine.IO loader:", engineio.async_drivers.__loader__)
+print("Engine.IO async mode loader:", engineio.async_drivers.__loader__)
+
+socketio = SocketIO(app, cors_allowed_origins="*", async_mode="threading")
 
 # --- Flask Web Server ---
 @app.route('/')
