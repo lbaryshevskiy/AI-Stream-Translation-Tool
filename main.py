@@ -14,8 +14,6 @@ import webbrowser
 stop_event = threading.Event()
 backend_threads = []
 
-selected_lang = tk.StringVar(value="en")  # default to English
-
 # --- Global Setup ---
 CHUNK = 1024
 FORMAT = pyaudio.paInt16
@@ -103,6 +101,7 @@ def stop_backend():
     stop_event.set()
 
 # --- GUI ---
+
 def copy_url():
     root.clipboard_clear()
     root.clipboard_append("http://localhost:5100")
@@ -119,14 +118,17 @@ root.resizable(False, False)
 frame = tk.Frame(root, padx=20, pady=20)
 frame.pack()
 
-tk.Label(frame, text="🎙️ Streamsub - AI-Powered Subtitles", font=("Helvetica", 16)).pack(pady=(0, 10))
-tk.Label(frame, text="Paste this in OBS Browser Source:").pack()
-
+selected_lang = tk.StringVar(value="en")  # now it's valid
 tk.Label(frame, text="Select translation language:").pack()
 
 lang_menu = tk.OptionMenu(frame, selected_lang,
     "en", "es", "fr", "de", "it", "pt", "ru", "uk", "zh-cn", "ja")
 lang_menu.pack(pady=(0, 10))
+
+tk.Label(frame, text="🎙️ Streamsub - AI-Powered Subtitles", font=("Helvetica", 16)).pack(pady=(0, 10))
+tk.Label(frame, text="Paste this in OBS Browser Source:").pack()
+
+tk.Label(frame, text="Select translation language:").pack()
 
 url_entry = tk.Entry(frame, width=40, justify='center')
 url_entry.insert(0, "http://localhost:5100")
