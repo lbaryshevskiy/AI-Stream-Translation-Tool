@@ -22,14 +22,14 @@ def copy_url():
 
 # --- GUI Setup ---
 root = tk.Tk()
-root.title("Live Subtitle Streamer Tool")
+root.title("Streamsub")
 root.geometry("420x220")
 root.resizable(False, False)
 
 frame = tk.Frame(root, padx=20, pady=20)
 frame.pack()
 
-tk.Label(frame, text="🎙️ Real-Time Subtitle Overlay", font=("Helvetica", 16)).pack(pady=(0, 10))
+tk.Label(frame, text="🎙️ Streamsub – AI-Powered Subtitles, font=("Helvetica", 16)).pack(pady=(0, 10))
 tk.Label(frame, text="Paste this in OBS Browser Source:").pack()
 
 url_entry = tk.Entry(frame, width=40, justify='center')
