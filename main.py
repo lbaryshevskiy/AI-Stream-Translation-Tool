@@ -24,6 +24,9 @@ translator = Translator()
 audio_queue = queue.Queue()
 
 app = Flask(__name__)
+
+print(">>> CONFIRM: async_mode is set to threading ✅")
+
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode="threading")
 
 # --- Flask Web Server ---
