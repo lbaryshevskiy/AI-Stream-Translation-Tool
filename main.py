@@ -1,3 +1,6 @@
+import os
+os.environ["FLASK_SOCKETIO_ASYNC_MODE"] = "threading"
+os.environ["ENGINEIO_ASYNC_MODE"] = "threading"
 import tkinter as tk
 import threading
 import queue
@@ -5,10 +8,6 @@ import time
 import wave
 import whisper
 import pyaudio
-import os
-os.environ["FLASK_SOCKETIO_ASYNC_MODE"] = "threading"
-os.environ["ENGINEIO_ASYNC_MODE"] = "threading"
-
 from flask import Flask, render_template
 from flask_socketio import SocketIO
 from googletrans import Translator
