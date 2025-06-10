@@ -29,7 +29,7 @@ root.resizable(False, False)
 frame = tk.Frame(root, padx=20, pady=20)
 frame.pack()
 
-tk.Label(frame, text="🎙️ Streamsub – AI-Powered Subtitles, font=("Helvetica", 16)).pack(pady=(0, 10))
+tk.Label(frame, text="Streamsub - AI-Powered Subtitles", font=("Helvetica", 16)).pack(pady=(0, 10))
 tk.Label(frame, text="Paste this in OBS Browser Source:").pack()
 
 url_entry = tk.Entry(frame, width=40, justify='center')
