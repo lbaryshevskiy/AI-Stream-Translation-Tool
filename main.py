@@ -108,5 +108,6 @@ start_btn.pack(pady=(10, 5))
 status_label = tk.Label(frame, text="", fg="green")
 status_label.pack()
 
-root.mainloop()
+if __name__ == "__main__":
+    root.mainloop()
 
