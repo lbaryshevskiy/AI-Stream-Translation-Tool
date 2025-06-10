@@ -43,6 +43,7 @@ def test_connect():
     socketio.emit("subtitle", {"text": "🔥 Hello from Streamsub!"})
 
 def record_audio():
+    print("🎤 record_audio() started")
     stream = pa.open(format=FORMAT, channels=CHANNELS,
                      rate=RATE, input=True, frames_per_buffer=CHUNK)
     while True:
@@ -53,6 +54,7 @@ def record_audio():
         audio_queue.put(b''.join(frames))
 
 def transcribe_loop():
+    print("🧠 transcribe_loop() started")
     while True:
         if not audio_queue.empty():
             audio_data = audio_queue.get()
@@ -75,6 +77,7 @@ def transcribe_loop():
 
 # --- Launch Backend Threads ---
 def start_backend():
+    print("🟢 start_backend() triggered")
     threading.Thread(target=record_audio, daemon=True).start()
     threading.Thread(target=transcribe_loop, daemon=True).start()
     threading.Thread(target=lambda: socketio.run(app, host='0.0.0.0', port=5100, debug=False, use_reloader=False, allow_unsafe_werkzeug=True), daemon=True).start()
