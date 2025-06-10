@@ -28,7 +28,7 @@ translator = Translator()
 audio_queue = queue.Queue()
 
 app = Flask(__name__)
-socketio = SocketIO(app, cors_allowed_origins="*")
+socketio = SocketIO(app, cors_allowed_origins="*", async_mode="threading")
 
 # --- Flask Web Server ---
 @app.route('/')
