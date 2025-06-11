@@ -146,6 +146,7 @@ header.grid(row=0, column=0, columnspan=2, pady=(0, 10))
 
 # Language selection
 tk.Label(frame, text="Translate subtitles to:", font=("Helvetica", 10)).grid(row=1, column=0, sticky="e")
+selected_lang = tk.StringVar(value="Select Language")
 lang_menu = tk.OptionMenu(frame, selected_lang, *language_options.keys())
 lang_menu.config(width=20)
 lang_menu.grid(row=1, column=1, sticky="w", pady=(0, 15))
