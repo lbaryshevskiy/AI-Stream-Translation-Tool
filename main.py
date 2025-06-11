@@ -10,6 +10,19 @@ from flask_socketio import SocketIO
 from googletrans import Translator
 import webbrowser
 
+language_options = {
+    "🇬🇧 English": "en",
+    "🇪🇸 Spanish": "es",
+    "🇫🇷 French": "fr",
+    "🇩🇪 German": "de",
+    "🇮🇹 Italian": "it",
+    "🇵🇹 Portuguese": "pt",
+    "🇺🇦 Ukrainian": "uk",
+    "🇨🇳 Chinese": "zh-cn",
+    "🇯🇵 Japanese": "ja"
+}
+
+
 #Adding a stop button
 stop_event = threading.Event()
 backend_threads = []
@@ -72,16 +85,19 @@ def transcribe_loop():
                 wf.setframerate(RATE)
                 wf.writeframes(audio_data)
             try:
-                result = model.transcribe(WAVE_OUTPUT_FILENAME)
-                text = result['text'].strip()
-                if text:
-                    translated = translator.translate(text, dest=selected_lang.get()).text
-                    print(f"🎙️ {text} → 💬 {translated}")
-                    socketio.emit('subtitle', {'text': translated})
-            except Exception as e:
-                print(f"❌ Error in transcription/translation: {e}")
-        time.sleep(1)
-    print("🛑 transcribe_loop() stopped")
+    result = model.transcribe(WAVE_OUTPUT_FILENAME)
+    text = result['text'].strip()
+    if text:
+        lang_label = selected_lang.get()
+        lang_code = language_options.get(lang_label)
+
+        if lang_code:
+            translated = translator.translate(text, dest=lang_code).text
+            print(f"🎙️ {text} → 💬 {translated}")
+            socketio.emit('subtitle', {'text': translated})
+        else:
+            print("⚠️ No valid language selected.")
+
 
 # --- Launch Backend Threads ---
 def start_backend():
@@ -125,8 +141,7 @@ selected_lang = tk.StringVar(value="Select Language")
 
 # Language selection
 tk.Label(frame, text="Translate subtitles to:", font=("Helvetica", 10)).pack()
-lang_menu = tk.OptionMenu(frame, selected_lang,
-    "en", "es", "fr", "de", "it", "pt", "ru", "uk", "zh-cn", "ja")
+lang_menu = tk.OptionMenu(frame, selected_lang, *language_options.keys())
 lang_menu.config(width=20)
 lang_menu.pack(pady=(0, 15))
 
