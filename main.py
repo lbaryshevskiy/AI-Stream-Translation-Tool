@@ -97,6 +97,10 @@ def transcribe_loop():
                         socketio.emit('subtitle', {'text': translated})
                     else:
                         print("⚠️ No valid language selected.")
+                    except Exception as e:
+                        print(f"❌ Error in transcription/translation: {e}")
+
+                  
 
 
 # --- Launch Backend Threads ---
