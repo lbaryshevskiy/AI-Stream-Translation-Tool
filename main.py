@@ -173,7 +173,7 @@ def toggle_backend():
 
 # Start/Stop Button
 start_btn = tk.Button(frame, text="▶️ Start Subtitle App", command=toggle_backend, width=15)
-start_btn.grid(row=4, column=0, columnspan=2, pady=(0, 10))
+start_btn.grid(row=4, column=0, columnspan=2, pady=(5, 15))
 
 # Status label
 status_label = tk.Label(frame, text="", font=("Helvetica", 9), fg="green")
