@@ -95,7 +95,7 @@ def transcribe_loop():
                         translated = translator.translate(text, dest=lang_code).text
                         print(f"🎙️ {text} → 💬 {translated}")
                         socketio.emit('subtitle', {'text': translated})
-                  else:
+                    else:
                         print("⚠️ No valid language selected.")
 
 
