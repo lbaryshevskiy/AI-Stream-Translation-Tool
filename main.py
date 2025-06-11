@@ -133,7 +133,7 @@ def launch_overlay():
 root = tk.Tk()
 root.title("Streamsub")
 root.geometry("420x320")
-root.resizable(False, False)
+root.resizable(True, True)
 
 frame = tk.Frame(root, padx=20, pady=20)
 frame.pack()
