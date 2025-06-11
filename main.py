@@ -118,23 +118,33 @@ root.resizable(False, False)
 frame = tk.Frame(root, padx=20, pady=20)
 frame.pack()
 
-selected_lang = tk.StringVar(value="en")  # now it's valid
-tk.Label(frame, text="Select translation language:").pack()
+# Header
+tk.Label(frame, text="🎙️ Streamsub", font=("Helvetica", 16, "bold")).pack(pady=(0, 10))
 
+# Language selection
+tk.Label(frame, text="Translate subtitles to:", font=("Helvetica", 10)).pack()
 lang_menu = tk.OptionMenu(frame, selected_lang,
     "en", "es", "fr", "de", "it", "pt", "ru", "uk", "zh-cn", "ja")
-lang_menu.pack(pady=(0, 10))
+lang_menu.config(width=20)
+lang_menu.pack(pady=(0, 15))
 
-tk.Label(frame, text="🎙️ Streamsub - AI-Powered Subtitles", font=("Helvetica", 16)).pack(pady=(0, 10))
-tk.Label(frame, text="Paste this in OBS Browser Source:").pack()
-
-url_entry = tk.Entry(frame, width=40, justify='center')
+# OBS URL
+tk.Label(frame, text="Paste this in OBS Browser Source:", font=("Helvetica", 10)).pack()
+url_entry = tk.Entry(frame, width=40, justify='center', font=("Courier", 10))
 url_entry.insert(0, "http://localhost:5100")
 url_entry.config(state='readonly')
 url_entry.pack(pady=(5, 5))
 
-copy_btn = tk.Button(frame, text="📋 Copy URL", command=copy_url)
+copy_btn = tk.Button(frame, text="📋 Copy URL", command=copy_url, width=20)
 copy_btn.pack(pady=5)
+
+# Start/Stop button
+start_btn = tk.Button(frame, text="▶️ Start Subtitle App", command=toggle_backend, width=25)
+start_btn.pack(pady=(15, 5))
+
+# Status
+status_label = tk.Label(frame, text="", fg="green", font=("Helvetica", 10))
+status_label.pack(pady=(5, 0))
 
 def toggle_backend():
     if start_btn["text"].startswith("▶️"):
