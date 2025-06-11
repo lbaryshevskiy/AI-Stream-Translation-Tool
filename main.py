@@ -140,14 +140,6 @@ url_entry.pack(pady=(5, 5))
 copy_btn = tk.Button(frame, text="📋 Copy URL", command=copy_url, width=20)
 copy_btn.pack(pady=5)
 
-# Start/Stop button
-start_btn = tk.Button(frame, text="▶️ Start Subtitle App", command=toggle_backend, width=25)
-start_btn.pack(pady=(15, 5))
-
-# Status
-status_label = tk.Label(frame, text="", fg="green", font=("Helvetica", 10))
-status_label.pack(pady=(5, 0))
-
 def toggle_backend():
     if start_btn["text"].startswith("▶️"):
         start_backend()
@@ -157,12 +149,14 @@ def toggle_backend():
         stop_backend()
         start_btn.config(text="▶️ Start Subtitle App")
         status_label.config(text="⏹ Transcription stopped")
+        
+# Start/Stop button
+start_btn = tk.Button(frame, text="▶️ Start Subtitle App", command=toggle_backend, width=25)
+start_btn.pack(pady=(15, 5))
 
-start_btn = tk.Button(frame, text="▶️ Start Subtitle App", command=toggle_backend)
-start_btn.pack(pady=(10, 5))
-
-status_label = tk.Label(frame, text="", fg="green")
-status_label.pack()
+# Status
+status_label = tk.Label(frame, text="", fg="green", font=("Helvetica", 10))
+status_label.pack(pady=(5, 0))
 
 if __name__ == "__main__":
     root.mainloop()
