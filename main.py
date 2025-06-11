@@ -132,24 +132,22 @@ def launch_overlay():
 
 root = tk.Tk()
 root.title("Streamsub")
-root.geometry("380x280")
+root.geometry("320x260")
 root.resizable(True, True)
 
 frame = tk.Frame(root, padx=20, pady=20)
-frame.grid(row=0, column=0, sticky="nsew")
-root.grid_rowconfigure(0, weight=1)
-root.grid_columnconfigure(0, weight=1)
+frame.pack(expand=True)
 
 # Header
 header = tk.Label(frame, text="🎙️ Streamsub", font=("Helvetica", 16, "bold"))
 header.grid(row=0, column=0, columnspan=2, pady=(0, 10))
 
 # Language selection
-tk.Label(frame, text="Translate subtitles to:", font=("Helvetica", 10)).grid(row=1, column=0, sticky="e")
+tk.Label(frame, text="Translate to:", font=("Helvetica", 10)).pack(pady=(0, 5))
 selected_lang = tk.StringVar(value="Select Language")
 lang_menu = tk.OptionMenu(frame, selected_lang, *language_options.keys())
-lang_menu.config(width=20)
-lang_menu.grid(row=1, column=1, sticky="w", pady=(0, 15))
+lang_menu.config(width=18)
+lang_menu.pack(pady=(0, 15))
 
 # OBS URL
 tk.Label(frame, text="Paste in OBS Browser Source:", font=("Helvetica", 10)).grid(row=2, column=0, sticky="e")
@@ -158,8 +156,8 @@ url_entry.insert(0, "http://localhost:5100")
 url_entry.config(state="readonly")
 url_entry.grid(row=2, column=1, sticky="w")
 
-copy_btn = tk.Button(frame, text="📋 Copy URL", command=copy_url, width=15)
-copy_btn.grid(row=3, column=1, sticky="w", pady=(5, 15))
+copy_btn = tk.Button(frame, text="📋 Copy URL", command=copy_url, width=20)
+copy_btn.pack(pady=(0, 15))
 
 def toggle_backend():
     if start_btn["text"].startswith("▶️"):
@@ -172,12 +170,12 @@ def toggle_backend():
         status_label.config(text="⏹ Transcription stopped")
 
 # Start/Stop Button
-start_btn = tk.Button(frame, text="▶️ Start Subtitle App", command=toggle_backend, width=20)
-start_btn.grid(row=4, column=0, columnspan=2, pady=(0, 10))
+start_btn = tk.Button(frame, text="▶️ Start Subtitle App", command=toggle_backend, width=22)
+start_btn.pack(pady=(0, 15))
 
 # Status label
 status_label = tk.Label(frame, text="", font=("Helvetica", 9), fg="green")
-status_label.grid(row=5, column=0, columnspan=2)
+status_label.pack()
 
 if __name__ == "__main__":
     root.mainloop()
