@@ -162,7 +162,7 @@ url_entry.config(state="readonly")
 url_entry.grid(row=2, column=1, sticky="w")
 
 copy_btn = tk.Button(frame, text="📋 Copy URL", command=copy_url, width=15)
-copy_btn.grid(row=3, column=1, sticky="w", pady=(5, 15))
+copy_btn.grid(row=3, column=0, sticky="w", pady=(5, 15))
 
 def toggle_backend():
     if start_btn["text"].startswith("▶️"):
@@ -176,7 +176,7 @@ def toggle_backend():
 
 # Start/Stop Button
 start_btn = tk.Button(frame, text="▶️ Start Subtitle App", command=toggle_backend, width=15)
-start_btn.grid(row=4, column=1, columnspan=2, pady=(5, 15))
+start_btn.grid(row=4, column=0, columnspan=2, pady=(5, 15))
 
 # Status label
 status_label = tk.Label(frame, text="", font=("Helvetica", 9), fg="green")
