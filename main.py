@@ -151,7 +151,7 @@ header.grid(row=0, column=0, columnspan=2, pady=(0, 10))
 tk.Label(frame, text="Translate subtitles to:", font=("Helvetica", 10)).grid(row=1, column=0, sticky="e")
 selected_lang = tk.StringVar(value="Select Language")
 lang_menu = tk.OptionMenu(frame, selected_lang, *language_options.keys())
-lang_menu.config(width=17)
+lang_menu.config(width=20)
 lang_menu.grid(row=0, column=0, pady=(20, 15), padx=20, sticky="w")
 
 # OBS URL
@@ -161,7 +161,7 @@ url_entry.insert(0, "http://localhost:5100")
 url_entry.config(state="readonly")
 url_entry.grid(row=2, column=1, sticky="w")
 
-copy_btn = tk.Button(frame, text="📋 Copy URL", command=copy_url, width=15)
+copy_btn = tk.Button(frame, text="📋 Copy URL", command=copy_url, width=20)
 copy_btn.grid(row=1, column=0, pady=5, padx=20, sticky="w")
 
 def toggle_backend():
@@ -175,7 +175,7 @@ def toggle_backend():
         status_label.config(text="⏹ Transcription stopped")
 
 # Start/Stop Button
-start_btn = tk.Button(frame, text="▶️ Start Subtitle App", command=toggle_backend, width=15)
+start_btn = tk.Button(frame, text="▶️ Start Subtitle App", command=toggle_backend, width=20)
 start_btn.grid(row=2, column=0, pady=(10, 20), padx=20, sticky="w")
 
 # Status label
