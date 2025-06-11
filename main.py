@@ -121,6 +121,8 @@ frame.pack()
 # Header
 tk.Label(frame, text="🎙️ Streamsub", font=("Helvetica", 16, "bold")).pack(pady=(0, 10))
 
+selected_lang = tk.StringVar(value="en")
+
 # Language selection
 tk.Label(frame, text="Translate subtitles to:", font=("Helvetica", 10)).pack()
 lang_menu = tk.OptionMenu(frame, selected_lang,
