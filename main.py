@@ -126,7 +126,6 @@ selected_lang = tk.StringVar(value="Select Language")
 # Language selection
 tk.Label(frame, text="Translate subtitles to:", font=("Helvetica", 10)).pack()
 lang_menu = tk.OptionMenu(frame, selected_lang,
-    "Select Language"
     "en", "es", "fr", "de", "it", "pt", "ru", "uk", "zh-cn", "ja")
 lang_menu.config(width=20)
 lang_menu.pack(pady=(0, 15))
