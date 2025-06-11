@@ -172,7 +172,7 @@ def toggle_backend():
         status_label.config(text="⏹ Transcription stopped")
 
 # Start/Stop Button
-start_btn = tk.Button(frame, text="▶️ Start Subtitle App", command=toggle_backend, width=25)
+start_btn = tk.Button(frame, text="▶️ Start Subtitle App", command=toggle_backend, width=15)
 start_btn.grid(row=4, column=0, columnspan=2, pady=(0, 10))
 
 # Status label
