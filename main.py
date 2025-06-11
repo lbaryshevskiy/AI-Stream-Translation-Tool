@@ -87,16 +87,16 @@ def transcribe_loop():
             try:
     result = model.transcribe(WAVE_OUTPUT_FILENAME)
     text = result['text'].strip()
-    if text:
-        lang_label = selected_lang.get()
-        lang_code = language_options.get(lang_label)
+        if text:
+            lang_label = selected_lang.get()
+            lang_code = language_options.get(lang_label)
 
-        if lang_code:
-            translated = translator.translate(text, dest=lang_code).text
-            print(f"🎙️ {text} → 💬 {translated}")
-            socketio.emit('subtitle', {'text': translated})
-        else:
-            print("⚠️ No valid language selected.")
+            if lang_code:
+                translated = translator.translate(text, dest=lang_code).text
+                print(f"🎙️ {text} → 💬 {translated}")
+                socketio.emit('subtitle', {'text': translated})
+            else:
+                print("⚠️ No valid language selected.")
 
 
 # --- Launch Backend Threads ---
