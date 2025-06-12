@@ -135,6 +135,9 @@ root.title("Streamsub")
 root.geometry("250x300")
 root.resizable(False, False)
 
+root.configure(bg="#1e1e1e")
+frame.configure(bg="#1e1e1e")
+
 #Center the window when user opens the app
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
@@ -182,6 +185,8 @@ def toggle_backend():
         stop_backend()
         start_btn.config(text="▶️ Start Subtitle App")
         status_label.config(text="⏹ Transcription stopped")
+
+
 
 # Start/Stop Button
 start_btn = tk.Button(frame, text="▶️ Start Subtitle App", command=toggle_backend, width=17)
