@@ -22,6 +22,10 @@ language_options = {
     "🇯🇵 Japanese": "ja"
 }
 
+start_btn = None
+status_label = None
+selected_lang = None
+
 #Adding a stop button
 stop_event = threading.Event()
 backend_threads = []
