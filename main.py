@@ -130,6 +130,15 @@ def launch_overlay():
     webbrowser.open("http://localhost:5100")
 
 # --- Customtkinter GUI ---
+def toggle_backend():
+    if start_btn.cget("text").startswith("▶️"):
+        start_backend()
+        start_btn.configure(text="⏹ Stop Subtitle App")
+        status_label.configure(text="🎙️ Transcription running...")
+    else:
+        stop_backend()
+        start_btn.configure(text="▶️ Start Subtitle App")
+        status_label.configure(text="⏹ Transcription stopped")
 
 def main():
     ctk.set_appearance_mode("Dark")
