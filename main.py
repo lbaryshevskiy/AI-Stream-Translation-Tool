@@ -152,8 +152,8 @@ root.grid_columnconfigure(0, weight=1)
 frame.grid_rowconfigure((0,1,2,3,4,5), weight=1)
 frame.grid_columnconfigure((0,1), weight=1)
 
-root.configure(bg="#1e1e1e")
-frame.configure(bg="#1e1e1e")
+root.configure(bg="#f5f5f5")
+frame.configure(bg="#f5f5f5")
 
 # Header
 header = tk.Label(frame, text="🎙️ Streamsub", font=("Helvetica", 16, "bold"))
