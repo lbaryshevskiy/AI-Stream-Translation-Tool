@@ -148,51 +148,35 @@ def main():
     ctk.set_appearance_mode("Dark")
     ctk.set_default_color_theme("blue")
 
-    global root, selected_lang, status_label, start_btn
+    global root, selected_lang, start_btn, status_label
 
     root = ctk.CTk()
     root.title("Streamsub")
-    root.geometry("250x300")
+    root.geometry("300x300")
     root.resizable(False, False)
-
-    screen_width = root.winfo_screenwidth()
-    screen_height = root.winfo_screenheight()
-    x = int((screen_width / 2) - (250 / 2))
-    y = int((screen_height / 2) - (300 / 2))
-    root.geometry(f"250x300+{x}+{y}")
 
     frame = ctk.CTkFrame(root)
     frame.pack(padx=20, pady=20, fill="both", expand=True)
 
-    header = ctk.CTkLabel(frame, text="🎙️ Streamsub", font=("Helvetica", 16, "bold"))
-    header.pack(pady=(0, 10))
+    ctk.CTkLabel(frame, text="🎙️ Streamsub", font=("Helvetica", 16, "bold")).pack(pady=(0, 10))
 
-    selected_lang = ctk.StringVar(value="Select Language")
-    lang_menu = ctk.CTkOptionMenu(frame, variable=selected_lang, values=list(language_options.keys()))
-    lang_menu.pack(pady=(5, 10))
+    selected_lang = ctk.StringVar(value="🇬🇧 English")
+    lang_menu = ctk.CTkOptionMenu(frame, variable=selected_lang, values=["🇬🇧 English", "🇪🇸 Spanish", "🇫🇷 French"])
+    lang_menu.pack(pady=10)
 
-    obs_label = ctk.CTkLabel(frame, text="Paste in OBS Browser Source:")
-    obs_label.pack(pady=(10, 0))
+    copy_btn = ctk.CTkButton(frame, text="📋 Copy OBS URL", command=lambda: print("Copy clicked"))
+    copy_btn.pack(pady=10)
 
-    url_entry = ctk.CTkEntry(frame, width=220)
-    url_entry.insert(0, "http://localhost:5100")
-    url_entry.configure(state="readonly")
-    url_entry.pack()
+    start_btn = ctk.CTkButton(frame, text="▶️ Start", command=lambda: print("Start clicked"))
+    start_btn.pack(pady=10)
 
-    copy_btn = ctk.CTkButton(frame, text="📋 Copy URL", command=copy_url)
-    copy_btn.pack(pady=(5, 10))
-
-    start_btn = ctk.CTkButton(frame, text="▶️ Start Subtitle App", command=toggle_backend)
-    start_btn.pack(pady=(5, 10))
-
-    status_label = ctk.CTkLabel(frame, text="✅ UI loaded", text_color="green")
-    status_label.pack()
+    status_label = ctk.CTkLabel(frame, text="✅ Ready", text_color="green")
+    status_label.pack(pady=(10, 0))
 
     root.mainloop()
 
-# Run app
 if __name__ == "__main__":
-     main()
+    main()
 
 
 
