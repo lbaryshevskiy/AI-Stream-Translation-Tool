@@ -129,8 +129,7 @@ def copy_url():
 def launch_overlay():
     webbrowser.open("http://localhost:5100")
 
-# --- Modern customtkinter GUI ---
-import customtkinter as ctk
+# --- Customtkinter GUI ---
 
 ctk.set_appearance_mode("Dark")
 ctk.set_default_color_theme("blue")
@@ -195,6 +194,8 @@ status_label.pack()
 
 # Run app
 if __name__ == "__main__":
+test_label = ctk.CTkLabel(frame, text="✅ Streamsub UI loaded")
+test_label.pack(pady=10)
     root.mainloop()
 
 
