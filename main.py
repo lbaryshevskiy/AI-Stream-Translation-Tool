@@ -137,7 +137,7 @@ ctk.set_default_color_theme("blue")
 root = ctk.CTk()
 root.title("Streamsub")
 root.geometry("250x300")
-root.resizable(False, False)
+root.resizable(True, True)
 
 # Center window
 screen_width = root.winfo_screenwidth()
@@ -192,10 +192,10 @@ start_btn.pack(pady=(5, 10))
 status_label = ctk.CTkLabel(frame, text="", text_color="green")
 status_label.pack()
 
+status_label.configure(text="✅ UI loaded successfully")
+
 # Run app
 if __name__ == "__main__":
-    test_label = ctk.CTkLabel(frame, text="✅ Streamsub UI loaded")
-    test_label.pack(pady=10)
     root.mainloop()
 
 
