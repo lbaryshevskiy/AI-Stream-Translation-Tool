@@ -161,17 +161,18 @@ def main():
     ctk.CTkLabel(frame, text="🎙️ Streamsub", font=("Helvetica", 16, "bold")).pack(pady=(0, 10))
 
     selected_lang = ctk.StringVar(value="🇬🇧 English")
-    lang_menu = ctk.CTkOptionMenu(frame, variable=selected_lang, values=["🇬🇧 English", "🇪🇸 Spanish", "🇫🇷 French"])
+    lang_menu = ctk.CTkOptionMenu(frame, variable=selected_lang, values=list(language_options.keys()))
     lang_menu.pack(pady=10)
 
     copy_btn = ctk.CTkButton(frame, text="📋 Copy OBS URL", command=lambda: print("Copy clicked"))
     copy_btn.pack(pady=10)
 
-    start_btn = ctk.CTkButton(frame, text="▶️ Start", command=lambda: print("Start clicked"))
-    start_btn.pack(pady=10)
+    copy_btn = ctk.CTkButton(frame, text="📋 Copy OBS URL", command=copy_url)
+    copy_btn.pack(pady=10)
 
-    status_label = ctk.CTkLabel(frame, text="✅ Ready", text_color="green")
-    status_label.pack(pady=(10, 0))
+    start_btn = ctk.CTkButton(frame, text="▶️ Start", command=toggle_backend)
+    start_btn.pack(pady=10)
+    
 
     root.mainloop()
 
