@@ -144,7 +144,7 @@ def main():
     ctk.set_appearance_mode("Dark")
     ctk.set_default_color_theme("blue")
 
-    global root, selected_lang, status_label
+    global root, selected_lang, status_label, start_btn
 
     root = ctk.CTk()
     root.title("Streamsub")
