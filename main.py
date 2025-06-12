@@ -1,4 +1,3 @@
-import customtkinter as ctk
 import threading
 import queue
 import time
@@ -9,6 +8,7 @@ from flask import Flask, render_template
 from flask_socketio import SocketIO
 from googletrans import Translator
 import webbrowser
+import customtkinter as ctk
 
 language_options = {
     "🇬🇧 English": "en",
