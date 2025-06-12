@@ -1,4 +1,4 @@
-import tkinter as tk
+import customtkinter as ctk
 import threading
 import queue
 import time
@@ -130,7 +130,10 @@ def copy_url():
 def launch_overlay():
     webbrowser.open("http://localhost:5100")
 
-root = tk.Tk()
+ctk.set_appearance_mode("Dark")
+ctk.set_default_color_theme("blue")
+
+root = ctk.CTk()
 root.title("Streamsub")
 root.geometry("250x300")
 root.resizable(False, False)
