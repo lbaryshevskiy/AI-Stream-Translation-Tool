@@ -135,9 +135,6 @@ root.title("Streamsub")
 root.geometry("250x300")
 root.resizable(False, False)
 
-root.configure(bg="#1e1e1e")
-frame.configure(bg="#1e1e1e")
-
 #Center the window when user opens the app
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
@@ -154,6 +151,9 @@ root.grid_columnconfigure(0, weight=1)
 
 frame.grid_rowconfigure((0,1,2,3,4,5), weight=1)
 frame.grid_columnconfigure((0,1), weight=1)
+
+root.configure(bg="#1e1e1e")
+frame.configure(bg="#1e1e1e")
 
 # Header
 header = tk.Label(frame, text="🎙️ Streamsub", font=("Helvetica", 16, "bold"))
