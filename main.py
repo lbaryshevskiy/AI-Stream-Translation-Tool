@@ -194,8 +194,8 @@ status_label.pack()
 
 # Run app
 if __name__ == "__main__":
-test_label = ctk.CTkLabel(frame, text="✅ Streamsub UI loaded")
-test_label.pack(pady=10)
+    test_label = ctk.CTkLabel(frame, text="✅ Streamsub UI loaded")
+    test_label.pack(pady=10)
     root.mainloop()
 
 
