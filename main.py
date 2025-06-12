@@ -135,6 +135,15 @@ root.title("Streamsub")
 root.geometry("250x300")
 root.resizable(False, False)
 
+#Center the window when user opens the app
+screen_width = root.winfo_screenwidth()
+screen_height = root.winfo_screenheight()
+
+x = int((screen_width / 2) - (250 / 2))
+y = int((screen_height / 2) - (300 / 2))
+
+root.geometry(f"250x300+{x}+{y}")
+
 frame = tk.Frame(root, padx=20, pady=20)
 frame.grid(row=0, column=0, sticky="nsew")
 root.grid_rowconfigure(0, weight=1)
