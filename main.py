@@ -161,7 +161,7 @@ header.grid(row=0, column=0, columnspan=2, pady=(0, 10))
 translate_label = ctk.CTkLabel(frame, text="Translate subtitles to:", font=("Helvetica", 10))
 translate_label.pack(anchor="w", pady=(10, 0))
 
-selected_lang = ctk.StringVar(value="Select Languge)  # or any default you want
+selected_lang = ctk.StringVar(value="Select Languge")
 lang_menu = ctk.CTkOptionMenu(frame, variable=selected_lang, values=list(language_options.keys()))
 lang_menu.pack(pady=(10, 10))
 
