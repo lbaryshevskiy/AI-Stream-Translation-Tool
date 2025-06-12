@@ -22,7 +22,6 @@ language_options = {
     "🇯🇵 Japanese": "ja"
 }
 
-
 #Adding a stop button
 stop_event = threading.Event()
 backend_threads = []
@@ -130,6 +129,9 @@ def copy_url():
 def launch_overlay():
     webbrowser.open("http://localhost:5100")
 
+# --- Modern customtkinter GUI ---
+import customtkinter as ctk
+
 ctk.set_appearance_mode("Dark")
 ctk.set_default_color_theme("blue")
 
@@ -138,67 +140,62 @@ root.title("Streamsub")
 root.geometry("250x300")
 root.resizable(False, False)
 
-#Center the window when user opens the app
+# Center window
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
-
 x = int((screen_width / 2) - (250 / 2))
 y = int((screen_height / 2) - (300 / 2))
-
 root.geometry(f"250x300+{x}+{y}")
 
+# Container frame
 frame = ctk.CTkFrame(root)
 frame.pack(padx=20, pady=20, fill="both", expand=True)
-frame.grid(row=0, column=0, sticky="nsew")
-root.grid_rowconfigure(0, weight=1)
-root.grid_columnconfigure(0, weight=1)
 
 # Header
 header = ctk.CTkLabel(frame, text="🎙️ Streamsub", font=("Helvetica", 16, "bold"))
-header.grid(row=0, column=0, columnspan=2, pady=(0, 10))
+header.pack(pady=(0, 10))
 
-# Language selection
-translate_label = ctk.CTkLabel(frame, text="Translate subtitles to:", font=("Helvetica", 10))
-translate_label.pack(anchor="w", pady=(10, 0))
-
-selected_lang = ctk.StringVar(value="Select Languge")
+# Language dropdown
+selected_lang = ctk.StringVar(value="Select Language")
 lang_menu = ctk.CTkOptionMenu(frame, variable=selected_lang, values=list(language_options.keys()))
-lang_menu.pack(pady=(10, 10))
+lang_menu.pack(pady=(5, 10))
 
+# OBS URL section
+obs_label = ctk.CTkLabel(frame, text="Paste in OBS Browser Source:")
+obs_label.pack(pady=(10, 0))
 
-# OBS URL
-obs_label = ctk.CTkLabel(frame, text="Paste in OBS Browser Source:", font=("Helvetica", 10))
-obs_label.pack(anchor="w", pady=(10, 0))
 url_entry = ctk.CTkEntry(frame, width=220)
 url_entry.insert(0, "http://localhost:5100")
 url_entry.configure(state="readonly")
-url_entry.pack(pady=(5, 0))
+url_entry.pack()
 
+def copy_url():
+    root.clipboard_clear()
+    root.clipboard_append("http://localhost:5100")
+    status_label.configure(text="✅ Copied to clipboard!")
 
 copy_btn = ctk.CTkButton(frame, text="📋 Copy URL", command=copy_url)
 copy_btn.pack(pady=(5, 10))
 
 def toggle_backend():
-    if start_btn["text"].startswith("▶️"):
+    if start_btn.cget("text").startswith("▶️"):
         start_backend()
-        start_btn.config(text="⏹ Stop Subtitle App")
-        status_label.config(text="🎙️ Transcription running...")
+        start_btn.configure(text="⏹ Stop Subtitle App")
+        status_label.configure(text="🎙️ Transcription running...")
     else:
         stop_backend()
-        start_btn.config(text="▶️ Start Subtitle App")
-        status_label.config(text="⏹ Transcription stopped")
+        start_btn.configure(text="▶️ Start Subtitle App")
+        status_label.configure(text="⏹ Transcription stopped")
 
-
-
-# Start/Stop Button
 start_btn = ctk.CTkButton(frame, text="▶️ Start Subtitle App", command=toggle_backend)
-start_btn.pack(pady=(10, 10))
+start_btn.pack(pady=(5, 10))
 
-# Status label
-status_label = ctk.CTkLabel(frame, text="", font=("Helvetica", 9), text_color="green")
-status_label.grid(row=5, column=0, columnspan=2)
+status_label = ctk.CTkLabel(frame, text="", text_color="green")
+status_label.pack()
 
+# Run app
 if __name__ == "__main__":
     root.mainloop()
+
 
 
