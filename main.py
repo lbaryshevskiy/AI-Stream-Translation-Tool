@@ -129,6 +129,15 @@ def copy_url():
     root.clipboard_clear()
     root.clipboard_append("http://localhost:5100")
     status_label.config(text="✅ Copied to clipboard!")
+    
+def show_pro_preferences():
+    popup = ctk.CTkToplevel()
+    popup.title("Pro Settings")
+    popup.geometry("300x120")
+    popup_label = ctk.CTkLabel(popup, text="⚙️ Preferences are part of the Pro version.\nComing soon!", font=ctk.CTkFont(size=14))
+    popup_label.pack(pady=20)
+    close_btn = ctk.CTkButton(popup, text="OK", command=popup.destroy)
+    close_btn.pack(pady=5)
 
 def launch_overlay():
     webbrowser.open("http://localhost:5100")
@@ -166,6 +175,9 @@ def main():
 
     copy_btn = ctk.CTkButton(frame, text="📋 Copy OBS URL", command=copy_url)
     copy_btn.pack(pady=10)
+
+    settings_btn = ctk.CTkButton(frame, text="⚙️ Preferences (Pro)", command=show_pro_preferences)
+    settings_btn.pack(pady=10)
 
     start_btn = ctk.CTkButton(frame, text="▶️ Start", command=toggle_backend)
     start_btn.pack(pady=10)
