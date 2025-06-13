@@ -164,9 +164,6 @@ def main():
     lang_menu = ctk.CTkOptionMenu(frame, variable=selected_lang, values=list(language_options.keys()))
     lang_menu.pack(pady=10)
 
-    copy_btn = ctk.CTkButton(frame, text="📋 Copy OBS URL", command=lambda: print("Copy clicked"))
-    copy_btn.pack(pady=10)
-
     copy_btn = ctk.CTkButton(frame, text="📋 Copy OBS URL", command=copy_url)
     copy_btn.pack(pady=10)
 
