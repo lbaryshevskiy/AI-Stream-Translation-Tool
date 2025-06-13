@@ -6,7 +6,6 @@ from setuptools import setup
 APP = ['main.py']
 DATA_FILES = []
 OPTIONS = {
-    OPTIONS = {
     'iconfile': 'streamsub.icns',
     'packages': ['encodings', 'tkinter', 'customtkinter', 'flask', 'flask_socketio', 'whisper'],
     'excludes': ['matplotlib', 'PyQt5', 'PyQt6', 'PySide2', 'PySide6', 'qtpy', 'numpy.random._examples', 'numpy.core.tests'],
