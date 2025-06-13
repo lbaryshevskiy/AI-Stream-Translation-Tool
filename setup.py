@@ -6,12 +6,13 @@ OPTIONS = {
     'iconfile': 'streamsub.icns',
     'packages': ['encodings', 'tkinter', 'customtkinter', 'flask', 'flask_socketio', 'whisper'],
     'excludes': [
-        'matplotlib', 'PyQt5', 'PyQt6', 'PySide2', 'PySide6', 'qtpy',
-        'PyInstaller', 'gi', 'gi.repository', 'PyGObject',
-        'cv2', 'email', 'unittest', 'numpy.core.tests', 'numpy.random._examples'
+        'PyQt5', 'PyQt6', 'matplotlib', 'email', 'unittest',
+        'PySide2', 'PySide6', 'gi', 'gi.repository', 'cv2',
+        'tests', 'PyInstaller', 'pyqtgraph', 'torchvision',
+        'numpy.core.tests', 'numpy.random._examples'
     ],
-    'argv_emulation': True,
     'includes': ['idna', 'requests'],
+    'argv_emulation': True,
 }
 
 setup(
@@ -21,3 +22,4 @@ setup(
     options={'py2app': OPTIONS},
     setup_requires=['py2app'],
 )
+
