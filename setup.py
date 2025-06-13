@@ -1,6 +1,3 @@
-import sys
-sys.setrecursionlimit(5000)
-
 from setuptools import setup
 
 APP = ['main.py']
@@ -8,9 +5,14 @@ DATA_FILES = []
 OPTIONS = {
     'iconfile': 'streamsub.icns',
     'packages': ['encodings', 'tkinter', 'customtkinter', 'flask', 'flask_socketio', 'whisper'],
-    'excludes': ['matplotlib', 'PyQt5', 'PyQt6', 'PySide2', 'PySide6', 'qtpy', 'numpy.random._examples', 'numpy.core.tests'],
+    'excludes': [
+        'matplotlib', 'PyQt5', 'PyQt6', 'PySide2', 'PySide6', 'qtpy',
+        'PyInstaller', 'gi', 'gi.repository', 'PyGObject',
+        'cv2', 'email', 'unittest', 'numpy.core.tests', 'numpy.random._examples'
+    ],
+    'argv_emulation': True,
+    'includes': ['idna', 'requests'],
 }
-
 
 setup(
     app=APP,
