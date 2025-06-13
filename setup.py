@@ -1,3 +1,6 @@
+import sys
+sys.setrecursionlimit(5000)
+
 from setuptools import setup
 
 APP = ['main.py']
