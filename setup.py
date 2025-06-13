@@ -4,7 +4,8 @@ APP = ['main.py']
 DATA_FILES = []
 OPTIONS = {
     'iconfile': 'streamsub.icns',
-    'packages': ['tkinter'],  # Add other packages as needed
+    'packages': ['encodings', 'tkinter', 'customtkinter', 'flask', 'flask_socketio', 'whisper'],
+    'excludes': ['matplotlib', 'PyQt5', 'PySide2'],
 }
 
 setup(
