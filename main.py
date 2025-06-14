@@ -198,51 +198,38 @@ def show_pro_preferences():
         )
         dark_mode_switch.select()  # ON by default (Dark mode enabled)
         dark_mode_switch.pack(pady=10)
-
-
         
-
     except KeyError:
         pass
 
-    # --- CREATOR TAB ---
     try:
-        # --- CREATOR TAB ---
-try:
-    creator_tab = tabview.tab("Creator")
+        creator_tab = tabview.tab("Creator")
 
-    if user_plan == "creator":
-        ctk.CTkLabel(creator_tab, text="Whisper Model:").pack(pady=(10, 0))
-        model_menu = ctk.CTkOptionMenu(creator_tab, values=["tiny", "base", "small", "medium", "large"])
-        model_menu.set("base")
-        model_menu.pack(pady=(0, 10))
+        if user_plan == "creator":
+            ctk.CTkLabel(creator_tab, text="Whisper Model:").pack(pady=(10, 0))
+            model_menu = ctk.CTkOptionMenu(creator_tab, values=["tiny", "base", "small", "medium", "large"])
+            model_menu.set("base")
+            model_menu.pack(pady=(0, 10))
 
-        logging_switch = ctk.CTkSwitch(creator_tab, text="Enable Logging")
-        logging_switch.pack(pady=10)
+            logging_switch = ctk.CTkSwitch(creator_tab, text="Enable Logging")
+            logging_switch.pack(pady=10)
 
-        save_checkbox = ctk.CTkCheckBox(creator_tab, text="Save Settings to File")
-        save_checkbox.pack(pady=10)
+            save_checkbox = ctk.CTkCheckBox(creator_tab, text="Save Settings to File")
+            save_checkbox.pack(pady=10)
 
-    else:
-        ctk.CTkLabel(
-            creator_tab,
-            text="🔒 Upgrade to Creator to access these settings",
-            font=("Helvetica", 11, "italic"),
-            text_color="gray"
-        ).pack(expand=True, pady=80)
-
-except KeyError:
-    pass
-
+        else:
+            ctk.CTkLabel(
+                creator_tab,
+                text="🔒 Upgrade to Creator to access these settings",
+                font=("Helvetica", 11, "italic"),
+                text_color="gray"
+            ).pack(expand=True, pady=80)
 
     except KeyError:
         pass
 
     # --- SAVE BUTTON ---
     ctk.CTkButton(popup, text="Save & Close", command=popup.destroy).pack(pady=10)
-
-
-
 
 def launch_overlay():
     webbrowser.open("http://localhost:5100")
