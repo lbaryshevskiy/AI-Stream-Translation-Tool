@@ -135,13 +135,13 @@ def show_pro_preferences():
     popup.title("Settings")
     popup.geometry("380x380")
 
-    # 🔁 User's subscription level (change dynamically later)
-    user_plan = "studio"  # or "creator"
+    # 🔁 Define the user's plan: "studio" or "creator"
+    user_plan = "studio"  # change to "creator" to unlock both tabs
 
     tabview = ctk.CTkTabview(popup, width=360, height=300)
     tabview.pack(padx=10, pady=10, fill="both", expand=True)
 
-    # Show tabs based on plan
+    # Add tabs based on plan
     if user_plan == "studio":
         tabview.add("Studio")
     elif user_plan == "creator":
@@ -149,7 +149,7 @@ def show_pro_preferences():
         tabview.add("Creator")
 
     # --- STUDIO TAB ---
-    if "Studio" in tabview._tabs:
+    try:
         studio_tab = tabview.tab("Studio")
 
         ctk.CTkLabel(studio_tab, text="Subtitle Font Size:").pack(pady=(10, 0))
@@ -166,8 +166,11 @@ def show_pro_preferences():
         dark_mode.select()
         dark_mode.pack(pady=10)
 
+    except KeyError:
+        pass
+
     # --- CREATOR TAB ---
-    if "Creator" in tabview._tabs:
+    try:
         creator_tab = tabview.tab("Creator")
 
         ctk.CTkLabel(creator_tab, text="Whisper Model:").pack(pady=(10, 0))
@@ -181,8 +184,12 @@ def show_pro_preferences():
         save_checkbox = ctk.CTkCheckBox(creator_tab, text="Save Settings to File")
         save_checkbox.pack(pady=10)
 
+    except KeyError:
+        pass
+
     # --- SAVE BUTTON ---
     ctk.CTkButton(popup, text="Save & Close", command=popup.destroy).pack(pady=10)
+
 
 
 
