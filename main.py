@@ -223,7 +223,7 @@ def show_pro_preferences():
             ctk.CTkLabel(
                 creator_tab,
                 text="🔒 Upgrade to Creator to enable these options",
-                font=("Helvetica", 10, "italic"),
+                font=("Helvetica", 15, "italic"),
                 text_color="gray"
             ).pack(pady=(10, 0))
         
