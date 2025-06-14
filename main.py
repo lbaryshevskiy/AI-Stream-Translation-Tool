@@ -280,7 +280,7 @@ def main():
         fg_color="transparent",
         corner_radius=0
     )
-    plan_wrapper.place(relx=1.0, rely=1.0, anchor="se", x=-45, y=10)
+    plan_wrapper.place(relx=1.0, rely=1.0, anchor="se", x=-60, y=8)
 
     plan_label = ctk.CTkLabel(
         plan_wrapper,
