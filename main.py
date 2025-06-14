@@ -192,31 +192,34 @@ def show_pro_preferences():
         ctk.CTkLabel(color_frame, text="Font Color:").pack(side="left")
 
         # Tooltip logic
-def show_tooltip(event):
-    global tooltip
-    tooltip = ctk.CTkToplevel()
-    tooltip.wm_overrideredirect(True)
-    tooltip.configure(bg="gray10")
-    tooltip_label = ctk.CTkLabel(
-        tooltip,
-        text="Unlock this option in Creator version",
-        font=("Helvetica", 9, "italic"),
-        text_color="gray"
-    )
-    tooltip_label.pack()
-    tooltip.geometry(f"+{event.x_root + 10}+{event.y_root + 10}")
-
-def hide_tooltip(event):
-    global tooltip
-    if tooltip:
-        tooltip.destroy()
+        # Tooltip logic (correct indentation inside try:)
         tooltip = None
 
-tooltip = None
-tooltip_icon = ctk.CTkLabel(color_frame, text="?", width=16)
-tooltip_icon.pack(side="left", padx=5)
-tooltip_icon.bind("<Enter>", show_tooltip)
-tooltip_icon.bind("<Leave>", hide_tooltip)
+        def show_tooltip(event):
+            nonlocal tooltip
+            tooltip = ctk.CTkToplevel()
+            tooltip.wm_overrideredirect(True)
+            tooltip.configure(bg="gray10")
+            tooltip_label = ctk.CTkLabel(
+                tooltip,
+                text="Unlock this option in Creator version",
+                font=("Helvetica", 9, "italic"),
+                text_color="gray"
+            )
+            tooltip_label.pack()
+            tooltip.geometry(f"+{event.x_root + 10}+{event.y_root + 10}")
+
+        def hide_tooltip(event):
+            nonlocal tooltip
+            if tooltip:
+                tooltip.destroy()
+                tooltip = None
+
+        tooltip_icon = ctk.CTkLabel(color_frame, text="?", width=16)
+        tooltip_icon.pack(side="left", padx=5)
+        tooltip_icon.bind("<Enter>", show_tooltip)
+        tooltip_icon.bind("<Leave>", hide_tooltip)
+
 
 # Disabled dropdown
 color_menu = ctk.CTkOptionMenu(
