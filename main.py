@@ -220,12 +220,14 @@ def show_pro_preferences():
             logging_switch.configure(state="disabled")
             save_checkbox.configure(state="disabled")
 
-            ctk.CTkLabel(
+            upgrade_label = ctk.CTkLabel(
                 creator_tab,
                 text="🔒 Upgrade to Creator to enable these options",
                 font=("Helvetica", 15, "italic"),
                 text_color="gray"
-            ).pack(pady=(10, 0))
+            )
+            upgrade_label.place(relx=0.5, rely=1.0, anchor="s", y=-10)
+
         
     except KeyError:
          pass
