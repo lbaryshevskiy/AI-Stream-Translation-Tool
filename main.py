@@ -143,7 +143,7 @@ def show_pro_preferences():
     tabview.add("Advanced")
 
     # --- BASIC TAB ---
-    basic_tab = tabview.tab("Studio")
+    basic_tab = tabview.tab("Basic")
 
     ctk.CTkLabel(basic_tab, text="Subtitle Font Size:").pack(pady=(10, 0))
     font_size_slider = ctk.CTkSlider(basic_tab, from_=12, to=48, number_of_steps=8)
@@ -160,7 +160,7 @@ def show_pro_preferences():
     dark_mode.pack(pady=10)
 
     # --- ADVANCED TAB ---
-    advanced_tab = tabview.tab("Creator")
+    advanced_tab = tabview.tab("Advanced")
 
     ctk.CTkLabel(advanced_tab, text="Whisper Model:").pack(pady=(10, 0))
     model_menu = ctk.CTkOptionMenu(advanced_tab, values=["tiny", "base", "small", "medium", "large"])
