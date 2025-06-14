@@ -184,20 +184,6 @@ def show_pro_preferences():
         opacity_slider.set(1.0)
         opacity_slider.pack(pady=(0, 10))
 
-        # Dark mode
-        def toggle_dark_mode():
-            mode = "Dark" if dark_mode_switch.get() == 1 else "Light"
-            ctk.set_appearance_mode(mode)
-            save_settings({"appearance_mode": mode})
-
-        dark_mode_switch = ctk.CTkSwitch(
-            studio_tab,
-            text="Dark Mode",
-            command=toggle_dark_mode
-        )
-        dark_mode_switch.select()  # ON by default (Dark mode enabled)
-        dark_mode_switch.pack(pady=10)
-        
         # Font Color (locked preview for Studio)
         ctk.CTkLabel(studio_tab, text="Font Color:").pack(pady=(10, 0))
 
@@ -215,7 +201,21 @@ def show_pro_preferences():
             font=("Helvetica", 9, "italic"),
             text_color="gray"
         ).pack()
+        
+         # Dark mode
+        def toggle_dark_mode():
+            mode = "Dark" if dark_mode_switch.get() == 1 else "Light"
+            ctk.set_appearance_mode(mode)
+            save_settings({"appearance_mode": mode})
 
+        dark_mode_switch = ctk.CTkSwitch(
+            studio_tab,
+            text="Dark Mode",
+            command=toggle_dark_mode
+        )
+        dark_mode_switch.select()  # ON by default (Dark mode enabled)
+        dark_mode_switch.pack(pady=10)
+        
     except KeyError:
         pass
 
@@ -311,10 +311,6 @@ def main():
         fg_color="transparent"
     )
     plan_label.pack(padx=0, pady=2)
-
-
-    
-
 
     ctk.CTkLabel(frame, text="🎙️ Streamsub", font=("Helvetica", 16, "bold")).pack(pady=(0, 10))
 
