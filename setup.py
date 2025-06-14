@@ -1,11 +1,11 @@
 from setuptools import setup
 
-APP = ['main.py']
+APP = ['launcher.py']
 OPTIONS = {
     'argv_emulation': True,
     'iconfile': 'streamsub.icns',
-    'packages': ['customtkinter', 'flask', 'flask_socketio', 'whisper'],
-    'excludes': ['tkinter.test', 'unittest', 'PyQt5', 'matplotlib'],
+    'packages': [],
+    'excludes': ['torch', 'whisper', 'numpy', 'matplotlib', 'unittest'],
 }
 
 setup(
@@ -14,3 +14,4 @@ setup(
     options={'py2app': OPTIONS},
     setup_requires=['py2app'],
 )
+
