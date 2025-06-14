@@ -160,12 +160,9 @@ def show_pro_preferences():
     tabview = ctk.CTkTabview(popup, width=360, height=300)
     tabview.pack(padx=10, pady=10, fill="both", expand=True)
 
-    # Add tabs based on plan
-    if user_plan == "studio":
-        tabview.add("Studio")
-    elif user_plan == "creator":
-        tabview.add("Studio")
-        tabview.add("Creator")
+    # Always add both tabs
+    tabview.add("Studio")
+    tabview.add("Creator")
 
     # --- STUDIO TAB ---
     try:
@@ -210,8 +207,11 @@ def show_pro_preferences():
 
     # --- CREATOR TAB ---
     try:
-        creator_tab = tabview.tab("Creator")
+        # --- CREATOR TAB ---
+try:
+    creator_tab = tabview.tab("Creator")
 
+    if user_plan == "creator":
         ctk.CTkLabel(creator_tab, text="Whisper Model:").pack(pady=(10, 0))
         model_menu = ctk.CTkOptionMenu(creator_tab, values=["tiny", "base", "small", "medium", "large"])
         model_menu.set("base")
@@ -222,6 +222,18 @@ def show_pro_preferences():
 
         save_checkbox = ctk.CTkCheckBox(creator_tab, text="Save Settings to File")
         save_checkbox.pack(pady=10)
+
+    else:
+        ctk.CTkLabel(
+            creator_tab,
+            text="🔒 Upgrade to Creator to access these settings",
+            font=("Helvetica", 11, "italic"),
+            text_color="gray"
+        ).pack(expand=True, pady=80)
+
+except KeyError:
+    pass
+
 
     except KeyError:
         pass
