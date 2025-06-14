@@ -153,19 +153,28 @@ def show_pro_preferences():
     try:
         studio_tab = tabview.tab("Studio")
 
+        # Font Size
         ctk.CTkLabel(studio_tab, text="Subtitle Font Size:").pack(pady=(10, 0))
-        font_size_slider = ctk.CTkSlider(studio_tab, from_=12, to=48, number_of_steps=8)
+        font_size_value = ctk.CTkLabel(studio_tab, text="24")
+        font_size_value.pack()
+        font_size_slider = ctk.CTkSlider(studio_tab, from_=12, to=48, number_of_steps=8,
+                                         command=lambda val: font_size_value.configure(text=str(int(float(val)))))
         font_size_slider.set(24)
         font_size_slider.pack(pady=(0, 10))
 
         ctk.CTkLabel(studio_tab, text="Overlay Opacity:").pack(pady=(5, 0))
-        opacity_slider = ctk.CTkSlider(studio_tab, from_=0.2, to=1.0)
+        opacity_value = ctk.CTkLabel(studio_tab, text="1.00")
+        opacity_value.pack()
+        opacity_slider = ctk.CTkSlider(studio_tab, from_=0.2, to=1.0,
+                                       command=lambda val: opacity_value.configure(text=f"{float(val):.2f}"))
         opacity_slider.set(1.0)
         opacity_slider.pack(pady=(0, 10))
 
+        # Dark mode
         dark_mode = ctk.CTkSwitch(studio_tab, text="Enable Dark Mode")
         dark_mode.select()
         dark_mode.pack(pady=10)
+        
 
     except KeyError:
         pass
