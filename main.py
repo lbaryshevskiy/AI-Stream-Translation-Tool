@@ -171,9 +171,20 @@ def show_pro_preferences():
         opacity_slider.pack(pady=(0, 10))
 
         # Dark mode
-        dark_mode = ctk.CTkSwitch(studio_tab, text="Enable Dark Mode")
-        dark_mode.select()
-        dark_mode.pack(pady=10)
+        def toggle_dark_mode():
+            if dark_mode_switch.get() == 1:
+                ctk.set_appearance_mode("Dark")
+            else:
+                ctk.set_appearance_mode("Light")
+
+       dark_mode_switch = ctk.CTkSwitch(
+           studio_tab,
+           text="Dark Mode",
+           command=toggle_dark_mode
+       )
+       dark_mode_switch.select()  # ON by default (Dark mode enabled)
+       dark_mode_switch.pack(pady=10)
+
         
 
     except KeyError:
