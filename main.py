@@ -137,6 +137,7 @@ def show_pro_preferences():
 
     # 🔁 Define the user's plan: "studio" or "creator"
     user_plan = "studio"  # change to "creator" to unlock both tabs
+    user_plan = "creator"  # temporarily unlocks all settings
 
     tabview = ctk.CTkTabview(popup, width=360, height=300)
     tabview.pack(padx=10, pady=10, fill="both", expand=True)
