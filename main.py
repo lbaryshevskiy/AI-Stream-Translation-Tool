@@ -198,6 +198,24 @@ def show_pro_preferences():
         dark_mode_switch.select()  # ON by default (Dark mode enabled)
         dark_mode_switch.pack(pady=10)
         
+        # Font Color (locked preview for Studio)
+        ctk.CTkLabel(studio_tab, text="Font Color:").pack(pady=(10, 0))
+
+        color_menu = ctk.CTkOptionMenu(
+            studio_tab,
+            values=["White", "Yellow", "Cyan", "Green"]
+        )
+        color_menu.set("White")
+        color_menu.configure(state="disabled")  # Lock selection for Studio
+        color_menu.pack(pady=(0, 5))
+
+        ctk.CTkLabel(
+            studio_tab,
+            text="Customize this option in Creator version",
+            font=("Helvetica", 9, "italic"),
+            text_color="gray"
+        ).pack()
+
     except KeyError:
         pass
 
