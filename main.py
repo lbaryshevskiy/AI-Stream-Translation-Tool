@@ -133,27 +133,48 @@ def copy_url():
 def show_pro_preferences():
     popup = ctk.CTkToplevel()
     popup.title("Settings")
-    popup.geometry("320x300")
+    popup.geometry("360x360")
 
-    # Example: Font Size
-    ctk.CTkLabel(popup, text="Subtitle Font Size:").pack(pady=(10, 0))
-    font_size_slider = ctk.CTkSlider(popup, from_=12, to=48, number_of_steps=8)
+    tabview = ctk.CTkTabview(popup, width=340, height=300)
+    tabview.pack(padx=10, pady=10, fill="both", expand=True)
+
+    # Tabs
+    tabview.add("Basic")
+    tabview.add("Advanced")
+
+    # --- BASIC TAB ---
+    basic_tab = tabview.tab("Basic")
+
+    ctk.CTkLabel(basic_tab, text="Subtitle Font Size:").pack(pady=(10, 0))
+    font_size_slider = ctk.CTkSlider(basic_tab, from_=12, to=48, number_of_steps=8)
     font_size_slider.set(24)
     font_size_slider.pack(pady=(0, 10))
 
-    # Example: Overlay Opacity
-    ctk.CTkLabel(popup, text="Overlay Opacity:").pack(pady=(5, 0))
-    opacity_slider = ctk.CTkSlider(popup, from_=0.2, to=1.0)
+    ctk.CTkLabel(basic_tab, text="Overlay Opacity:").pack(pady=(5, 0))
+    opacity_slider = ctk.CTkSlider(basic_tab, from_=0.2, to=1.0)
     opacity_slider.set(1.0)
     opacity_slider.pack(pady=(0, 10))
 
-    # Example: Dark Mode toggle
-    dark_mode = ctk.CTkSwitch(popup, text="Enable Dark Mode")
+    dark_mode = ctk.CTkSwitch(basic_tab, text="Enable Dark Mode")
     dark_mode.select()
     dark_mode.pack(pady=10)
 
-    # Close button
-    ctk.CTkButton(popup, text="Save & Close", command=popup.destroy).pack(pady=20)
+    # --- ADVANCED TAB ---
+    advanced_tab = tabview.tab("Advanced")
+
+    ctk.CTkLabel(advanced_tab, text="Whisper Model:").pack(pady=(10, 0))
+    model_menu = ctk.CTkOptionMenu(advanced_tab, values=["tiny", "base", "small", "medium", "large"])
+    model_menu.set("base")
+    model_menu.pack(pady=(0, 10))
+
+    logging_switch = ctk.CTkSwitch(advanced_tab, text="Enable Logging")
+    logging_switch.pack(pady=10)
+
+    save_checkbox = ctk.CTkCheckBox(advanced_tab, text="Save Settings to File")
+    save_checkbox.pack(pady=10)
+
+    ctk.CTkButton(popup, text="Save & Close", command=popup.destroy).pack(pady=10)
+
 
 def launch_overlay():
     webbrowser.open("http://localhost:5100")
@@ -192,10 +213,6 @@ def main():
         values=["Select Language..."] + list(language_options.keys())
     )
     lang_menu.pack(pady=10)
-
-
-
-      
 
     copy_btn = ctk.CTkButton(frame, text="📋 Copy OBS URL", command=copy_url)
     copy_btn.pack(pady=10)
