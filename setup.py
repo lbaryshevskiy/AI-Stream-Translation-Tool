@@ -1,6 +1,6 @@
 from setuptools import setup
 
-APP = ['launcher.py']
+APP = ['main.py']
 OPTIONS = {
     'argv_emulation': True,
     'iconfile': 'streamsub.icns',
