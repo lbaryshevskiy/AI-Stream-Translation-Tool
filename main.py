@@ -171,11 +171,12 @@ def main():
 
     selected_lang = ctk.StringVar(value="Select Language...")
     lang_menu = ctk.CTkOptionMenu(
-    frame,
-    variable=selected_lang,
-    values=["Select Language..."] + list(language_options.keys())
-)
-lang_menu.pack(pady=10)
+        frame,
+        variable=selected_lang,
+        values=["Select Language..."] + list(language_options.keys())
+    )
+    lang_menu.pack(pady=10)
+
 
 
       
