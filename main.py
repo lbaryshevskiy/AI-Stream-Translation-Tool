@@ -177,13 +177,14 @@ def show_pro_preferences():
             else:
                 ctk.set_appearance_mode("Light")
 
-       dark_mode_switch = ctk.CTkSwitch(
-           studio_tab,
-           text="Dark Mode",
-           command=toggle_dark_mode
-       )
-       dark_mode_switch.select()  # ON by default (Dark mode enabled)
-       dark_mode_switch.pack(pady=10)
+        dark_mode_switch = ctk.CTkSwitch(
+            studio_tab,
+            text="Dark Mode",
+            command=toggle_dark_mode
+        )
+        dark_mode_switch.select()  # ON by default (Dark mode enabled)
+        dark_mode_switch.pack(pady=10)
+
 
         
 
