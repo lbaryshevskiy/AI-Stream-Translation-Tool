@@ -132,12 +132,28 @@ def copy_url():
     
 def show_pro_preferences():
     popup = ctk.CTkToplevel()
-    popup.title("Pro Settings")
-    popup.geometry("300x120")
-    popup_label = ctk.CTkLabel(popup, text="⚙️ Preferences are part of the Pro version.\nComing soon!", font=ctk.CTkFont(size=14))
-    popup_label.pack(pady=20)
-    close_btn = ctk.CTkButton(popup, text="OK", command=popup.destroy)
-    close_btn.pack(pady=5)
+    popup.title("Settings")
+    popup.geometry("320x300")
+
+    # Example: Font Size
+    ctk.CTkLabel(popup, text="Subtitle Font Size:").pack(pady=(10, 0))
+    font_size_slider = ctk.CTkSlider(popup, from_=12, to=48, number_of_steps=8)
+    font_size_slider.set(24)
+    font_size_slider.pack(pady=(0, 10))
+
+    # Example: Overlay Opacity
+    ctk.CTkLabel(popup, text="Overlay Opacity:").pack(pady=(5, 0))
+    opacity_slider = ctk.CTkSlider(popup, from_=0.2, to=1.0)
+    opacity_slider.set(1.0)
+    opacity_slider.pack(pady=(0, 10))
+
+    # Example: Dark Mode toggle
+    dark_mode = ctk.CTkSwitch(popup, text="Enable Dark Mode")
+    dark_mode.select()
+    dark_mode.pack(pady=10)
+
+    # Close button
+    ctk.CTkButton(popup, text="Save & Close", command=popup.destroy).pack(pady=20)
 
 def launch_overlay():
     webbrowser.open("http://localhost:5100")
