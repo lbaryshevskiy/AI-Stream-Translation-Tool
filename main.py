@@ -287,7 +287,7 @@ def main():
         plan_wrapper,
         text=f"{user_plan.title()} Version",
         text_color=plan_colors.get(user_plan, "gray"),
-        font=("Helvetica", 10, "italic"),
+        font=("Helvetica", 12, "italic"),
         fg_color="transparent"
     )
     plan_label.pack(padx=0, pady=2)
