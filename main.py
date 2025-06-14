@@ -222,7 +222,7 @@ def show_pro_preferences():
 
             upgrade_label = ctk.CTkLabel(
                 creator_tab,
-                text="🔒 Upgrade to Creator to enable these options",
+                text="🔒 Unlock these features with Creator Version",
                 font=("Helvetica", 15, "italic"),
                 text_color="gray"
             )
