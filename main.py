@@ -169,7 +169,7 @@ def main():
 
     ctk.CTkLabel(frame, text="🎙️ Streamsub", font=("Helvetica", 16, "bold")).pack(pady=(0, 10))
 
-    selected_lang = ctk.StringVar(value="Select Language...")
+    selected_lang = ctk.StringVar(value="🌐 Language")
     lang_menu = ctk.CTkOptionMenu(
         frame,
         variable=selected_lang,
