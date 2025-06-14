@@ -274,12 +274,12 @@ def main():
         "creator": "green"
     }
 
-    # Display plan as popup label in top-right corner
     plan_label = ctk.CTkLabel(
         root,
         text=f"🧪 Running: {user_plan.title()} Version",
         text_color=plan_colors.get(user_plan, "gray"),
         font=("Helvetica", 10, "italic")
+        fg_color="transparent"
     )
     plan_label.place(relx=1.0, rely=1.0, anchor="se", x=-10, y=-10)
 
