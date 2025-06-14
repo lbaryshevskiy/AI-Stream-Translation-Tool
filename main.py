@@ -192,19 +192,19 @@ def show_pro_preferences():
         ctk.CTkLabel(color_frame, text="Font Color:").pack(side="left")
 
         # Tooltip logic
- def show_tooltip(event):
-     global tooltip
-     tooltip = ctk.CTkToplevel()
-     tooltip.wm_overrideredirect(True)
-     tooltip.configure(bg="gray10")
-     tooltip_label = ctk.CTkLabel(
-         tooltip,
-         text="Unlock this option in Creator version",
-         font=("Helvetica", 9, "italic"),
-         text_color="gray"
-     )
-     tooltip_label.pack()
-     tooltip.geometry(f"+{event.x_root + 10}+{event.y_root + 10}")
+def show_tooltip(event):
+    global tooltip
+    tooltip = ctk.CTkToplevel()
+    tooltip.wm_overrideredirect(True)
+    tooltip.configure(bg="gray10")
+    tooltip_label = ctk.CTkLabel(
+        tooltip,
+        text="Unlock this option in Creator version",
+        font=("Helvetica", 9, "italic"),
+        text_color="gray"
+    )
+    tooltip_label.pack()
+    tooltip.geometry(f"+{event.x_root + 10}+{event.y_root + 10}")
 
 def hide_tooltip(event):
     global tooltip
