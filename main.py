@@ -9,6 +9,20 @@ from flask_socketio import SocketIO
 from googletrans import Translator
 import webbrowser
 import customtkinter as ctk
+import json
+import os
+
+SETTINGS_FILE = "settings.json"
+
+def load_settings():
+    if os.path.exists(SETTINGS_FILE):
+        with open(SETTINGS_FILE, "r") as f:
+            return json.load(f)
+    return {}
+
+def save_settings(data):
+    with open(SETTINGS_FILE, "w") as f:
+        json.dump(data, f)
 
 language_options = {
     "🇬🇧 English": "en",
@@ -172,10 +186,9 @@ def show_pro_preferences():
 
         # Dark mode
         def toggle_dark_mode():
-            if dark_mode_switch.get() == 1:
-                ctk.set_appearance_mode("Dark")
-            else:
-                ctk.set_appearance_mode("Light")
+            mode = "Dark" if dark_mode_switch.get() == 1 else "Light"
+            ctk.set_appearance_mode(mode)
+            save_settings({"appearance_mode": mode})
 
         dark_mode_switch = ctk.CTkSwitch(
             studio_tab,
@@ -230,7 +243,9 @@ def toggle_backend():
         status_label.configure(text="⏹ Transcription stopped")
 
 def main():
-    ctk.set_appearance_mode("Dark")
+    settings = load_settings()
+    appearance = settings.get("appearance_mode", "Dark")
+    ctk.set_appearance_mode(appearance)
     ctk.set_default_color_theme("blue")
 
     global root, selected_lang, start_btn, status_label
