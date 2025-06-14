@@ -185,22 +185,48 @@ def show_pro_preferences():
         opacity_slider.pack(pady=(0, 10))
 
         # Font Color (locked preview for Studio)
-        ctk.CTkLabel(studio_tab, text="Font Color:").pack(pady=(10, 0))
+        # Font Color row with tooltip "?" next to label
+        color_frame = ctk.CTkFrame(studio_tab, fg_color="transparent")
+        color_frame.pack(pady=(10, 0), anchor="w")
 
-        color_menu = ctk.CTkOptionMenu(
-            studio_tab,
-            values=["White", "Yellow", "Cyan", "Green"]
-        )
-        color_menu.set("White")
-        color_menu.configure(state="disabled")  # Lock selection for Studio
-        color_menu.pack(pady=(0, 5))
+        ctk.CTkLabel(color_frame, text="Font Color:").pack(side="left")
 
-        ctk.CTkLabel(
-            studio_tab,
-            text="Customize this option in Creator version",
-            font=("Helvetica", 9, "italic"),
-            text_color="gray"
-        ).pack()
+        # Tooltip logic
+ def show_tooltip(event):
+     global tooltip
+     tooltip = ctk.CTkToplevel()
+     tooltip.wm_overrideredirect(True)
+     tooltip.configure(bg="gray10")
+     tooltip_label = ctk.CTkLabel(
+         tooltip,
+         text="Unlock this option in Creator version",
+         font=("Helvetica", 9, "italic"),
+         text_color="gray"
+     )
+     tooltip_label.pack()
+     tooltip.geometry(f"+{event.x_root + 10}+{event.y_root + 10}")
+
+def hide_tooltip(event):
+    global tooltip
+    if tooltip:
+        tooltip.destroy()
+        tooltip = None
+
+tooltip = None
+tooltip_icon = ctk.CTkLabel(color_frame, text="?", width=16)
+tooltip_icon.pack(side="left", padx=5)
+tooltip_icon.bind("<Enter>", show_tooltip)
+tooltip_icon.bind("<Leave>", hide_tooltip)
+
+# Disabled dropdown
+color_menu = ctk.CTkOptionMenu(
+    studio_tab,
+    values=["White", "Yellow", "Cyan", "Green"]
+)
+color_menu.set("White")
+color_menu.configure(state="disabled")
+color_menu.pack(pady=(5, 10))
+
         
          # Dark mode
         def toggle_dark_mode():
