@@ -274,14 +274,20 @@ def main():
         "creator": "green"
     }
 
+    # Create transparent frame to host label safely
+    plan_wrapper = ctk.CTkFrame(frame, fg_color="transparent", corner_radius=0)
+    plan_wrapper.place(relx=1.0, rely=1.0, anchor="se", x=-10, y=-20)
+
+    # Add label inside frame with extra padding
     plan_label = ctk.CTkLabel(
-        root,
+        plan_wrapper,
         text=f"🧪 Running: {user_plan.title()} Version",
         text_color=plan_colors.get(user_plan, "gray"),
         font=("Helvetica", 10, "italic"),
         fg_color="transparent"
     )
-    plan_label.place(relx=1.0, rely=1.0, anchor="se", x=-10, y=-30)
+    plan_label.pack(padx=5, pady=2)
+
 
     ctk.CTkLabel(frame, text="🎙️ Streamsub", font=("Helvetica", 16, "bold")).pack(pady=(0, 10))
 
