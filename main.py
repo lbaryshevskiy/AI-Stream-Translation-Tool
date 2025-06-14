@@ -16,7 +16,7 @@ SETTINGS_FILE = "settings.json"
 
 # --- DEVELOPMENT MODE ---
 dev_mode = True
-dev_override_plan = "free"  # can be: "free", "studio", "creator"
+dev_override_plan = "studio"  # can be: "free", "studio", "creator"
 
 def load_settings():
     if os.path.exists(SETTINGS_FILE):
