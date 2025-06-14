@@ -133,47 +133,57 @@ def copy_url():
 def show_pro_preferences():
     popup = ctk.CTkToplevel()
     popup.title("Settings")
-    popup.geometry("360x360")
+    popup.geometry("380x380")
 
-    tabview = ctk.CTkTabview(popup, width=340, height=300)
+    # 🔁 User's subscription level (change dynamically later)
+    user_plan = "studio"  # or "creator"
+
+    tabview = ctk.CTkTabview(popup, width=360, height=300)
     tabview.pack(padx=10, pady=10, fill="both", expand=True)
 
-    # Tabs
-    tabview.add("Basic")
-    tabview.add("Advanced")
+    # Show tabs based on plan
+    if user_plan == "studio":
+        tabview.add("Studio")
+    elif user_plan == "creator":
+        tabview.add("Studio")
+        tabview.add("Creator")
 
-    # --- BASIC TAB ---
-    basic_tab = tabview.tab("Basic")
+    # --- STUDIO TAB ---
+    if "Studio" in tabview._tabs:
+        studio_tab = tabview.tab("Studio")
 
-    ctk.CTkLabel(basic_tab, text="Subtitle Font Size:").pack(pady=(10, 0))
-    font_size_slider = ctk.CTkSlider(basic_tab, from_=12, to=48, number_of_steps=8)
-    font_size_slider.set(24)
-    font_size_slider.pack(pady=(0, 10))
+        ctk.CTkLabel(studio_tab, text="Subtitle Font Size:").pack(pady=(10, 0))
+        font_size_slider = ctk.CTkSlider(studio_tab, from_=12, to=48, number_of_steps=8)
+        font_size_slider.set(24)
+        font_size_slider.pack(pady=(0, 10))
 
-    ctk.CTkLabel(basic_tab, text="Overlay Opacity:").pack(pady=(5, 0))
-    opacity_slider = ctk.CTkSlider(basic_tab, from_=0.2, to=1.0)
-    opacity_slider.set(1.0)
-    opacity_slider.pack(pady=(0, 10))
+        ctk.CTkLabel(studio_tab, text="Overlay Opacity:").pack(pady=(5, 0))
+        opacity_slider = ctk.CTkSlider(studio_tab, from_=0.2, to=1.0)
+        opacity_slider.set(1.0)
+        opacity_slider.pack(pady=(0, 10))
 
-    dark_mode = ctk.CTkSwitch(basic_tab, text="Enable Dark Mode")
-    dark_mode.select()
-    dark_mode.pack(pady=10)
+        dark_mode = ctk.CTkSwitch(studio_tab, text="Enable Dark Mode")
+        dark_mode.select()
+        dark_mode.pack(pady=10)
 
-    # --- ADVANCED TAB ---
-    advanced_tab = tabview.tab("Advanced")
+    # --- CREATOR TAB ---
+    if "Creator" in tabview._tabs:
+        creator_tab = tabview.tab("Creator")
 
-    ctk.CTkLabel(advanced_tab, text="Whisper Model:").pack(pady=(10, 0))
-    model_menu = ctk.CTkOptionMenu(advanced_tab, values=["tiny", "base", "small", "medium", "large"])
-    model_menu.set("base")
-    model_menu.pack(pady=(0, 10))
+        ctk.CTkLabel(creator_tab, text="Whisper Model:").pack(pady=(10, 0))
+        model_menu = ctk.CTkOptionMenu(creator_tab, values=["tiny", "base", "small", "medium", "large"])
+        model_menu.set("base")
+        model_menu.pack(pady=(0, 10))
 
-    logging_switch = ctk.CTkSwitch(advanced_tab, text="Enable Logging")
-    logging_switch.pack(pady=10)
+        logging_switch = ctk.CTkSwitch(creator_tab, text="Enable Logging")
+        logging_switch.pack(pady=10)
 
-    save_checkbox = ctk.CTkCheckBox(advanced_tab, text="Save Settings to File")
-    save_checkbox.pack(pady=10)
+        save_checkbox = ctk.CTkCheckBox(creator_tab, text="Save Settings to File")
+        save_checkbox.pack(pady=10)
 
+    # --- SAVE BUTTON ---
     ctk.CTkButton(popup, text="Save & Close", command=popup.destroy).pack(pady=10)
+
 
 
 def launch_overlay():
