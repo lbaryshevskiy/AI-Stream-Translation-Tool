@@ -275,13 +275,12 @@ def main():
     }
 
     # === Plan label container (bottom-right inside frame) ===
-    # === Plan label container (bottom-right inside frame) ===
     plan_wrapper = ctk.CTkFrame(
         frame,
         fg_color="transparent",
         corner_radius=0
     )
-    plan_wrapper.place(relx=1.0, rely=1.0, anchor="se", x=-12, y=-10)
+    plan_wrapper.place(relx=1.0, rely=1.0, anchor="se", x=-20, y=-12)
 
     plan_label = ctk.CTkLabel(
         plan_wrapper,
