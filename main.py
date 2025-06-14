@@ -281,6 +281,8 @@ def main():
         text_color=plan_colors.get(user_plan, "gray"),
         font=("Helvetica", 10, "italic")
     )
+    plan_label.place(relx=1.0, rely=0.0, anchor="ne", x=-10, y=10)
+
     
     ctk.CTkLabel(frame, text="🎙️ Streamsub", font=("Helvetica", 16, "bold")).pack(pady=(0, 10))
 
