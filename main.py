@@ -281,7 +281,7 @@ def main():
         font=("Helvetica", 10, "italic"),
         fg_color="transparent"
     )
-    plan_label.place(relx=1.0, rely=1.0, anchor="se", x=-10, y=-20)
+    plan_label.place(relx=1.0, rely=1.0, anchor="se", x=-10, y=-30)
 
     ctk.CTkLabel(frame, text="🎙️ Streamsub", font=("Helvetica", 16, "bold")).pack(pady=(0, 10))
 
