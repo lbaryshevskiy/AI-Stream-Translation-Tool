@@ -14,6 +14,10 @@ import os
 
 SETTINGS_FILE = "settings.json"
 
+# --- DEVELOPMENT MODE ---
+dev_mode = True
+dev_override_plan = "creator"  # can be: "free", "studio", "creator"
+
 def load_settings():
     if os.path.exists(SETTINGS_FILE):
         with open(SETTINGS_FILE, "r") as f:
@@ -255,9 +259,29 @@ def main():
     root.geometry("300x300")
     root.resizable(False, False)
 
+    # Determine plan (simulate during dev)
+    if dev_mode:
+        user_plan = dev_override_plan
+    else:
+        user_plan = "free"  # placeholder for future licensing logic
+
     frame = ctk.CTkFrame(root)
     frame.pack(padx=20, pady=20, fill="both", expand=True)
+    
+    plan_colors = {
+        "free": "red",
+        "studio": "orange",
+        "creator": "green"
+    }
 
+    # Display plan as popup label in top-right corner
+    plan_label = ctk.CTkLabel(
+        root,
+        text=f"🧪 Running: {user_plan.title()} Version",
+        text_color=plan_colors.get(user_plan, "gray"),
+        font=("Helvetica", 10, "italic")
+    )
+    
     ctk.CTkLabel(frame, text="🎙️ Streamsub", font=("Helvetica", 16, "bold")).pack(pady=(0, 10))
 
     selected_lang = ctk.StringVar(value="🌐 Language")
