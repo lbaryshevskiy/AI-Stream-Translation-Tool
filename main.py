@@ -215,21 +215,21 @@ def show_pro_preferences():
         save_checkbox = ctk.CTkCheckBox(creator_tab, text="Save Settings to File")
         save_checkbox.pack(pady=10)
 
-    if user_plan != "creator":
-        model_menu.configure(state="disabled")
-        logging_switch.configure(state="disabled")
-        save_checkbox.configure(state="disabled")
+        if user_plan != "creator":
+            model_menu.configure(state="disabled")
+            logging_switch.configure(state="disabled")
+            save_checkbox.configure(state="disabled")
 
-        ctk.CTkLabel(
-            creator_tab,
-            text="🔒 Upgrade to Creator to enable these options",
-            font=("Helvetica", 10, "italic"),
-            text_color="gray"
-        ).pack(pady=(10, 0))
+            ctk.CTkLabel(
+                creator_tab,
+                text="🔒 Upgrade to Creator to enable these options",
+                font=("Helvetica", 10, "italic"),
+                text_color="gray"
+            ).pack(pady=(10, 0))
         
     except KeyError:
-        pass
-
+         pass
+    
     # --- SAVE BUTTON ---
     ctk.CTkButton(popup, text="Save & Close", command=popup.destroy).pack(pady=10)
 
