@@ -275,21 +275,23 @@ def main():
     }
 
     # === Plan label container (bottom-right inside frame) ===
+    # === Plan label container (bottom-right inside frame) ===
     plan_wrapper = ctk.CTkFrame(
         frame,
         fg_color="transparent",
         corner_radius=0
     )
-    plan_wrapper.place(relx=1.0, rely=1.0, anchor="se", x=-15, y=-18)
+    plan_wrapper.place(relx=1.0, rely=1.0, anchor="se", x=-12, y=-10)
 
     plan_label = ctk.CTkLabel(
         plan_wrapper,
-        text=f"🧪 Running: {user_plan.title()} Version",
+        text=f"{user_plan.title()} Version",
         text_color=plan_colors.get(user_plan, "gray"),
         font=("Helvetica", 10, "italic"),
         fg_color="transparent"
     )
-    plan_label.pack(padx=0, pady=3)
+    plan_label.pack(padx=0, pady=2)
+
 
     
 
