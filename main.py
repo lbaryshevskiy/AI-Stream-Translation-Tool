@@ -184,12 +184,17 @@ def show_pro_preferences():
         opacity_slider.set(1.0)
         opacity_slider.pack(pady=(0, 10))
 
-        # Font Color (locked preview for Studio)
         # Font Color row with tooltip "?" next to label
-        color_frame = ctk.CTkFrame(studio_tab, fg_color="transparent")
-        color_frame.pack(pady=(10, 0), anchor="w")
+        # Font Color label + separate "?" icon aligned
+        color_label_frame = ctk.CTkFrame(studio_tab, fg_color="transparent")
+        color_label_frame.pack(pady=(10, 0))
 
-        ctk.CTkLabel(color_frame, text="Font Color:").pack(side="left")
+        font_color_label = ctk.CTkLabel(color_label_frame, text="Font Color:", font=("Helvetica", 12))
+        font_color_label.pack(side="left")
+
+        tooltip_icon = ctk.CTkLabel(color_label_frame, text="?", font=("Helvetica", 12, "bold"), width=12)
+        tooltip_icon.pack(side="left", padx=(2, 0))  # tightly placed beside the colon
+
 
         # Tooltip logic
         # Tooltip logic (correct indentation inside try:)
