@@ -335,12 +335,8 @@ def show_pro_preferences():
                 text_color="gray"
             )
             upgrade_label.place(relx=0.5, rely=1.0, anchor="s", y=-10)
-
-        
-    except KeyError:
-         pass
-
-    # === Save & Close and Dark Mode Bottom Row ===
+            
+                # === Save & Close and Dark Mode Bottom Row ===
         footer_frame = ctk.CTkFrame(popup, fg_color="transparent")
         footer_frame.pack(pady=(5, 10), anchor="s")
 
@@ -354,6 +350,10 @@ def show_pro_preferences():
 
         dark_mode_switch.place_forget()  # Remove previous position if any
         dark_mode_switch.pack(in_=footer_frame, side="left")
+        
+    except KeyError:
+         pass
+
 
 def launch_overlay():
     webbrowser.open("http://localhost:5100")
