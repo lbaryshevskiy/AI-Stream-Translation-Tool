@@ -280,7 +280,7 @@ def show_pro_preferences():
 
         # === Live Subtitle Preview Box ===
         preview_frame = ctk.CTkFrame(page1, fg_color="#1a1a1a", corner_radius=10)
-        preview_frame.pack(pady=(10, 5), padx=40)  # Shifted up and reduced width
+        preview_frame.pack(pady=(10, 2), padx=40)  # Shifted up and reduced width
 
         preview_label = ctk.CTkLabel(
             preview_frame,
