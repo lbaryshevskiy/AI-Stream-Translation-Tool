@@ -169,15 +169,17 @@ def show_pro_preferences():
         label_font = ("Helvetica", 13, "bold")
 
                 # === Studio Page Container ===
-        studio_pages = ctk.CTkFrame(page1, fg_color="transparent")
+                 # === Studio Page Container and Pages ===
+        studio_pages = ctk.CTkFrame(studio_tab, fg_color="transparent")
         studio_pages.pack(expand=True, fill="both")
 
         page1 = ctk.CTkFrame(studio_pages, fg_color="transparent")
         page2 = ctk.CTkFrame(studio_pages, fg_color="transparent")
 
-        page1.pack(expand=True, fill="both")  # Show page 1 initially
+        page1.pack(expand=True, fill="both")  # Initial visible page
 
                 # === Subtitle Font Size ===
+        
         ctk.CTkLabel(page1, text="Subtitle Font Size:", font=label_font).pack(pady=(10, 0))
 
         font_size_value_label = ctk.CTkLabel(page1, text="24")
