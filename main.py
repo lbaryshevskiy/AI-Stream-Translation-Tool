@@ -217,20 +217,6 @@ def show_pro_preferences():
         opacity_slider.set(1.0)
         opacity_slider.pack(pady=(0, 5))
         
-        # === Live Subtitle Preview Box ===
-        preview_frame = ctk.CTkFrame(page1, fg_color="#1a1a1a", corner_radius=10)
-        preview_frame.pack(pady=(10, 5), padx=40)  # Shifted up and reduced width
-
-        preview_label = ctk.CTkLabel(
-            preview_frame,
-            text="This is how your subtitle looks.",
-            font=("Helvetica", 20),
-            text_color="white",
-            wraplength=300,
-            anchor="center",
-            justify="center"
-        )
-        preview_label.pack(padx=10, pady=8)
         
         def update_preview(*args):
             # Update font size
@@ -291,6 +277,21 @@ def show_pro_preferences():
         color_menu.set("White")
         color_menu.configure(state="disabled")
         color_menu.pack(pady=(0, 5))
+
+        # === Live Subtitle Preview Box ===
+        preview_frame = ctk.CTkFrame(page1, fg_color="#1a1a1a", corner_radius=10)
+        preview_frame.pack(pady=(10, 5), padx=40)  # Shifted up and reduced width
+
+        preview_label = ctk.CTkLabel(
+            preview_frame,
+            text="This is how your subtitle looks.",
+            font=("Helvetica", 20),
+            text_color="white",
+            wraplength=300,
+            anchor="center",
+            justify="center"
+        )
+        preview_label.pack(padx=10, pady=8)
 
         def toggle_dark_mode():
             mode = "Dark" if dark_mode_switch.get() == 1 else "Light"
