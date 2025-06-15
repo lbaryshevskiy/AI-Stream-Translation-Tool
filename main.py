@@ -335,7 +335,7 @@ def show_pro_preferences():
 
         # Inner frame to hold buttons right-aligned
         right_frame = ctk.CTkFrame(footer_frame, fg_color="transparent")
-        right_frame.pack(side="right", padx=(0, 30))
+        right_frame.pack(side="right", padx=(0, 35))
 
         dark_mode_switch = ctk.CTkSwitch(
             right_frame,
