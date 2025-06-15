@@ -281,10 +281,15 @@ def show_pro_preferences():
         def go_to_page2():
             page1.pack_forget()
             page2.pack(expand=True, fill="both")
-            
+            back_btn.place(relx=0.0, rely=1.0, anchor="sw", x=10, y=-10)
+            next_btn.place_forget()
+
         def go_to_page1():
             page2.pack_forget()
             page1.pack(expand=True, fill="both")
+            next_btn.place(relx=1.0, rely=1.0, anchor="se", x=-10, y=-10)
+            back_btn.place_forget()
+
 
         next_btn = ctk.CTkButton(
             studio_tab,
@@ -304,7 +309,6 @@ def show_pro_preferences():
             corner_radius=6,
             command=go_to_page1
         )
-        back_btn.place(relx=0.0, rely=1.0, anchor="sw", x=10, y=-10)
 
     except KeyError:
         pass
