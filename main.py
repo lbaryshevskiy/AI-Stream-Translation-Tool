@@ -273,7 +273,6 @@ def show_pro_preferences():
             command=toggle_dark_mode
         )
         dark_mode_switch.select()
-        dark_mode_switch.place(relx=1.0, rely=1.0, anchor="se", x=-80, y=-10)
 
         def go_to_page2():
             page1.pack_forget()
@@ -340,9 +339,21 @@ def show_pro_preferences():
         
     except KeyError:
          pass
-    
-    # --- SAVE BUTTON ---
-    ctk.CTkButton(popup, text="Save & Close", command=popup.destroy).pack(pady=10)
+
+    # === Save & Close and Dark Mode Bottom Row ===
+        footer_frame = ctk.CTkFrame(popup, fg_color="transparent")
+        footer_frame.pack(pady=(5, 10), anchor="s", side="bottom")
+
+        save_btn = ctk.CTkButton(
+            footer_frame,
+            text="Save & Close",
+            command=popup.destroy,
+            width=140
+        )
+        save_btn.pack(side="left", padx=(0, 10))
+
+        dark_mode_switch.place_forget()  # Remove previous position if any
+        dark_mode_switch.pack(in_=footer_frame, side="left")
 
 def launch_overlay():
     webbrowser.open("http://localhost:5100")
