@@ -216,6 +216,35 @@ def show_pro_preferences():
         )
         opacity_slider.set(1.0)
         opacity_slider.pack(pady=(0, 10))
+        
+        # === Live Subtitle Preview Box ===
+        preview_frame = ctk.CTkFrame(studio_tab, fg_color="#1a1a1a", corner_radius=10)
+        preview_frame.pack(pady=(20, 10), padx=20, fill="x")
+
+        preview_label = ctk.CTkLabel(
+            preview_frame,
+            text="This is how your subtitle looks.",
+            text_color="white",
+            font=("Helvetica", subtitle_font_slider.get()),
+            anchor="center",
+            wraplength=400
+        )
+        preview_label.pack(pady=10, padx=10)
+        
+        def update_preview(*args):
+            # Update font size
+            preview_label.configure(
+                font=("Helvetica", int(subtitle_font_slider.get()))
+            )
+
+            # Simulate opacity via grayscale darkening (simulate transparency)
+            opacity = overlay_opacity_slider.get()
+            shade = int(26 + (opacity * 230))  # 0.1 → #2a2a2a, 1.0 → #ffffff
+            hex_color = f"#{shade:02x}{shade:02x}{shade:02x}"
+            preview_frame.configure(fg_color=hex_color)
+            
+        subtitle_font_slider.configure(command=lambda val: update_preview())
+        overlay_opacity_slider.configure(command=lambda val: update_preview())
 
         
         # === Font Color (with Tooltip) ===
