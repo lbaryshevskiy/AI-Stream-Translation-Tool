@@ -368,7 +368,7 @@ def main():
 
     root = ctk.CTk()
     root.title("Streamsub")
-    root.geometry("300x400")
+    root.geometry("300x300")
     root.resizable(False, False)
 
     # Determine plan (simulate during dev)
