@@ -262,9 +262,6 @@ def show_pro_preferences():
         color_menu.configure(state="disabled")
         color_menu.pack(pady=(5, 10))
 
-        # === App Theme ===
-        ctk.CTkLabel(page1, text="App Theme:", font=label_font).pack(pady=(10, 0))
-
         def toggle_dark_mode():
             mode = "Dark" if dark_mode_switch.get() == 1 else "Light"
             ctk.set_appearance_mode(mode)
