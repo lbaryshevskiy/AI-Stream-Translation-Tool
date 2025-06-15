@@ -333,7 +333,7 @@ def show_pro_preferences():
                 # === Save & Close and Dark Mode Bottom Row ===
                 # === Save & Close and Dark Mode Bottom Row ===
         footer_frame = ctk.CTkFrame(popup, fg_color="transparent")
-        footer_frame.pack(pady=(5, 10), anchor="s")
+        footer_frame.pack(pady=(5, 10), anchor="e", fill="x")
 
         save_btn = ctk.CTkButton(
             footer_frame,
