@@ -234,7 +234,7 @@ def show_pro_preferences():
         def update_preview(*args):
             # Update font size
             preview_label.configure(
-                font=("Helvetica", int(subtitle_font_slider.get()))
+                font=("Helvetica", int(font_slider.get()))
             )
 
             # Simulate opacity via grayscale darkening (simulate transparency)
@@ -243,7 +243,7 @@ def show_pro_preferences():
             hex_color = f"#{shade:02x}{shade:02x}{shade:02x}"
             preview_frame.configure(fg_color=hex_color)
             
-        subtitle_font_slider.configure(command=lambda val: update_preview())
+        font_slider.configure(command=lambda val: update_preview())
         overlay_opacity_slider.configure(command=lambda val: update_preview())
 
         
