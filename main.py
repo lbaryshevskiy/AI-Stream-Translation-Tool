@@ -330,26 +330,30 @@ def show_pro_preferences():
             )
             upgrade_label.place(relx=0.5, rely=1.0, anchor="s", y=-10)
             
-                # === Save & Close and Dark Mode Bottom Row ===
-                # === Save & Close and Dark Mode Bottom Row ===
+                # === Save & Close and Dark Mode Bottom Row (Right-aligned) ===
         footer_frame = ctk.CTkFrame(popup, fg_color="transparent")
-        footer_frame.pack(pady=(5, 10), anchor="e", fill="x")
+        footer_frame.pack(pady=(5, 10), fill="x")
+
+        # Inner frame to right-align contents
+        right_frame = ctk.CTkFrame(footer_frame, fg_color="transparent")
+        right_frame.pack(side="right", padx=10)
 
         save_btn = ctk.CTkButton(
-            footer_frame,
+            right_frame,
             text="Save & Close",
             command=popup.destroy,
             width=140
         )
-        save_btn.pack(side="left", padx=(0, 10))
+        save_btn.pack(side="right", padx=(10, 0))
 
         dark_mode_switch = ctk.CTkSwitch(
-            footer_frame,
+            right_frame,
             text="Dark Mode",
             command=toggle_dark_mode
         )
         dark_mode_switch.select()
-        dark_mode_switch.pack(side="left")
+        dark_mode_switch.pack(side="right")
+
         
     except KeyError:
          pass
