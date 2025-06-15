@@ -184,8 +184,8 @@ def show_pro_preferences():
         opacity_slider.set(1.0)
         opacity_slider.pack(pady=(0, 10))
 
-        # Font Color row with tooltip "?" next to label
-        # Font Color label + separate "?" icon aligned
+    
+        # Font Color label + separate "?" 
         color_label_frame = ctk.CTkFrame(studio_tab, fg_color="transparent")
         color_label_frame.pack(pady=(10, 0))
 
@@ -195,9 +195,11 @@ def show_pro_preferences():
         tooltip_icon = ctk.CTkLabel(color_label_frame, text="?", font=("Helvetica", 12, "bold"), width=12)
         tooltip_icon.pack(side="left", padx=(2, 0))  # tightly placed beside the colon
 
+        tooltip_icon.bind("<Enter>", show_tooltip)
+        tooltip_icon.bind("<Leave>", hide_tooltip)
 
         # Tooltip logic
-        # Tooltip logic (correct indentation inside try:)
+        
         tooltip = None
 
         def show_tooltip(event):
@@ -219,11 +221,6 @@ def show_pro_preferences():
             if tooltip:
                 tooltip.destroy()
                 tooltip = None
-
-        tooltip_icon = ctk.CTkLabel(color_frame, text="?", width=16)
-        tooltip_icon.pack(side="left", padx=5)
-        tooltip_icon.bind("<Enter>", show_tooltip)
-        tooltip_icon.bind("<Leave>", hide_tooltip)
 
         # Disabled dropdown
         color_menu = ctk.CTkOptionMenu(
