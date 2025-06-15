@@ -343,7 +343,7 @@ def show_pro_preferences():
             command=toggle_dark_mode
         )
         dark_mode_switch.select()
-        dark_mode_switch.pack(side="right", padx=(10, 0))
+        dark_mode_switch.pack(side="right", padx=(10, 20))
 
         save_btn = ctk.CTkButton(
             right_frame,
