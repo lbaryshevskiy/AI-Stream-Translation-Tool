@@ -220,17 +220,15 @@ def show_pro_preferences():
         tooltip_icon.bind("<Enter>", show_tooltip)
         tooltip_icon.bind("<Leave>", hide_tooltip)
 
+        # Disabled dropdown
+        color_menu = ctk.CTkOptionMenu(
+            studio_tab,
+            values=["White", "Yellow", "Cyan", "Green"]
+        )
+        color_menu.set("White")
+        color_menu.configure(state="disabled")
+        color_menu.pack(pady=(5, 10))
 
-# Disabled dropdown
-color_menu = ctk.CTkOptionMenu(
-    studio_tab,
-    values=["White", "Yellow", "Cyan", "Green"]
-)
-color_menu.set("White")
-color_menu.configure(state="disabled")
-color_menu.pack(pady=(5, 10))
-
-        
          # Dark mode
         def toggle_dark_mode():
             mode = "Dark" if dark_mode_switch.get() == 1 else "Light"
