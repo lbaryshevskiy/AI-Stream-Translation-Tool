@@ -185,18 +185,6 @@ def show_pro_preferences():
         opacity_slider.pack(pady=(0, 10))
 
     
-        # Font Color label + separate "?" 
-        color_label_frame = ctk.CTkFrame(studio_tab, fg_color="transparent")
-        color_label_frame.pack(pady=(10, 0))
-
-        font_color_label = ctk.CTkLabel(color_label_frame, text="Font Color:", font=("Helvetica", 12))
-        font_color_label.pack(side="left")
-
-        tooltip_icon = ctk.CTkLabel(color_label_frame, text="?", font=("Helvetica", 12, "bold"), width=12)
-        tooltip_icon.pack(side="left", padx=(2, 0))  # tightly placed beside the colon
-
-        tooltip_icon.bind("<Enter>", show_tooltip)
-        tooltip_icon.bind("<Leave>", hide_tooltip)
 
         # Tooltip logic
         
@@ -221,7 +209,20 @@ def show_pro_preferences():
             if tooltip:
                 tooltip.destroy()
                 tooltip = None
+                
+        # Font Color label + separate "?" 
+        color_label_frame = ctk.CTkFrame(studio_tab, fg_color="transparent")
+        color_label_frame.pack(pady=(10, 0))
 
+        font_color_label = ctk.CTkLabel(color_label_frame, text="Font Color:", font=("Helvetica", 12))
+        font_color_label.pack(side="left")
+
+        tooltip_icon = ctk.CTkLabel(color_label_frame, text="?", font=("Helvetica", 12, "bold"), width=12)
+        tooltip_icon.pack(side="left", padx=(2, 0))  # tightly placed beside the colon
+
+        tooltip_icon.bind("<Enter>", show_tooltip)
+        tooltip_icon.bind("<Leave>", hide_tooltip)
+        
         # Disabled dropdown
         color_menu = ctk.CTkOptionMenu(
             studio_tab,
