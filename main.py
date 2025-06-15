@@ -166,20 +166,28 @@ def show_pro_preferences():
     # --- STUDIO TAB ---
     try:
         studio_tab = tabview.tab("Studio")
-
         label_font = ("Helvetica", 13, "bold")
 
-                # === Subtitle Font Size ===
-        ctk.CTkLabel(studio_tab, text="Subtitle Font Size:", font=label_font).pack(pady=(10, 0))
+                # === Studio Page Container ===
+        studio_pages = ctk.CTkFrame(page1, fg_color="transparent")
+        studio_pages.pack(expand=True, fill="both")
 
-        font_size_value_label = ctk.CTkLabel(studio_tab, text="24")
+        page1 = ctk.CTkFrame(studio_pages, fg_color="transparent")
+        page2 = ctk.CTkFrame(studio_pages, fg_color="transparent")
+
+        page1.pack(expand=True, fill="both")  # Show page 1 initially
+
+                # === Subtitle Font Size ===
+        ctk.CTkLabel(page1, text="Subtitle Font Size:", font=label_font).pack(pady=(10, 0))
+
+        font_size_value_label = ctk.CTkLabel(page1, text="24")
         font_size_value_label.pack()
 
         def update_font_size(value):
             font_size_value_label.configure(text=str(int(value)))
 
         font_slider = ctk.CTkSlider(
-            studio_tab,
+            page1,
             from_=10,
             to=40,
             number_of_steps=6,
@@ -189,16 +197,16 @@ def show_pro_preferences():
         font_slider.pack(pady=(0, 10))
 
         # === Overlay Opacity ===
-        ctk.CTkLabel(studio_tab, text="Overlay Opacity:", font=label_font).pack(pady=(10, 0))
+        ctk.CTkLabel(page1, text="Overlay Opacity:", font=label_font).pack(pady=(10, 0))
 
-        opacity_value_label = ctk.CTkLabel(studio_tab, text="1.00")
+        opacity_value_label = ctk.CTkLabel(page1, text="1.00")
         opacity_value_label.pack()
 
         def update_opacity(value):
             opacity_value_label.configure(text=f"{float(value):.2f}")
 
         opacity_slider = ctk.CTkSlider(
-            studio_tab,
+            page1,
             from_=0.2,
             to=1.0,
             number_of_steps=8,
@@ -207,7 +215,7 @@ def show_pro_preferences():
         opacity_slider.set(1.0)
         opacity_slider.pack(pady=(0, 10))
 
-
+        
         # === Font Color (with Tooltip) ===
         tooltip = None
 
@@ -232,7 +240,7 @@ def show_pro_preferences():
                 tooltip = None
 
         # Label and tooltip row
-        color_label_frame = ctk.CTkFrame(studio_tab, fg_color="transparent")
+        color_label_frame = ctk.CTkFrame(page1, fg_color="transparent")
         color_label_frame.pack(pady=(10, 0))
 
         font_color_label = ctk.CTkLabel(color_label_frame, text="Font Color:", font=label_font)
@@ -245,7 +253,7 @@ def show_pro_preferences():
 
         # Disabled dropdown
         color_menu = ctk.CTkOptionMenu(
-            studio_tab,
+            page1,
             values=["White", "Yellow", "Cyan", "Green"]
         )
         color_menu.set("White")
@@ -253,7 +261,7 @@ def show_pro_preferences():
         color_menu.pack(pady=(5, 10))
 
         # === App Theme ===
-        ctk.CTkLabel(studio_tab, text="App Theme:", font=label_font).pack(pady=(10, 0))
+        ctk.CTkLabel(page1, text="App Theme:", font=label_font).pack(pady=(10, 0))
 
         def toggle_dark_mode():
             mode = "Dark" if dark_mode_switch.get() == 1 else "Light"
@@ -261,14 +269,27 @@ def show_pro_preferences():
             save_settings({"appearance_mode": mode})
 
         dark_mode_switch = ctk.CTkSwitch(
-            studio_tab,
+            page1,
             text="Enable Dark Mode",
             command=toggle_dark_mode
         )
         dark_mode_switch.select()
         dark_mode_switch.pack(pady=(0, 10))
 
-        
+        def go_to_page2():
+            page1.pack_forget()
+            page2.pack(expand=True, fill="both")
+
+        next_btn = ctk.CTkButton(
+            studio_tab,
+            text="→",
+            width=30,
+            height=25,
+            corner_radius=6,
+            command=go_to_page2
+        )
+        next_btn.place(relx=1.0, rely=1.0, anchor="se", x=-10, y=-10)
+
     except KeyError:
         pass
 
