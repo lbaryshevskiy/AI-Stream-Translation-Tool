@@ -218,18 +218,20 @@ def show_pro_preferences():
         opacity_slider.pack(pady=(0, 5))
         
         # === Live Subtitle Preview Box ===
-        preview_frame = ctk.CTkFrame(studio_tab, fg_color="#1a1a1a", corner_radius=10)
-        preview_frame.pack(pady=(5, 5), padx=20, fill="x")
+        # --- Subtitle Preview Box (Page 1 only) ---
+        preview_frame = ctk.CTkFrame(page1, fg_color="#1a1a1a", corner_radius=10)
+        preview_frame.pack(pady=(10, 5), padx=40)  # Shifted up and reduced width
 
         preview_label = ctk.CTkLabel(
             preview_frame,
             text="This is how your subtitle looks.",
+            font=("Helvetica", 20),
             text_color="white",
-            font=("Helvetica", font_slider.get()),
+            wraplength=300,
             anchor="center",
-            wraplength=400
+            justify="center"
         )
-        preview_label.pack(pady=10, padx=10)
+        preview_label.pack(padx=10, pady=8)
         
         def update_preview(*args):
             # Update font size
