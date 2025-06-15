@@ -218,7 +218,6 @@ def show_pro_preferences():
         opacity_slider.pack(pady=(0, 5))
         
         # === Live Subtitle Preview Box ===
-        # --- Subtitle Preview Box (Page 1 only) ---
         preview_frame = ctk.CTkFrame(page1, fg_color="#1a1a1a", corner_radius=10)
         preview_frame.pack(pady=(10, 5), padx=40)  # Shifted up and reduced width
 
