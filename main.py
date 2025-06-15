@@ -267,12 +267,6 @@ def show_pro_preferences():
             ctk.set_appearance_mode(mode)
             save_settings({"appearance_mode": mode})
 
-        dark_mode_switch = ctk.CTkSwitch(
-            page1,
-            text="Dark Mode",
-            command=toggle_dark_mode
-        )
-        dark_mode_switch.select()
 
         def go_to_page2():
             page1.pack_forget()
@@ -337,6 +331,7 @@ def show_pro_preferences():
             upgrade_label.place(relx=0.5, rely=1.0, anchor="s", y=-10)
             
                 # === Save & Close and Dark Mode Bottom Row ===
+                # === Save & Close and Dark Mode Bottom Row ===
         footer_frame = ctk.CTkFrame(popup, fg_color="transparent")
         footer_frame.pack(pady=(5, 10), anchor="s")
 
@@ -348,8 +343,13 @@ def show_pro_preferences():
         )
         save_btn.pack(side="left", padx=(0, 10))
 
-        dark_mode_switch.place_forget()  # Remove previous position if any
-        dark_mode_switch.pack(in_=footer_frame, side="left")
+        dark_mode_switch = ctk.CTkSwitch(
+            footer_frame,
+            text="Dark Mode",
+            command=toggle_dark_mode
+        )
+        dark_mode_switch.select()
+        dark_mode_switch.pack(side="left")
         
     except KeyError:
          pass
