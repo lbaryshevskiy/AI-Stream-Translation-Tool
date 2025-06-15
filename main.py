@@ -169,17 +169,44 @@ def show_pro_preferences():
 
         label_font = ("Helvetica", 13, "bold")
 
-        # === Subtitle Font Size ===
+                # === Subtitle Font Size ===
         ctk.CTkLabel(studio_tab, text="Subtitle Font Size:", font=label_font).pack(pady=(10, 0))
-        font_slider = ctk.CTkSlider(studio_tab, from_=10, to=40, number_of_steps=6)
-        font_slider.set(20)
+
+        font_size_value_label = ctk.CTkLabel(studio_tab, text="24")
+        font_size_value_label.pack()
+
+        def update_font_size(value):
+            font_size_value_label.configure(text=str(int(value)))
+
+        font_slider = ctk.CTkSlider(
+            studio_tab,
+            from_=10,
+            to=40,
+            number_of_steps=6,
+            command=update_font_size
+        )
+        font_slider.set(24)
         font_slider.pack(pady=(0, 10))
 
         # === Overlay Opacity ===
         ctk.CTkLabel(studio_tab, text="Overlay Opacity:", font=label_font).pack(pady=(10, 0))
-        opacity_slider = ctk.CTkSlider(studio_tab, from_=0.2, to=1.0, number_of_steps=8)
+
+        opacity_value_label = ctk.CTkLabel(studio_tab, text="1.00")
+        opacity_value_label.pack()
+
+        def update_opacity(value):
+            opacity_value_label.configure(text=f"{float(value):.2f}")
+
+        opacity_slider = ctk.CTkSlider(
+            studio_tab,
+            from_=0.2,
+            to=1.0,
+            number_of_steps=8,
+            command=update_opacity
+        )
         opacity_slider.set(1.0)
         opacity_slider.pack(pady=(0, 10))
+
 
         # === Font Color (with Tooltip) ===
         tooltip = None
