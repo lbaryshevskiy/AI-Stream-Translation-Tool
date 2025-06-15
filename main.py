@@ -180,10 +180,10 @@ def show_pro_preferences():
 
                 # === Subtitle Font Size ===
         
-        ctk.CTkLabel(page1, text="Subtitle Font Size:", font=label_font).pack(pady=(10, 0))
+        ctk.CTkLabel(page1, text="Subtitle Font Size:", font=label_font).pack(pady=(5, 0))
 
         font_size_value_label = ctk.CTkLabel(page1, text="24")
-        font_size_value_label.pack()
+        font_size_value_label.pack(pady=(0, 2))
 
         def update_font_size(value):
             font_size_value_label.configure(text=str(int(value)))
@@ -196,13 +196,13 @@ def show_pro_preferences():
             command=update_font_size
         )
         font_slider.set(24)
-        font_slider.pack(pady=(0, 10))
+        font_slider.pack(pady=(0, 5))
 
         # === Overlay Opacity ===
-        ctk.CTkLabel(page1, text="Overlay Opacity:", font=label_font).pack(pady=(10, 0))
+        ctk.CTkLabel(page1, text="Overlay Opacity:", font=label_font).pack(pady=(5, 0))
 
         opacity_value_label = ctk.CTkLabel(page1, text="1.00")
-        opacity_value_label.pack()
+        opacity_value_label.pack(pady=(0, 2))
 
         def update_opacity(value):
             opacity_value_label.configure(text=f"{float(value):.2f}")
@@ -215,11 +215,11 @@ def show_pro_preferences():
             command=update_opacity
         )
         opacity_slider.set(1.0)
-        opacity_slider.pack(pady=(0, 10))
+        opacity_slider.pack(pady=(0, 5))
         
         # === Live Subtitle Preview Box ===
         preview_frame = ctk.CTkFrame(studio_tab, fg_color="#1a1a1a", corner_radius=10)
-        preview_frame.pack(pady=(20, 10), padx=20, fill="x")
+        preview_frame.pack(pady=(5, 5), padx=20, fill="x")
 
         preview_label = ctk.CTkLabel(
             preview_frame,
@@ -272,7 +272,7 @@ def show_pro_preferences():
 
         # Label and tooltip row
         color_label_frame = ctk.CTkFrame(page1, fg_color="transparent")
-        color_label_frame.pack(pady=(10, 0))
+        color_label_frame.pack(pady=(5, 0))
 
         font_color_label = ctk.CTkLabel(color_label_frame, text="Font Color:", font=label_font)
         font_color_label.pack(side="left")
@@ -289,7 +289,7 @@ def show_pro_preferences():
         )
         color_menu.set("White")
         color_menu.configure(state="disabled")
-        color_menu.pack(pady=(5, 10))
+        color_menu.pack(pady=(0, 5))
 
         def toggle_dark_mode():
             mode = "Dark" if dark_mode_switch.get() == 1 else "Light"
