@@ -273,7 +273,7 @@ def show_pro_preferences():
             command=toggle_dark_mode
         )
         dark_mode_switch.select()
-        dark_mode_switch.place(relx=1.0, rely=1.0, anchor="se", x=-130, y=-15)
+        dark_mode_switch.place(relx=1.0, rely=1.0, anchor="se", x=-80, y=-10)
 
         def go_to_page2():
             page1.pack_forget()
