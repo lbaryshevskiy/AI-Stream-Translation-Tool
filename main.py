@@ -167,27 +167,21 @@ def show_pro_preferences():
     try:
         studio_tab = tabview.tab("Studio")
 
-        # Font Size
-        ctk.CTkLabel(studio_tab, text="Subtitle Font Size:").pack(pady=(10, 0))
-        font_size_value = ctk.CTkLabel(studio_tab, text="24")
-        font_size_value.pack()
-        font_size_slider = ctk.CTkSlider(studio_tab, from_=12, to=48, number_of_steps=8,
-                                         command=lambda val: font_size_value.configure(text=str(int(float(val)))))
-        font_size_slider.set(24)
-        font_size_slider.pack(pady=(0, 10))
+        label_font = ("Helvetica", 13, "bold")
 
-        ctk.CTkLabel(studio_tab, text="Overlay Opacity:").pack(pady=(5, 0))
-        opacity_value = ctk.CTkLabel(studio_tab, text="1.00")
-        opacity_value.pack()
-        opacity_slider = ctk.CTkSlider(studio_tab, from_=0.2, to=1.0,
-                                       command=lambda val: opacity_value.configure(text=f"{float(val):.2f}"))
+        # === Subtitle Font Size ===
+        ctk.CTkLabel(studio_tab, text="Subtitle Font Size:", font=label_font).pack(pady=(10, 0))
+        font_slider = ctk.CTkSlider(studio_tab, from_=10, to=40, number_of_steps=6)
+        font_slider.set(20)
+        font_slider.pack(pady=(0, 10))
+
+        # === Overlay Opacity ===
+        ctk.CTkLabel(studio_tab, text="Overlay Opacity:", font=label_font).pack(pady=(10, 0))
+        opacity_slider = ctk.CTkSlider(studio_tab, from_=0.2, to=1.0, number_of_steps=8)
         opacity_slider.set(1.0)
         opacity_slider.pack(pady=(0, 10))
 
-    
-
-        # Tooltip logic
-        
+        # === Font Color (with Tooltip) ===
         tooltip = None
 
         def show_tooltip(event):
@@ -198,7 +192,7 @@ def show_pro_preferences():
             tooltip_label = ctk.CTkLabel(
                 tooltip,
                 text="Unlock this option in Creator version",
-                font=("Helvetica", 9, "italic"),
+                font=("Helvetica", 10, "italic"),
                 text_color="gray"
             )
             tooltip_label.pack()
@@ -209,20 +203,19 @@ def show_pro_preferences():
             if tooltip:
                 tooltip.destroy()
                 tooltip = None
-                
-        # Font Color label + separate "?" 
+
+        # Label and tooltip row
         color_label_frame = ctk.CTkFrame(studio_tab, fg_color="transparent")
         color_label_frame.pack(pady=(10, 0))
 
-        font_color_label = ctk.CTkLabel(color_label_frame, text="Font Color:", font=("Helvetica", 12))
+        font_color_label = ctk.CTkLabel(color_label_frame, text="Font Color:", font=label_font)
         font_color_label.pack(side="left")
 
         tooltip_icon = ctk.CTkLabel(color_label_frame, text="?", font=("Helvetica", 12, "bold"), width=12)
-        tooltip_icon.pack(side="left", padx=(2, 0))  # tightly placed beside the colon
-
+        tooltip_icon.pack(side="left", padx=(2, 0))
         tooltip_icon.bind("<Enter>", show_tooltip)
         tooltip_icon.bind("<Leave>", hide_tooltip)
-        
+
         # Disabled dropdown
         color_menu = ctk.CTkOptionMenu(
             studio_tab,
@@ -232,7 +225,9 @@ def show_pro_preferences():
         color_menu.configure(state="disabled")
         color_menu.pack(pady=(5, 10))
 
-         # Dark mode
+        # === App Theme ===
+        ctk.CTkLabel(studio_tab, text="App Theme:", font=label_font).pack(pady=(10, 0))
+
         def toggle_dark_mode():
             mode = "Dark" if dark_mode_switch.get() == 1 else "Light"
             ctk.set_appearance_mode(mode)
@@ -240,11 +235,12 @@ def show_pro_preferences():
 
         dark_mode_switch = ctk.CTkSwitch(
             studio_tab,
-            text="Dark Mode",
+            text="Enable Dark Mode",
             command=toggle_dark_mode
         )
-        dark_mode_switch.select()  # ON by default (Dark mode enabled)
-        dark_mode_switch.pack(pady=10)
+        dark_mode_switch.select()
+        dark_mode_switch.pack(pady=(0, 10))
+
         
     except KeyError:
         pass
