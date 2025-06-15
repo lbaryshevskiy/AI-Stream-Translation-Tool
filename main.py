@@ -225,7 +225,7 @@ def show_pro_preferences():
             preview_frame,
             text="This is how your subtitle looks.",
             text_color="white",
-            font=("Helvetica", subtitle_font_slider.get()),
+            font=("Helvetica", font_slider.get()),
             anchor="center",
             wraplength=400
         )
