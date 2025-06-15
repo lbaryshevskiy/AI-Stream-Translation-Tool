@@ -269,7 +269,7 @@ def show_pro_preferences():
 
         dark_mode_switch = ctk.CTkSwitch(
             page1,
-            text="Enable Dark Mode",
+            text="Dark Mode",
             command=toggle_dark_mode
         )
         dark_mode_switch.select()
@@ -368,7 +368,7 @@ def main():
 
     root = ctk.CTk()
     root.title("Streamsub")
-    root.geometry("300x300")
+    root.geometry("300x400")
     root.resizable(False, False)
 
     # Determine plan (simulate during dev)
