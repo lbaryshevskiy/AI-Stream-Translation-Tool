@@ -202,11 +202,6 @@ def show_pro_preferences():
 
 
         # === Overlay Opacity ===
-        ctk.CTkLabel(page1, text="Overlay Opacity:", font=label_font).pack(pady=(5, 0))
-
-        opacity_value_label = ctk.CTkLabel(page1, text="1.00")
-        opacity_value_label.pack(pady=(0, 2))
-
         def update_opacity(value):
             opacity_value_label.configure(text=f"{float(value):.2f}")
             update_preview()
