@@ -197,7 +197,7 @@ def show_pro_preferences():
             command=update_font_size
         )
         font_slider.set(24)
-        font_slider.pack(0, 8)
+        font_slider.pack(pady=(0, 8))
 
         # === Overlay Opacity ===
             # === Overlay Opacity ===
@@ -219,7 +219,7 @@ def show_pro_preferences():
             command=update_opacity
         )
         overlay_opacity_slider.set(1.0)
-        overlay_opacity_slider.pack(0, 8)
+        overlay_opacity_slider.pack(pady=(0, 8))
 
 
         def update_preview(*args):
