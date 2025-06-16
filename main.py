@@ -186,6 +186,9 @@ def show_pro_preferences():
         font_size_label = ctk.CTkLabel(page1, text="Subtitle Font Size:", font=label_font)
         font_size_label.pack(pady=(20, 0))
 
+        font_size_value_label = ctk.CTkLabel(page1, text="24")
+        font_size_value_label.pack()
+        
         font_slider = ctk.CTkSlider(
             page1,
             from_=12,
@@ -196,11 +199,6 @@ def show_pro_preferences():
         font_slider.set(24)
         font_slider.pack()
 
-        font_size_value_label = ctk.CTkLabel(page1, text="24")
-        font_size_value_label.pack()
-
-
-
         # === Overlay Opacity ===
         def update_opacity(value):
             opacity_value_label.configure(text=f"{float(value):.2f}")
@@ -208,6 +206,9 @@ def show_pro_preferences():
 
         opacity_label = ctk.CTkLabel(page1, text="Overlay Opacity:", font=label_font)
         opacity_label.pack(pady=(10, 0))
+
+        opacity_value_label = ctk.CTkLabel(page1, text="1.00")
+        opacity_value_label.pack(pady=(0, 10))
 
         overlay_opacity_slider = ctk.CTkSlider(
             page1,
@@ -218,9 +219,6 @@ def show_pro_preferences():
         )    
         overlay_opacity_slider.set(1.0)
         overlay_opacity_slider.pack()
-
-        opacity_value_label = ctk.CTkLabel(page1, text="1.00")
-        opacity_value_label.pack(pady=(0, 10))
 
         def update_preview(*args):
             # Update font size
