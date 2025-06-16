@@ -265,7 +265,7 @@ def show_pro_preferences():
         color_label_frame.pack(pady=(5, 0))
 
         font_color_label = ctk.CTkLabel(color_label_frame, text="Font Color:", font=label_font)
-        font_color_label.pack(side="left", pady=(0, -2))
+        font_color_label.pack(side="left", pady=(0, 1))
 
         tooltip_icon = ctk.CTkLabel(color_label_frame, text="?", font=("Helvetica", 12, "bold"), width=12)
         tooltip_icon.pack(side="left", padx=(2, 0))
