@@ -262,7 +262,7 @@ def show_pro_preferences():
 
         # Label and tooltip row
         color_label_frame = ctk.CTkFrame(page1, fg_color="transparent")
-        color_label_frame.pack(pady=(5, 0))
+        color_label_frame.pack(pady=(0, 0))
 
         font_color_label = ctk.CTkLabel(color_label_frame, text="Font Color:", font=label_font)
         font_color_label.pack(side="left", pady=(0, 0))
