@@ -184,10 +184,10 @@ def show_pro_preferences():
             update_preview()
 
         font_size_label = ctk.CTkLabel(page1, text="Subtitle Font Size:", font=label_font)
-        font_size_label.pack(pady=(20, 0))
+        font_size_label.pack(pady=(15, 0))
 
         font_size_value_label = ctk.CTkLabel(page1, text="24")
-        font_size_value_label.pack()
+        font_size_value_label.pack(0, 2)
         
         font_slider = ctk.CTkSlider(
             page1,
@@ -197,7 +197,7 @@ def show_pro_preferences():
             command=update_font_size
         )
         font_slider.set(24)
-        font_slider.pack()
+        font_slider.pack(0, 8)
 
         # === Overlay Opacity ===
             # === Overlay Opacity ===
@@ -206,10 +206,10 @@ def show_pro_preferences():
             update_preview()
 
         opacity_label = ctk.CTkLabel(page1, text="Overlay Opacity:", font=label_font)
-        opacity_label.pack(pady=(10, 0))
+        opacity_label.pack(pady=(5, 0))
 
         opacity_value_label = ctk.CTkLabel(page1, text="1.00")
-        opacity_value_label.pack()
+        opacity_value_label.pack(0, 2)
 
         overlay_opacity_slider = ctk.CTkSlider(
             page1,
@@ -219,7 +219,7 @@ def show_pro_preferences():
             command=update_opacity
         )
         overlay_opacity_slider.set(1.0)
-        overlay_opacity_slider.pack()
+        overlay_opacity_slider.pack(0, 8)
 
 
         def update_preview(*args):
@@ -279,11 +279,11 @@ def show_pro_preferences():
         )
         color_menu.set("White")
         color_menu.configure(state="disabled")
-        color_menu.pack(pady=(0, 5))
+        color_menu.pack(pady=(0, 8))
 
         # === Live Subtitle Preview Box ===
         preview_frame = ctk.CTkFrame(page1, fg_color="#1a1a1a", corner_radius=10)
-        preview_frame.pack(pady=(20, 15), padx=40)  # Shifted up and reduced width
+        preview_frame.pack(pady=(0, 12), padx=40)  # Shifted up and reduced width
 
         preview_label = ctk.CTkLabel(
             preview_frame,
