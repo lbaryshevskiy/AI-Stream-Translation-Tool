@@ -465,7 +465,7 @@ def main():
     copy_btn = ctk.CTkButton(frame, text="📋 Copy OBS URL", command=copy_url)
     copy_btn.pack(pady=10)
 
-    settings_btn = ctk.CTkButton(frame, text="⚙️ Preferences (Pro)", command=show_pro_preferences)
+    settings_btn = ctk.CTkButton(frame, text="⚙️ Settings", command=show_pro_preferences)
     settings_btn.pack(pady=10)
 
     start_btn = ctk.CTkButton(frame, text="▶️ Start", command=toggle_backend)
