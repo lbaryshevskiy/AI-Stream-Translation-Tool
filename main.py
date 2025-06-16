@@ -187,8 +187,8 @@ def show_pro_preferences():
         font_size_label.pack(pady=(15, 0))
 
         font_size_value_label = ctk.CTkLabel(page1, text="24")
-        font_size_value_label.pack(0, 2)
-        
+        font_size_value_label.pack(pady=(0, 2))
+
         font_slider = ctk.CTkSlider(
             page1,
             from_=12,
