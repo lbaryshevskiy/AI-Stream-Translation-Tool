@@ -265,7 +265,7 @@ def show_pro_preferences():
         color_label_frame.pack(pady=(5, 0))
 
         font_color_label = ctk.CTkLabel(color_label_frame, text="Font Color:", font=label_font)
-        font_color_label.pack(side="left", pady=(0, 1))
+        font_color_label.pack(side="left", pady=(0, 0))
 
         tooltip_icon = ctk.CTkLabel(color_label_frame, text="?", font=("Helvetica", 12, "bold"), width=12)
         tooltip_icon.pack(side="left", padx=(2, 0))
@@ -279,7 +279,7 @@ def show_pro_preferences():
         )
         color_menu.set("White")
         color_menu.configure(state="disabled")
-        color_menu.pack(pady=(0, 0))
+        color_menu.pack(pady=(0, 10))
 
         # === Live Subtitle Preview Box ===
         preview_frame = ctk.CTkFrame(page1, fg_color="#1a1a1a", corner_radius=10)
