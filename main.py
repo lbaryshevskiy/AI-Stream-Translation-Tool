@@ -179,7 +179,6 @@ def show_pro_preferences():
         page1.pack(expand=True, fill="both")  # Initial visible page
 
                 # === Subtitle Font Size ===
-        
         ctk.CTkLabel(page1, text="Subtitle Font Size:", font=label_font).pack(pady=(5, 0))
 
         font_size_value_label = ctk.CTkLabel(page1, text="24")
@@ -193,10 +192,10 @@ def show_pro_preferences():
             page1,
             from_=10,
             to=40,
-            number_of_steps=6,
-            command=update_font_size
+            number_of_steps=6
         )
         font_slider.set(24)
+        font_slider.configure(command=update_font_size)
         font_slider.pack(pady=(0, 5))
 
 
@@ -214,13 +213,11 @@ def show_pro_preferences():
             page1,
             from_=0.2,
             to=1.0,
-            number_of_steps=8,
-            command=update_opacity
+            number_of_steps=8
         )
         opacity_slider.set(1.0)
+        opacity_slider.configure(command=update_opacity)
         opacity_slider.pack(pady=(0, 5))
-
-        
         
         def update_preview(*args):
             # Update font size
