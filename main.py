@@ -209,7 +209,7 @@ def show_pro_preferences():
         opacity_label.pack(pady=(5, 0))
 
         opacity_value_label = ctk.CTkLabel(page1, text="1.00")
-        opacity_value_label.pack(0, 2)
+        opacity_value_label.pack(pady=(0, 2))
 
         overlay_opacity_slider = ctk.CTkSlider(
             page1,
