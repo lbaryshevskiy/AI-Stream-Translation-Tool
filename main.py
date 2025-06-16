@@ -179,24 +179,26 @@ def show_pro_preferences():
         page1.pack(expand=True, fill="both")  # Initial visible page
 
                 # === Subtitle Font Size ===
-        ctk.CTkLabel(page1, text="Subtitle Font Size:", font=label_font).pack(pady=(5, 0))
-
-        font_size_value_label = ctk.CTkLabel(page1, text="24")
-        font_size_value_label.pack(pady=(0, 2))
-
         def update_font_size(value):
             font_size_value_label.configure(text=str(int(float(value))))
             update_preview()
 
+        font_size_label = ctk.CTkLabel(page1, text="Subtitle Font Size:", font=label_font)
+        font_size_label.pack(pady=(20, 0))
+
         font_slider = ctk.CTkSlider(
             page1,
-            from_=10,
-            to=40,
-            number_of_steps=6
+            from_=12,
+            to=48,
+            number_of_steps=36,
+            command=update_font_size
         )
         font_slider.set(24)
-        font_slider.configure(command=update_font_size)
-        font_slider.pack(pady=(0, 5))
+        font_slider.pack()
+
+        font_size_value_label = ctk.CTkLabel(page1, text="24")
+        font_size_value_label.pack()
+
 
 
         # === Overlay Opacity ===
@@ -209,16 +211,22 @@ def show_pro_preferences():
             opacity_value_label.configure(text=f"{float(value):.2f}")
             update_preview()
 
-        opacity_slider = ctk.CTkSlider(
+        opacity_label = ctk.CTkLabel(page1, text="Overlay Opacity:", font=label_font)
+        opacity_label.pack(pady=(10, 0))
+
+        overlay_opacity_slider = ctk.CTkSlider(
             page1,
-            from_=0.2,
+            from_=0.1,
             to=1.0,
-            number_of_steps=8
-        )
-        opacity_slider.set(1.0)
-        opacity_slider.configure(command=update_opacity)
-        opacity_slider.pack(pady=(0, 5))
-        
+            number_of_steps=18,
+            command=update_opacity
+        )    
+        overlay_opacity_slider.set(1.0)
+        overlay_opacity_slider.pack()
+
+        opacity_value_label = ctk.CTkLabel(page1, text="1.00")
+        opacity_value_label.pack(pady=(0, 10))
+
         def update_preview(*args):
             # Update font size
             preview_label.configure(
