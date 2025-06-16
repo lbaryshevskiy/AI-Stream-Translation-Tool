@@ -239,9 +239,8 @@ def show_pro_preferences():
             hex_color = f"#{shade:02x}{shade:02x}{shade:02x}"
             preview_frame.configure(fg_color=hex_color)
             
-        font_slider.configure(command=lambda val: update_preview())
-        opacity_slider.configure(command=lambda val: update_preview())
-
+            font_slider.configure(command=update_font_size)
+            overlay_opacity_slider.configure(command=update_opacity)
         
         # === Font Color (with Tooltip) ===
         tooltip = None
