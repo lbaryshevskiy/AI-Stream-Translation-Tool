@@ -218,7 +218,7 @@ def show_pro_preferences():
             command=update_opacity
         )    
         overlay_opacity_slider.set(1.0)
-        overlay_opacity_slider.pack()
+        overlay_opacity_slider.pack(pady=(0, 5))
 
         def update_preview(*args):
             # Update font size
