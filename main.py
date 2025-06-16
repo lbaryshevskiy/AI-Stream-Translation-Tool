@@ -234,7 +234,7 @@ def show_pro_preferences():
             )
 
             # Simulate opacity via grayscale darkening (simulate transparency)
-            opacity = opacity_slider.get()
+            opacity = overlay_opacity_slider.get()
             shade = int(26 + (opacity * 230))  # 0.1 → #2a2a2a, 1.0 → #ffffff
             hex_color = f"#{shade:02x}{shade:02x}{shade:02x}"
             preview_frame.configure(fg_color=hex_color)
