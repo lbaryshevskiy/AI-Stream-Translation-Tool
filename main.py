@@ -200,6 +200,7 @@ def show_pro_preferences():
         font_slider.pack()
 
         # === Overlay Opacity ===
+            # === Overlay Opacity ===
         def update_opacity(value):
             opacity_value_label.configure(text=f"{float(value):.2f}")
             update_preview()
@@ -208,7 +209,7 @@ def show_pro_preferences():
         opacity_label.pack(pady=(10, 0))
 
         opacity_value_label = ctk.CTkLabel(page1, text="1.00")
-        opacity_value_label.pack(pady=(0, 10))
+        opacity_value_label.pack()
 
         overlay_opacity_slider = ctk.CTkSlider(
             page1,
@@ -216,9 +217,10 @@ def show_pro_preferences():
             to=1.0,
             number_of_steps=18,
             command=update_opacity
-        )    
+        )
         overlay_opacity_slider.set(1.0)
-        overlay_opacity_slider.pack(pady=(0, 2))
+        overlay_opacity_slider.pack()
+
 
         def update_preview(*args):
             # Update font size
