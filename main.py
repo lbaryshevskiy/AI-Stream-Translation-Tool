@@ -304,9 +304,17 @@ def show_pro_preferences():
         }
 
         box_size_var = ctk.StringVar(value="Compact (600x100)")
+        last = load_settings().get("last_custom_box_size")
+        if last:
+            box_size_var.set(f"Custom ({last})")
+            try:
+                preview_label.configure(wraplength=int(last.split("x")[0]))
+            except:
+                pass
 
         def update_box_size(choice):
             if choice == "Custom...":
+                width_entry.delete(0, tk.END)  # Start empty each time
                 custom_frame.pack(pady=(5, 10))
             else:
                 custom_frame.pack_forget()
@@ -326,37 +334,25 @@ def show_pro_preferences():
 
         def apply_custom_width():
             value = width_entry.get().strip()
-
+            
             try:
                 if "x" in value:
                     width_str, _ = value.lower().split("x")
                     width = int(width_str.strip())
                 else:
                     width = int(value)
-
-                # Apply to preview
+                    
                 preview_label.configure(wraplength=width)
-
-                # Format label and inject into dropdown
-                custom_label = f"Custom ({value})"
-                if custom_label not in box_size_menu.cget("values"):
-                    new_values = list(box_size_menu.cget("values"))
-                    new_values.insert(-1, custom_label)
-                    box_size_menu.configure(values=new_values)
-
-                # Set dropdown to this new label
-                box_size_var.set(custom_label)
-
-                # Hide input box
+                save_settings({"last_custom_box_size": value})
+                box_size_var.set(f"Custom ({value})")
                 custom_frame.pack_forget()
-
+                
             except Exception as e:
                 print("Invalid custom size:", e)
 
     except Exception as e:
         print("Studio tab error:", e)
-
-
+        
 
     # --- CREATOR TAB ---
     try:
