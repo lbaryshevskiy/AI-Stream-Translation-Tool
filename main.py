@@ -377,58 +377,57 @@ def show_pro_preferences():
             except ValueError:
                 pass  # Ignore invalid input
 
-        try:
-            creator_tab = tabview.tab("Creator")
+            try:
+                creator_tab = tabview.tab("Creator")
 
-        ctk.CTkLabel(creator_tab, text="Whisper Model:").pack(pady=(10, 0))
-        model_menu = ctk.CTkOptionMenu(creator_tab, values=["tiny", "base", "small", "medium", "large"])
-        model_menu.set("base")
-        model_menu.pack(pady=(0, 10))
+                ctk.CTkLabel(creator_tab, text="Whisper Model:").pack(pady=(10, 0))
 
-        logging_switch = ctk.CTkSwitch(creator_tab, text="Enable Logging")
-        logging_switch.pack(pady=10)
+                model_menu = ctk.CTkOptionMenu(
+                    creator_tab,
+                    values=["tiny", "base", "small", "medium", "large"]
+                )
+                model_menu.set("base")
+                model_menu.pack(pady=(0, 10))
 
-        save_checkbox = ctk.CTkCheckBox(creator_tab, text="Save Settings to File")
-        save_checkbox.pack(pady=10)
+                logging_switch = ctk.CTkSwitch(creator_tab, text="Enable Logging")
+                logging_switch.pack(pady=10)
 
-        if user_plan != "creator":
-            model_menu.configure(state="disabled")
-            logging_switch.configure(state="disabled")
-            save_checkbox.configure(state="disabled")
+                save_checkbox = ctk.CTkCheckBox(creator_tab, text="Save Settings to File")
+                save_checkbox.pack(pady=10)
 
-            upgrade_label = ctk.CTkLabel(
-                creator_tab,
-                text="🔒 Unlock these features with Creator Version",
-                font=("Helvetica", 15, "italic"),
-                text_color="gray"
-            )
-            upgrade_label.place(relx=0.5, rely=1.0, anchor="s", y=-10)
-            
-        footer_frame = ctk.CTkFrame(popup, fg_color="transparent")
-        footer_frame.pack(pady=(5, 10), fill="x")
+                if user_plan != "creator":
+                    model_menu.configure(state="disabled")
+                    logging_switch.configure(state="disabled")
+                    save_checkbox.configure(state="disabled")
 
-        # Inner frame to hold buttons right-aligned
-        right_frame = ctk.CTkFrame(footer_frame, fg_color="transparent")
-        right_frame.pack(side="right", padx=(0, 25))
+                    upgrade_label = ctk.CTkLabel(
+                        creator_tab,
+                        text="🔒 Unlock these features with Creator Version",
+                        font=("Helvetica", 15, "italic"),
+                        text_color="gray"
 
-        dark_mode_switch = ctk.CTkSwitch(
-            right_frame,
-            text="Dark Mode",
-            command=toggle_dark_mode
-        )
-        dark_mode_switch.select()
-        dark_mode_switch.pack(side="right", padx=(10, 0))
 
-        save_btn = ctk.CTkButton(
-            right_frame,
-            text="Save & Close",
-            command=popup.destroy,
-            width=140
-        )
-        save_btn.pack(side="right")
+                right_frame = ctk.CTkFrame(footer_frame, fg_color="transparent")
+                right_frame.pack(side="right", padx=(0, 25))
 
-    except KeyError:
-         pass
+                dark_mode_switch = ctk.CTkSwitch(
+                    right_frame,
+                    text="Dark Mode",
+                    command=toggle_dark_mode
+                )
+                dark_mode_switch.select()
+                dark_mode_switch.pack(side="right", padx=(10, 0))
+
+                save_btn = ctk.CTkButton(
+                    right_frame,
+                    text="Save & Close",
+                    command=popup.destroy,
+                    width=140
+                )
+                save_btn.pack(side="right")
+
+            except KeyError:
+                pass
 
 
 def launch_overlay():
