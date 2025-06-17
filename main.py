@@ -460,21 +460,16 @@ def main():
     else:  # free
         available_langs = ["🇬🇧 English", "🇫🇷 French", "🇪🇸 Spanish"]
 
-    placeholder = "🌐 Language"
-    available_langs.insert(0, placeholder)
-
+    # Add upgrade hint at the bottom (fake entry)
+    upgrade_hint = "🔓 More languages in Creator"
     if user_plan != "creator":
-        upgrade_hint = "🔓 More languages in Creator"
         available_langs.append(upgrade_hint)
-    else:
-        upgrade_hint = None 
 
-    # Selected language
-    selected_lang = ctk.StringVar(value=placeholder)
+    selected_lang = ctk.StringVar(value="🌐 Language")
 
     def on_lang_select(choice):
-        if choice == upgrade_hint or choice == placeholder:
-            selected_lang.set(placeholder)
+        if choice == upgrade_hint:
+            selected_lang.set("🌐 Language") 
         else:
             selected_lang.set(choice)
 
@@ -485,7 +480,6 @@ def main():
         command=on_lang_select
     )
     lang_menu.pack(pady=10)
-
 
     copy_btn = ctk.CTkButton(frame, text="📋 Copy OBS URL", command=copy_url)
     copy_btn.pack(pady=10)
