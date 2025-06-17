@@ -375,7 +375,8 @@ def show_pro_preferences():
                 width = int(width_entry.get())
                 preview_label.configure(wraplength=width)
             except ValueError:
-                 pass
+                pass  # Ignore invalid input
+
 
     try:
         creator_tab = tabview.tab("Creator")
