@@ -454,7 +454,7 @@ def main():
 
     ctk.CTkLabel(frame, text="🎙️ Streamsub", font=("Helvetica", 16, "bold")).pack(pady=(0, 10))
 
-        # --- Language Selection Based on Plan ---
+           # --- Language Selection Based on Plan ---
     if user_plan == "creator":
         available_langs = list(language_options.keys())
     elif user_plan == "studio":
@@ -462,23 +462,28 @@ def main():
     else:  # free
         available_langs = ["🇬🇧 English", "🇫🇷 French", "🇪🇸 Spanish"]
 
+    # Add disabled-looking hint item at the end
+    if user_plan != "creator":
+        upgrade_hint = "🔓 Unlimited selection in Creator Mode"
+        available_langs.append(upgrade_hint)
+
+    # Store current lang separately for selection control
     selected_lang = ctk.StringVar(value=available_langs[0])
+
+    def on_lang_select(choice):
+        if choice == upgrade_hint:
+            # Revert to previous valid selection
+            selected_lang.set(available_langs[0])
+        else:
+            selected_lang.set(choice)
 
     lang_menu = ctk.CTkOptionMenu(
         frame,
         variable=selected_lang,
-        values=available_langs
+        values=available_langs,
+        command=on_lang_select
     )
     lang_menu.pack(pady=10)
-
-    if user_plan != "creator":
-        hint_label = ctk.CTkLabel(
-            frame,
-            text="🔒 More languages in Creator version",
-            text_color="gray",
-            font=("Helvetica", 10, "italic")
-        )
-        hint_label.pack(pady=(0, 5))
 
     copy_btn = ctk.CTkButton(frame, text="📋 Copy OBS URL", command=copy_url)
     copy_btn.pack(pady=10)
