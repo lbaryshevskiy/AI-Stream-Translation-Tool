@@ -373,8 +373,7 @@ def show_pro_preferences():
         def apply_custom_width():
             try:
                 width = int(width_entry.get())
-                preview_label.confi_
-
+                preview_label.configure(wraplength=width)
 
     except KeyError:
         pass
