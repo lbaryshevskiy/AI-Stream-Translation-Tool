@@ -314,12 +314,13 @@ def show_pro_preferences():
 
         def update_box_size(choice):
             if choice == "Custom...":
-                width_entry.delete(0, tk.END)  # Start empty each time
+                width_entry.delete(0, ctk.END)  # Fix here
                 custom_frame.pack(pady=(5, 10))
             else:
                 custom_frame.pack_forget()
                 wrap_length = box_size_presets.get(choice, 600)
                 preview_label.configure(wraplength=wrap_length)
+
 
         box_size_menu = ctk.CTkOptionMenu(page2, variable=box_size_var, values=list(box_size_presets.keys()), command=update_box_size)
         box_size_menu.pack(pady=(0, 5))
