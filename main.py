@@ -188,7 +188,17 @@ def show_pro_preferences():
         font_slider.set(20)
         font_size_value_label.configure(text="20")
         font_slider.pack(pady=(0, 8))
-
+        
+        def update_preview(*args):
+            preview_label.configure(font=("Helvetica", int(font_slider.get())))
+            opacity = overlay_opacity_slider.get()
+            if opacity <= 0.11:
+                preview_frame.configure(fg_color="transparent")
+            else:
+                shade = int(26 + (opacity * 230))
+                hex_color = f"#{shade:02x}{shade:02x}{shade:02x}"
+                preview_frame.configure(fg_color=hex_color)
+                
         # --- Opacity ---
         def update_opacity(value):
             opacity_value_label.configure(text=f"{float(value):.2f}")
@@ -231,18 +241,7 @@ def show_pro_preferences():
             justify="center"
         )
         preview_label.pack(padx=10, pady=8)
-
-        def update_preview(*args):
-            preview_label.configure(font=("Helvetica", int(font_slider.get())))
-            opacity = overlay_opacity_slider.get()
-            if opacity <= 0.11:
-                preview_frame.configure(fg_color="transparent")
-            else:
-                shade = int(26 + (opacity * 230))
-                hex_color = f"#{shade:02x}{shade:02x}{shade:02x}"
-                preview_frame.configure(fg_color=hex_color)
-
-
+        
 
         # --- Tooltip for font color ---
         def show_tooltip(event):
