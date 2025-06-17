@@ -185,7 +185,8 @@ def show_pro_preferences():
         font_size_value_label.pack(pady=(0, 2))
 
         font_slider = ctk.CTkSlider(page1, from_=12, to=48, number_of_steps=36, command=update_font_size)
-        font_slider.set(24)
+        font_slider.set(20)
+        font_size_value_label.configure(text="20")
         font_slider.pack(pady=(0, 8))
 
         # --- Opacity ---
