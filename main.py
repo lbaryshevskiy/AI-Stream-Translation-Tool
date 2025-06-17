@@ -154,6 +154,11 @@ def show_pro_preferences():
     from __main__ import dev_mode, dev_override_plan
     user_plan = dev_override_plan if dev_mode else "free"
 
+    def toggle_dark_mode():
+    mode = "Dark" if dark_mode_switch.get() == 1 else "Light"
+    ctk.set_appearance_mode(mode)
+    save_settings({"appearance_mode": mode})
+
     tabview = ctk.CTkTabview(popup, width=360, height=300)
     tabview.pack(padx=10, pady=10, fill="both", expand=True)
 
