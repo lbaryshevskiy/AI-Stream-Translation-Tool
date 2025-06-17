@@ -194,20 +194,6 @@ def show_pro_preferences():
 
         opacity_value_label = ctk.CTkLabel(page1, text="1.00")
         opacity_value_label.pack(pady=(0, 2))
-
-        preview_frame = ctk.CTkFrame(page1, fg_color="#1a1a1a", corner_radius=10)
-        preview_frame.pack(pady=(10, 10), padx=40)
-        
-        preview_label = ctk.CTkLabel(
-            preview_frame,
-            text="This is how your subtitle looks.",
-            font=("Helvetica", 20),
-            text_color="white",
-            wraplength=300,
-            anchor="center",
-            justify="center"
-        )
-        preview_label.pack(padx=10, pady=8)
         
         def update_preview(*args):
             preview_label.configure(font=("Helvetica", int(font_slider.get())))
@@ -230,18 +216,6 @@ def show_pro_preferences():
         overlay_opacity_slider.pack(pady=(0, 8))
         update_preview()
 
-        color_label_frame = ctk.CTkFrame(page1, fg_color="transparent")
-        color_label_frame.pack(pady=(0, 0))
-
-        font_color_label = ctk.CTkLabel(color_label_frame, text="Font Color:", font=label_font)
-        font_color_label.pack(side="left", pady=(0, 0))
-
-        color_menu = ctk.CTkOptionMenu(page1, values=["White", "Yellow", "Cyan", "Green"])
-        color_menu.set("White")
-        color_menu.configure(state="disabled")
-        color_menu.pack(pady=(0, 10))
-
-
         # --- Tooltip for font color ---
         def show_tooltip(event):
             tooltip = ctk.CTkToplevel()
@@ -260,6 +234,20 @@ def show_pro_preferences():
         tooltip_icon.pack(side="left", padx=(2, 0))
         tooltip_icon.bind("<Enter>", show_tooltip)
         tooltip_icon.bind("<Leave>", hide_tooltip)
+
+        preview_frame = ctk.CTkFrame(page1, fg_color="#1a1a1a", corner_radius=10)
+        preview_frame.pack(pady=(10, 10), padx=40)
+        
+        preview_label = ctk.CTkLabel(
+            preview_frame,
+            text="This is how your subtitle looks.",
+            font=("Helvetica", 20),
+            text_color="white",
+            wraplength=300,
+            anchor="center",
+            justify="center"
+        )
+        preview_label.pack(padx=10, pady=8)
         
         def toggle_dark_mode():
             mode = "Dark" if dark_mode_switch.get() == 1 else "Light"
