@@ -353,9 +353,6 @@ def show_pro_preferences():
             except Exception as e:
                 print("Invalid custom size:", e)
 
-            except ValueError:
-                pass
-
     # --- CREATOR TAB ---
     try:
         creator_tab = tabview.tab("Creator")
