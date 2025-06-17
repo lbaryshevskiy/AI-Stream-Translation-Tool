@@ -464,7 +464,7 @@ def main():
 
     # Add disabled-looking hint item at the end
     if user_plan != "creator":
-        upgrade_hint = "🔓 Unlimited selection in Creator Mode"
+        upgrade_hint = "🔓 Creator mode unlocks all"
         available_langs.append(upgrade_hint)
 
     # Store current lang separately for selection control
