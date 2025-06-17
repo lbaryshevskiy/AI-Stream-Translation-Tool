@@ -377,8 +377,8 @@ def show_pro_preferences():
             except ValueError:
                 pass  # Ignore invalid input
 
-            try:
-                creator_tab = tabview.tab("Creator")
+        try:
+            creator_tab = tabview.tab("Creator")
 
         ctk.CTkLabel(creator_tab, text="Whisper Model:").pack(pady=(10, 0))
         model_menu = ctk.CTkOptionMenu(creator_tab, values=["tiny", "base", "small", "medium", "large"])
