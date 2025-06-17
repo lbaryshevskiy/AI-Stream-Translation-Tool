@@ -205,6 +205,7 @@ def show_pro_preferences():
         overlay_opacity_slider.set(0.10)
         opacity_value_label.configure(text="0.10")
         overlay_opacity_slider.pack(pady=(0, 8))
+        update_preview()
 
         color_label_frame = ctk.CTkFrame(page1, fg_color="transparent")
         color_label_frame.pack(pady=(0, 0))
