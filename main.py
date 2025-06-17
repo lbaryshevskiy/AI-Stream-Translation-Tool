@@ -353,6 +353,10 @@ def show_pro_preferences():
             except Exception as e:
                 print("Invalid custom size:", e)
 
+    except Exception as e:
+        print("Studio tab error:", e)
+
+
 
     # --- CREATOR TAB ---
     try:
