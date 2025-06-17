@@ -312,7 +312,6 @@ def show_pro_preferences():
             next_btn.place(relx=1.0, rely=1.0, anchor="se", x=-10, y=-10)
             back_btn.place_forget()
 
-
         next_btn = ctk.CTkButton(
             studio_tab,
             text="→",
@@ -331,6 +330,30 @@ def show_pro_preferences():
             corner_radius=6,
             command=go_to_page1
         )
+                # === Subtitle Box Size Selector ===
+        box_size_label = ctk.CTkLabel(page2, text="Subtitle Box Size:", font=label_font)
+        box_size_label.pack(pady=(15, 0))
+
+        box_size_options = {
+            "Compact": 300,
+            "Wide": 500,
+            "Tall": 300,     # Affects height via wrapping
+            "Full Width": 700
+        }
+
+        box_size_var = ctk.StringVar(value="Compact")
+
+        def update_box_size(choice):
+            wrap_length = box_size_options.get(choice, 300)
+            preview_label.configure(wraplength=wrap_length)
+
+        box_size_menu = ctk.CTkOptionMenu(
+            page2,
+            variable=box_size_var,
+            values=list(box_size_options.keys()),
+            command=update_box_size
+        )
+        box_size_menu.pack(pady=(0, 10))
 
     except KeyError:
         pass
