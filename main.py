@@ -209,11 +209,6 @@ def show_pro_preferences():
         font_color_label = ctk.CTkLabel(color_label_frame, text="Font Color:", font=label_font)
         font_color_label.pack(side="left", pady=(0, 0))
 
-        tooltip_icon = ctk.CTkLabel(color_label_frame, text="?", font=("Helvetica", 12, "bold"), width=12)
-        tooltip_icon.pack(side="left", padx=(2, 0))
-        tooltip_icon.bind("<Enter>", show_tooltip)
-        tooltip_icon.bind("<Leave>", hide_tooltip)
-
         color_menu = ctk.CTkOptionMenu(page1, values=["White", "Yellow", "Cyan", "Green"])
         color_menu.set("White")
         color_menu.configure(state="disabled")
@@ -255,6 +250,11 @@ def show_pro_preferences():
         def hide_tooltip(event):
             if hasattr(event.widget, "tooltip"):
                 event.widget.tooltip.destroy()
+                
+        tooltip_icon = ctk.CTkLabel(color_label_frame, text="?", font=("Helvetica", 12, "bold"), width=12)
+        tooltip_icon.pack(side="left", padx=(2, 0))
+        tooltip_icon.bind("<Enter>", show_tooltip)
+        tooltip_icon.bind("<Leave>", hide_tooltip)
         
         def toggle_dark_mode():
             mode = "Dark" if dark_mode_switch.get() == 1 else "Light"
