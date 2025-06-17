@@ -203,14 +203,6 @@ def show_pro_preferences():
         overlay_opacity_slider.set(1.0)
         overlay_opacity_slider.pack(pady=(0, 8))
 
-        # --- Preview Box ---
-        def update_preview(*args):
-            preview_label.configure(font=("Helvetica", int(font_slider.get())))
-            opacity = overlay_opacity_slider.get()
-            shade = int(26 + (opacity * 230))
-            hex_color = f"#{shade:02x}{shade:02x}{shade:02x}"
-            preview_frame.configure(fg_color=hex_color)
-            
         color_label_frame = ctk.CTkFrame(page1, fg_color="transparent")
         color_label_frame.pack(pady=(0, 0))
 
@@ -240,6 +232,15 @@ def show_pro_preferences():
             justify="center"
         )
         preview_label.pack(padx=10, pady=8)
+
+        # --- Preview Box ---
+        def update_preview(*args):
+            preview_label.configure(font=("Helvetica", int(font_slider.get())))
+            opacity = overlay_opacity_slider.get()
+            shade = int(26 + (opacity * 230))
+            hex_color = f"#{shade:02x}{shade:02x}{shade:02x}"
+            preview_frame.configure(fg_color=hex_color)
+
 
         # --- Tooltip for font color ---
         def show_tooltip(event):
