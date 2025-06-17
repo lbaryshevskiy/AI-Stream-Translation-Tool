@@ -460,7 +460,7 @@ def main():
     else:  # free
         available_langs = ["🇬🇧 English", "🇫🇷 French", "🇪🇸 Spanish"]
 
-    placeholder = "🌐 Select Language"
+    placeholder = "🌐 Language"
     available_langs.insert(0, placeholder)
 
     if user_plan != "creator":
