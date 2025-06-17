@@ -149,7 +149,7 @@ def copy_url():
 def show_pro_preferences():
     popup = ctk.CTkToplevel()
     popup.title("Settings")
-    popup.geometry("430x430")
+    popup.geometry("430x480")
 
     from __main__ import dev_mode, dev_override_plan
     user_plan = dev_override_plan if dev_mode else "free"
