@@ -405,6 +405,8 @@ def show_pro_preferences():
                         text="🔒 Unlock these features with Creator Version",
                         font=("Helvetica", 15, "italic"),
                         text_color="gray"
+                    )            
+                    upgrade_label.place(relx=0.5, rely=1.0, anchor="s", y=-10)
 
 
                 right_frame = ctk.CTkFrame(footer_frame, fg_color="transparent")
