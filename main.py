@@ -232,10 +232,16 @@ def show_pro_preferences():
         # --- Preview Box ---
         def update_preview(*args):
             preview_label.configure(font=("Helvetica", int(font_slider.get())))
+    
             opacity = overlay_opacity_slider.get()
-            shade = int(26 + (opacity * 230))
-            hex_color = f"#{shade:02x}{shade:02x}{shade:02x}"
-            preview_frame.configure(fg_color=hex_color)
+    
+             if opacity <= 0.11:
+                preview_frame.configure(fg_color="transparent")
+            else:
+                shade = int(26 + (opacity * 230))
+                hex_color = f"#{shade:02x}{shade:02x}{shade:02x}"
+                preview_frame.configure(fg_color=hex_color)
+
 
 
         # --- Tooltip for font color ---
