@@ -454,13 +454,31 @@ def main():
 
     ctk.CTkLabel(frame, text="🎙️ Streamsub", font=("Helvetica", 16, "bold")).pack(pady=(0, 10))
 
-    selected_lang = ctk.StringVar(value="🌐 Language")
+        # --- Language Selection Based on Plan ---
+    if user_plan == "creator":
+        available_langs = list(language_options.keys())
+    elif user_plan == "studio":
+        available_langs = ["🇬🇧 English", "🇫🇷 French", "🇪🇸 Spanish", "🇩🇪 German", "🇮🇹 Italian"]
+    else:  # free
+        available_langs = ["🇬🇧 English", "🇫🇷 French", "🇪🇸 Spanish"]
+
+    selected_lang = ctk.StringVar(value=available_langs[0])
+
     lang_menu = ctk.CTkOptionMenu(
         frame,
         variable=selected_lang,
-        values=["Select Language..."] + list(language_options.keys())
+        values=available_langs
     )
     lang_menu.pack(pady=10)
+
+    if user_plan != "creator":
+        hint_label = ctk.CTkLabel(
+            frame,
+            text="🔒 More languages in Creator version",
+            text_color="gray",
+            font=("Helvetica", 10, "italic")
+        )
+        hint_label.pack(pady=(0, 5))
 
     copy_btn = ctk.CTkButton(frame, text="📋 Copy OBS URL", command=copy_url)
     copy_btn.pack(pady=10)
