@@ -325,41 +325,36 @@ def show_pro_preferences():
         apply_btn.pack(side="left")
 
         def apply_custom_width():
-    value = width_entry.get().strip()
+            value = width_entry.get().strip()
 
-    try:
-        if "x" in value:
-            width_str, _ = value.lower().split("x")
-            width = int(width_str.strip())
-        else:
-            width = int(value)
+            try:
+                if "x" in value:
+                    width_str, _ = value.lower().split("x")
+                    width = int(width_str.strip())
+                else:
+                    width = int(value)
 
-        # Apply the width to preview
-        preview_label.configure(wraplength=width)
+                # Apply to preview
+                preview_label.configure(wraplength=width)
 
-        # Update dropdown to reflect this custom value
-        custom_label = f"Custom ({value})"
+                # Format label and inject into dropdown
+                custom_label = f"Custom ({value})"
+                if custom_label not in box_size_menu.cget("values"):
+                    new_values = list(box_size_menu.cget("values"))
+                    new_values.insert(-1, custom_label)
+                    box_size_menu.configure(values=new_values)
 
-        # Only add if not already in list
-        if custom_label not in box_size_menu.cget("values"):
-            new_values = list(box_size_menu.cget("values"))
-            new_values.insert(-1, custom_label)  # add before "Custom..."
-            box_size_menu.configure(values=new_values)
+                # Set dropdown to this new label
+                box_size_var.set(custom_label)
 
-        # Update selection
-        box_size_var.set(custom_label)
+                # Hide input box
+                custom_frame.pack_forget()
 
-        # Hide the entry field
-        custom_frame.pack_forget()
-
-    except Exception as e:
-        print("Invalid custom size:", e)
+            except Exception as e:
+                print("Invalid custom size:", e)
 
             except ValueError:
                 pass
-
-    except KeyError:
-        pass
 
     # --- CREATOR TAB ---
     try:
