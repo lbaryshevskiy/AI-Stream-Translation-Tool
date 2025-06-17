@@ -334,26 +334,47 @@ def show_pro_preferences():
         box_size_label = ctk.CTkLabel(page2, text="Subtitle Box Size:", font=label_font)
         box_size_label.pack(pady=(15, 0))
 
-        box_size_options = {
-            "Compact": 300,
-            "Wide": 500,
-            "Tall": 300,     # Affects height via wrapping
-            "Full Width": 700
+        box_size_presets = {
+            "Compact (600x100)": 600,
+            "Wide (800x100)": 800,
+            "Tall (600x300)": 600,
+            "Full Width (1000x150)": 1000,
+            "Custom...": None
         }
 
-        box_size_var = ctk.StringVar(value="Compact")
+        box_size_var = ctk.StringVar(value="Compact (600x100)")
 
         def update_box_size(choice):
-            wrap_length = box_size_options.get(choice, 300)
-            preview_label.configure(wraplength=wrap_length)
+            if choice == "Custom...":
+                custom_frame.pack(pady=(5, 10))
+            else:
+                custom_frame.pack_forget()
+                wrap_length = box_size_presets.get(choice, 600)
+                preview_label.configure(wraplength=wrap_length)
 
         box_size_menu = ctk.CTkOptionMenu(
             page2,
             variable=box_size_var,
-            values=list(box_size_options.keys()),
+            values=list(box_size_presets.keys()),
             command=update_box_size
         )
-        box_size_menu.pack(pady=(0, 10))
+        box_size_menu.pack(pady=(0, 5))
+
+        # === Custom Entry Frame (hidden unless triggered) ===
+        custom_frame = ctk.CTkFrame(page2, fg_color="transparent")
+        
+        width_entry = ctk.CTkEntry(custom_frame, placeholder_text="Width", width=80)
+        width_entry.pack(side="left", padx=(0, 5))
+        
+        apply_btn = ctk.CTkButton(custom_frame, text="Apply", width=60, command=lambda: apply_custom_width())
+
+        apply_btn.pack(side="left")
+
+        def apply_custom_width():
+            try:
+                width = int(width_entry.get())
+                preview_label.confi_
+
 
     except KeyError:
         pass
