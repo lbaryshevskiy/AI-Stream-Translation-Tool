@@ -188,6 +188,23 @@ def show_pro_preferences():
         font_slider.set(20)
         font_size_value_label.configure(text="20")
         font_slider.pack(pady=(0, 8))
+
+        opacity_label = ctk.CTkLabel(page1, text="Overlay Opacity:", font=label_font)
+        opacity_label.pack(pady=(5, 0))
+
+        opacity_value_label = ctk.CTkLabel(page1, text="1.00")
+        opacity_value_label.pack(pady=(0, 2))
+
+        preview_label = ctk.CTkLabel(
+            preview_frame,
+            text="This is how your subtitle looks.",
+            font=("Helvetica", 20),
+            text_color="white",
+            wraplength=300,
+            anchor="center",
+            justify="center"
+        )
+        preview_label.pack(padx=10, pady=8)
         
         def update_preview(*args):
             preview_label.configure(font=("Helvetica", int(font_slider.get())))
@@ -203,14 +220,7 @@ def show_pro_preferences():
         def update_opacity(value):
             opacity_value_label.configure(text=f"{float(value):.2f}")
             update_preview()
-
         
-        opacity_label = ctk.CTkLabel(page1, text="Overlay Opacity:", font=label_font)
-        opacity_label.pack(pady=(5, 0))
-
-        opacity_value_label = ctk.CTkLabel(page1, text="1.00")
-        opacity_value_label.pack(pady=(0, 2))
-
         overlay_opacity_slider = ctk.CTkSlider(page1, from_=0.1, to=1.0, number_of_steps=18, command=update_opacity)
         overlay_opacity_slider.set(0.10)
         opacity_value_label.configure(text="0.10")
@@ -231,17 +241,6 @@ def show_pro_preferences():
         preview_frame = ctk.CTkFrame(page1, fg_color="#1a1a1a", corner_radius=10)
         preview_frame.pack(pady=(10, 10), padx=40)
 
-        preview_label = ctk.CTkLabel(
-            preview_frame,
-            text="This is how your subtitle looks.",
-            font=("Helvetica", 20),
-            text_color="white",
-            wraplength=300,
-            anchor="center",
-            justify="center"
-        )
-        preview_label.pack(padx=10, pady=8)
-        
 
         # --- Tooltip for font color ---
         def show_tooltip(event):
