@@ -111,7 +111,7 @@ def transcribe_loop():
                 if text:
                     lang_label = selected_lang.get()
                     lang_code = language_options.get(lang_label)
-
+                    
                     if lang_code:
                         translated = translator.translate(text, dest=lang_code).text
                         print(f"🎙️ {text} → 💬 {translated}")
@@ -122,8 +122,6 @@ def transcribe_loop():
                 print(f"❌ Error in transcription/translation: {e}")
 
                   
-
-
 # --- Launch Backend Threads ---
 def start_backend():
     global backend_threads
@@ -454,7 +452,7 @@ def main():
 
     ctk.CTkLabel(frame, text="🎙️ Streamsub", font=("Helvetica", 16, "bold")).pack(pady=(0, 10))
 
-           # --- Language Selection Based on Plan ---
+        # --- Language Selection Based on Plan ---
     if user_plan == "creator":
         available_langs = list(language_options.keys())
     elif user_plan == "studio":
@@ -462,18 +460,21 @@ def main():
     else:  # free
         available_langs = ["🇬🇧 English", "🇫🇷 French", "🇪🇸 Spanish"]
 
-    # Add disabled-looking hint item at the end
-    if user_plan != "creator":
-        upgrade_hint = "🔓 Creator mode unlocks all"
-        available_langs.append(upgrade_hint)
+    placeholder = "🌐 Select Language"
+    available_langs.insert(0, placeholder)
 
-    # Store current lang separately for selection control
-    selected_lang = ctk.StringVar(value=available_langs[0])
+    if user_plan != "creator":
+        upgrade_hint = "🔓 More languages in Creator"
+        available_langs.append(upgrade_hint)
+    else:
+        upgrade_hint = None 
+
+    # Selected language
+    selected_lang = ctk.StringVar(value=placeholder)
 
     def on_lang_select(choice):
-        if choice == upgrade_hint:
-            # Revert to previous valid selection
-            selected_lang.set(available_langs[0])
+        if choice == upgrade_hint or choice == placeholder:
+            selected_lang.set(placeholder)
         else:
             selected_lang.set(choice)
 
@@ -484,6 +485,7 @@ def main():
         command=on_lang_select
     )
     lang_menu.pack(pady=10)
+
 
     copy_btn = ctk.CTkButton(frame, text="📋 Copy OBS URL", command=copy_url)
     copy_btn.pack(pady=10)
