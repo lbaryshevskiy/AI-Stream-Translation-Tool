@@ -374,7 +374,7 @@ def show_pro_preferences():
             try:
                 width = int(width_entry.get())
                 preview_label.configure(wraplength=width)
-                except ValueError:
+            except ValueError:
                      pass
 
     try:
