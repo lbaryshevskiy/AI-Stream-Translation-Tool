@@ -194,7 +194,6 @@ def show_pro_preferences():
             opacity_value_label.configure(text=f"{float(value):.2f}")
             update_preview()
 
-
         
         opacity_label = ctk.CTkLabel(page1, text="Overlay Opacity:", font=label_font)
         opacity_label.pack(pady=(5, 0))
@@ -231,18 +230,15 @@ def show_pro_preferences():
         )
         preview_label.pack(padx=10, pady=8)
 
-        # --- Preview Box ---
-         def update_preview(*args):
-           preview_label.configure(font=("Helvetica", int(font_slider.get())))
-           opacity = overlay_opacity_slider.get()
-           if opacity <= 0.11:
-              preview_frame.configure(fg_color="transparent")
-           else:
-              shade = int(26 + (opacity * 230))
-              hex_color = f"#{shade:02x}{shade:02x}{shade:02x}"
-              preview_frame.configure(fg_color=hex_color)
-
-  
+        def update_preview(*args):
+            preview_label.configure(font=("Helvetica", int(font_slider.get())))
+            opacity = overlay_opacity_slider.get()
+            if opacity <= 0.11:
+                preview_frame.configure(fg_color="transparent")
+            else:
+                shade = int(26 + (opacity * 230))
+                hex_color = f"#{shade:02x}{shade:02x}{shade:02x}"
+                preview_frame.configure(fg_color=hex_color)
 
 
 
