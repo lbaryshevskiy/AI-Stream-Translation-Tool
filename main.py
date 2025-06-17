@@ -377,9 +377,6 @@ def show_pro_preferences():
                 except ValueError:
                      pass
 
-    except KeyError:
-        pass
-
     try:
         creator_tab = tabview.tab("Creator")
 
