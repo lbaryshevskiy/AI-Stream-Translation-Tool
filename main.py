@@ -210,6 +210,22 @@ def show_pro_preferences():
             shade = int(26 + (opacity * 230))
             hex_color = f"#{shade:02x}{shade:02x}{shade:02x}"
             preview_frame.configure(fg_color=hex_color)
+            
+        color_label_frame = ctk.CTkFrame(page1, fg_color="transparent")
+        color_label_frame.pack(pady=(0, 0))
+
+        font_color_label = ctk.CTkLabel(color_label_frame, text="Font Color:", font=label_font)
+        font_color_label.pack(side="left", pady=(0, 0))
+
+        tooltip_icon = ctk.CTkLabel(color_label_frame, text="?", font=("Helvetica", 12, "bold"), width=12)
+        tooltip_icon.pack(side="left", padx=(2, 0))
+        tooltip_icon.bind("<Enter>", show_tooltip)
+        tooltip_icon.bind("<Leave>", hide_tooltip)
+
+        color_menu = ctk.CTkOptionMenu(page1, values=["White", "Yellow", "Cyan", "Green"])
+        color_menu.set("White")
+        color_menu.configure(state="disabled")
+        color_menu.pack(pady=(0, 10))
 
         preview_frame = ctk.CTkFrame(page1, fg_color="#1a1a1a", corner_radius=10)
         preview_frame.pack(pady=(10, 10), padx=40)
@@ -238,22 +254,6 @@ def show_pro_preferences():
         def hide_tooltip(event):
             if hasattr(event.widget, "tooltip"):
                 event.widget.tooltip.destroy()
-
-        color_label_frame = ctk.CTkFrame(page1, fg_color="transparent")
-        color_label_frame.pack(pady=(0, 0))
-
-        font_color_label = ctk.CTkLabel(color_label_frame, text="Font Color:", font=label_font)
-        font_color_label.pack(side="left", pady=(0, 0))
-
-        tooltip_icon = ctk.CTkLabel(color_label_frame, text="?", font=("Helvetica", 12, "bold"), width=12)
-        tooltip_icon.pack(side="left", padx=(2, 0))
-        tooltip_icon.bind("<Enter>", show_tooltip)
-        tooltip_icon.bind("<Leave>", hide_tooltip)
-
-        color_menu = ctk.CTkOptionMenu(page1, values=["White", "Yellow", "Cyan", "Green"])
-        color_menu.set("White")
-        color_menu.configure(state="disabled")
-        color_menu.pack(pady=(0, 10))
         
         def toggle_dark_mode():
             mode = "Dark" if dark_mode_switch.get() == 1 else "Light"
@@ -364,8 +364,6 @@ def show_pro_preferences():
 
     except KeyError:
         pass
-
-
 
 def launch_overlay():
     webbrowser.open("http://localhost:5100")
