@@ -157,26 +157,22 @@ def show_pro_preferences():
     tabview = ctk.CTkTabview(popup, width=360, height=300)
     tabview.pack(padx=10, pady=10, fill="both", expand=True)
 
-    # Always add both tabs
     tabview.add("Studio")
     tabview.add("Creator")
 
-    # --- STUDIO TAB ---
     try:
         studio_tab = tabview.tab("Studio")
         label_font = ("Helvetica", 13, "bold")
 
-                # === Studio Page Container ===
-                 # === Studio Page Container and Pages ===
         studio_pages = ctk.CTkFrame(studio_tab, fg_color="transparent")
         studio_pages.pack(expand=True, fill="both")
 
         page1 = ctk.CTkFrame(studio_pages, fg_color="transparent")
         page2 = ctk.CTkFrame(studio_pages, fg_color="transparent")
 
-        page1.pack(expand=True, fill="both")  # Initial visible page
+        page1.pack(expand=True, fill="both")
 
-                # === Subtitle Font Size ===
+        # --- Font Size ---
         def update_font_size(value):
             font_size_value_label.configure(text=str(int(float(value))))
             update_preview()
@@ -187,18 +183,11 @@ def show_pro_preferences():
         font_size_value_label = ctk.CTkLabel(page1, text="24")
         font_size_value_label.pack(pady=(0, 2))
 
-        font_slider = ctk.CTkSlider(
-            page1,
-            from_=12,
-            to=48,
-            number_of_steps=36,
-            command=update_font_size
-        )
+        font_slider = ctk.CTkSlider(page1, from_=12, to=48, number_of_steps=36, command=update_font_size)
         font_slider.set(24)
         font_slider.pack(pady=(0, 8))
 
-        # === Overlay Opacity ===
-            # === Overlay Opacity ===
+        # --- Opacity ---
         def update_opacity(value):
             opacity_value_label.configure(text=f"{float(value):.2f}")
             update_preview()
@@ -209,79 +198,20 @@ def show_pro_preferences():
         opacity_value_label = ctk.CTkLabel(page1, text="1.00")
         opacity_value_label.pack(pady=(0, 2))
 
-        overlay_opacity_slider = ctk.CTkSlider(
-            page1,
-            from_=0.1,
-            to=1.0,
-            number_of_steps=18,
-            command=update_opacity
-        )
+        overlay_opacity_slider = ctk.CTkSlider(page1, from_=0.1, to=1.0, number_of_steps=18, command=update_opacity)
         overlay_opacity_slider.set(1.0)
         overlay_opacity_slider.pack(pady=(0, 8))
 
-
+        # --- Preview Box ---
         def update_preview(*args):
-            # Update font size
-            preview_label.configure(
-                font=("Helvetica", int(font_slider.get()))
-            )
-
-            # Simulate opacity via grayscale darkening (simulate transparency)
+            preview_label.configure(font=("Helvetica", int(font_slider.get())))
             opacity = overlay_opacity_slider.get()
-            shade = int(26 + (opacity * 230))  # 0.1 → #2a2a2a, 1.0 → #ffffff
+            shade = int(26 + (opacity * 230))
             hex_color = f"#{shade:02x}{shade:02x}{shade:02x}"
             preview_frame.configure(fg_color=hex_color)
-            
-            font_slider.configure(command=update_font_size)
-            overlay_opacity_slider.configure(command=update_opacity)
-        
-        # === Font Color (with Tooltip) ===
-        tooltip = None
 
-        def show_tooltip(event):
-            nonlocal tooltip
-            tooltip = ctk.CTkToplevel()
-            tooltip.wm_overrideredirect(True)
-            tooltip.configure(bg="gray10")
-            tooltip_label = ctk.CTkLabel(
-                tooltip,
-                text="Unlock this option in Creator version",
-                font=("Helvetica", 10, "italic"),
-                text_color="gray"
-            )
-            tooltip_label.pack()
-            tooltip.geometry(f"+{event.x_root + 10}+{event.y_root + 10}")
-
-        def hide_tooltip(event):
-            nonlocal tooltip
-            if tooltip:
-                tooltip.destroy()
-                tooltip = None
-
-        # Label and tooltip row
-        color_label_frame = ctk.CTkFrame(page1, fg_color="transparent")
-        color_label_frame.pack(pady=(0, 0))
-
-        font_color_label = ctk.CTkLabel(color_label_frame, text="Font Color:", font=label_font)
-        font_color_label.pack(side="left", pady=(0, 0))
-
-        tooltip_icon = ctk.CTkLabel(color_label_frame, text="?", font=("Helvetica", 12, "bold"), width=12)
-        tooltip_icon.pack(side="left", padx=(2, 0))
-        tooltip_icon.bind("<Enter>", show_tooltip)
-        tooltip_icon.bind("<Leave>", hide_tooltip)
-
-        # Disabled dropdown
-        color_menu = ctk.CTkOptionMenu(
-            page1,
-            values=["White", "Yellow", "Cyan", "Green"]
-        )
-        color_menu.set("White")
-        color_menu.configure(state="disabled")
-        color_menu.pack(pady=(0, 10))
-
-        # === Live Subtitle Preview Box ===
         preview_frame = ctk.CTkFrame(page1, fg_color="#1a1a1a", corner_radius=10)
-        preview_frame.pack(pady=(10, 10), padx=40)  # Shifted up and reduced width
+        preview_frame.pack(pady=(10, 10), padx=40)
 
         preview_label = ctk.CTkLabel(
             preview_frame,
@@ -294,12 +224,37 @@ def show_pro_preferences():
         )
         preview_label.pack(padx=10, pady=8)
 
-        def toggle_dark_mode():
-            mode = "Dark" if dark_mode_switch.get() == 1 else "Light"
-            ctk.set_appearance_mode(mode)
-            save_settings({"appearance_mode": mode})
+        # --- Tooltip for font color ---
+        def show_tooltip(event):
+            tooltip = ctk.CTkToplevel()
+            tooltip.wm_overrideredirect(True)
+            tooltip.configure(bg="gray10")
+            tooltip_label = ctk.CTkLabel(tooltip, text="Unlock this option in Creator version", font=("Helvetica", 10, "italic"), text_color="gray")
+            tooltip_label.pack()
+            tooltip.geometry(f"+{event.x_root + 10}+{event.y_root + 10}")
+            event.widget.tooltip = tooltip
 
+        def hide_tooltip(event):
+            if hasattr(event.widget, "tooltip"):
+                event.widget.tooltip.destroy()
 
+        color_label_frame = ctk.CTkFrame(page1, fg_color="transparent")
+        color_label_frame.pack(pady=(0, 0))
+
+        font_color_label = ctk.CTkLabel(color_label_frame, text="Font Color:", font=label_font)
+        font_color_label.pack(side="left", pady=(0, 0))
+
+        tooltip_icon = ctk.CTkLabel(color_label_frame, text="?", font=("Helvetica", 12, "bold"), width=12)
+        tooltip_icon.pack(side="left", padx=(2, 0))
+        tooltip_icon.bind("<Enter>", show_tooltip)
+        tooltip_icon.bind("<Leave>", hide_tooltip)
+
+        color_menu = ctk.CTkOptionMenu(page1, values=["White", "Yellow", "Cyan", "Green"])
+        color_menu.set("White")
+        color_menu.configure(state="disabled")
+        color_menu.pack(pady=(0, 10))
+
+        # --- Page Navigation ---
         def go_to_page2():
             page1.pack_forget()
             page2.pack(expand=True, fill="both")
@@ -312,25 +267,12 @@ def show_pro_preferences():
             next_btn.place(relx=1.0, rely=1.0, anchor="se", x=-10, y=-10)
             back_btn.place_forget()
 
-        next_btn = ctk.CTkButton(
-            studio_tab,
-            text="→",
-            width=30,
-            height=25,
-            corner_radius=6,
-            command=go_to_page2
-        )
+        next_btn = ctk.CTkButton(studio_tab, text="→", width=30, height=25, corner_radius=6, command=go_to_page2)
         next_btn.place(relx=1.0, rely=1.0, anchor="se", x=-10, y=-10)
 
-        back_btn = ctk.CTkButton(
-            studio_tab,
-            text="←",
-            width=30,
-            height=25,
-            corner_radius=6,
-            command=go_to_page1
-        )
-                # === Subtitle Box Size Selector ===
+        back_btn = ctk.CTkButton(studio_tab, text="←", width=30, height=25, corner_radius=6, command=go_to_page1)
+
+        # --- Page 2: Box Size Selector ---
         box_size_label = ctk.CTkLabel(page2, text="Subtitle Box Size:", font=label_font)
         box_size_label.pack(pady=(15, 0))
 
@@ -352,22 +294,15 @@ def show_pro_preferences():
                 wrap_length = box_size_presets.get(choice, 600)
                 preview_label.configure(wraplength=wrap_length)
 
-        box_size_menu = ctk.CTkOptionMenu(
-            page2,
-            variable=box_size_var,
-            values=list(box_size_presets.keys()),
-            command=update_box_size
-        )
+        box_size_menu = ctk.CTkOptionMenu(page2, variable=box_size_var, values=list(box_size_presets.keys()), command=update_box_size)
         box_size_menu.pack(pady=(0, 5))
 
-        # === Custom Entry Frame (hidden unless triggered) ===
         custom_frame = ctk.CTkFrame(page2, fg_color="transparent")
-        
+
         width_entry = ctk.CTkEntry(custom_frame, placeholder_text="Width", width=80)
         width_entry.pack(side="left", padx=(0, 5))
-        
-        apply_btn = ctk.CTkButton(custom_frame, text="Apply", width=60, command=lambda: apply_custom_width())
 
+        apply_btn = ctk.CTkButton(custom_frame, text="Apply", width=60, command=lambda: apply_custom_width())
         apply_btn.pack(side="left")
 
         def apply_custom_width():
@@ -375,61 +310,56 @@ def show_pro_preferences():
                 width = int(width_entry.get())
                 preview_label.configure(wraplength=width)
             except ValueError:
-                pass  # Ignore invalid input
-
-            try:
-                creator_tab = tabview.tab("Creator")
-
-                ctk.CTkLabel(creator_tab, text="Whisper Model:").pack(pady=(10, 0))
-
-                model_menu = ctk.CTkOptionMenu(
-                    creator_tab,
-                    values=["tiny", "base", "small", "medium", "large"]
-                )
-                model_menu.set("base")
-                model_menu.pack(pady=(0, 10))
-
-                logging_switch = ctk.CTkSwitch(creator_tab, text="Enable Logging")
-                logging_switch.pack(pady=10)
-
-                save_checkbox = ctk.CTkCheckBox(creator_tab, text="Save Settings to File")
-                save_checkbox.pack(pady=10)
-
-                if user_plan != "creator":
-                    model_menu.configure(state="disabled")
-                    logging_switch.configure(state="disabled")
-                    save_checkbox.configure(state="disabled")
-
-                    upgrade_label = ctk.CTkLabel(
-                        creator_tab,
-                        text="🔒 Unlock these features with Creator Version",
-                        font=("Helvetica", 15, "italic"),
-                        text_color="gray"
-                    )            
-                    upgrade_label.place(relx=0.5, rely=1.0, anchor="s", y=-10)
-
-
-                right_frame = ctk.CTkFrame(footer_frame, fg_color="transparent")
-                right_frame.pack(side="right", padx=(0, 25))
-
-                dark_mode_switch = ctk.CTkSwitch(
-                    right_frame,
-                    text="Dark Mode",
-                    command=toggle_dark_mode
-                )
-                dark_mode_switch.select()
-                dark_mode_switch.pack(side="right", padx=(10, 0))
-
-                save_btn = ctk.CTkButton(
-                    right_frame,
-                    text="Save & Close",
-                    command=popup.destroy,
-                    width=140
-                )
-                save_btn.pack(side="right")
-
-            except KeyError:
                 pass
+
+    except KeyError:
+        pass
+
+    # --- CREATOR TAB ---
+    try:
+        creator_tab = tabview.tab("Creator")
+
+        ctk.CTkLabel(creator_tab, text="Whisper Model:").pack(pady=(10, 0))
+
+        model_menu = ctk.CTkOptionMenu(creator_tab, values=["tiny", "base", "small", "medium", "large"])
+        model_menu.set("base")
+        model_menu.pack(pady=(0, 10))
+
+        logging_switch = ctk.CTkSwitch(creator_tab, text="Enable Logging")
+        logging_switch.pack(pady=10)
+
+        save_checkbox = ctk.CTkCheckBox(creator_tab, text="Save Settings to File")
+        save_checkbox.pack(pady=10)
+
+        if user_plan != "creator":
+            model_menu.configure(state="disabled")
+            logging_switch.configure(state="disabled")
+            save_checkbox.configure(state="disabled")
+
+            upgrade_label = ctk.CTkLabel(
+                creator_tab,
+                text="🔒 Unlock these features with Creator Version",
+                font=("Helvetica", 15, "italic"),
+                text_color="gray"
+            )
+            upgrade_label.place(relx=0.5, rely=1.0, anchor="s", y=-10)
+
+        footer_frame = ctk.CTkFrame(popup, fg_color="transparent")
+        footer_frame.pack(pady=(5, 10), fill="x")
+
+        right_frame = ctk.CTkFrame(footer_frame, fg_color="transparent")
+        right_frame.pack(side="right", padx=(0, 25))
+
+        dark_mode_switch = ctk.CTkSwitch(right_frame, text="Dark Mode", command=toggle_dark_mode)
+        dark_mode_switch.select()
+        dark_mode_switch.pack(side="right", padx=(10, 0))
+
+        save_btn = ctk.CTkButton(right_frame, text="Save & Close", command=popup.destroy, width=140)
+        save_btn.pack(side="right")
+
+    except KeyError:
+        pass
+
 
 
 def launch_overlay():
