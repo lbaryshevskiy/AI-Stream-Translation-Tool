@@ -173,7 +173,7 @@ def show_pro_preferences():
 
         page1.pack(expand=True, fill="both")
 
-        # --- Font Size ---
+                # --- Font Size ---
         def update_font_size(value):
             font_size_value_label.configure(text=str(int(float(value))))
             update_preview()
@@ -181,47 +181,35 @@ def show_pro_preferences():
         font_size_label = ctk.CTkLabel(page1, text="Subtitle Font Size:", font=label_font)
         font_size_label.pack(pady=(15, 0))
 
-        font_size_value_label = ctk.CTkLabel(page1, text="24")
+        font_size_value_label = ctk.CTkLabel(page1, text="20")
         font_size_value_label.pack(pady=(0, 2))
 
         font_slider = ctk.CTkSlider(page1, from_=12, to=48, number_of_steps=36, command=update_font_size)
         font_slider.set(20)
-        font_size_value_label.configure(text="20")
         font_slider.pack(pady=(0, 8))
 
+        # --- Opacity ---
         opacity_label = ctk.CTkLabel(page1, text="Overlay Opacity:", font=label_font)
         opacity_label.pack(pady=(5, 0))
 
-        opacity_value_label = ctk.CTkLabel(page1, text="1.00")
+        opacity_value_label = ctk.CTkLabel(page1, text="0.10")
         opacity_value_label.pack(pady=(0, 2))
-        
-        def update_preview(*args):
-            preview_label.configure(font=("Helvetica", int(font_slider.get())))
-            opacity = overlay_opacity_slider.get()
-            if opacity <= 0.11:
-                preview_frame.configure(fg_color="transparent")
-            else:
-                shade = int(26 + (opacity * 230))
-                hex_color = f"#{shade:02x}{shade:02x}{shade:02x}"
-                preview_frame.configure(fg_color=hex_color)
-                
-        # --- Opacity ---
-        def update_opacity(value):
-            opacity_value_label.configure(text=f"{float(value):.2f}")
-            update_preview()
-        
-        overlay_opacity_slider = ctk.CTkSlider(page1, from_=0.1, to=1.0, number_of_steps=18, command=update_opacity)
-        overlay_opacity_slider.set(0.10)
-        opacity_value_label.configure(text="0.10")
-        overlay_opacity_slider.pack(pady=(0, 8))
-        update_preview()
 
-        # --- Tooltip for font color ---
+        overlay_opacity_slider = ctk.CTkSlider(page1, from_=0.1, to=1.0, number_of_steps=18)
+        overlay_opacity_slider.set(0.10)
+        overlay_opacity_slider.pack(pady=(0, 8))
+
+        # --- Tooltip Definitions (must come before used) ---
         def show_tooltip(event):
             tooltip = ctk.CTkToplevel()
             tooltip.wm_overrideredirect(True)
             tooltip.configure(bg="gray10")
-            tooltip_label = ctk.CTkLabel(tooltip, text="Unlock this option in Creator version", font=("Helvetica", 10, "italic"), text_color="gray")
+            tooltip_label = ctk.CTkLabel(
+                tooltip,
+                text="Unlock this option in Creator version",
+                font=("Helvetica", 10, "italic"),
+                text_color="gray"
+            )
             tooltip_label.pack()
             tooltip.geometry(f"+{event.x_root + 10}+{event.y_root + 10}")
             event.widget.tooltip = tooltip
@@ -229,15 +217,28 @@ def show_pro_preferences():
         def hide_tooltip(event):
             if hasattr(event.widget, "tooltip"):
                 event.widget.tooltip.destroy()
-                
+
+        # --- Font Color Section ---
+        color_label_frame = ctk.CTkFrame(page1, fg_color="transparent")
+        color_label_frame.pack(pady=(10, 0))
+
+        font_color_label = ctk.CTkLabel(color_label_frame, text="Font Color:", font=label_font)
+        font_color_label.pack(side="left", pady=(0, 0))
+
         tooltip_icon = ctk.CTkLabel(color_label_frame, text="?", font=("Helvetica", 12, "bold"), width=12)
         tooltip_icon.pack(side="left", padx=(2, 0))
         tooltip_icon.bind("<Enter>", show_tooltip)
         tooltip_icon.bind("<Leave>", hide_tooltip)
 
-        preview_frame = ctk.CTkFrame(page1, fg_color="#1a1a1a", corner_radius=10)
+        color_menu = ctk.CTkOptionMenu(page1, values=["White", "Yellow", "Cyan", "Green"])
+        color_menu.set("White")
+        color_menu.configure(state="disabled")
+        color_menu.pack(pady=(0, 10))
+
+        # --- Preview Box ---
+        preview_frame = ctk.CTkFrame(page1, fg_color="transparent", corner_radius=10)
         preview_frame.pack(pady=(10, 10), padx=40)
-        
+
         preview_label = ctk.CTkLabel(
             preview_frame,
             text="This is how your subtitle looks.",
@@ -248,6 +249,25 @@ def show_pro_preferences():
             justify="center"
         )
         preview_label.pack(padx=10, pady=8)
+
+        # --- Live Preview Logic ---
+        def update_preview(*args):
+            preview_label.configure(font=("Helvetica", int(font_slider.get())))
+            opacity = overlay_opacity_slider.get()
+            if opacity <= 0.11:
+                preview_frame.configure(fg_color="transparent")
+            else:
+                shade = int(26 + (opacity * 230))
+                hex_color = f"#{shade:02x}{shade:02x}{shade:02x}"
+                preview_frame.configure(fg_color=hex_color)
+
+        def update_opacity(value):
+            opacity_value_label.configure(text=f"{float(value):.2f}")
+            update_preview()
+
+        overlay_opacity_slider.configure(command=update_opacity)
+        update_preview()
+
         
         def toggle_dark_mode():
             mode = "Dark" if dark_mode_switch.get() == 1 else "Light"
