@@ -195,6 +195,9 @@ def show_pro_preferences():
         opacity_value_label = ctk.CTkLabel(page1, text="1.00")
         opacity_value_label.pack(pady=(0, 2))
 
+        preview_frame = ctk.CTkFrame(page1, fg_color="#1a1a1a", corner_radius=10)
+        preview_frame.pack(pady=(10, 10), padx=40)
+        
         preview_label = ctk.CTkLabel(
             preview_frame,
             text="This is how your subtitle looks.",
@@ -237,9 +240,6 @@ def show_pro_preferences():
         color_menu.set("White")
         color_menu.configure(state="disabled")
         color_menu.pack(pady=(0, 10))
-
-        preview_frame = ctk.CTkFrame(page1, fg_color="#1a1a1a", corner_radius=10)
-        preview_frame.pack(pady=(10, 10), padx=40)
 
 
         # --- Tooltip for font color ---
