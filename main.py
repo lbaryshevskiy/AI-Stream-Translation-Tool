@@ -374,6 +374,8 @@ def show_pro_preferences():
             try:
                 width = int(width_entry.get())
                 preview_label.configure(wraplength=width)
+                except ValueError:
+                     pass
 
     except KeyError:
         pass
@@ -428,8 +430,6 @@ def show_pro_preferences():
         )
         save_btn.pack(side="right")
 
-
-        
     except KeyError:
          pass
 
