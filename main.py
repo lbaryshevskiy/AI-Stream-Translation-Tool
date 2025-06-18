@@ -334,7 +334,7 @@ def show_pro_preferences():
         apply_btn.pack(side="left")
 
         # --- Font Family Selector ---
-        font_choices = ["Helvetica", "Arial", "Roboto", "Georgia", "Courier New"]
+        font_choices = ["Helvetica", "Arial", "Roboto", "Georgia", "Courier New", "Times New Roman"]
         
         saved_font = load_settings().get("font_family")
         if saved_font in font_choices:
