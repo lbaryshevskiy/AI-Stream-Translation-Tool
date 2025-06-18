@@ -404,11 +404,7 @@ def show_pro_preferences():
             except Exception as e:
                 print("Invalid custom size:", e)
 
-        # Remove redundant or misplaced blocks (already defined above) to avoid duplication and errors.
-
-
-
-        
+    
 
     # --- CREATOR TAB ---
     try:
