@@ -277,19 +277,43 @@ def show_pro_preferences():
         def go_to_page2():
             page1.pack_forget()
             page2.pack(expand=True, fill="both")
+            page2.update_idletasks()
             back_btn.place(relx=0.0, rely=1.0, anchor="sw", x=10, y=-10)
             next_btn.place_forget()
 
         def go_to_page1():
             page2.pack_forget()
             page1.pack(expand=True, fill="both")
+            page2.update_idletasks()
             next_btn.place(relx=1.0, rely=1.0, anchor="se", x=-10, y=-10)
             back_btn.place_forget()
 
-        next_btn = ctk.CTkButton(studio_tab, text="→", width=30, height=25, corner_radius=6, command=go_to_page2)
+        next_btn = ctk.CTkButton(
+            studio_tab,
+            text="→",
+            width=30,
+            height=25,
+            corner_radius=6,
+            command=go_to_page2,
+            fg_color="transparent",
+            hover_color="#333333",
+            text_color="white"
+        )
         next_btn.place(relx=1.0, rely=1.0, anchor="se", x=-10, y=-10)
 
-        back_btn = ctk.CTkButton(studio_tab, text="←", width=30, height=25, corner_radius=6, command=go_to_page1)
+
+        back_btn = ctk.CTkButton(
+            studio_tab,
+            text="←",
+            width=30,
+            height=25,
+            corner_radius=6,
+            command=go_to_page1,
+            fg_color="transparent",
+            hover_color="#333333",
+            text_color="white"
+        )
+        back_btn.place(relx=0.0, rely=1.0, anchor="sw", x=10, y=-10)
 
         # --- Page 2: Box Size Selector ---
         box_size_label = ctk.CTkLabel(page2, text="Subtitle Box Size:", font=label_font)
