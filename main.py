@@ -252,7 +252,7 @@ def show_pro_preferences():
 
         # --- Live Preview Logic ---
         def update_preview(*args):
-            preview_label.configure(font=("Helvetica", int(font_slider.get())))
+            preview_label.configure(font=(font_family_var.get(), int(font_slider.get())))
             opacity = overlay_opacity_slider.get()
             if opacity <= 0.11:
                 preview_frame.configure(fg_color="transparent")
@@ -332,6 +332,32 @@ def show_pro_preferences():
 
         apply_btn = ctk.CTkButton(custom_frame, text="Apply", width=60, command=lambda: apply_custom_width())
         apply_btn.pack(side="left")
+
+                # --- Font Family Selector ---
+        font_choices = ["Helvetica", "Arial", "Roboto", "Georgia", "Courier New"]
+
+        font_family_label = ctk.CTkLabel(page2, text="Font Family:", font=label_font)
+        font_family_label.pack(pady=(10, 0))
+
+        font_family_var = ctk.StringVar(value="Helvetica")
+
+        def update_font_family(choice):
+            preview_label.configure(font=(choice, int(font_slider.get())))
+            save_settings({"font_family": font_family_var.get()})
+            
+        font_family_menu = ctk.CTkOptionMenu(
+            page2,
+            values=font_choices,
+            variable=font_family_var,
+            command=update_font_family
+        )
+        font_family_menu.pack(pady=(0, 10))
+        
+        saved_font = load_settings().get("font_family")
+        if saved_font in font_choices:
+            font_family_var.set(saved_font)
+
+
 
         def apply_custom_width():
             value = width_entry.get().strip()
