@@ -249,7 +249,8 @@ def show_pro_preferences():
             justify="center"
         )
         preview_label.pack(padx=10, pady=8)
-
+        
+        font_family_var = ctk.StringVar(value="Helvetica")
         # --- Live Preview Logic ---
         def update_preview(*args):
             preview_label.configure(font=(font_family_var.get(), int(font_slider.get())))
@@ -334,8 +335,7 @@ def show_pro_preferences():
 
         # --- Font Family Selector ---
         font_choices = ["Helvetica", "Arial", "Roboto", "Georgia", "Courier New"]
-
-        font_family_var = ctk.StringVar(value="Helvetica")
+        
         saved_font = load_settings().get("font_family")
         if saved_font in font_choices:
             font_family_var.set(saved_font)
