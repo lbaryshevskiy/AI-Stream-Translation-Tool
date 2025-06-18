@@ -322,6 +322,8 @@ def show_pro_preferences():
         back_btn.place(relx=0.0, rely=1.0, anchor="sw", x=10, y=-10)
         next_btn.update_idletasks()
 
+        back_btn.place_forget()
+
         # --- Page 2: Box Size Selector ---
         box_size_label = ctk.CTkLabel(page2, text="Subtitle Box Size:", font=label_font)
         box_size_label.pack(pady=(15, 0))
