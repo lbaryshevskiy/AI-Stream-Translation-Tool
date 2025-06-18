@@ -407,7 +407,6 @@ def show_pro_preferences():
     
 
     # --- CREATOR TAB ---
-    try:
         creator_tab = tabview.tab("Creator")
 
         ctk.CTkLabel(creator_tab, text="Whisper Model:").pack(pady=(10, 0))
