@@ -267,7 +267,6 @@ def show_pro_preferences():
 
         overlay_opacity_slider.configure(command=update_opacity)
         update_preview()
-
         
         def toggle_dark_mode():
             mode = "Dark" if dark_mode_switch.get() == 1 else "Light"
@@ -356,26 +355,79 @@ def show_pro_preferences():
         saved_font = load_settings().get("font_family")
         if saved_font in font_choices:
             font_family_var.set(saved_font)
-
-
-
+            
         def apply_custom_width():
             value = width_entry.get().strip()
-            
+
             try:
                 if "x" in value:
                     width_str, _ = value.lower().split("x")
                     width = int(width_str.strip())
                 else:
                     width = int(value)
-                    
+
                 preview_label.configure(wraplength=width)
                 save_settings({"last_custom_box_size": value})
                 box_size_var.set(f"Custom ({value})")
                 custom_frame.pack_forget()
-                
+
             except Exception as e:
                 print("Invalid custom size:", e)
+
+        # --- Font Family Selector ---
+        font_choices = ["Helvetica", "Arial", "Roboto", "Georgia", "Courier New"]
+
+        font_family_var = ctk.StringVar(value="Helvetica")
+
+        saved_font = load_settings().get("font_family")
+        if saved_font in font_choices:
+            font_family_var.set(saved_font)
+
+        def update_font_family(choice):
+            preview_label.configure(font=(choice, int(font_slider.get())))
+            save_settings({"font_family": font_family_var.get()})
+
+        font_family_label = ctk.CTkLabel(page2, text="Font Family:", font=label_font)
+        font_family_label.pack(pady=(10, 0))
+
+        font_family_menu = ctk.CTkOptionMenu(
+            page2,
+            values=font_choices,
+            variable=font_family_var,
+            command=update_font_family
+        )
+        font_family_menu.pack(pady=(0, 10))
+
+        def update_preview(*args):
+            preview_label.configure(font=(font_family_var.get(), int(font_slider.get())))
+            opacity = overlay_opacity_slider.get()
+            if opacity <= 0.11:
+                preview_frame.configure(fg_color="transparent")
+            else:
+                shade = int(26 + (opacity * 230))
+                hex_color = f"#{shade:02x}{shade:02x}{shade:02x}"
+                preview_frame.configure(fg_color=hex_color)
+
+        def update_opacity(value):
+            opacity_value_label.configure(text=f"{float(value):.2f}")
+            update_preview()
+
+        overlay_opacity_slider.configure(command=update_opacity)
+        update_preview()
+
+        def update_box_size(choice):
+            if choice == "Custom...":
+                width_entry.delete(0, ctk.END)
+                custom_frame.pack(pady=(5, 10))
+            else:
+                custom_frame.pack_forget()
+                wrap_length = box_size_presets.get(choice, 600)
+                preview_label.configure(wraplength=wrap_length)
+
+        def toggle_dark_mode():
+            mode = "Dark" if dark_mode_switch.get() == 1 else "Light"
+            ctk.set_appearance_mode(mode)
+            save_settings({"appearance_mode": mode})
 
     except Exception as e:
         print("Studio tab error:", e)
