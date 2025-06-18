@@ -375,10 +375,10 @@ def show_pro_preferences():
                 print("Invalid custom size:", e)
 
         # --- Font Family Selector ---
+        # --- Font Family Selector ---
         font_choices = ["Helvetica", "Arial", "Roboto", "Georgia", "Courier New"]
 
         font_family_var = ctk.StringVar(value="Helvetica")
-
         saved_font = load_settings().get("font_family")
         if saved_font in font_choices:
             font_family_var.set(saved_font)
@@ -429,8 +429,23 @@ def show_pro_preferences():
             ctk.set_appearance_mode(mode)
             save_settings({"appearance_mode": mode})
 
-    except Exception as e:
-        print("Studio tab error:", e)
+        def apply_custom_width():
+            value = width_entry.get().strip()
+
+            try:
+                if "x" in value:
+                    width_str, _ = value.lower().split("x")
+                    width = int(width_str.strip())
+                else:
+                    width = int(value)
+
+                preview_label.configure(wraplength=width)
+                save_settings({"last_custom_box_size": value})
+                box_size_var.set(f"Custom ({value})")
+                custom_frame.pack_forget()
+
+            except Exception as e:
+                print("Invalid custom size:", e)
         
 
     # --- CREATOR TAB ---
