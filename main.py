@@ -23,6 +23,9 @@ is_in_settings = False
 dev_mode = True
 dev_override_plan = "studio"  # can be: "free", "studio", "creator"
 
+def run_flask():
+    socketio.run(app, port=5100, allow_unsafe_werkzeug=True)
+
 def load_settings():
     if os.path.exists(SETTINGS_FILE):
         with open(SETTINGS_FILE, "r") as f:
@@ -133,9 +136,6 @@ def start_backend():
     global backend_threads, flask_process
     print("🟢 start_backend() triggered")
     stop_event.clear()
-
-    def run_flask():
-        socketio.run(app, port=5100, allow_unsafe_werkzeug=True)
 
     flask_process = Process(target=run_flask)
     flask_process.start()
