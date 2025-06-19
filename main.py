@@ -148,7 +148,7 @@ def start_backend():
         t.start()
 
 def stop_backend():
-    global flask_thread, backend_threads
+    global flask_process, backend_threads
     print("🔴 stop_backend() triggered")
     stop_event.set()
 
@@ -162,14 +162,8 @@ def stop_backend():
         flask_process = None
 
     print("🔴 record_audio() stopped")
-
-    # Force exit to release port if Flask is still alive
-    if flask_thread and flask_thread.is_alive():
-        print("🛑 Flask thread still running — force exiting to free port.")
-        os._exit(0)
-
-    flask_thread = None
     print("✅ Backend stopped successfully.")
+ 
 
 # --- GUI ---
 
