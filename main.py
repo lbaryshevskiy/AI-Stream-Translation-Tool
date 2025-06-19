@@ -148,7 +148,7 @@ def start_backend():
         t.start()
 
 def stop_backend():
-    global flask_process
+    global flask_thread, backend_threads
     print("🔴 stop_backend() triggered")
     stop_event.set()
 
