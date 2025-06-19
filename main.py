@@ -6,6 +6,9 @@ import whisper
 import pyaudio
 from flask import Flask, render_template
 from flask_socketio import SocketIO
+import logging
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.ERROR)
 from googletrans import Translator
 import webbrowser
 import customtkinter as ctk
