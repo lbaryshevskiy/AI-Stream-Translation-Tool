@@ -627,6 +627,10 @@ def main():
     start_btn = ctk.CTkButton(frame, text="▶️ Start", command=toggle_backend)
     start_btn.pack(pady=10)
 
+    global status_label
+    status_label = ctk.CTkLabel(frame, text="", font=("Helvetica", 12))
+    status_label.place_forget()  # Keeps it invisible
+
     root.mainloop()
 
 if __name__ == "__main__":
