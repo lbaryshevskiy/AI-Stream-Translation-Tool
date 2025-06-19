@@ -234,7 +234,7 @@ def show_pro_preferences():
         color_menu.set("White")
         color_menu.configure(state="disabled")
         color_menu.pack(pady=(0, 10))
-
+        
         # --- Preview Box ---
         preview_frame = ctk.CTkFrame(page1, fg_color="transparent", corner_radius=10)
         preview_frame.pack(pady=(30, 10), padx=40)
@@ -243,7 +243,6 @@ def show_pro_preferences():
             preview_frame,
             text="This is how your subtitle looks.",
             font=("Helvetica", 20),
-            text_color="white",
             wraplength=300,
             anchor="center",
             justify="center"
@@ -253,7 +252,14 @@ def show_pro_preferences():
         font_family_var = ctk.StringVar(value="Helvetica")
         # --- Live Preview Logic ---
         def update_preview(*args):
-            preview_label.configure(font=(font_family_var.get(), int(font_slider.get())))
+            appearance = ctk.get_appearance_mode()
+            font_color = "black" if appearance == "Light" else "white"
+
+            preview_label.configure(
+                font=(font_family_var.get(), int(font_slider.get())),
+                text_color=font_color
+            )
+
             opacity = overlay_opacity_slider.get()
             if opacity <= 0.11:
                 preview_frame.configure(fg_color="transparent")
