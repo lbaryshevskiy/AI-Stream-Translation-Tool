@@ -171,6 +171,8 @@ def copy_url():
     status_label.config(text="✅ Copied to clipboard!")
     
 def show_pro_preferences():
+    global is_in_settings
+    is_in_settings = True
     popup = ctk.CTkToplevel()
     popup.title("Settings")
     popup.geometry("430x480")
