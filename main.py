@@ -14,6 +14,7 @@ import webbrowser
 import customtkinter as ctk
 import json
 import os
+from multiprocessing import Process
 
 SETTINGS_FILE = "settings.json"
 is_in_settings = False
@@ -125,46 +126,42 @@ def transcribe_loop():
             except Exception as e:
                 print(f"❌ Error in transcription/translation: {e}")
 
-flask_thread = None
+flask_process = None
 
 # --- Launch Backend Threads ---
 def start_backend():
-    global backend_threads, flask_thread
+    global backend_threads, flask_process
     print("🟢 start_backend() triggered")
     stop_event.clear()
-    
-    # Create threads
-    audio_thread = threading.Thread(target=record_audio, daemon=True)
-    transcribe_thread = threading.Thread(target=transcribe_loop, daemon=True)
-    flask_thread = threading.Thread(
-        target=lambda: socketio.run(
-            app,
-            host='0.0.0.0',
-            port=5100,
-            debug=False,
-            use_reloader=False,
-            allow_unsafe_werkzeug=True
-        ),
-        daemon=True
-    )
-    
-    backend_threads = [audio_thread, transcribe_thread, flask_thread]
 
+    def run_flask():
+        socketio.run(app, port=5100, allow_unsafe_werkzeug=True)
+
+    flask_process = Process(target=run_flask)
+    flask_process.start()
+
+    backend_threads = []
+    t1 = threading.Thread(target=record_audio, daemon=True)
+    t2 = threading.Thread(target=transcribe_loop, daemon=True)
+    backend_threads.extend([t1, t2])
     for t in backend_threads:
         t.start()
 
 def stop_backend():
-    global stop_event, flask_thread
+    global flask_process
     print("🔴 stop_backend() triggered")
-
     stop_event.set()
 
-    # Gracefully stop all backend threads
-    for thread in backend_threads:
-        if thread.is_alive():
-            thread.join(timeout=1)
+    for t in backend_threads:
+        t.join()
 
-    backend_threads.clear()
+    if flask_process is not None and flask_process.is_alive():
+        print("🔴 Terminating Flask process")
+        flask_process.terminate()
+        flask_process.join()
+        flask_process = None
+
+    print("🔴 record_audio() stopped")
 
     # Force exit to release port if Flask is still alive
     if flask_thread and flask_thread.is_alive():
