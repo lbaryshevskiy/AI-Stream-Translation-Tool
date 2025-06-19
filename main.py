@@ -154,17 +154,24 @@ def start_backend():
         t.start()
 
 def stop_backend():
-    global stop_event
+    global stop_event, flask_thread
     print("🔴 stop_backend() triggered")
 
-    # Signal the background threads to stop
     stop_event.set()
 
-    # Optionally wait for threads to join
+    # Gracefully stop all backend threads
     for thread in backend_threads:
         if thread.is_alive():
             thread.join(timeout=1)
 
+    backend_threads.clear()
+
+    # Force exit to release port if Flask is still alive
+    if flask_thread and flask_thread.is_alive():
+        print("🛑 Flask thread still running — force exiting to free port.")
+        os._exit(0)
+
+    flask_thread = None
     print("✅ Backend stopped successfully.")
 
 # --- GUI ---
