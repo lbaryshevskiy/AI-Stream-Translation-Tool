@@ -16,6 +16,7 @@ import json
 import os
 
 SETTINGS_FILE = "settings.json"
+is_in_settings = False
 
 # --- DEVELOPMENT MODE ---
 dev_mode = True
@@ -291,13 +292,13 @@ def show_pro_preferences():
                 hex_color = f"#{shade:02x}{shade:02x}{shade:02x}"
                 preview_frame.configure(fg_color=hex_color)
 
-            style_payload = {
-                "font": font_family_var.get(),
-                "size": int(font_slider.get()),
-                "opacity": float(opacity),
-                "wraplength": preview_label.cget("wraplength"),
-            }
-            socketio.emit("style_update", style_payload)
+            if not is_in_settings:
+                socketio.emit("style_update", {
+                    "font": font_family_var.get(),
+                    "size": int(font_slider.get()),
+                    "opacity": opacity,
+                    "wraplength": preview_label.cget("wraplength")
+            })
 
         def update_opacity(value):
             opacity_value_label.configure(text=f"{float(value):.2f}")
