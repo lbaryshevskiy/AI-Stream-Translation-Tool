@@ -121,23 +121,43 @@ def transcribe_loop():
             except Exception as e:
                 print(f"❌ Error in transcription/translation: {e}")
 
-                  
+flask_thread = None
+
 # --- Launch Backend Threads ---
 def start_backend():
-    global backend_threads
+    global backend_threads, flask_thread
     print("🟢 start_backend() triggered")
     stop_event.clear()
-    backend_threads = [
-        threading.Thread(target=record_audio, daemon=True),
-        threading.Thread(target=transcribe_loop, daemon=True),
-        threading.Thread(target=lambda: socketio.run(app, host='0.0.0.0', port=5100, debug=False, use_reloader=False, allow_unsafe_werkzeug=True), daemon=True),
-    ]
+    
+    # Create threads
+    audio_thread = threading.Thread(target=record_audio, daemon=True)
+    transcribe_thread = threading.Thread(target=transcribe_loop, daemon=True)
+    flask_thread = threading.Thread(
+        target=lambda: socketio.run(
+            app,
+            host='0.0.0.0',
+            port=5100,
+            debug=False,
+            use_reloader=False,
+            allow_unsafe_werkzeug=True
+        ),
+        daemon=True
+    )
+    
+    backend_threads = [audio_thread, transcribe_thread, flask_thread]
+
     for t in backend_threads:
         t.start()
 
 def stop_backend():
+    global flask_thread
     print("🔴 stop_backend() triggered")
     stop_event.set()
+
+    if flask_thread and flask_thread.is_alive():
+        print("🛑 Flask thread is still alive — forcing exit.")
+        os._exit(0)
+
 
 # --- GUI ---
 
