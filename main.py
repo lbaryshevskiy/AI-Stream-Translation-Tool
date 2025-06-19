@@ -279,6 +279,14 @@ def show_pro_preferences():
             mode = "Dark" if dark_mode_switch.get() == 1 else "Light"
             ctk.set_appearance_mode(mode)
             save_settings({"appearance_mode": mode})
+            # Immediately update preview font color
+            update_preview()
+
+            # Immediately update arrow color
+            arrow_color = "white" if mode == "Dark" else "black"
+            next_btn.configure(text_color=arrow_color)
+            back_btn.configure(text_color=arrow_color)
+
         
         def go_to_page2():
             page1.pack_forget()
