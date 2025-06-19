@@ -407,7 +407,14 @@ def show_pro_preferences():
         font_family_menu.pack(pady=(0, 10))
 
         def update_preview(*args):
-            preview_label.configure(font=(font_family_var.get(), int(font_slider.get())))
+            appearance = ctk.get_appearance_mode()
+            font_color = "black" if appearance == "Light" else "white"
+
+            preview_label.configure(
+                font=(font_family_var.get(), int(font_slider.get())),
+                text_color=font_color
+            )
+
             opacity = overlay_opacity_slider.get()
             if opacity <= 0.11:
                 preview_frame.configure(fg_color="transparent")
@@ -437,6 +444,14 @@ def show_pro_preferences():
             ctk.set_appearance_mode(mode)
             save_settings({"appearance_mode": mode})
 
+            # Update preview color immediately
+            update_preview()
+
+            # Update arrow colors immediately
+            arrow_color = "white" if mode == "Dark" else "black"
+            next_btn.configure(text_color=arrow_color)
+            back_btn.configure(text_color=arrow_color)
+
         def apply_custom_width():
             value = width_entry.get().strip()
 
@@ -455,7 +470,6 @@ def show_pro_preferences():
             except Exception as e:
                 print("Invalid custom size:", e)
 
-    
 
     # --- CREATOR TAB ---
         creator_tab = tabview.tab("Creator")
