@@ -548,6 +548,11 @@ def show_pro_preferences():
 
         dark_mode_switch.pack(side="right", padx=(10, 0))
 
+        def close_settings():
+            global is_in_settings
+            is_in_settings = False
+            popup.destroy()
+
         save_btn = ctk.CTkButton(right_frame, text="Save & Close", command=popup.destroy, width=140)
         save_btn.pack(side="right")
 
