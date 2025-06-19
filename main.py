@@ -484,7 +484,12 @@ def show_pro_preferences():
         right_frame.pack(side="right", padx=(0, 25))
 
         dark_mode_switch = ctk.CTkSwitch(right_frame, text="Dark Mode", command=toggle_dark_mode)
-        dark_mode_switch.select()
+
+        if ctk.get_appearance_mode() == "Dark":
+            dark_mode_switch.select()
+        else:
+            dark_mode_switch.deselect()
+
         dark_mode_switch.pack(side="right", padx=(10, 0))
 
         save_btn = ctk.CTkButton(right_frame, text="Save & Close", command=popup.destroy, width=140)
