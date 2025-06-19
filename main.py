@@ -271,7 +271,6 @@ def show_pro_preferences():
             style_payload = {
                 "font": font_family_var.get(),
                 "size": int(font_slider.get()),
-                "color": "black" if appearance == "Light" else "white",
                 "opacity": float(opacity),
                 "wraplength": preview_label.cget("wraplength"),
             }
