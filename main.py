@@ -648,12 +648,12 @@ def main():
     settings_btn = ctk.CTkButton(frame, text="⚙️ Settings", command=show_pro_preferences)
     settings_btn.pack(pady=10)
 
-    start_btn = ctk.CTkButton(frame, text="▶️ Start", command=toggle_backend)
-    start_btn.pack(pady=10)
-
     global status_label
     status_label = ctk.CTkLabel(frame, text="", font=("Helvetica", 12))
     status_label.place_forget()  # Keeps it invisible
+
+    start_btn = ctk.CTkButton(frame, text="▶️ Start", command=toggle_backend)
+    start_btn.pack(pady=10)
 
     root.mainloop()
 
