@@ -533,6 +533,8 @@ def launch_overlay():
 
 # --- Customtkinter GUI ---
 def toggle_backend():
+    global status_label
+    
     if start_btn.cget("text").startswith("▶️"):
         start_backend()
         start_btn.configure(text="⏹ Stop Subtitle App")
