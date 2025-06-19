@@ -268,6 +268,15 @@ def show_pro_preferences():
                 hex_color = f"#{shade:02x}{shade:02x}{shade:02x}"
                 preview_frame.configure(fg_color=hex_color)
 
+            style_payload = {
+                "font": font_family_var.get(),
+                "size": int(font_slider.get()),
+                "color": "black" if appearance == "Light" else "white",
+                "opacity": float(opacity),
+                "wraplength": preview_label.cget("wraplength"),
+            }
+            socketio.emit("style_update", style_payload)
+
         def update_opacity(value):
             opacity_value_label.configure(text=f"{float(value):.2f}")
             update_preview()
