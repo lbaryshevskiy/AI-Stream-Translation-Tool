@@ -17,6 +17,7 @@ import os
 
 SETTINGS_FILE = "settings.json"
 is_in_settings = False
+flask_thread = None
 
 # --- DEVELOPMENT MODE ---
 dev_mode = True
@@ -131,22 +132,27 @@ def transcribe_loop():
 
 # --- Launch Backend Threads ---
 def start_backend():
-    global backend_threads
+    global backend_threads, flask_thread
     print("🟢 start_backend() triggered")
     stop_event.clear()
 
-    time.sleep(0.5)
+    # Prevent launching a second Flask thread
+    if flask_thread and flask_thread.is_alive():
+        print("⚠️ Flask thread already running.")
+        return
 
-    flask_thread = threading.Thread(target=run_flask, daemon=True)
-    flask_thread.start()
+    audio_thread = threading.Thread(target=record_audio, daemon=True)
+    transcribe_thread = threading.Thread(target=transcribe_loop, daemon=True)
 
-    backend_threads = []
-    t1 = threading.Thread(target=record_audio, daemon=True)
-    t2 = threading.Thread(target=transcribe_loop, daemon=True)
-    backend_threads.extend([t1, t2])
+    flask_thread = threading.Thread(
+        target=lambda: socketio.run(app, host="0.0.0.0", port=5100, debug=False, use_reloader=False, allow_unsafe_werkzeug=True),
+        daemon=True
+    )
+
+    backend_threads = [audio_thread, transcribe_thread, flask_thread]
+
     for t in backend_threads:
         t.start()
-
 
 def stop_backend():
     global backend_threads
@@ -154,8 +160,10 @@ def stop_backend():
     stop_event.set()
 
     for t in backend_threads:
-        t.join()
+        if t is not flask_thread:  # Don't wait for flask_thread; it won't stop
+            t.join()
 
+    print("🔴 record_audio() stopped")
     print("✅ Backend stopped successfully.")
  
 
