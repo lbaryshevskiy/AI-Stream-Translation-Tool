@@ -591,6 +591,13 @@ def toggle_backend():
         start_btn.configure(text="▶️ Start Subtitle App")
         if status_label:
             status_label.configure(text="⏹ Transcription stopped")
+            
+def restart_server():
+    print("🔁 Restarting server...")
+    stop_backend()
+    time.sleep(1)
+    start_flask_once()
+    print("✅ Restart complete")
 
 def main():
     settings = load_settings()
@@ -681,13 +688,6 @@ def main():
 
     start_btn = ctk.CTkButton(frame, text="▶️ Start", command=toggle_backend)
     start_btn.pack(pady=10)
-
-    def restart_server():
-        print("🔁 Restarting server...")
-        stop_backend()
-        time.sleep(1)  # Let Flask fully release the port
-        start_flask_once()
-        print("✅ Restart complete")
  
     reload_btn = ctk.CTkButton(
         frame,
