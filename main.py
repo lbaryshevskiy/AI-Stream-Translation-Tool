@@ -712,6 +712,8 @@ def main():
     )
     reload_btn.pack(pady=(0, 5))
     
+    root.mainloop()
+    
 if __name__ == "__main__":
     main()
 
