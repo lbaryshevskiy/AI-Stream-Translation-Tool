@@ -137,8 +137,7 @@ def start_backend():
     stop_event.clear()
 
     # Prevent launching a second Flask thread
-    if flask_thread:
-    if flask_thread.is_alive():
+    if flask_thread and flask_thread.is_alive():
         print("⚠️ Flask thread already running.")
         return
     else:
