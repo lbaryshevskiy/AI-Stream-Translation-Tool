@@ -595,15 +595,11 @@ def toggle_backend():
             status_label.configure(text="⏹ Transcription stopped")
             
 def stop_flask():
-    for proc in psutil.process_iter(attrs=["pid", "name"]):
-        try:
-            for conn in proc.connections(kind="inet"):
-                if conn.laddr.port == 5100:
-                    print(f"🛑 Killing Flask process {proc.pid}")
-                    proc.kill()
-                    time.sleep(1)
-        except Exception:
-            continue
+    print("🛑 stop_flask() called (no killing)")
+    # Do nothing or add graceful stop logic here if Flask were in subprocess
+
+        #except Exception:
+            #continue
             
 def restart_server():
     print("🔁 Restarting server...")
