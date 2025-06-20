@@ -137,6 +137,8 @@ def start_backend():
     print("🟢 start_backend() triggered")
     stop_event.clear()
 
+    time.sleep(0.5)
+
     flask_process = Process(target=run_flask)
     flask_process.start()
 
