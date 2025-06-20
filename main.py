@@ -1,6 +1,7 @@
 import threading
 import queue
 import time
+time.sleep(0.5)
 import wave
 import whisper
 import pyaudio
@@ -684,12 +685,19 @@ def main():
     def restart_server():
         print("🔁 Restarting server...")
         stop_backend()
-        time.sleep(1)  # Ensure Flask releases port
+        time.sleep(1)  # Let Flask fully release the port
         start_flask_once()
         print("✅ Restart complete")
 
-    reload_btn = ctk.CTkButton(frame, text="🔁", width=30, command=restart_server)
-    reload_btn.place(relx=1.0, rely=1.0, anchor="se", x=-5, y=-5)
+
+        reload_btn = ctk.CTkButton(
+        frame,
+        text="🔄",  # emoji for reload
+        width=30,
+        height=30,
+        command=restart_server
+    )
+    reload_btn.place(relx=1.0, rely=0.0, anchor="ne", x=-10, y=10)  # Top-right corner
 
     root.mainloop()
 
