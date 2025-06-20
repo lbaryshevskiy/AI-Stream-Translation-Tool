@@ -683,12 +683,12 @@ def main():
     start_btn.pack(pady=10)
 
     def restart_server():
-    print("🔁 Restarting server...")
-    stop_backend()
-    time.sleep(1)  # Let Flask fully release the port
-    start_flask_once()
-    print("✅ Restart complete")
-
+        print("🔁 Restarting server...")
+        stop_backend()
+        time.sleep(1)  # Let Flask fully release the port
+        start_flask_once()
+        print("✅ Restart complete")
+ 
     # Now you can safely assign it as a command
     reload_btn = ctk.CTkButton(
         frame,
