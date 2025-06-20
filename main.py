@@ -132,27 +132,35 @@ def transcribe_loop():
 
 # --- Launch Backend Threads ---
 def start_backend():
-    global backend_threads, flask_thread
+    global backend_threads
     print("🟢 start_backend() triggered")
     stop_event.clear()
 
-    # Prevent launching a second Flask thread
-    if flask_thread and flask_thread.is_alive():
-        print("⚠️ Flask thread already running.")
-        return
-    else:
-        print("⚠️ Flask thread exists but is not alive — restarting.")
-
-
+    # Create backend threads
     audio_thread = threading.Thread(target=record_audio, daemon=True)
     transcribe_thread = threading.Thread(target=transcribe_loop, daemon=True)
 
-    flask_thread = threading.Thread(
-        target=lambda: socketio.run(app, host="0.0.0.0", port=5100, debug=False, use_reloader=False, allow_unsafe_werkzeug=True),
-        daemon=True
-    )
+    backend_threads = [audio_thread, transcribe_thread]
 
-    backend_threads = [audio_thread, transcribe_thread, flask_thread]
+    for t in backend_threads:
+        t.start()
+
+    def start_flask_once():
+    global flask_thread
+    if flask_thread is None or not flask_thread.is_alive():
+        flask_thread = threading.Thread(
+            target=lambda: socketio.run(
+                app,
+                host="0.0.0.0",
+                port=5100,
+                debug=False,
+                use_reloader=False,
+                allow_unsafe_werkzeug=True
+            ),
+            daemon=True
+        )
+        flask_thread.start()
+        print("🚀 Flask started once")
 
     for t in backend_threads:
         t.start()
@@ -169,6 +177,23 @@ def stop_backend():
     print("🔴 record_audio() stopped")
     print("✅ Backend stopped successfully.")
     flask_thread = None
+    
+def start_flask_once():
+    global flask_thread
+    if flask_thread is None or not flask_thread.is_alive():
+        flask_thread = threading.Thread(
+            target=lambda: socketio.run(
+                app,
+                host="0.0.0.0",
+                port=5100,
+                debug=False,
+                use_reloader=False,
+                allow_unsafe_werkzeug=True
+            ),
+            daemon=True
+        )
+        flask_thread.start()
+        print("🚀 Flask started once")
 
  
 
@@ -588,6 +613,7 @@ def toggle_backend():
 
 def main():
     settings = load_settings()
+    start_flask_once()
     appearance = settings.get("appearance_mode", "Dark")
     ctk.set_appearance_mode(appearance)
     ctk.set_default_color_theme("blue")
