@@ -148,7 +148,7 @@ def start_backend():
         t.start()
         
     start_flask_once()
-
+    
 def stop_backend():
     global backend_threads, flask_thread
     print("🔴 stop_backend() triggered")
@@ -158,9 +158,10 @@ def stop_backend():
         if t is not flask_thread and t.is_alive():
             t.join()
 
-    print("🔴 record_audio() stopped")
+    stop_flask()  # 🔴 Kill port 5100 to avoid reuse error
+    flask_thread = None
     print("✅ Backend stopped successfully.")
-    flask_thread = None  # still needed
+
     
 def start_flask_once():
     global flask_thread
@@ -606,22 +607,12 @@ def stop_flask():
             
 def restart_server():
     print("🔁 Restarting server...")
-
-    # Find and kill the process on port 5100
-    for proc in psutil.process_iter(attrs=["pid", "name"]):
-        try:
-            for conn in proc.connections(kind="inet"):
-                if conn.laddr.port == 5100:
-                    print(f"🛑 Killing process {proc.pid} using port 5100")
-                    proc.kill()
-        except Exception:
-            continue
-
+    stop_backend()
     time.sleep(1)
-    start_flask_once()
+    start_backend()
     print("✅ Restart complete")
 
-
+    # MAIN
 def main():
     settings = load_settings()
     start_flask_once()
@@ -719,7 +710,7 @@ def main():
         height=30,
         command=restart_server
     )
-    reload_btn.place(relx=1.0, rely=0.0, anchor="ne", x=-10, y=10)
+    reload_btn.pack(pady=(0, 5))
     
 if __name__ == "__main__":
     main()
