@@ -679,8 +679,8 @@ def main():
     status_label = ctk.CTkLabel(frame, text="", font=("Helvetica", 12))
     status_label.place_forget()  # Keeps it invisible
 
-    #start_btn = ctk.CTkButton(frame, text="▶️ Start", command=toggle_backend)
-    #start_btn.pack(pady=10)
+    start_btn = ctk.CTkButton(frame, text="▶️ Start", command=toggle_backend)
+    start_btn.pack(pady=10)
 
     def restart_server():
         print("🔁 Restarting server...")
@@ -690,14 +690,14 @@ def main():
         print("✅ Restart complete")
  
     # Now you can safely assign it as a command
-    reload_btn = ctk.CTkButton(
+    #reload_btn = ctk.CTkButton(
         frame,
         text="🔁",
         width=30,
         height=30,
         command=restart_server  # This line is now valid
     )
-    reload_btn.place(relx=1.0, rely=0.0, anchor="ne", x=-10, y=10)
+    #reload_btn.place(relx=1.0, rely=0.0, anchor="ne", x=-10, y=10)
 
 
 if __name__ == "__main__":
