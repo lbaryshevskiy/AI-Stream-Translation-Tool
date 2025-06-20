@@ -696,7 +696,7 @@ def main():
         width=30,
         height=30,
         command=restart_server  # This line is now valid
-    )
+    #)
     #reload_btn.place(relx=1.0, rely=0.0, anchor="ne", x=-10, y=10)
 
 
