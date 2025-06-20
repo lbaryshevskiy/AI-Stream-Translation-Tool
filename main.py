@@ -137,9 +137,13 @@ def start_backend():
     stop_event.clear()
 
     # Prevent launching a second Flask thread
-    if flask_thread and flask_thread.is_alive():
+    if flask_thread:
+    if flask_thread.is_alive():
         print("⚠️ Flask thread already running.")
         return
+    else:
+        print("⚠️ Flask thread exists but is not alive — restarting.")
+
 
     audio_thread = threading.Thread(target=record_audio, daemon=True)
     transcribe_thread = threading.Thread(target=transcribe_loop, daemon=True)
@@ -155,16 +159,18 @@ def start_backend():
         t.start()
 
 def stop_backend():
-    global backend_threads
+    global backend_threads, flask_thread
     print("🔴 stop_backend() triggered")
     stop_event.set()
 
     for t in backend_threads:
-        if t is not flask_thread:  # Don't wait for flask_thread; it won't stop
+        if t is not flask_thread:  # Don't wait for Flask thread
             t.join()
 
     print("🔴 record_audio() stopped")
     print("✅ Backend stopped successfully.")
+    flask_thread = None
+
  
 
 # --- GUI ---
