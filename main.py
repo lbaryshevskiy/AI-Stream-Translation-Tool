@@ -700,6 +700,16 @@ def main():
 
     start_btn = ctk.CTkButton(frame, text="▶️ Start", command=toggle_backend)
     start_btn.pack(pady=10)
+    
+    def restart_server():
+        print("🔁 Restarting server...")
+        stop_backend()
+        time.sleep(1)  # Ensure Flask releases port
+        start_flask_once()
+        print("✅ Restart complete")
+
+    reload_btn = ctk.CTkButton(frame, text="🔁", width=30, command=restart_server)
+    reload_btn.place(relx=1.0, rely=1.0, anchor="se", x=-5, y=-5)
 
     root.mainloop()
 
