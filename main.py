@@ -15,6 +15,7 @@ import webbrowser
 import customtkinter as ctk
 import json
 import os
+import psutil
 
 SETTINGS_FILE = "settings.json"
 is_in_settings = False
@@ -154,12 +155,12 @@ def stop_backend():
     stop_event.set()
 
     for t in backend_threads:
-        if t is not flask_thread:  # Don't wait for Flask thread
+        if t is not flask_thread and t.is_alive():
             t.join()
 
     print("🔴 record_audio() stopped")
     print("✅ Backend stopped successfully.")
-    flask_thread = None
+    flask_thread = None  # still needed
     
 def start_flask_once():
     global flask_thread
@@ -594,10 +595,21 @@ def toggle_backend():
             
 def restart_server():
     print("🔁 Restarting server...")
-    stop_backend()
+
+    # Find and kill the process on port 5100
+    for proc in psutil.process_iter(attrs=["pid", "name"]):
+        try:
+            for conn in proc.connections(kind="inet"):
+                if conn.laddr.port == 5100:
+                    print(f"🛑 Killing process {proc.pid} using port 5100")
+                    proc.kill()
+        except Exception:
+            continue
+
     time.sleep(1)
     start_flask_once()
     print("✅ Restart complete")
+
 
 def main():
     settings = load_settings()
@@ -696,7 +708,7 @@ def main():
         height=30,
         command=restart_server  # This line is now valid
     )
-    reload_btn.place(relx=1.0, rely=0.0, anchor="ne", x=-10, y=10)
+    reload_btn.place(relx=0.9, rely=0.05, anchor="ne")
 
 
 if __name__ == "__main__":
