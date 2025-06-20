@@ -133,7 +133,7 @@ flask_process = None
 
 # --- Launch Backend Threads ---
 def start_backend():
-    global backend_threads, flask_process
+    global backend_threads, flask_process  # <-- this is the fix
     print("🟢 start_backend() triggered")
     stop_event.clear()
 
