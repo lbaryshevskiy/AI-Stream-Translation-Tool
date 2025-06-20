@@ -144,26 +144,8 @@ def start_backend():
 
     for t in backend_threads:
         t.start()
-
-    def start_flask_once():
-    global flask_thread
-    if flask_thread is None or not flask_thread.is_alive():
-        flask_thread = threading.Thread(
-            target=lambda: socketio.run(
-                app,
-                host="0.0.0.0",
-                port=5100,
-                debug=False,
-                use_reloader=False,
-                allow_unsafe_werkzeug=True
-            ),
-            daemon=True
-        )
-        flask_thread.start()
-        print("🚀 Flask started once")
-
-    for t in backend_threads:
-        t.start()
+        
+    start_flask_once()
 
 def stop_backend():
     global backend_threads, flask_thread
@@ -194,8 +176,6 @@ def start_flask_once():
         )
         flask_thread.start()
         print("🚀 Flask started once")
-
- 
 
 # --- GUI ---
 
