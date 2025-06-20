@@ -593,6 +593,17 @@ def toggle_backend():
         if status_label:
             status_label.configure(text="⏹ Transcription stopped")
             
+def stop_flask():
+    for proc in psutil.process_iter(attrs=["pid", "name"]):
+        try:
+            for conn in proc.connections(kind="inet"):
+                if conn.laddr.port == 5100:
+                    print(f"🛑 Killing Flask process {proc.pid}")
+                    proc.kill()
+                    time.sleep(1)
+        except Exception:
+            continue
+            
 def restart_server():
     print("🔁 Restarting server...")
 
@@ -700,17 +711,16 @@ def main():
 
     start_btn = ctk.CTkButton(frame, text="▶️ Start", command=toggle_backend)
     start_btn.pack(pady=10)
- 
+
     reload_btn = ctk.CTkButton(
         frame,
         text="🔁",
         width=30,
         height=30,
-        command=restart_server  # This line is now valid
+        command=restart_server
     )
-    reload_btn.place(relx=0.9, rely=0.05, anchor="ne")
-
-
+    reload_btn.place(relx=1.0, rely=0.0, anchor="ne", x=-10, y=10)
+    
 if __name__ == "__main__":
     main()
 
