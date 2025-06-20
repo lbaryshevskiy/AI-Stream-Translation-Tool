@@ -14,7 +14,6 @@ import webbrowser
 import customtkinter as ctk
 import json
 import os
-from multiprocessing import Process
 
 SETTINGS_FILE = "settings.json"
 is_in_settings = False
@@ -129,18 +128,17 @@ def transcribe_loop():
             except Exception as e:
                 print(f"❌ Error in transcription/translation: {e}")
 
-flask_process = None
 
 # --- Launch Backend Threads ---
 def start_backend():
-    global backend_threads, flask_process  # <-- this is the fix
+    global backend_threads
     print("🟢 start_backend() triggered")
     stop_event.clear()
 
     time.sleep(0.5)
 
-    flask_process = Process(target=run_flask)
-    flask_process.start()
+    flask_thread = threading.Thread(target=run_flask, daemon=True)
+    flask_thread.start()
 
     backend_threads = []
     t1 = threading.Thread(target=record_audio, daemon=True)
@@ -149,21 +147,15 @@ def start_backend():
     for t in backend_threads:
         t.start()
 
+
 def stop_backend():
-    global flask_process, backend_threads
+    global backend_threads
     print("🔴 stop_backend() triggered")
     stop_event.set()
 
     for t in backend_threads:
         t.join()
 
-    if flask_process is not None and flask_process.is_alive():
-        print("🔴 Terminating Flask process")
-        flask_process.terminate()
-        flask_process.join()
-        flask_process = None
-
-    print("🔴 record_audio() stopped")
     print("✅ Backend stopped successfully.")
  
 
