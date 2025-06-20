@@ -681,16 +681,8 @@ def main():
 
     start_btn = ctk.CTkButton(frame, text="▶️ Start", command=toggle_backend)
     start_btn.pack(pady=10)
-    
-    def restart_server():
-        print("🔁 Restarting server...")
-        stop_backend()
-        time.sleep(1)  # Let Flask fully release the port
-        start_flask_once()
-        print("✅ Restart complete")
 
-
-        reload_btn = ctk.CTkButton(
+    reload_btn = ctk.CTkButton(
         frame,
         text="🔄",  # emoji for reload
         width=30,
@@ -700,6 +692,13 @@ def main():
     reload_btn.place(relx=1.0, rely=0.0, anchor="ne", x=-10, y=10)  # Top-right corner
 
     root.mainloop()
+    
+    def restart_server():
+        print("🔁 Restarting server...")
+        stop_backend()
+        time.sleep(1)  # Let Flask fully release the port
+        start_flask_once()
+        print("✅ Restart complete")
 
 if __name__ == "__main__":
     main()
