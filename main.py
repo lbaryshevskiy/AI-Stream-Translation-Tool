@@ -621,7 +621,7 @@ def restart_server():
     stop_backend()
     time.sleep(1)
     stop_event.clear()
-    start_backend()
+    start_flask_once()  # 🟢 Only restart Flask, not audio threads
     print("✅ Restart complete")
 
     # MAIN
