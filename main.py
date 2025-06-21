@@ -713,17 +713,9 @@ def main():
     btn_row.pack(pady=(10, 5), anchor="center")
 
     # --- Button Row: Start (left) + Reload (right-aligned) ---
-    btn_row = ctk.CTkFrame(frame, fg_color="transparent", width=230)
-    btn_row.pack(pady=(10, 5))
-
-    reload_btn = ctk.CTkButton(
-        btn_row,
-        text="🔁",
-        width=20,
-        height=20,
-        command=restart_server
-    )
-    reload_btn.pack(side="right")
+   # --- Button Row: Start + Reload (right aligned inside frame) ---
+    btn_row = ctk.CTkFrame(frame, fg_color="transparent")
+    btn_row.pack(pady=(10, 5), fill="x", padx=40)  # ⬅️ Add padding for alignment
 
     start_btn = ctk.CTkButton(
         btn_row,
@@ -733,6 +725,15 @@ def main():
         height=30
     )
     start_btn.pack(side="left")
+
+    reload_btn = ctk.CTkButton(
+        btn_row,
+        text="🔁",
+        width=20,
+        height=20,
+        command=restart_server
+    )
+    reload_btn.pack(side="right", pady=(5, 0))  # slightly lowered
 
     root.mainloop()
     
