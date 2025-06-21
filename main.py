@@ -717,16 +717,16 @@ def main():
         btn_row,
         text="▶️ Start",
         command=toggle_backend,
-        width=190,
-        height=36
+        width=100,
+        height=20
     )
     start_btn.pack(side="left", padx=(0, 10))  # adds space before reload
 
     reload_btn = ctk.CTkButton(
         btn_row,
         text="🔁",
-        width=40,
-        height=36,
+        width=20,
+        height=20,
         command=restart_server
     )
     reload_btn.pack(side="left")
