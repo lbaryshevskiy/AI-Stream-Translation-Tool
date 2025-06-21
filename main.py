@@ -711,6 +711,7 @@ def main():
 
     # --- Button Row: Start + Reload ---
     # --- Button Row: Start + Reload (minimalist layout) ---
+    # --- Button Row: Start + Reload (even height alignment) ---
     btn_row = ctk.CTkFrame(frame, fg_color="transparent")
     btn_row.pack(pady=(10, 5), anchor="center")
 
@@ -721,7 +722,7 @@ def main():
         width=120,
         height=30
     )
-    start_btn.pack(side="left", padx=(0, 4))  # small gap before reload
+    start_btn.pack(side="left", padx=(0, 4))
 
     reload_btn = ctk.CTkButton(
         btn_row,
@@ -730,7 +731,7 @@ def main():
         height=20,
         command=restart_server
     )
-    reload_btn.pack(side="left")
+    reload_btn.pack(side="left", pady=(5, 0))  # ✅ push it down slightly
 
     root.mainloop()
     
