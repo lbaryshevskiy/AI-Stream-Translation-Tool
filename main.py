@@ -601,7 +601,6 @@ def show_pro_preferences():
             width=140
         )
         save_btn.pack(side="right", padx=10, pady=10)
-
     except KeyError:
         pass
 
