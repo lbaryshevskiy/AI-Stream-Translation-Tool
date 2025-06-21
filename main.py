@@ -472,23 +472,6 @@ def show_pro_preferences():
         )
         font_family_menu.pack(pady=(0, 10))
 
-        def update_preview(*args):
-            appearance = ctk.get_appearance_mode()
-            font_color = "black" if appearance == "Light" else "white"
-
-            preview_label.configure(
-                font=(font_family_var.get(), int(font_slider.get())),
-                text_color=font_color
-            )
-
-            opacity = overlay_opacity_slider.get()
-            if opacity <= 0.11:
-                preview_frame.configure(fg_color="transparent")
-            else:
-                shade = int(26 + (opacity * 230))
-                hex_color = f"#{shade:02x}{shade:02x}{shade:02x}"
-                preview_frame.configure(fg_color=hex_color)
-
         def update_opacity(value):
             opacity_value_label.configure(text=f"{float(value):.2f}")
             update_preview()
