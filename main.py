@@ -709,10 +709,6 @@ def main():
     status_label = ctk.CTkLabel(frame, text="", font=("Helvetica", 12))
     status_label.place_forget()  # Keeps it invisible
 
-    btn_row = ctk.CTkFrame(frame, fg_color="transparent")
-    btn_row.pack(pady=(10, 5), anchor="center")
-
-    # --- Button Row: Start (left) + Reload (right-aligned) ---
    # --- Button Row: Start + Reload (right aligned inside frame) ---
     btn_row = ctk.CTkFrame(frame, fg_color="transparent")
     btn_row.pack(pady=(10, 5), fill="x", padx=40)  # ⬅️ Add padding for alignment
