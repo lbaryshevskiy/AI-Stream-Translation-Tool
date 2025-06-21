@@ -74,8 +74,10 @@ import engineio.base_server
 engineio.base_server.async_drivers = {'threading': eio_threading}
 
 app = Flask(__name__)
-print(f">>> CONFIRM: async_mode is set to {socketio.async_mode} ✅")
+
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode="eventlet")
+
+print(f">>> CONFIRM: async_mode is set to {socketio.async_mode} ✅")
 
 # --- Flask Web Server ---
 @app.route('/')
