@@ -14,6 +14,7 @@ import customtkinter as ctk
 import json
 import os
 import psutil
+from googletrans import Translator
 
 SETTINGS_FILE = "settings.json"
 is_in_settings = False
