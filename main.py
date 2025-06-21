@@ -599,21 +599,18 @@ def toggle_backend():
 
     if start_btn.cget("text").startswith("▶️"):
         start_backend()
-        start_btn.configure(text="⏹ Stop Subtitle App")
+        start_btn.configure(text="⏹ Stop")
         if status_label:
             status_label.configure(text="🎙️ Transcription running...")
     else:
         stop_backend()
-        start_btn.configure(text="▶️ Start Subtitle App")
+        start_btn.configure(text="▶️ Start")
         if status_label:
             status_label.configure(text="⏹ Transcription stopped")
+
             
 def stop_flask():
     print("🛑 stop_flask() called (no killing)")
-    # Do nothing or add graceful stop logic here if Flask were in subprocess
-
-        #except Exception:
-            #continue
             
 def restart_server():
     print("🔁 Restarting backend...")
