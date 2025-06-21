@@ -709,18 +709,18 @@ def main():
     status_label = ctk.CTkLabel(frame, text="", font=("Helvetica", 12))
     status_label.place_forget()  # Keeps it invisible
 
-   # --- Button Row: compact Start + Reload side by side ---
+   # --- Right-aligned Start + Reload (aligned with buttons above) ---
     btn_row = ctk.CTkFrame(frame, fg_color="transparent")
-    btn_row.pack(pady=(10, 5))
+    btn_row.pack(pady=(10, 5), anchor="e", padx=(0, 20))  # anchor to right + padding
 
     start_btn = ctk.CTkButton(
         btn_row,
         text="▶️ Start",
         command=toggle_backend,
         width=140,
-        height=28  # ✅ Slimmer height
+        height=28
     )
-    start_btn.pack(side="left", padx=(0, 6))
+    start_btn.pack(side="left", padx=(0, 6))  # small gap before reload
 
     reload_btn = ctk.CTkButton(
         btn_row,
@@ -730,6 +730,7 @@ def main():
         height=28
     )
     reload_btn.pack(side="left")
+
 
     root.mainloop()
     
