@@ -717,8 +717,8 @@ def main():
         btn_row,
         text="▶️ Start",
         command=toggle_backend,
-        width=170,
-        height=40
+        width=190,
+        height=36
     )
     start_btn.pack(side="left", padx=(0, 10))  # adds space before reload
 
@@ -726,7 +726,7 @@ def main():
         btn_row,
         text="🔁",
         width=40,
-        height=40,
+        height=36,
         command=restart_server
     )
     reload_btn.pack(side="left")
