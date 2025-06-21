@@ -710,8 +710,9 @@ def main():
     status_label.place_forget()  # Keeps it invisible
 
     # --- Button Row: Start + Reload ---
+    # --- Button Row: Start + Reload (minimalist layout) ---
     btn_row = ctk.CTkFrame(frame, fg_color="transparent")
-    btn_row.pack(pady=(10, 0), anchor="center")
+    btn_row.pack(pady=(10, 5), anchor="center")
 
     start_btn = ctk.CTkButton(
         btn_row,
@@ -720,7 +721,7 @@ def main():
         width=120,
         height=30
     )
-    start_btn.pack(side="left", padx=(0, 10))  # adds space before reload
+    start_btn.pack(side="left", padx=(0, 4))  # small gap before reload
 
     reload_btn = ctk.CTkButton(
         btn_row,
@@ -731,7 +732,6 @@ def main():
     )
     reload_btn.pack(side="left")
 
-    
     root.mainloop()
     
 if __name__ == "__main__":
