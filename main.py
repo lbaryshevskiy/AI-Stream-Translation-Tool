@@ -85,8 +85,12 @@ def overlay():
 @socketio.on('connect')
 def test_connect():
     print("✅ Socket connected")
-    threading.Timer(0.1, lambda: socketio.emit("subtitle", {"text": "🔥 Hello from Streamsub!"})).start()
-
+    def emit_hello():
+        try:
+            socketio.emit("subtitle", {"text": "🔥 Hello from Streamsub!"})
+        except Exception as e:
+            print(f"⚠️ OBS closed or emit failed: {e}")
+    threading.Timer(0.1, emit_hello).start()
 
 def record_audio():
     print("🎤 record_audio() started")
