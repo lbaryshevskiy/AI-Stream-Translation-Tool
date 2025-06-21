@@ -711,7 +711,7 @@ def main():
 
    # --- Right-aligned Start + Reload (aligned with buttons above) ---
     btn_row = ctk.CTkFrame(frame, fg_color="transparent")
-    btn_row.pack(pady=(10, 5), anchor="e", padx=(0, 20))  # anchor to right + padding
+    btn_row.pack(pady=(10, 5), anchor="e", padx=(0, 8))  # anchor to right + padding
 
     start_btn = ctk.CTkButton(
         btn_row,
