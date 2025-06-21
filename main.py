@@ -732,7 +732,7 @@ def main():
         fg_color="transparent",
         hover_color="gray20",
         text_color="white",
-        font=("Helvetica", 20)  # ⬅️ Increase from 16 to 18
+        font=("Helvetica", 25) 
     )
     reload_btn.pack(side="left")
     
