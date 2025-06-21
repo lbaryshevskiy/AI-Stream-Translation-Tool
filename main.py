@@ -92,18 +92,26 @@ def test_connect():
 
 def record_audio():
     print("🎤 record_audio() started")
-    stream = pa.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK)
-    while not stop_event.is_set():
-        frames = []
-        for _ in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
-            if stop_event.is_set():
-                break
-            data = stream.read(CHUNK)
-            frames.append(data)
-        audio_queue.put(b''.join(frames))
-    stream.stop_stream()
-    stream.close()
-    print("🛑 record_audio() stopped")
+    try:
+        stream = pa.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK)
+        while not stop_event.is_set():
+            frames = []
+            for _ in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
+                if stop_event.is_set():
+                    break
+                try:
+                    data = stream.read(CHUNK, exception_on_overflow=False)
+                    frames.append(data)
+                except Exception as e:
+                    print("⚠️ Mic read error:", e)
+                    break
+            if frames:
+                audio_queue.put(b''.join(frames))
+        stream.stop_stream()
+        stream.close()
+        print("🛑 record_audio() stopped")
+    except Exception as e:
+        print("❌ Failed to open mic stream:", e)
 
 def transcribe_loop():
     print("🧠 transcribe_loop() started")
@@ -156,12 +164,15 @@ def stop_backend():
 
     for t in backend_threads:
         if t.is_alive():
-            t.join()
+            print(f"⏳ Waiting for thread: {t.name}")
+            t.join(timeout=3)
+            if t.is_alive():
+                print(f"⚠️ WARNING: Thread did not stop cleanly: {t.name}")
 
     backend_threads = []
 
     if flask_thread and flask_thread.is_alive():
-        print("🛑 Waiting for Flask thread to stop...")
+        print("🛑 Flask thread still alive — not force-stopping in thread mode.")
       
 def start_flask_once():
     global flask_thread
