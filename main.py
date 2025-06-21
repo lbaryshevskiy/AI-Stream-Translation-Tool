@@ -242,7 +242,10 @@ def show_pro_preferences():
         font_size_value_label.pack(pady=(0, 2))
 
         font_slider = ctk.CTkSlider(page1, from_=12, to=48, number_of_steps=36, command=update_font_size)
-        font_slider.set(20)
+        
+        settings = load_settings()
+        font_slider.set(settings.get("font_size", 20))
+        
         font_slider.pack(pady=(0, 8))
 
         # --- Opacity ---
@@ -253,7 +256,7 @@ def show_pro_preferences():
         opacity_value_label.pack(pady=(0, 2))
 
         overlay_opacity_slider = ctk.CTkSlider(page1, from_=0.1, to=1.0, number_of_steps=18)
-        overlay_opacity_slider.set(0.10)
+        overlay_opacity_slider.set(settings.get("opacity", 0.1))
         overlay_opacity_slider.pack(pady=(0, 8))
 
         # --- Tooltip Definitions (must come before used) ---
