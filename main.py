@@ -155,14 +155,14 @@ def stop_backend():
     stop_event.set()
 
     for t in backend_threads:
-        if t is not flask_thread and t.is_alive():
+        if t.is_alive():
             t.join()
 
-    stop_flask()  # 🔴 Kill port 5100 to avoid reuse error
-    flask_thread = None
-    print("✅ Backend stopped successfully.")
+    backend_threads = []
 
-    
+    if flask_thread and flask_thread.is_alive():
+        print("🛑 Waiting for Flask thread to stop...")
+      
 def start_flask_once():
     global flask_thread
     if flask_thread is None or not flask_thread.is_alive():
@@ -179,6 +179,9 @@ def start_flask_once():
         )
         flask_thread.start()
         print("🚀 Flask started once")
+    else:
+        print("⚠️ Flask already running")
+
 
 # --- GUI ---
 
@@ -602,9 +605,11 @@ def stop_flask():
             #continue
             
 def restart_server():
-    print("🔁 Restarting server...")
+    print("🔁 Restarting backend...")
+    stop_event.set()
     stop_backend()
     time.sleep(1)
+    stop_event.clear()
     start_backend()
     print("✅ Restart complete")
 
