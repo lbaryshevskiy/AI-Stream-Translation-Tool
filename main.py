@@ -709,28 +709,28 @@ def main():
     status_label = ctk.CTkLabel(frame, text="", font=("Helvetica", 12))
     status_label.place_forget()  # Keeps it invisible
 
-   # --- Button Row: Start + Reload (centered & visually even) ---
-   # --- Button Row: Start (full width like others) + Reload inside it ---
+    # --- Button Row: Start + inline Reload (fit within same width) ---
     btn_row = ctk.CTkFrame(frame, fg_color="transparent", width=210)
     btn_row.pack(pady=(10, 5))
 
+    # Shrink Start to leave space for Reload inside the same 210px area
     start_btn = ctk.CTkButton(
         btn_row,
         text="▶️ Start",
         command=toggle_backend,
-        width=210,
+        width=180,
         height=36
-    )
+    )    
     start_btn.grid(row=0, column=0, sticky="w")
 
     reload_btn = ctk.CTkButton(
         btn_row,
         text="🔁",
-        width=22,
-        height=22,
+        width=24,
+        height=24,
         command=restart_server
     )
-    reload_btn.place(relx=1.0, rely=0.5, anchor="e", x=-8, y=0)  # tucks it in right end
+    reload_btn.place(relx=1.0, rely=0.5, anchor="e", x=-6, y=0)
 
     root.mainloop()
     
