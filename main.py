@@ -75,7 +75,7 @@ engineio.base_server.async_drivers = {'threading': eio_threading}
 
 app = Flask(__name__)
 print(">>> CONFIRM: async_mode is set to threading ✅")
-socketio = SocketIO(app, cors_allowed_origins="*", async_mode="threading")
+socketio = SocketIO(app, cors_allowed_origins="*", async_mode="eventlet")
 
 # --- Flask Web Server ---
 @app.route('/')
@@ -743,8 +743,9 @@ def main():
     
     root.mainloop()
     
-if __name__ == "__main__":
+def run_app():
     main()
+
 
 
 
