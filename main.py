@@ -136,9 +136,9 @@ def transcribe_loop():
                         except Exception as e:
                             print(f"⚠️ Failed to emit subtitle: {e}")
                         else:
-                        print("⚠️ No valid language selected.")
-            except Exception as e:
-                print(f"❌ Error in transcription/translation: {e}")
+                            print("⚠️ No valid language selected.")
+                except Exception as e:
+                    print(f"❌ Error in transcription/translation: {e}")
 
 
 # --- Launch Backend Threads ---
