@@ -8,9 +8,7 @@ import pyaudio
 from flask import Flask, render_template
 from flask_socketio import SocketIO
 import logging
-log = logging.getLogger('werkzeug')
-log.setLevel(logging.ERROR)
-from googletrans import Translator
+logging.getLogger('werkzeug').setLevel(logging.ERROR)
 import webbrowser
 import customtkinter as ctk
 import json
