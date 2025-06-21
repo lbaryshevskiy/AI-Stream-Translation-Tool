@@ -583,8 +583,23 @@ def show_pro_preferences():
             is_in_settings = False
             popup.destroy()
 
-        save_btn = ctk.CTkButton(right_frame, text="Save & Close", command=popup.destroy, width=140)
-        save_btn.pack(side="right")
+        def save_and_close():
+        save_settings({
+            "font_size": int(font_slider.get()),
+            "opacity": float(overlay_opacity_slider.get()),
+            "font_family": font_family_var.get()
+        })
+        global is_in_settings
+        is_in_settings = False
+        popup.destroy()
+
+    save_btn = ctk.CTkButton(
+        right_frame,
+        text="Save & Close",
+        command=save_and_close,
+        width=140
+    )
+    save_btn.pack(side="right", padx=10, pady=10)
 
     except KeyError:
         pass
