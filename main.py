@@ -9,11 +9,9 @@ from flask import Flask, render_template
 from flask_socketio import SocketIO
 import logging
 logging.getLogger('werkzeug').setLevel(logging.ERROR)
-import webbrowser
 import customtkinter as ctk
 import json
 import os
-import psutil
 from googletrans import Translator
 
 SETTINGS_FILE = "settings.json"
@@ -133,12 +131,12 @@ def transcribe_loop():
                     if lang_code:
                         translated = translator.translate(text, dest=lang_code).text
                         print(f"🎙️ {text} → 💬 {translated}")
-                        socketio.emit('subtitle', {'text': translated})
+                        try:
+                            socketio.emit('subtitle', {'text': translated})
+                        except Exception as e:
+                            print(f"⚠️ Failed to emit subtitle: {e}")
                     else:
                         print("⚠️ No valid language selected.")
-            except Exception as e:
-                print(f"❌ Error in transcription/translation: {e}")
-
 
 # --- Launch Backend Threads ---
 def start_backend():
