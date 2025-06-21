@@ -724,17 +724,17 @@ def main():
 
     reload_btn = ctk.CTkButton(
         btn_row,
-        text="↻",  # cleaner circle arrow
+        text="↻",
         command=restart_server,
         width=26,
         height=26,
         fg_color="transparent",
         hover_color="gray20",
         text_color="white",
-        font=("Helvetica", 16)
+        font=("Helvetica", 18)  # ⬅️ Increase from 16 to 18
     )
     reload_btn.pack(side="left")
-
+    
     root.mainloop()
     
 if __name__ == "__main__":
