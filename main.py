@@ -88,7 +88,8 @@ def overlay():
 @socketio.on('connect')
 def test_connect():
     print("✅ Socket connected")
-    socketio.emit("subtitle", {"text": "🔥 Hello from Streamsub!"})
+    threading.Timer(0.1, lambda: socketio.emit("subtitle", {"text": "🔥 Hello from Streamsub!"})).start()
+
 
 def record_audio():
     print("🎤 record_audio() started")
