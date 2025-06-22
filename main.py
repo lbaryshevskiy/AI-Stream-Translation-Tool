@@ -485,7 +485,7 @@ def show_pro_preferences():
             preview_frame,
             text="This is how your subtitle looks.",
             font=(font_family_var.get(), int(font_slider.get())),
-            wraplength=220,
+            wraplength=360,
             anchor="center",
             justify="center"
         )
