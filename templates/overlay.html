@@ -46,11 +46,8 @@
       const subtitle = document.getElementById("subtitle");
       subtitle.style.fontFamily = data.font;
       subtitle.style.fontSize = data.size + "px";
-      subtitle.style.maxWidth = Math.min(data.wraplength, window.innerWidth) + "px";
-      subtitle.style.opacity = Math.min(data.opacity, 1);
-      
       subtitle.style.maxWidth = `${data.wraplength}px`;
-
+      subtitle.style.opacity = Math.min(data.opacity, 1);
     });
 
     socket.on("disconnect", () => {
