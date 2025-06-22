@@ -224,6 +224,11 @@ def show_pro_preferences():
     tabview.add("Creator")
 
     try:
+        # Load saved settings
+        settings = load_settings()
+        saved_size = settings.get("font_size", 20)
+        saved_opacity = settings.get("opacity", 0.1)
+        
         studio_tab = tabview.tab("Studio")
         label_font = ("Helvetica", 13, "bold")
 
