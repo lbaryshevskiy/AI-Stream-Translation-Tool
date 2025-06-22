@@ -303,7 +303,9 @@ def show_pro_preferences():
         # --- Preview Box ---
         preview_frame = ctk.CTkFrame(page1, fg_color="transparent", corner_radius=10)
         preview_frame.pack(pady=(30, 10), padx=40)
-
+        
+        font_family_var = ctk.StringVar(value="Inter")
+        
         preview_label = ctk.CTkLabel(
             page1,
             text="This is how your subtitle looks.",
@@ -314,8 +316,7 @@ def show_pro_preferences():
             justify="center"    
         )
         preview_label.pack(pady=(20, 10))
-
-        font_family_var = ctk.StringVar(value="Helvetica")
+        
         # --- Live Preview Logic ---
         def update_preview(*args):
             appearance = ctk.get_appearance_mode()
