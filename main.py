@@ -606,6 +606,7 @@ def show_pro_preferences():
                 "font_size": font_size,
                 "opacity": opacity,
                 "font_family": font_family
+                "wraplength": preview_label.cget("wraplength")
             })
             save_settings(existing)
 
