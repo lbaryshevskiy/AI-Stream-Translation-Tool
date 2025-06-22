@@ -265,7 +265,12 @@ def show_pro_preferences():
         opacity_value_label.pack(pady=(0, 2))
 
         overlay_opacity_slider = ctk.CTkSlider(page1, from_=0.1, to=1.0, number_of_steps=18)
-        overlay_opacity_slider.set(settings.get("opacity", 0.1))
+        
+        saved_opacity = settings.get("opacity", 0.1)
+        if isinstance(saved_opacity, list):
+            saved_opacity = saved_opacity[0]
+        overlay_opacity_slider.set(saved_opacity)
+        
         overlay_opacity_slider.pack(pady=(0, 8))
 
         # --- Tooltip Definitions (must come before used) ---
