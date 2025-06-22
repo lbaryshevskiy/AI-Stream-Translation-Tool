@@ -602,11 +602,12 @@ def show_pro_preferences():
             font_family = font_family_var.get()
             
             existing = load_settings()
+            wraplength = preview_label.cget("wraplength")
             existing.update({
                 "font_size": font_size,
                 "opacity": opacity,
-                "font_family": font_family
-                "wraplength": preview_label.cget("wraplength")
+                "font_family": font_family,
+                "wraplength": wraplength
             })
             save_settings(existing)
 
