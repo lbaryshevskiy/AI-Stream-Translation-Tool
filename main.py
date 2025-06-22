@@ -253,8 +253,8 @@ def show_pro_preferences():
         if isinstance(saved_size, list):  # due to prior tuple saving
             saved_size = saved_size[0]
         font_slider.set(saved_size)
+        preview_label.configure(font=(font_family_var.get(), saved_size))
 
-        
         font_slider.pack(pady=(0, 8))
 
         # --- Opacity ---
@@ -591,13 +591,13 @@ def show_pro_preferences():
             font_family = font_family_var.get()
             
             existing = load_settings()
-            save_settings({
+            existing.update({
                 "font_size": font_size,
                 "opacity": opacity,
                 "font_family": font_family
             })
             save_settings(existing)
-            
+
             # Emit updated style to the overlay stream
             socketio.emit("style_update", {
                 "font": font_family,
