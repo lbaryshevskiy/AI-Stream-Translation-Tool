@@ -577,9 +577,9 @@ def show_pro_preferences():
             popup.destroy()
 
         def save_and_close():
-            "font_size": int(font_slider.get()),
-            "opacity": float(overlay_opacity_slider.get()),
-            "font_family": font_family_var.get()
+            font_size = int(font_slider.get()),
+            opacity = float(overlay_opacity_slider.get()),
+            font_family = font_family_var.get()
                 
             save_settings({
                 "font_size": font_size,
