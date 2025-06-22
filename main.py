@@ -309,9 +309,12 @@ def show_pro_preferences():
         
         # --- Preview Box ---
         font_family_var = ctk.StringVar(value="Inter")
-
+        
+        preview_label = None
         # --- Live Preview Logic ---
         def update_preview(*args):
+            if preview_label is None:
+                return
             appearance = ctk.get_appearance_mode()
             font_color = "black" if appearance == "Light" else "white"
 
