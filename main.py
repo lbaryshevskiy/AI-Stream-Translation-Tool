@@ -305,15 +305,16 @@ def show_pro_preferences():
         preview_frame.pack(pady=(30, 10), padx=40)
 
         preview_label = ctk.CTkLabel(
-            preview_frame,
+            page1,
             text="This is how your subtitle looks.",
-            font=("Helvetica", 20),
-            wraplength=300,
-            anchor="center",
-            justify="center"
+            font=(font_family_var.get(), int(font_slider.get())),
+            height=50,           
+            wraplength=220,       
+            anchor="center",     
+            justify="center"    
         )
-        preview_label.pack(padx=10, pady=8)
-        
+        preview_label.pack(pady=(20, 10))
+
         font_family_var = ctk.StringVar(value="Helvetica")
         # --- Live Preview Logic ---
         def update_preview(*args):
