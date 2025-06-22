@@ -304,8 +304,8 @@ def show_pro_preferences():
         font_family_var = ctk.StringVar(value="Inter")
         
         preview_frame = ctk.CTkFrame(page1, fg_color="transparent", corner_radius=10, width=260, height=60)
-        preview_frame.pack(pady=(30, 10), padx=40)
-        
+        preview_frame.pack(pady=(20, 0), padx=40)
+
         preview_label = ctk.CTkLabel(
             preview_frame,
             text="This is how your subtitle looks.",
