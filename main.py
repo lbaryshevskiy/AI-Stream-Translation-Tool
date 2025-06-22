@@ -589,13 +589,15 @@ def show_pro_preferences():
             font_size = int(font_slider.get())
             opacity = float(overlay_opacity_slider.get())
             font_family = font_family_var.get()
-
+            
+            existing = load_settings()
             save_settings({
                 "font_size": font_size,
                 "opacity": opacity,
                 "font_family": font_family
             })
-
+            save_settings(existing)
+            
             # Emit updated style to the overlay stream
             socketio.emit("style_update", {
                 "font": font_family,
