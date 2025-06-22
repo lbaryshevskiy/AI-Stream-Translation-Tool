@@ -252,8 +252,6 @@ def show_pro_preferences():
         saved_size = settings.get("font_size", 20)
         if isinstance(saved_size, list):  # due to prior tuple saving
             saved_size = saved_size[0]
-        font_slider.set(saved_size)
-        preview_label.configure(font=(font_family_var.get(), saved_size))
 
         font_slider.pack(pady=(0, 8))
 
@@ -314,7 +312,8 @@ def show_pro_preferences():
         
         preview_frame = ctk.CTkFrame(page1, fg_color="transparent", corner_radius=10, width=260, height=60)
         preview_frame.pack(pady=(20, 0), padx=40)
-
+        
+        font_slider.set(saved_size)
         preview_label = ctk.CTkLabel(
             preview_frame,
             text="This is how your subtitle looks.",
@@ -324,6 +323,8 @@ def show_pro_preferences():
             justify="center"
         )
         preview_label.pack(expand=True, fill="both")
+
+        preview_label.configure(font=(font_family_var.get(), saved_size))
 
         # --- Live Preview Logic ---
         def update_preview(*args):
