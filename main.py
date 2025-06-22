@@ -577,11 +577,24 @@ def show_pro_preferences():
             popup.destroy()
 
         def save_and_close():
-            save_settings({
                 "font_size": int(font_slider.get()),
                 "opacity": float(overlay_opacity_slider.get()),
                 "font_family": font_family_var.get()
+                
+            save_settings({
+                "font_size": font_size,
+                "opacity": opacity,
+                "font_family": font_family
             })
+
+            # Emit updated style to the overlay stream
+            socketio.emit("style_update", {
+                "font": font_family,
+                "size": font_size,
+                "opacity": opacity,
+                "wraplength": preview_label.cget("wraplength")
+            })
+                
             global is_in_settings
             is_in_settings = False
             popup.destroy()
