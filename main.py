@@ -344,7 +344,7 @@ def show_pro_preferences():
             update_preview()
 
         overlay_opacity_slider.configure(command=update_opacity)
-        update_preview()
+        
         
         def toggle_dark_mode():
             mode = "Dark" if dark_mode_switch.get() == 1 else "Light"
@@ -491,6 +491,8 @@ def show_pro_preferences():
         )
         preview_label.pack(expand=True, fill="both")
         preview_label.configure(font=(font_family_var.get(), saved_size))
+
+        update_preview()
 
         def update_opacity(value):
             opacity_value_label.configure(text=f"{float(value):.2f}")
