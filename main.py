@@ -301,9 +301,6 @@ def show_pro_preferences():
         color_menu.pack(pady=(0, 10))
         
         # --- Preview Box ---
-        preview_frame = ctk.CTkFrame(page1, fg_color="transparent", corner_radius=10)
-        preview_frame.pack(pady=(30, 10), padx=40)
-        
         font_family_var = ctk.StringVar(value="Inter")
         
         preview_frame = ctk.CTkFrame(page1, fg_color="transparent", corner_radius=10, width=260, height=60)
@@ -319,7 +316,6 @@ def show_pro_preferences():
         )
         preview_label.pack(expand=True, fill="both")
 
-        
         # --- Live Preview Logic ---
         def update_preview(*args):
             appearance = ctk.get_appearance_mode()
