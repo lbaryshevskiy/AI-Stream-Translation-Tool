@@ -249,7 +249,11 @@ def show_pro_preferences():
         font_slider = ctk.CTkSlider(page1, from_=12, to=48, number_of_steps=36, command=update_font_size)
         
         settings = load_settings()
-        font_slider.set(settings.get("font_size", 20))
+        saved_size = settings.get("font_size", 20)
+        if isinstance(saved_size, list):  # due to prior tuple saving
+            saved_size = saved_size[0]
+        font_slider.set(saved_size)
+
         
         font_slider.pack(pady=(0, 8))
 
@@ -577,10 +581,10 @@ def show_pro_preferences():
             popup.destroy()
 
         def save_and_close():
-            font_size = int(font_slider.get()),
-            opacity = float(overlay_opacity_slider.get()),
+            font_size = int(font_slider.get())
+            opacity = float(overlay_opacity_slider.get())
             font_family = font_family_var.get()
-                
+
             save_settings({
                 "font_size": font_size,
                 "opacity": opacity,
