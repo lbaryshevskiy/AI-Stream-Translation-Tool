@@ -603,12 +603,22 @@ def show_pro_preferences():
             
             existing = load_settings()
             wraplength = preview_label.cget("wraplength")
+            box_choice = box_size_var.get()
+            if "Custom" in box_choice:
+                width_str = width_entry.get().strip()
+                wraplength = int(width_str.split("x")[0]) if "x" in width_str else int(width_str)
+                existing["last_custom_box_size"] = width_str
+            else:
+                wraplength = box_size_presets.get(box_choice, 600)
+                
             existing.update({
                 "font_size": font_size,
                 "opacity": opacity,
                 "font_family": font_family,
-                "wraplength": wraplength
+                "wraplength": wraplength,
+                "box_size": box_choice
             })
+
             save_settings(existing)
 
             # Emit updated style to the overlay stream
@@ -616,7 +626,7 @@ def show_pro_preferences():
                 "font": font_family,
                 "size": font_size,
                 "opacity": opacity,
-                "wraplength": preview_label.cget("wraplength")
+                "wraplength": wraplength
             })
                 
             global is_in_settings
