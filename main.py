@@ -431,10 +431,23 @@ def show_pro_preferences():
             "Custom...": None
         }
 
-        box_size_var = ctk.StringVar(value="Compact (600x100)")
-        last = load_settings().get("last_custom_box_size")
-        if last:
-            box_size_var.set(f"Custom ({last})")
+        settings = load_settings()
+        saved_wrap = settings.get("wraplength", 1000)
+        saved_box = settings.get("box_size", "Full Width (1000x150)")
+        
+        box_size_var = ctk.StringVar(value=saved_box)
+        
+        if "Custom" in saved_box:
+            last_custom = settings.get("last_custom_box_size", f"{saved_wrap}x100")
+            box_size_var.set(f"Custom ({last_custom})")
+            try:
+                preview_label.configure(wraplength=int(last_custom.split("x")[0]))
+            except:
+                pass
+            width_entry.insert(0, last_custom)
+            custom_frame.pack(pady=(5, 10))
+        else:
+            preview_label.configure(wraplength=box_size_presets.get(saved_box, 1000))
             try:
                 preview_label.configure(wraplength=int(last.split("x")[0]))
             except:
