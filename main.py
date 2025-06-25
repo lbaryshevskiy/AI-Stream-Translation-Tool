@@ -441,7 +441,7 @@ def show_pro_preferences():
             preview_frame,
             text="This is how your subtitle looks.",
             font=(font_family_var.get(), int(font_slider.get())),
-            wraplength=320,
+            wraplength=saved_wrap,
             anchor="center",
             justify="center"
         )
@@ -627,7 +627,8 @@ def show_pro_preferences():
                 "opacity": opacity,
                 "font_family": font_family,
                 "wraplength": wraplength,
-                "box_size": box_choice
+                "box_size": box_choice,
+                "last_custom_box_size": width_entry.get().strip() if "Custom" in box_choice else ""
             })
 
             save_settings(existing)
