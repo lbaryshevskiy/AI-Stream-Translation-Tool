@@ -436,6 +436,16 @@ def show_pro_preferences():
         saved_box = settings.get("box_size", "Full Width (1000x150)")
         
         box_size_var = ctk.StringVar(value=saved_box)
+
+        preview_label = ctk.CTkLabel(
+            preview_frame,
+            text="This is how your subtitle looks.",
+            font=(font_family_var.get(), int(font_slider.get())),
+            wraplength=320,
+            anchor="center",
+            justify="center"
+        )
+        preview_label.pack(expand=True, fill="both")
         
         if "Custom" in saved_box:
             last_custom = settings.get("last_custom_box_size", f"{saved_wrap}x100")
@@ -499,18 +509,6 @@ def show_pro_preferences():
         # --- Preview Box (moved from page1 to page2) ---
         preview_frame = ctk.CTkFrame(page2, fg_color="transparent", corner_radius=10, width=500, height=60)
         preview_frame.pack(pady=(10, 10), padx=40)
-        
-        preview_label = ctk.CTkLabel(
-            preview_frame,
-            text="This is how your subtitle looks.",
-            font=(font_family_var.get(), int(font_slider.get())),
-            wraplength=320,
-            anchor="center",
-            justify="center"
-        )
-        preview_label.pack(expand=True, fill="both")
-        preview_label.configure(font=(font_family_var.get(), saved_size))
-
         update_preview()
 
         def update_opacity(value):
