@@ -436,7 +436,10 @@ def show_pro_preferences():
         saved_box = settings.get("box_size", "Full Width (1000x150)")
         
         box_size_var = ctk.StringVar(value=saved_box)
-
+        
+        preview_frame = ctk.CTkFrame(page2, fg_color="transparent", corner_radius=10, width=500, height=60)
+        preview_frame.pack(pady=(10, 10), padx=40)
+        
         preview_label = ctk.CTkLabel(
             preview_frame,
             text="This is how your subtitle looks.",
