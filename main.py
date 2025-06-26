@@ -420,51 +420,6 @@ def show_pro_preferences():
 
 
         # --- Page 2: Box Size Selector ---
-        box_size_label = ctk.CTkLabel(page2, text="Subtitle Box Size:", font=label_font)
-        box_size_label.pack(pady=(15, 0))
-
-        box_size_presets = {
-            "Compact (600x100)": 600,
-            "Wide (800x100)": 800,
-            "Tall (600x300)": 600,
-            "Full Width (1000x150)": 1000,
-            "Custom...": None
-        }
-
-        settings = load_settings()
-        saved_wrap = settings.get("wraplength", 1000)
-        saved_box = settings.get("box_size", "Full Width (1000x150)")
-        
-        box_size_var = ctk.StringVar(value=saved_box)
-        
-        preview_frame = ctk.CTkFrame(page2, fg_color="transparent", corner_radius=10, width=500, height=60)
-        preview_frame.pack(pady=(10, 10), padx=40)
-        
-        preview_label = ctk.CTkLabel(
-            preview_frame,
-            text="This is how your subtitle looks.",
-            font=(font_family_var.get(), int(font_slider.get())),
-            wraplength=saved_wrap,
-            anchor="center",
-            justify="center"
-        )
-        preview_label.pack(expand=True, fill="both")
-        
-        if "Custom" in saved_box:
-            last_custom = settings.get("last_custom_box_size", f"{saved_wrap}x100")
-            box_size_var.set(f"Custom ({last_custom})")
-            try:
-                preview_label.configure(wraplength=int(last_custom.split("x")[0]))
-            except:
-                pass
-            width_entry.insert(0, last_custom)
-            custom_frame.pack(pady=(5, 10))
-        else:
-            preview_label.configure(wraplength=box_size_presets.get(saved_box, 1000))
-            try:
-                preview_label.configure(wraplength=int(last.split("x")[0]))
-            except:
-                pass
 
         def update_box_size(choice):
             if choice == "Custom...":
@@ -513,6 +468,52 @@ def show_pro_preferences():
         preview_frame = ctk.CTkFrame(page2, fg_color="transparent", corner_radius=10, width=500, height=60)
         preview_frame.pack(pady=(10, 10), padx=40)
         update_preview()
+
+        box_size_label = ctk.CTkLabel(page2, text="Subtitle Box Size:", font=label_font)
+        box_size_label.pack(pady=(15, 0))
+
+        box_size_presets = {
+            "Compact (600x100)": 600,
+            "Wide (800x100)": 800,
+            "Tall (600x300)": 600,
+            "Full Width (1000x150)": 1000,
+            "Custom...": None
+        }
+
+        settings = load_settings()
+        saved_wrap = settings.get("wraplength", 1000)
+        saved_box = settings.get("box_size", "Full Width (1000x150)")
+        
+        box_size_var = ctk.StringVar(value=saved_box)
+        
+        preview_frame = ctk.CTkFrame(page2, fg_color="transparent", corner_radius=10, width=500, height=60)
+        preview_frame.pack(pady=(10, 10), padx=40)
+        
+        preview_label = ctk.CTkLabel(
+            preview_frame,
+            text="This is how your subtitle looks.",
+            font=(font_family_var.get(), int(font_slider.get())),
+            wraplength=saved_wrap,
+            anchor="center",
+            justify="center"
+        )
+        preview_label.pack(expand=True, fill="both")
+        
+        if "Custom" in saved_box:
+            last_custom = settings.get("last_custom_box_size", f"{saved_wrap}x100")
+            box_size_var.set(f"Custom ({last_custom})")
+            try:
+                preview_label.configure(wraplength=int(last_custom.split("x")[0]))
+            except:
+                pass
+            width_entry.insert(0, last_custom)
+            custom_frame.pack(pady=(5, 10))
+        else:
+            preview_label.configure(wraplength=box_size_presets.get(saved_box, 1000))
+            try:
+                preview_label.configure(wraplength=int(last.split("x")[0]))
+            except:
+                pass
 
         def update_opacity(value):
             opacity_value_label.configure(text=f"{float(value):.2f}")
