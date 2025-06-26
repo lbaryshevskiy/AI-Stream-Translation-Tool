@@ -616,7 +616,6 @@ def show_pro_preferences():
             font_family = font_family_var.get()
             
             existing = load_settings()
-            wraplength = preview_label.cget("wraplength")
             box_choice = box_size_var.get()
             if "Custom" in box_choice:
                 width_str = width_entry.get().strip()
@@ -629,7 +628,6 @@ def show_pro_preferences():
                 "font_size": font_size,
                 "opacity": opacity,
                 "font_family": font_family,
-                "wraplength": wraplength,
                 "box_size": box_choice,
                 "last_custom_box_size": width_entry.get().strip() if "Custom" in box_choice else ""
             })
