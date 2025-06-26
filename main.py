@@ -342,7 +342,6 @@ def show_pro_preferences():
                     "font": font_family_var.get(),
                     "size": int(font_slider.get()),
                     "opacity": opacity,
-                    "wraplength": int(preview_label.cget("wraplength"))
             })
 
         def update_opacity(value):
