@@ -593,8 +593,11 @@ def show_pro_preferences():
                 else:
                     width = int(value)
                 preview_label.configure(wraplength=width)
-                save_settings({"last_custom_box_size": value})
                 box_size_var.set(f"Custom ({value})")
+                save_settings({
+                    "box_size": f"Custom ({value})",
+                    "last_custom_box_size": value
+                })
                 custom_frame.pack_forget()
         
             except Exception as e:
