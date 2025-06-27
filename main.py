@@ -659,7 +659,8 @@ def show_pro_preferences():
                 "font": font_family,
                 "size": font_size,
                 "opacity": opacity,
-                "wraplength": wraplength
+                "wraplength": wraplength,
+                "box_background": box_bg_var.get(),
             })
                 
             global is_in_settings
