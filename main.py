@@ -509,7 +509,8 @@ def show_pro_preferences():
             preview_frame,
             text="This is how your subtitle looks.",
             font=(font_family_var.get(), 20),
-             width=600,
+            fg_color="transparent",
+            width=600,
             wraplength=600,
             anchor="center",
             justify="center"
