@@ -547,7 +547,7 @@ def show_pro_preferences():
         )
         preview_label.pack(pady=(30, 10))
     
-        if saved_box.startswith("Custom"):
+        if saved_box == "Custom...":
             last_custom = settings.get("last_custom_box_size", f"{saved_wrap}x100")
             width_entry.insert(0, last_custom)
             custom_frame.pack(side="left", padx=(10, 0))
@@ -585,17 +585,17 @@ def show_pro_preferences():
 
         def apply_custom_width():
             value = width_entry.get().strip()
-        
             try:
                 if "x" in value:
                     width_str, _ = value.lower().split("x")
                     width = int(width_str.strip())
                 else:
                     width = int(value)
+                
                 preview_label.configure(wraplength=width)
-                box_size_var.set(f"Custom ({value})")
+                box_size_var.set(f"{value}px")
                 save_settings({
-                    "box_size": f"Custom ({value})",
+                    "box_size": f"{value}px",
                     "last_custom_box_size": value
                 })
                 custom_frame.pack_forget()
@@ -677,12 +677,12 @@ def show_pro_preferences():
                 "box_background": box_bg_var.get(),
             })
             
-            if box_choice.startswith("Custom"):
-                    existing["box_size"] = "Custom..."
-                    existing["last_custom_box_size"] = width_entry.get().strip()
+            existing["box_size"] = box_choice
+            if "Custom" in box_choice:
+                existing["last_custom_box_size"] = width_entry.get().strip()
             else:
-                existing["box_size"] = box_choice
                 existing["last_custom_box_size"] = ""
+
             save_settings(existing)
 
             # Emit updated style to the overlay stream
