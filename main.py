@@ -141,18 +141,19 @@ def transcribe_loop():
                 text = text.replace('\x00', '')  # Optional: remove invisible null chars
                 
                 if text and isinstance(text, str) and text.strip():
-                    lang_label = selected_lang.get()   
+                    lang_label = selected_lang.get().strip()
                     lang_code = language_options.get(lang_label)
                     
                     if lang_code:
-                        translated = translator.translate(text, dest=lang_code).text
-                        print(f"🎙️ {text} → 💬 {translated}")
                         try:
-                            socketio.emit('subtitle', {'text': translated})
+                            translated = translator.translate(text, dest=lang_code).text
+                            print(f"🎤 {text} → 💬 {translated}")
+                            socketio.emit("subtitle", {"text": translated})
                         except Exception as e:
                             print(f"⚠️ Failed to emit subtitle: {e}")
-                        else:
-                            print("⚠️ No valid language selected.")
+                    else:
+                        print(f"⚠️ No valid language selected for label: '{lang_label}'")
+                        
             except Exception as e:
                 print(f"❌ Error in transcription/translation: {e}")
 
