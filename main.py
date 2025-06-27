@@ -13,6 +13,7 @@ import customtkinter as ctk
 import json
 import os
 from googletrans import Translator
+clear_timer = None  # Global timer to auto-clear subtitle
 
 SETTINGS_FILE = "settings.json"
 is_in_settings = False
@@ -114,6 +115,10 @@ def record_audio():
         print("🛑 record_audio() stopped")
     except Exception as e:
         print("❌ Failed to open mic stream:", e)
+        
+def clear_subtitle():
+    socketio.emit("subtitle", {"text": ""})
+    print("🕓 No speech detected — subtitle cleared.")
 
 def transcribe_loop():
     print("🧠 transcribe_loop() started")
