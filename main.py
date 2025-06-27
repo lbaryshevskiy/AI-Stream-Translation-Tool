@@ -490,7 +490,7 @@ def show_pro_preferences():
         )
         box_size_menu.pack(side="left", padx=(0, 10))
 
-        custom_frame = ctk.CTkFrame(page2, fg_color="transparent")
+       custom_frame = ctk.CTkFrame(box_size_container, fg_color="transparent")
 
         width_entry = ctk.CTkEntry(custom_frame, placeholder_text="Width", width=80)
         width_entry.pack(side="left", padx=(0, 5))
@@ -547,10 +547,10 @@ def show_pro_preferences():
         )
         preview_label.pack(pady=(30, 10))
     
-        if "Custom" in saved_box:
+        if saved_box == "Custom...":
             last_custom = settings.get("last_custom_box_size", f"{saved_wrap}x100")
             width_entry.insert(0, last_custom)
-            custom_frame.pack(pady=(5, 10))
+            custom_frame.pack(side="left", padx=(10, 0))
         else:
             custom_frame.pack_forget()
 
