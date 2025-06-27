@@ -501,7 +501,7 @@ def show_pro_preferences():
             text="Enable Subtitle Background Box",
             variable=box_bg_var
         )
-        box_bg_toggle.pack(pady=(5, 10))
+        box_bg_toggle.pack(pady=(20, 20))
 
         # --- Preview Box (moved from page1 to page2) ---
         preview_frame = ctk.CTkFrame(page2, fg_color="transparent", corner_radius=10, width=500, height=150)
