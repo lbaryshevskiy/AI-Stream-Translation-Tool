@@ -671,8 +671,13 @@ def show_pro_preferences():
                 "last_custom_box_size": width_entry.get().strip() if "Custom" in box_choice else "",
                 "input_language": input_lang_var.get(),
                 "box_background": box_bg_var.get(),
-                "box_size": box_choice if "Custom" not in box_choice else "Custom...",
-                "last_custom_box_size": width_entry.get().strip() if "Custom" in box_choice else "",
+                if box_choice.startswith("Custom"):
+                    existing["box_size"] = "Custom..."
+                    existing["last_custom_box_size"] = width_entry.get().strip()
+                else:
+                    existing["box_size"] = box_choice
+                    existing["last_custom_box_size"] = ""
+
             })
 
             save_settings(existing)
