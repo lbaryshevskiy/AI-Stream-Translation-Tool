@@ -594,7 +594,7 @@ def show_pro_preferences():
                     width = int(value)
                 
                 preview_label.configure(wraplength=width)
-                box_size_var.set(f"{value}px")
+                box_size_var.set(f"Custom Width ({value}px)")
                 save_settings({
                     "box_size": f"{value}px",
                     "last_custom_box_size": value
