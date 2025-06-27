@@ -478,8 +478,17 @@ def show_pro_preferences():
         
         box_size_var = ctk.StringVar(value=saved_box)
 
-        box_size_menu = ctk.CTkOptionMenu(page2, variable=box_size_var, values=list(box_size_presets.keys()), command=update_box_size)
-        box_size_menu.pack(pady=(0, 5))
+        # Create a horizontal container
+        box_size_container = ctk.CTkFrame(page2, fg_color="transparent")
+        box_size_container.pack(pady=(0, 5))
+        
+        box_size_menu = ctk.CTkOptionMenu(
+            box_size_container,
+            variable=box_size_var,
+            values=list(box_size_presets.keys()),
+            command=update_box_size
+        )
+        box_size_menu.pack(side="left", padx=(0, 10))
 
         custom_frame = ctk.CTkFrame(page2, fg_color="transparent")
 
@@ -488,6 +497,8 @@ def show_pro_preferences():
 
         apply_btn = ctk.CTkButton(custom_frame, text="Apply", width=60, command=lambda: apply_custom_width())
         apply_btn.pack(side="left")
+
+        custom_frame.pack_forget()
 
         # --- Font Family Selector ---
         font_choices = ["Helvetica", "Trebuchet MS", "Roboto", "Georgia", "Courier New", "Times New Roman"]
@@ -554,7 +565,7 @@ def show_pro_preferences():
         def update_box_size(choice):
             if choice == "Custom...":
                 width_entry.delete(0, ctk.END)
-                custom_frame.pack(pady=(5, 10))
+                custom_frame.pack(side="left", padx=(10, 0))
             else:
                 custom_frame.pack_forget()
                 wrap_length = box_size_presets.get(choice, 600)
