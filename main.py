@@ -119,6 +119,9 @@ def record_audio():
         print("❌ Failed to open mic stream:", e)
         
 def clear_subtitle():
+    global subtitles_started
+    if not subtitles_started:
+        return 
     socketio.emit("subtitle", {"text": ""})
     print("🕓 No speech detected — subtitle cleared.")
 
