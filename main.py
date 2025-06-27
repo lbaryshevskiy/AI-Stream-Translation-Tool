@@ -453,11 +453,13 @@ def show_pro_preferences():
         # --- Page 2: Box Size Selector ---
 
         def update_box_size(choice):
-            if choice == "Custom...":
-                width_entry.delete(0, ctk.END)  # Fix here
+            if "Custom" in choice:
+                width_entry.delete(0, ctk.END)
                 custom_frame.pack(pady=(5, 10))
             else:
                 custom_frame.pack_forget()
+                wrap_length = box_size_presets.get(choice, 600)
+                preview_label.configure(wraplength=wrap_length)
 
         box_size_label = ctk.CTkLabel(page2, text="Subtitle Box Size:", font=label_font)
         box_size_label.pack(pady=(15, 0))
@@ -536,11 +538,11 @@ def show_pro_preferences():
     
         if "Custom" in saved_box:
             last_custom = settings.get("last_custom_box_size", f"{saved_wrap}x100")
-            box_size_var.set(f"Custom ({last_custom})")
             width_entry.insert(0, last_custom)
             custom_frame.pack(pady=(5, 10))
         else:
-            box_size_var.set(saved_box)
+            custom_frame.pack_forget()
+
         
         def update_opacity(value):
             opacity_value_label.configure(text=f"{float(value):.2f}")
@@ -658,6 +660,8 @@ def show_pro_preferences():
                 "last_custom_box_size": width_entry.get().strip() if "Custom" in box_choice else "",
                 "input_language": input_lang_var.get(),
                 "box_background": box_bg_var.get(),
+                "box_size": "Custom..." if "Custom" in box_choice else box_choice,
+                "last_custom_box_size": width_entry.get().strip() if "Custom" in box_choice else "",
             })
 
             save_settings(existing)
