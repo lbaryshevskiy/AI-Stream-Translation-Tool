@@ -338,7 +338,7 @@ def show_pro_preferences():
             font_color = "black" if appearance == "Light" else "white"
 
             preview_label.configure(
-                font=(font_family_var.get(), int(font_slider.get())),
+                font=(font_family_var.get(), 20),
                 text_color=font_color
             )
 
