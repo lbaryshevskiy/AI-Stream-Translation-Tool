@@ -138,8 +138,10 @@ def transcribe_loop():
                     result = model.transcribe(WAVE_OUTPUT_FILENAME)
                     
                 text = result['text'].strip()
-                if text:
-                    lang_label = selected_lang.get()
+                text = text.replace('\x00', '')  # Optional: remove invisible null chars
+                
+                if text and isinstance(text, str) and text.strip():
+                    lang_label = selected_lang.get()   
                     lang_code = language_options.get(lang_label)
                     
                     if lang_code:
