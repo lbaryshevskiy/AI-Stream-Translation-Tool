@@ -575,20 +575,21 @@ def show_pro_preferences():
 
         def apply_custom_width():
             value = width_entry.get().strip()
-
+        
             try:
                 if "x" in value:
                     width_str, _ = value.lower().split("x")
                     width = int(width_str.strip())
                 else:
                     width = int(value)
-
+                preview_label.configure(wraplength=width)
                 save_settings({"last_custom_box_size": value})
                 box_size_var.set(f"Custom ({value})")
                 custom_frame.pack_forget()
-
+        
             except Exception as e:
                 print("Invalid custom size:", e)
+
 
     # --- CREATOR TAB ---
         creator_tab = tabview.tab("Creator")
