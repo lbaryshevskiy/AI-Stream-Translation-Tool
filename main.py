@@ -508,7 +508,7 @@ def show_pro_preferences():
         preview_label = ctk.CTkLabel(
             preview_frame,
             text="This is how your subtitle looks.",
-            font=(font_family_var.get(), int(font_slider.get())),
+            font=(font_family_var.get(), 20),
              width=600,
             wraplength=600,
             anchor="center",
