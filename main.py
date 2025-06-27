@@ -344,13 +344,7 @@ def show_pro_preferences():
                 text_color=font_color
             )
 
-            opacity = overlay_opacity_slider.get()
-            if opacity <= 0.11:
-                preview_frame.configure(fg_color="transparent")
-            else:
-                shade = int(26 + (opacity * 230))
-                hex_color = f"#{shade:02x}{shade:02x}{shade:02x}"
-                preview_frame.configure(fg_color=hex_color)
+            preview_frame.configure(fg_color="transparent")
 
             if not is_in_settings:
                 socketio.emit("style_update", {
