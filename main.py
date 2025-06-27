@@ -547,13 +547,12 @@ def show_pro_preferences():
         )
         preview_label.pack(pady=(30, 10))
     
-        if saved_box == "Custom...":
+        if saved_box.startswith("Custom"):
             last_custom = settings.get("last_custom_box_size", f"{saved_wrap}x100")
             width_entry.insert(0, last_custom)
             custom_frame.pack(side="left", padx=(10, 0))
         else:
             custom_frame.pack_forget()
-
         
         def update_opacity(value):
             opacity_value_label.configure(text=f"{float(value):.2f}")
@@ -672,7 +671,7 @@ def show_pro_preferences():
                 "last_custom_box_size": width_entry.get().strip() if "Custom" in box_choice else "",
                 "input_language": input_lang_var.get(),
                 "box_background": box_bg_var.get(),
-                "box_size": "Custom..." if "Custom" in box_choice else box_choice,
+                "box_size": box_choice if "Custom" not in box_choice else "Custom...",
                 "last_custom_box_size": width_entry.get().strip() if "Custom" in box_choice else "",
             })
 
