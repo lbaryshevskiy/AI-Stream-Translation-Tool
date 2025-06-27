@@ -416,8 +416,6 @@ def show_pro_preferences():
             hover_color="#333333",
         )
         back_btn.place(relx=0.0, rely=1.0, anchor="sw", x=10, y=-10)
-        next_btn.update_idletasks()
-
         back_btn.place_forget()
 
         next_btn = ctk.CTkButton(
