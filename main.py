@@ -505,7 +505,7 @@ def show_pro_preferences():
 
         # --- Preview Box (moved from page1 to page2) ---
         preview_frame = ctk.CTkFrame(page2, fg_color="transparent", corner_radius=10, width=500, height=150)
-        preview_frame.pack(pady=(80, 30), padx=40)
+        preview_frame.pack(pady=(30, 30), padx=40)
         update_preview()
         
         preview_label = ctk.CTkLabel(
