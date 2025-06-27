@@ -41,7 +41,19 @@
 
     socket.on("subtitle", function (data) {
       console.log("🗨️ Subtitle received:", data);
-      document.getElementById("subtitle").innerText = data.text;
+      const el = document.getElementById("subtitle");
+    
+      if (data.text === "") {
+        // Fade out smoothly
+        el.style.opacity = 0;
+        setTimeout(() => {
+          el.innerText = "";
+        }, 400); // matches CSS transition duration (0.4s)
+      } else {
+        // Show subtitle instantly
+        el.innerText = data.text;
+        el.style.opacity = 1;
+      }
     });
     
     socket.on("style_update", function (data) {
