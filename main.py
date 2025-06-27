@@ -215,9 +215,7 @@ def start_flask_once():
     else:
         print("⚠️ Flask already running")
 
-
 # --- GUI ---
-
 def copy_url():
     root.clipboard_clear()
     root.clipboard_append("http://localhost:5100")
@@ -444,7 +442,6 @@ def show_pro_preferences():
         next_btn.configure(text_color=arrow_color)
         back_btn.configure(text_color=arrow_color)
 
-
         # --- Page 2: Box Size Selector ---
 
         def update_box_size(choice):
@@ -574,7 +571,6 @@ def show_pro_preferences():
 
             except Exception as e:
                 print("Invalid custom size:", e)
-
 
     # --- CREATOR TAB ---
         creator_tab = tabview.tab("Creator")
