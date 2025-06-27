@@ -486,7 +486,7 @@ def show_pro_preferences():
             font_family_var.set(saved_font)
 
         def update_font_family(choice):
-            preview_label.configure(font=(choice, int(font_slider.get())))
+            preview_label.configure(font=(choice, 20))
             save_settings({"font_family": font_family_var.get()})
 
         font_family_label = ctk.CTkLabel(page2, text="Font Family:", font=label_font)
