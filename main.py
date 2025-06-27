@@ -19,6 +19,8 @@ SETTINGS_FILE = "settings.json"
 is_in_settings = False
 flask_thread = None
 
+subtitles_started = False
+
 # --- DEVELOPMENT MODE ---
 dev_mode = True
 dev_override_plan = "studio"  # can be: "free", "studio", "creator"
@@ -154,6 +156,15 @@ def transcribe_loop():
                             translated = translator.translate(text, dest=lang_code).text
                             print(f"🎤 {text} → 💬 {translated}")
                             socketio.emit("subtitle", {"text": translated})
+
+                            global clear_timer, subtitles_started
+
+                            subtitles_started = True
+                            
+                            if clear_timer:
+                                clear_timer.cancel()
+                            clear_timer = threading.Timer(3.0, clear_subtitle)
+                            clear_timer.start()
                         except Exception as e:
                             print(f"⚠️ Failed to emit subtitle: {e}")
                     else:
