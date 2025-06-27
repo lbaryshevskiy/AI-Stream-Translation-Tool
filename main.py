@@ -126,7 +126,17 @@ def transcribe_loop():
                 wf.setframerate(RATE)
                 wf.writeframes(audio_data)
             try:
-                result = model.transcribe(WAVE_OUTPUT_FILENAME)
+                # Get input language setting from saved config
+                settings = load_settings()
+                input_choice = settings.get("input_language", "🌐 Auto-detect")
+                input_code = language_options.get(input_choice) if input_choice != "🌐 Auto-detect" else None
+
+                # Transcribe with or without input language specified
+                if input_code:
+                    result = model.transcribe(WAVE_OUTPUT_FILENAME, language=input_code)
+                else:
+                    result = model.transcribe(WAVE_OUTPUT_FILENAME)
+                    
                 text = result['text'].strip()
                 if text:
                     lang_label = selected_lang.get()
@@ -381,7 +391,20 @@ def show_pro_preferences():
             
             next_btn.place(relx=1.0, rely=1.0, anchor="se", x=-10, y=-10)
             next_btn.update_idletasks()
-            
+                # --- Input Language Dropdown (Bottom) ---
+        input_lang_label = ctk.CTkLabel(page1, text="Input Language:", font=label_font)
+        input_lang_label.pack(pady=(25, 0))
+
+        saved_input_lang = settings.get("input_language", "🌐 Auto-detect")
+        input_lang_var = ctk.StringVar(value=saved_input_lang)
+
+        input_lang_menu = ctk.CTkOptionMenu(
+            page1,
+            variable=input_lang_var,
+            values=["🌐 Auto-detect"] + list(language_options.keys())
+        )
+        input_lang_menu.pack(pady=(0, 12))
+
             back_btn.place_forget()
 
         next_btn = ctk.CTkButton(
@@ -616,6 +639,7 @@ def show_pro_preferences():
                 "font_family": font_family,
                 "box_size": box_choice,
                 "last_custom_box_size": width_entry.get().strip() if "Custom" in box_choice else ""
+                "input_language": input_lang_var.get(),
             })
 
             save_settings(existing)
