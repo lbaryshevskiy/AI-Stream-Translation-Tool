@@ -656,6 +656,7 @@ def show_pro_preferences():
             
             existing = load_settings()
             box_choice = box_size_var.get()
+                                
             if "Custom" in box_choice:
                 width_str = width_entry.get().strip()
                 wraplength = int(width_str.split("x")[0]) if "x" in width_str else int(width_str)
@@ -671,15 +672,14 @@ def show_pro_preferences():
                 "last_custom_box_size": width_entry.get().strip() if "Custom" in box_choice else "",
                 "input_language": input_lang_var.get(),
                 "box_background": box_bg_var.get(),
-                
-                if box_choice.startswith("Custom"):
+            })
+            
+            if box_choice.startswith("Custom"):
                     existing["box_size"] = "Custom..."
                     existing["last_custom_box_size"] = width_entry.get().strip()
-                else:
-                    existing["box_size"] = box_choice
-                    existing["last_custom_box_size"] = ""
-            })
-
+            else:
+                existing["box_size"] = box_choice
+                existing["last_custom_box_size"] = ""
             save_settings(existing)
 
             # Emit updated style to the overlay stream
