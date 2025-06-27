@@ -391,7 +391,7 @@ def show_pro_preferences():
             
             next_btn.place(relx=1.0, rely=1.0, anchor="se", x=-10, y=-10)
             next_btn.update_idletasks()
-                # --- Input Language Dropdown (Bottom) ---
+
         input_lang_label = ctk.CTkLabel(page1, text="Input Language:", font=label_font)
         input_lang_label.pack(pady=(25, 0))
 
