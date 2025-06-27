@@ -501,6 +501,14 @@ def show_pro_preferences():
         )
         font_family_menu.pack(pady=(0, 10))
 
+        box_bg_var = ctk.BooleanVar(value=settings.get("box_background", True))
+        box_bg_toggle = ctk.CTkCheckBox(
+            page2,
+            text="Enable Subtitle Background Box",
+            variable=box_bg_var
+        )
+        box_bg_toggle.pack(pady=(5, 10))
+
         # --- Preview Box (moved from page1 to page2) ---
         preview_frame = ctk.CTkFrame(page2, fg_color="transparent", corner_radius=10, width=500, height=150)
         preview_frame.pack(pady=(80, 30), padx=40)
@@ -641,6 +649,7 @@ def show_pro_preferences():
                 "box_size": box_choice,
                 "last_custom_box_size": width_entry.get().strip() if "Custom" in box_choice else "",
                 "input_language": input_lang_var.get(),
+                "box_background": box_bg_var.get(),
             })
 
             save_settings(existing)
