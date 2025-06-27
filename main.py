@@ -638,7 +638,7 @@ def show_pro_preferences():
                 "opacity": opacity,
                 "font_family": font_family,
                 "box_size": box_choice,
-                "last_custom_box_size": width_entry.get().strip() if "Custom" in box_choice else ""
+                "last_custom_box_size": width_entry.get().strip() if "Custom" in box_choice else "",
                 "input_language": input_lang_var.get(),
             })
 
