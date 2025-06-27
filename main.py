@@ -389,6 +389,7 @@ def show_pro_preferences():
             page1.pack(expand=True, fill="both")
             page2.update_idletasks()
             
+            back_btn.place_forget()
             next_btn.place(relx=1.0, rely=1.0, anchor="se", x=-10, y=-10)
             next_btn.update_idletasks()
 
