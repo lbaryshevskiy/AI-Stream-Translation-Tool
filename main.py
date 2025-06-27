@@ -518,7 +518,7 @@ def show_pro_preferences():
             anchor="center",
             justify="center"
         )
-        preview_label.pack(expand=True, fill="both")
+        preview_label.pack(expand=True, fill="both", pady=(10, 30))
     
         if "Custom" in saved_box:
             last_custom = settings.get("last_custom_box_size", f"{saved_wrap}x100")
