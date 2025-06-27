@@ -62,6 +62,19 @@
       subtitle.style.fontSize = data.size + "px";
       subtitle.style.maxWidth = `${data.wraplength}px`;
       subtitle.style.opacity = Math.min(data.opacity, 1);
+
+      // NEW: Handle subtitle background toggle
+      if (data.box_background) {
+        subtitle.style.backgroundColor = "rgba(0,0,0,0.5)";
+        subtitle.style.borderRadius = "8px";
+        subtitle.style.padding = "8px 16px";
+        subtitle.style.display = "inline-block";
+      } else {
+        subtitle.style.backgroundColor = "transparent";
+        subtitle.style.borderRadius = "0px";
+        subtitle.style.padding = "0px";
+        subtitle.style.display = "block"; // or keep inline-block if you prefer
+      }
     });
 
     socket.on("disconnect", () => {
