@@ -405,7 +405,7 @@ def show_pro_preferences():
         )
         input_lang_menu.pack(pady=(0, 12))
 
-            back_btn.place_forget()
+        back_btn.place_forget()
 
         next_btn = ctk.CTkButton(
             studio_tab,
