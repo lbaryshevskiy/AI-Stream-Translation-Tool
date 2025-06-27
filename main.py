@@ -394,7 +394,7 @@ def show_pro_preferences():
             next_btn.update_idletasks()
 
         input_lang_label = ctk.CTkLabel(page1, text="Input Language:", font=label_font)
-        input_lang_label.pack(pady=(12, 0))
+        input_lang_label.pack(pady=(10, 0))
 
         saved_input_lang = settings.get("input_language", "🌐 Auto-detect")
         input_lang_var = ctk.StringVar(value=saved_input_lang)
@@ -404,7 +404,7 @@ def show_pro_preferences():
             variable=input_lang_var,
             values=["🌐 Auto-detect"] + list(language_options.keys())
         )
-        input_lang_menu.pack(pady=(0, 6))
+        input_lang_menu.pack(pady=(0, 8))
 
         back_btn = ctk.CTkButton(
             studio_tab,
