@@ -407,19 +407,6 @@ def show_pro_preferences():
 
         back_btn.place_forget()
 
-        next_btn = ctk.CTkButton(
-            studio_tab,
-            text="→",
-            width=30,
-            height=25,
-            corner_radius=6,
-            command=go_to_page2,
-            fg_color="transparent",
-            hover_color="#333333",
-        )
-        next_btn.place(relx=1.0, rely=1.0, anchor="se", x=-10, y=-10)
-        next_btn.update_idletasks()
-
         back_btn = ctk.CTkButton(
             studio_tab,
             text="←",
@@ -434,6 +421,19 @@ def show_pro_preferences():
         next_btn.update_idletasks()
 
         back_btn.place_forget()
+
+        next_btn = ctk.CTkButton(
+            studio_tab,
+            text="→",
+            width=30,
+            height=25,
+            corner_radius=6,
+            command=go_to_page2,
+            fg_color="transparent",
+            hover_color="#333333",
+        )
+        next_btn.place(relx=1.0, rely=1.0, anchor="se", x=-10, y=-10)
+        next_btn.update_idletasks()
 
         arrow_color = "black" if ctk.get_appearance_mode() == "Light" else "white"
 
