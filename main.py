@@ -677,7 +677,6 @@ def show_pro_preferences():
                 else:
                     existing["box_size"] = box_choice
                     existing["last_custom_box_size"] = ""
-
             })
 
             save_settings(existing)
