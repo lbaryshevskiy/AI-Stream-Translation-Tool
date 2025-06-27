@@ -498,19 +498,11 @@ def show_pro_preferences():
         if "Custom" in saved_box:
             last_custom = settings.get("last_custom_box_size", f"{saved_wrap}x100")
             box_size_var.set(f"Custom ({last_custom})")
-            try:
-                preview_label.configure(wraplength=int(last_custom.split("x")[0]))
-            except:
-                pass
             width_entry.insert(0, last_custom)
             custom_frame.pack(pady=(5, 10))
         else:
-            preview_label.configure(wraplength=box_size_presets.get(saved_box, 1000))
-            try:
-                preview_label.configure(wraplength=int(last.split("x")[0]))
-            except:
-                pass
-
+            box_size_var.set(saved_box)
+        
         def update_opacity(value):
             opacity_value_label.configure(text=f"{float(value):.2f}")
             update_preview()
