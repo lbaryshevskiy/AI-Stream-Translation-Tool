@@ -162,7 +162,6 @@ def transcribe_loop():
             except Exception as e:
                 print(f"❌ Error in transcription/translation: {e}")
 
-
 # --- Launch Backend Threads ---
 def start_backend():
     global backend_threads
