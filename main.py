@@ -426,9 +426,6 @@ def show_pro_preferences():
                 custom_frame.pack(pady=(5, 10))
             else:
                 custom_frame.pack_forget()
-                #wrap_length = box_size_presets.get(choice, 600)
-                #preview_label.configure(wraplength=wrap_length)
-
 
         box_size_menu = ctk.CTkOptionMenu(page2, variable=box_size_var, values=list(box_size_presets.keys()), command=update_box_size)
         box_size_menu.pack(pady=(0, 5))
@@ -553,7 +550,6 @@ def show_pro_preferences():
                 else:
                     width = int(value)
 
-                preview_label.configure(wraplength=width)
                 save_settings({"last_custom_box_size": value})
                 box_size_var.set(f"Custom ({value})")
                 custom_frame.pack_forget()
