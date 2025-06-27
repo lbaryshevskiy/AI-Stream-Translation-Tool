@@ -468,7 +468,8 @@ def show_pro_preferences():
             "Compact (600x100)": 600,
             "Wide (800x100)": 800,
             "Tall (600x300)": 600,
-            "Full Width (1000x150)": 1000,
+            "Extended Width (1000x150)": 1000,
+            "Full Width (1500x150)": 1500,
             "Custom...": None
         }
 
