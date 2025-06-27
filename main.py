@@ -427,6 +427,23 @@ def show_pro_preferences():
             else:
                 custom_frame.pack_forget()
 
+        box_size_label = ctk.CTkLabel(page2, text="Subtitle Box Size:", font=label_font)
+        box_size_label.pack(pady=(15, 0))
+
+        box_size_presets = {
+            "Compact (600x100)": 600,
+            "Wide (800x100)": 800,
+            "Tall (600x300)": 600,
+            "Full Width (1000x150)": 1000,
+            "Custom...": None
+        }
+
+        settings = load_settings()
+        saved_wrap = settings.get("wraplength", 1000)
+        saved_box = settings.get("box_size", "Full Width (1000x150)")
+        
+        box_size_var = ctk.StringVar(value=saved_box)
+
         box_size_menu = ctk.CTkOptionMenu(page2, variable=box_size_var, values=list(box_size_presets.keys()), command=update_box_size)
         box_size_menu.pack(pady=(0, 5))
 
@@ -477,23 +494,6 @@ def show_pro_preferences():
             justify="center"
         )
         preview_label.pack(expand=True, fill="both")
-        
-        box_size_label = ctk.CTkLabel(page2, text="Subtitle Box Size:", font=label_font)
-        box_size_label.pack(pady=(15, 0))
-
-        box_size_presets = {
-            "Compact (600x100)": 600,
-            "Wide (800x100)": 800,
-            "Tall (600x300)": 600,
-            "Full Width (1000x150)": 1000,
-            "Custom...": None
-        }
-
-        settings = load_settings()
-        saved_wrap = settings.get("wraplength", 1000)
-        saved_box = settings.get("box_size", "Full Width (1000x150)")
-        
-        box_size_var = ctk.StringVar(value=saved_box)
     
         if "Custom" in saved_box:
             last_custom = settings.get("last_custom_box_size", f"{saved_wrap}x100")
