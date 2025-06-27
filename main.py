@@ -490,7 +490,7 @@ def show_pro_preferences():
         )
         box_size_menu.pack(side="left", padx=(0, 10))
 
-       custom_frame = ctk.CTkFrame(box_size_container, fg_color="transparent")
+        custom_frame = ctk.CTkFrame(box_size_container, fg_color="transparent")
 
         width_entry = ctk.CTkEntry(custom_frame, placeholder_text="Width", width=80)
         width_entry.pack(side="left", padx=(0, 5))
