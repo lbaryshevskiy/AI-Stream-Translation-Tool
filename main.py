@@ -675,7 +675,7 @@ def show_pro_preferences():
                 "wraplength": wraplength,
                 "box_background": box_bg_var.get(),
             })
-            #socketio.emit("subtitle", {"text": preview_label.cget("text")})
+            custom_frame.pack_forget()
             global is_in_settings
             is_in_settings = False
             popup.destroy()
