@@ -115,7 +115,7 @@ def test_connect():
 def record_audio():
     print("🎤 record_audio() started")
     try:
-    stream = pa.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK)
+        stream = pa.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK)
         
         if user_plan == "creator" and has_rnnoise:
             rnnoise_proc = rnnoise.RNNoise()
