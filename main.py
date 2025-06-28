@@ -725,6 +725,7 @@ def show_pro_preferences():
                 "opacity": opacity,
                 "wraplength": wraplength,
                 "box_background": box_bg_var.get(),
+                "font_color": color_menu.get().lower(),
             })
             custom_frame.pack_forget()
             global is_in_settings
