@@ -117,22 +117,14 @@ def record_audio():
                     print("⚠️ Mic read error:", e)
                     break
             if frames:
-                audio_queue.put(b''.join(frames))
-                # --- NEW: Convert to numpy, apply noise reduction ---
+                audio_data = b''.join(frames)
                 audio_array = np.frombuffer(audio_data, dtype=np.int16)
                 reduced_noise = nr.reduce_noise(y=audio_array, sr=RATE)
-
-                # Convert back to bytes
                 processed_audio = reduced_noise.astype(np.int16).tobytes()
-
-                # --- NEW: Apply VAD ---
-                is_speech = vad.is_speech(processed_audio[:CHUNK], RATE)  # Check first frame
+                is_speech = vad.is_speech(processed_audio[:CHUNK], RATE)
 
                 if is_speech:
                     audio_queue.put(processed_audio)
-                else:
-                    print("🔇 Non-speech frame skipped")
-                    
         stream.stop_stream()
         stream.close()
         print("🛑 record_audio() stopped")
