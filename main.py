@@ -115,7 +115,11 @@ def test_connect():
 def record_audio():
     print("🎤 record_audio() started")
     try:
-        stream = pa.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK)
+    stream = pa.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK)
+        
+        if user_plan == "creator" and has_rnnoise:
+            rnnoise_proc = rnnoise.RNNoise()
+    
         while not stop_event.is_set():
             frames = []
             for _ in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
@@ -130,14 +134,13 @@ def record_audio():
             if frames:
                 audio_data = b''.join(frames)
                 audio_array = np.frombuffer(audio_data, dtype=np.int16)
-            
+    
                 if user_plan == "creator" and has_rnnoise:
-                    rnnoise_proc = rnnoise.RNNoise()
                     processed_audio = rnnoise_proc.filter(audio_array).astype(np.int16).tobytes()
                 else:
                     reduced_noise = nr.reduce_noise(y=audio_array, sr=RATE)
                     processed_audio = reduced_noise.astype(np.int16).tobytes()
-            
+    
                 is_speech = vad.is_speech(processed_audio[:CHUNK], RATE)
         stream.stop_stream()
         stream.close()
