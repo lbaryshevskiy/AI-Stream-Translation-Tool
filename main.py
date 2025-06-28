@@ -29,7 +29,7 @@ vad.set_mode(2)  # Aggressiveness 0-3 (2 is moderate suppression)
 
 # --- DEVELOPMENT MODE ---
 dev_mode = True
-dev_override_plan = "studio"  # can be: "free", "studio", "creator"
+dev_override_plan = "creator"  # can be: "free", "studio", "creator"
 
 def run_flask():
     socketio.run(app, port=5100, allow_unsafe_werkzeug=True)
