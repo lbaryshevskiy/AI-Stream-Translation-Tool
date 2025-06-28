@@ -355,9 +355,12 @@ def show_pro_preferences():
             tooltip_icon.bind("<Enter>", show_tooltip)
             tooltip_icon.bind("<Leave>", hide_tooltip)
 
-        color_menu = ctk.CTkOptionMenu(page1, values=["White", "Yellow", "Cyan", "Green"])
+        color_menu = ctk.CTkOptionMenu(page1, values=[
+            "White", "Yellow", "Cyan", "Green",
+            "Black", "Red", "Blue", "Orange", "Purple", "Pink"
+        ])
         color_menu.set("White")
-        
+
         if user_plan != "creator":
             color_menu.configure(state="disabled")
         color_menu.pack(pady=(0, 10))
