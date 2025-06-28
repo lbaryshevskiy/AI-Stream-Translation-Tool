@@ -75,6 +75,10 @@
         subtitle.style.padding = "0px";
         subtitle.style.display = "block"; // or keep inline-block if you prefer
       }
+      if (data.font_color) {
+        subtitle.style.color = data.font_color;
+      }
+
     });
 
     socket.on("disconnect", () => {
