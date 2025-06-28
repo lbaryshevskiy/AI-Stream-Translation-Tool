@@ -76,10 +76,9 @@ pa = pyaudio.PyAudio()
 settings = load_settings()
 current_model_name = settings.get("whisper_model", "base")
 model = whisper.load_model(current_model_name)
+
 translator = Translator()
 audio_queue = queue.Queue()
-
-current_model_name = "base"  
 
 import engineio.async_drivers.threading as eio_threading
 import engineio.base_server
