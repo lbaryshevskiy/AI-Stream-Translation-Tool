@@ -7,6 +7,9 @@ import whisper
 import pyaudio
 from flask import Flask, render_template
 from flask_socketio import SocketIO
+import noisereduce as nr
+import webrtcvad
+import numpy as np
 import logging
 logging.getLogger('werkzeug').setLevel(logging.ERROR)
 import customtkinter as ctk
@@ -20,6 +23,9 @@ is_in_settings = False
 flask_thread = None
 
 subtitles_started = False
+
+vad = webrtcvad.Vad()
+vad.set_mode(2)  # Aggressiveness 0-3 (2 is moderate suppression)
 
 # --- DEVELOPMENT MODE ---
 dev_mode = True
@@ -112,6 +118,21 @@ def record_audio():
                     break
             if frames:
                 audio_queue.put(b''.join(frames))
+                # --- NEW: Convert to numpy, apply noise reduction ---
+                audio_array = np.frombuffer(audio_data, dtype=np.int16)
+                reduced_noise = nr.reduce_noise(y=audio_array, sr=RATE)
+
+                # Convert back to bytes
+                processed_audio = reduced_noise.astype(np.int16).tobytes()
+
+                # --- NEW: Apply VAD ---
+                is_speech = vad.is_speech(processed_audio[:CHUNK], RATE)  # Check first frame
+
+                if is_speech:
+                    audio_queue.put(processed_audio)
+                else:
+                    print("🔇 Non-speech frame skipped")
+                    
         stream.stop_stream()
         stream.close()
         print("🛑 record_audio() stopped")
