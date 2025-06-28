@@ -626,8 +626,8 @@ def show_pro_preferences():
 
         ctk.CTkLabel(creator_tab, text="Whisper Model:").pack(pady=(10, 0))
 
-        model_menu = ctk.CTkOptionMenu(creator_tab, values=["tiny", "base", "small", "medium", "large"])
-        model_menu.set("base")
+        model_menu = ctk.CTkOptionMenu(creator_tab, values=["Tiny", "Base", "Small", "Medium", "Large"])
+        model_menu.set("Base")
         model_menu.pack(pady=(0, 10))
 
         def change_model(choice):
