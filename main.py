@@ -8,6 +8,12 @@ import pyaudio
 from flask import Flask, render_template
 from flask_socketio import SocketIO
 import noisereduce as nr
+try:
+    import rnnoise
+    has_rnnoise = True
+except ImportError:
+    has_rnnoise = False
+
 import webrtcvad
 import numpy as np
 import logging
@@ -29,7 +35,9 @@ vad.set_mode(2)  # Aggressiveness 0-3 (2 is moderate suppression)
 
 # --- DEVELOPMENT MODE ---
 dev_mode = True
-dev_override_plan = "creator"  # can be: "free", "studio", "creator"
+dev_override_plan = "creator"
+
+user_plan = dev_override_plan if dev_mode else "free"
 
 def run_flask():
     socketio.run(app, port=5100, allow_unsafe_werkzeug=True)
@@ -122,12 +130,15 @@ def record_audio():
             if frames:
                 audio_data = b''.join(frames)
                 audio_array = np.frombuffer(audio_data, dtype=np.int16)
-                reduced_noise = nr.reduce_noise(y=audio_array, sr=RATE)
-                processed_audio = reduced_noise.astype(np.int16).tobytes()
+            
+                if user_plan == "creator" and has_rnnoise:
+                    rnnoise_proc = rnnoise.RNNoise()
+                    processed_audio = rnnoise_proc.filter(audio_array).astype(np.int16).tobytes()
+                else:
+                    reduced_noise = nr.reduce_noise(y=audio_array, sr=RATE)
+                    processed_audio = reduced_noise.astype(np.int16).tobytes()
+            
                 is_speech = vad.is_speech(processed_audio[:CHUNK], RATE)
-
-                if is_speech:
-                    audio_queue.put(processed_audio)
         stream.stop_stream()
         stream.close()
         print("🛑 record_audio() stopped")
