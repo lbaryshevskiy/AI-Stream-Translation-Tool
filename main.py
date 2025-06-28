@@ -9,7 +9,7 @@ from flask import Flask, render_template
 from flask_socketio import SocketIO
 import noisereduce as nr
 try:
-    import rnnoise
+    import rnnoise_wrapper as rnnoise
     has_rnnoise = True
 except ImportError:
     has_rnnoise = False
