@@ -350,12 +350,16 @@ def show_pro_preferences():
 
         tooltip_icon = ctk.CTkLabel(color_label_frame, text="?", font=("Helvetica", 12, "bold"), width=12)
         tooltip_icon.pack(side="left", padx=(2, 0))
-        tooltip_icon.bind("<Enter>", show_tooltip)
-        tooltip_icon.bind("<Leave>", hide_tooltip)
+        
+        if user_plan != "creator":
+            tooltip_icon.bind("<Enter>", show_tooltip)
+            tooltip_icon.bind("<Leave>", hide_tooltip)
 
         color_menu = ctk.CTkOptionMenu(page1, values=["White", "Yellow", "Cyan", "Green"])
         color_menu.set("White")
-        color_menu.configure(state="disabled")
+        
+        if user_plan != "creator":
+            color_menu.configure(state="disabled")
         color_menu.pack(pady=(0, 10))
         
         # --- Preview Box ---
