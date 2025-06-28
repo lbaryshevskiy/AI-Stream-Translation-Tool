@@ -135,13 +135,13 @@ def record_audio():
                 audio_data = b''.join(frames)
                 audio_array = np.frombuffer(audio_data, dtype=np.int16)
     
-                if user_plan == "creator" and has_rnnoise:
-                    print("✅ Using RNNoise for noise suppression")
-                    processed_audio = rnnoise_proc.filter(audio_array).astype(np.int16).tobytes()
-                else:
-                    print("⚠️ Using noisereduce instead of RNNoise")
-                    reduced_noise = nr.reduce_noise(y=audio_array, sr=RATE)
-                    processed_audio = reduced_noise.astype(np.int16).tobytes()
+                #if user_plan == "creator" and has_rnnoise:
+                    #print("✅ Using RNNoise for noise suppression")
+                    #processed_audio = rnnoise_proc.filter(audio_array).astype(np.int16).tobytes()
+                #else:
+                print("⚠️ Using noisereduce instead of RNNoise")
+                reduced_noise = nr.reduce_noise(y=audio_array, sr=RATE)
+                processed_audio = reduced_noise.astype(np.int16).tobytes()
     
                 is_speech = vad.is_speech(processed_audio[:CHUNK], RATE)
         stream.stop_stream()
