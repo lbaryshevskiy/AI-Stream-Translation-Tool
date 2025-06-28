@@ -73,9 +73,13 @@ RECORD_SECONDS = 5
 WAVE_OUTPUT_FILENAME = "temp.wav"
 pa = pyaudio.PyAudio()
 
-model = whisper.load_model("base")
+settings = load_settings()
+current_model_name = settings.get("whisper_model", "base")
+model = whisper.load_model(current_model_name)
 translator = Translator()
 audio_queue = queue.Queue()
+
+current_model_name = "base"  
 
 import engineio.async_drivers.threading as eio_threading
 import engineio.base_server
@@ -626,6 +630,18 @@ def show_pro_preferences():
         model_menu = ctk.CTkOptionMenu(creator_tab, values=["tiny", "base", "small", "medium", "large"])
         model_menu.set("base")
         model_menu.pack(pady=(0, 10))
+
+        def change_model(choice):
+            global model, current_model_name
+            print(f"🔄 Changing Whisper model to: {choice}")
+            try:
+                current_model_name = choice
+                model = whisper.load_model(choice)
+                print(f"✅ Model switched to {choice}")
+            except Exception as e:
+                print(f"❌ Failed to load model '{choice}': {e}")
+                
+        model_menu.configure(command=change_model)
 
         logging_switch = ctk.CTkSwitch(creator_tab, text="Enable Logging")
         logging_switch.pack(pady=10)
