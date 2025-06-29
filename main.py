@@ -97,6 +97,23 @@ app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode="threading")
 print(f">>> CONFIRM: async_mode is set to {socketio.async_mode} ✅")
 
+loading_popup = None
+
+def show_loading_popup(message="Loading, please wait..."):
+    global loading_popup
+    loading_popup = ctk.CTkToplevel()
+    loading_popup.title("Please Wait")
+    loading_popup.geometry("300x100")
+    loading_popup.resizable(False, False)
+    ctk.CTkLabel(loading_popup, text=message).pack(expand=True)
+    loading_popup.update()
+
+def close_loading_popup():
+    global loading_popup
+    if loading_popup:
+        loading_popup.destroy()
+        loading_popup = None
+        
 # --- Flask Web Server ---
 @app.route('/')
 def overlay():
@@ -664,13 +681,16 @@ def show_pro_preferences():
         def change_model(choice):
             global model, current_model_name
             print(f"🔄 Changing Whisper model to: {choice}")
+            show_loading_popup("Loading model, please wait...")
             try:
-                selected_model = whisper_models.get(choice, "base")  # default to 'base' if not found
+                selected_model = whisper_models.get(choice, "base")
                 current_model_name = selected_model
                 model = whisper.load_model(selected_model)
                 print(f"✅ Model switched to {selected_model}")
             except Exception as e:
                 print(f"❌ Failed to load model '{selected_model}': {e}")
+            finally:
+                close_loading_popup()
                 
         model_menu.configure(command=change_model)
 
