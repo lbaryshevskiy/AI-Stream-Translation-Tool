@@ -665,11 +665,12 @@ def show_pro_preferences():
             global model, current_model_name
             print(f"🔄 Changing Whisper model to: {choice}")
             try:
-                current_model_name = choice
-                model = whisper.load_model(choice)
-                print(f"✅ Model switched to {choice}")
+                selected_model = whisper_models.get(choice, "base")  # default to 'base' if not found
+                current_model_name = selected_model
+                model = whisper.load_model(selected_model)
+                print(f"✅ Model switched to {selected_model}")
             except Exception as e:
-                print(f"❌ Failed to load model '{choice}': {e}")
+                print(f"❌ Failed to load model '{selected_model}': {e}")
                 
         model_menu.configure(command=change_model)
 
