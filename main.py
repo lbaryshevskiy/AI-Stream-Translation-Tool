@@ -653,6 +653,14 @@ def show_pro_preferences():
         model_menu.set("Base")
         model_menu.pack(pady=(0, 10))
 
+        whisper_models = {
+            "Tiny": "tiny",
+            "Base": "base",
+            "Small": "small",
+            "Medium": "medium",
+            "Large": "large"
+        }
+
         def change_model(choice):
             global model, current_model_name
             print(f"🔄 Changing Whisper model to: {choice}")
