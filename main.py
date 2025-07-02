@@ -124,7 +124,7 @@ def test_connect():
     print("✅ Socket connected")
     def emit_hello():
         try:
-            socketio.emit("subtitle", {"text": "🔥 Hello from Streamsub!"})
+            socketio.emit("subtitle", {"text": "✨ Streamsub is live!"})
         except Exception as e:
             print(f"⚠️ OBS closed or emit failed: {e}")
     threading.Timer(0.1, emit_hello).start()
