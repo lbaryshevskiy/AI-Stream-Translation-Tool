@@ -141,8 +141,15 @@ def record_audio():
                 audio_data = b''.join(frames)
                 audio_array = np.frombuffer(audio_data, dtype=np.int16)
                 processed_audio = audio_array.astype(np.int16).tobytes()
-    
-                is_speech = vad.is_speech(processed_audio[:CHUNK], RATE)
+           
+                frame_duration_ms = 20
+                frame_size = int(RATE * frame_duration_ms / 1000) 
+                try:
+                    speech_check = vad.is_speech(processed_audio[:frame_size*2], RATE)
+                    print("✅ Mic read success, VAD speech detected:", speech_check)
+            except Exception as e:
+                print("❌ VAD error:", e)
+                
         stream.stop_stream()
         stream.close()
         print("🛑 record_audio() stopped")
