@@ -150,8 +150,11 @@ def record_audio():
                 try:
                     speech_check = vad.is_speech(processed_audio[:frame_size*2], RATE)
                     # Only print if state changed (reduce spam)
-                    if speech_check != last_speech_state:
-                        print("✅ VAD speech detected:" if speech_check else "🔇 No speech detected")
+                    if speech_check and speech_check != last_speech_state:
+                        print("✅ VAD speech detected")
+                        last_speech_state = speech_check
+                    elif not speech_check and speech_check != last_speech_state:
+                        print("🔇 No speech detected")
                         last_speech_state = speech_check
 
                     if speech_check:
