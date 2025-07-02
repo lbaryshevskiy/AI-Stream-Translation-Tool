@@ -126,6 +126,8 @@ def record_audio():
     print("🎤 record_audio() started")
     try:
         stream = pa.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK)
+        last_speech_state = None
+
         while not stop_event.is_set():
             frames = []
             for _ in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
@@ -137,21 +139,26 @@ def record_audio():
                 except Exception as e:
                     print("⚠️ Mic read error:", e)
                     break
+
             if frames:
                 audio_data = b''.join(frames)
                 audio_array = np.frombuffer(audio_data, dtype=np.int16)
                 processed_audio = audio_array.astype(np.int16).tobytes()
-           
+
                 frame_duration_ms = 20
-                frame_size = int(RATE * frame_duration_ms / 1000) 
+                frame_size = int(RATE * frame_duration_ms / 1000)
                 try:
                     speech_check = vad.is_speech(processed_audio[:frame_size*2], RATE)
+                    # Only print if state changed (reduce spam)
+                    if speech_check != last_speech_state:
+                        print("✅ VAD speech detected:" if speech_check else "🔇 No speech detected")
+                        last_speech_state = speech_check
+
                     if speech_check:
-                        print("✅ Speech detected.")
+                        audio_queue.put(audio_data)
+
                 except Exception as e:
                     print("❌ VAD error:", e)
-                    
-                audio_queue.put(processed_audio)
 
         stream.stop_stream()
         stream.close()
