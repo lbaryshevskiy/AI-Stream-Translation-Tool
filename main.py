@@ -146,10 +146,13 @@ def record_audio():
                 frame_size = int(RATE * frame_duration_ms / 1000) 
                 try:
                     speech_check = vad.is_speech(processed_audio[:frame_size*2], RATE)
-                    print("✅ Mic read success, VAD speech detected:", speech_check)
+                    if speech_check:
+                        print("✅ Speech detected.")
                 except Exception as e:
                     print("❌ VAD error:", e)
-                
+                    
+                audio_queue.put(processed_audio)
+
         stream.stop_stream()
         stream.close()
         print("🛑 record_audio() stopped")
