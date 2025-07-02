@@ -205,11 +205,14 @@ def transcribe_loop():
                     lang_label = selected_lang.get().strip()
                     lang_code = language_options.get(lang_label)
                     
-                    if lang_code:
-                        try:
-                            translated = translator.translate(text, dest=lang_code).text
-                            print(f"🎤 {text} → 💬 {translated}")
-                            socketio.emit("subtitle", {"text": translated})
+                    if not lang_code:
+                        print(f"⚠️ No valid language selected for '{lang_label}', defaulting to English")
+                        lang_code = "en"
+                    
+                    try:
+                        translated = translator.translate(text, dest=lang_code).text
+                        print(f"🎤 {text} → 💬 {translated}")
+                        socketio.emit("subtitle", {"text": translated})
 
                             global clear_timer, subtitles_started
 
