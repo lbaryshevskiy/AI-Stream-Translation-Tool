@@ -7,7 +7,6 @@ import whisper
 import pyaudio
 from flask import Flask, render_template
 from flask_socketio import SocketIO
-import noisereduce as nr
 import webrtcvad
 import numpy as np
 import logging
@@ -141,8 +140,7 @@ def record_audio():
             if frames:
                 audio_data = b''.join(frames)
                 audio_array = np.frombuffer(audio_data, dtype=np.int16)
-                reduced_noise = nr.reduce_noise(y=audio_array, sr=RATE)
-                processed_audio = reduced_noise.astype(np.int16).tobytes()
+                processed_audio = audio_array.astype(np.int16).tobytes()
     
                 is_speech = vad.is_speech(processed_audio[:CHUNK], RATE)
         stream.stop_stream()
