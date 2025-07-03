@@ -178,68 +178,48 @@ def clear_subtitle():
 def transcribe_loop():
     print("🧠 transcribe_loop() started")
     while not stop_event.is_set():
-    print("🔍 audio_queue.qsize():", audio_queue.qsize())
         if not audio_queue.empty():
-            audio_data = audio_queue.get()
+            frames = []
+            while not audio_queue.empty():
+                frames.append(audio_queue.get())
+
+            # Write frames to WAV file
             with wave.open(WAVE_OUTPUT_FILENAME, 'wb') as wf:
                 wf.setnchannels(CHANNELS)
                 wf.setsampwidth(pa.get_sample_size(FORMAT))
                 wf.setframerate(RATE)
-                wf.writeframes(audio_data)
-            try:
-                # Get input language setting from saved config
-                settings = load_settings()
-                input_choice = settings.get("input_language", "🌐 Auto-detect")
-                input_code = language_options.get(input_choice) if input_choice != "🌐 Auto-detect" else None
-                
-                import os
-                print("📁 Checking file:", WAVE_OUTPUT_FILENAME, "Exists:", os.path.exists(WAVE_OUTPUT_FILENAME), "Size:", os.path.getsize(WAVE_OUTPUT_FILENAME) if os.path.exists(WAVE_OUTPUT_FILENAME) else "N/A")
+                wf.writeframes(b''.join(frames))
 
-                # Transcribe with or without input language specified
-                if input_code:
-                    print("🔔 Calling model.transcribe now...")
-                    result = model.transcribe(WAVE_OUTPUT_FILENAME, language=input_code)
-                    print("📝 Raw result from model.transcribe:", result)
-                else:
-                    result = model.transcribe(WAVE_OUTPUT_FILENAME)
-                    print("📝 Raw result from model.transcribe:", result)
-                    
+            print("💾 Audio file written, calling Whisper...")
+
+            try:
+                # Transcribe
+                result = model.transcribe(WAVE_OUTPUT_FILENAME)
                 text = result['text'].strip()
-                print("🔧 Transcribed text:", text)
-                text = text.replace('\x00', '')  # Optional: remove invisible null chars
-                
-                if text and isinstance(text, str) and text.strip():
+                print("📝 Transcribed text:", text)
+
+                if text:
+                    # Translate
                     lang_label = selected_lang.get().strip()
-                    print("🔧 Selected lang_label:", lang_label)
                     lang_code = language_options.get(lang_label)
-                    print("🌐 Translating to lang_code:", lang_code)
-                    
+
                     if not lang_code:
                         print(f"⚠️ No valid language selected for '{lang_label}', defaulting to English")
                         lang_code = "en"
-                    
-                    try:
-                        print("🔧 Preparing to translate text:", text)
-                        print("🔧 Translating to lang_code:", lang_code)
-                        translated = translator.translate(text, dest=lang_code).text
-                        print(f"🎤 {text} → 💬 {translated}")
-                        socketio.emit("subtitle", {"text": translated})
 
-                            global clear_timer, subtitles_started
+                    translated = translator.translate(text, dest=lang_code).text
+                    print(f"🎤 {text} → 💬 {translated}")
 
-                            subtitles_started = True
-                            
-                            if clear_timer:
-                                clear_timer.cancel()
-                            clear_timer = threading.Timer(3.0, clear_subtitle)
-                            clear_timer.start()
-                        except Exception as e:
-                            print(f"⚠️ Failed to emit subtitle: {e}")
-                    else:
-                        print(f"⚠️ No valid language selected for label: '{lang_label}'")
-                        
+                    # Emit subtitle
+                    socketio.emit("subtitle", {"text": translated})
+
+                    # Clear subtitle after 3s
+                    global clear_timer
+                    clear_timer = threading.Timer(3.0, clear_subtitle)
+                    clear_timer.start()
             except Exception as e:
-                print(f"❌ Error in transcription/translation: {e}")
+                print("❌ Error in transcription or translation:", e)
+
 
 # --- Launch Backend Threads ---
 def start_backend():
