@@ -136,16 +136,8 @@ def record_audio():
             audio_array = np.frombuffer(audio_data, dtype=np.int16)
             processed_audio = audio_array.astype(np.int16).tobytes()
 
-            # VAD check
-            frame_duration_ms = 20
-            frame_size = int(RATE * frame_duration_ms / 1000)
-            speech_check = vad.is_speech(processed_audio[:frame_size*2], RATE)
-
-            if speech_check:
-                print("✅ VAD detected speech, queuing audio for transcription")
-                audio_queue.put(audio_data)
-            else:
-                print("🔇 VAD: no speech detected, skipping")
+            print("✅ Queuing audio data (bypassing VAD for debug)")
+            audio_queue.put(audio_data)
 
     except Exception as e:
         print("❌ Error in record_audio():", e)
