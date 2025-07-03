@@ -128,7 +128,8 @@ def record_audio():
         stream = pa.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK)
         last_speech_state = None
 
-        while not stop_event.is_set():
+        while not stop_event.is_set()
+        print("🔄 Checking audio queue, empty status:", audio_queue.empty())
             frames = []
             for _ in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
                 if stop_event.is_set():
