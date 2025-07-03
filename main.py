@@ -126,26 +126,26 @@ def record_audio():
     print("🎤 record_audio() started")
     try:
         stream = pa.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK)
-        last_speech_state = None
-
         while not stop_event.is_set():
-            data = stream.read(CHUNK, exception_on_overflow=False)
-            audio_array = np.frombuffer(data, dtype=np.int16)
+            frames = []
+            for _ in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
+                data = stream.read(CHUNK, exception_on_overflow=False)
+                frames.append(data)
+
+            audio_data = b''.join(frames)
+            audio_array = np.frombuffer(audio_data, dtype=np.int16)
             processed_audio = audio_array.astype(np.int16).tobytes()
 
+            # VAD check
             frame_duration_ms = 20
             frame_size = int(RATE * frame_duration_ms / 1000)
-            try:
-                speech_check = vad.is_speech(processed_audio[:frame_size*2], RATE)
-                if speech_check != last_speech_state:
-                    if speech_check:
-                        print("✅ VAD speech detected")
-                        audio_queue.put(data)  # only queue if speech detected
-                    else:
-                        print("🔇 No speech detected")
-                    last_speech_state = speech_check
-            except Exception as e:
-                print("❌ VAD error:", e)
+            speech_check = vad.is_speech(processed_audio[:frame_size*2], RATE)
+
+            if speech_check:
+                print("✅ VAD detected speech, queuing audio for transcription")
+                audio_queue.put(audio_data)
+            else:
+                print("🔇 VAD: no speech detected, skipping")
 
     except Exception as e:
         print("❌ Error in record_audio():", e)
@@ -171,42 +171,27 @@ def transcribe_loop():
                 wf.setsampwidth(pa.get_sample_size(FORMAT))
                 wf.setframerate(RATE)
                 wf.writeframes(audio_data)
+
             try:
-                settings = load_settings()
-                input_choice = settings.get("input_language", "🌐 Auto-detect")
-                input_code = language_options.get(input_choice) if input_choice != "🌐 Auto-detect" else None
-
-                if input_code:
-                    print("🔔 Calling model.transcribe with input_code...")
-                    result = model.transcribe(WAVE_OUTPUT_FILENAME, language=input_code)
-                else:
-                    print("🔔 Calling model.transcribe with auto-detect...")
-                    result = model.transcribe(WAVE_OUTPUT_FILENAME)
-                print("📝 Raw result:", result)
-
+                result = model.transcribe(WAVE_OUTPUT_FILENAME)
                 text = result['text'].strip()
-                print("🔧 Transcribed text:", text)
+                print(f"📝 Transcribed: {text}")
 
                 if text:
                     lang_label = selected_lang.get().strip()
-                    lang_code = language_options.get(lang_label, "en")
-                    print(f"🌐 Translating to {lang_code}")
+                    lang_code = language_options.get(lang_label)
+                    if not lang_code:
+                        lang_code = "en"
 
                     translated = translator.translate(text, dest=lang_code).text
-                    print(f"🎤 {text} → 💬 {translated}")
+                    print(f"🌐 Translation: {translated}")
+
                     socketio.emit("subtitle", {"text": translated})
 
-                    global clear_timer, subtitles_started
-                    subtitles_started = True
-                    if clear_timer:
-                        clear_timer.cancel()
-                    clear_timer = threading.Timer(3.0, clear_subtitle)
-                    clear_timer.start()
-
             except Exception as e:
-                print("❌ Error in transcribe_loop:", e)
+                print("❌ Transcription error:", e)
         else:
-            time.sleep(0.1)
+            time.sleep(0.1)  # avoid busy loop
 
 # --- Launch Backend Threads ---
 def start_backend():
