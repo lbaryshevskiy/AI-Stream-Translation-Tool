@@ -157,6 +157,7 @@ def transcribe_loop():
     print("🧠 transcribe_loop() started")
     while not stop_event.is_set():
         if not audio_queue.empty():
+            print("🔄 transcribe_loop() processing audio data...")
             audio_data = audio_queue.get()
             print("🎤 Processing audio data from queue, size:", len(audio_data))
             with wave.open(WAVE_OUTPUT_FILENAME, 'wb') as wf:
@@ -164,6 +165,8 @@ def transcribe_loop():
                 wf.setsampwidth(pa.get_sample_size(FORMAT))
                 wf.setframerate(RATE)
                 wf.writeframes(audio_data)
+                
+            print("💾 Saved audio to file, running Whisper transcribe...")
 
             try:
                 result = model.transcribe(WAVE_OUTPUT_FILENAME)
