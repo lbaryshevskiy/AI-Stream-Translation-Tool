@@ -864,7 +864,7 @@ def main():
     )
     lang_menu.pack(pady=10)
 
-    copy_btn = ctk.CTkButton(frame, text="📋 Copy OBS URL", command=copy_url)
+    copy_btn = ctk.CTkButton(frame, text="📋 Copy OBS ", command=copy_url)
     copy_btn.pack(pady=10)
 
     settings_btn = ctk.CTkButton(frame, text="⚙️ Settings", command=show_pro_preferences)
