@@ -124,49 +124,35 @@ def test_connect():
 
 def record_audio():
     print("🎤 record_audio() started")
-
     try:
         stream = pa.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK)
+        last_speech_state = None
+
         while not stop_event.is_set():
             data = stream.read(CHUNK, exception_on_overflow=False)
-            audio_queue.put(data)
-            print("✅ Audio data chunk added to queue")
+            audio_array = np.frombuffer(data, dtype=np.int16)
+            processed_audio = audio_array.astype(np.int16).tobytes()
+
+            frame_duration_ms = 20
+            frame_size = int(RATE * frame_duration_ms / 1000)
+            try:
+                speech_check = vad.is_speech(processed_audio[:frame_size*2], RATE)
+                if speech_check != last_speech_state:
+                    if speech_check:
+                        print("✅ VAD speech detected")
+                        audio_queue.put(data)  # only queue if speech detected
+                    else:
+                        print("🔇 No speech detected")
+                    last_speech_state = speech_check
+            except Exception as e:
+                print("❌ VAD error:", e)
+
     except Exception as e:
         print("❌ Error in record_audio():", e)
     finally:
         stream.stop_stream()
         stream.close()
         print("🛑 record_audio() stopped")
-
-            if frames:
-                audio_data = b''.join(frames)
-                audio_array = np.frombuffer(audio_data, dtype=np.int16)
-                processed_audio = audio_array.astype(np.int16).tobytes()
-
-                frame_duration_ms = 20
-                frame_size = int(RATE * frame_duration_ms / 1000)
-                try:
-                    speech_check = vad.is_speech(processed_audio[:frame_size*2], RATE)
-                    # Only print if state changed (reduce spam)
-                    if speech_check and speech_check != last_speech_state:
-                        print("✅ VAD speech detected")
-                        last_speech_state = speech_check
-                    elif not speech_check and speech_check != last_speech_state:
-                        print("🔇 No speech detected")
-                        last_speech_state = speech_check
-
-                    if speech_check:
-                        audio_queue.put(audio_data)
-                        print("🔧 Audio data queued for transcription")
-
-                except Exception as e:
-                    print("❌ VAD error:", e)
-
-        stream.stop_stream()
-        stream.close()
-        print("🛑 record_audio() stopped")
-    except Exception as e:
-        print("❌ Failed to open mic stream:", e)
         
 def clear_subtitle():
     global subtitles_started
