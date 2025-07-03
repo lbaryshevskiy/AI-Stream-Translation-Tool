@@ -168,22 +168,22 @@ def transcribe_loop():
                 
             print("💾 Saved audio to file, running Whisper transcribe...")
 
-            try:
-                result = model.transcribe(WAVE_OUTPUT_FILENAME)
+           try:
+                print("🔔 Calling Whisper transcribe test...")
+                result = model.transcribe(WAVE_OUTPUT_FILENAME, fp16=False)
+                print("📄 Full Whisper result:", result)
                 text = result['text'].strip()
                 print(f"📝 Transcribed: {text}")
-
+            
                 if text:
                     lang_label = selected_lang.get().strip()
-                    lang_code = language_options.get(lang_label)
-                    if not lang_code:
-                        lang_code = "en"
-
+                    lang_code = language_options.get(lang_label, "en")
                     translated = translator.translate(text, dest=lang_code).text
                     print(f"🌐 Translation: {translated}")
-
                     socketio.emit("subtitle", {"text": translated})
-
+                else:
+                    print("⚠️ Whisper returned empty text.")
+            
             except Exception as e:
                 print("❌ Transcription error:", e)
         else:
