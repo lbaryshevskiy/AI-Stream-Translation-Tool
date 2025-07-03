@@ -193,9 +193,13 @@ def transcribe_loop():
                 settings = load_settings()
                 input_choice = settings.get("input_language", "🌐 Auto-detect")
                 input_code = language_options.get(input_choice) if input_choice != "🌐 Auto-detect" else None
+                
+                import os
+                print("📁 Checking file:", WAVE_OUTPUT_FILENAME, "Exists:", os.path.exists(WAVE_OUTPUT_FILENAME), "Size:", os.path.getsize(WAVE_OUTPUT_FILENAME) if os.path.exists(WAVE_OUTPUT_FILENAME) else "N/A")
 
                 # Transcribe with or without input language specified
                 if input_code:
+                    print("🔔 Calling model.transcribe now...")
                     result = model.transcribe(WAVE_OUTPUT_FILENAME, language=input_code)
                     print("📝 Raw result from model.transcribe:", result)
                 else:
