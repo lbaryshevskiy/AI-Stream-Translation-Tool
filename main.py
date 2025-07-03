@@ -172,12 +172,10 @@ def transcribe_loop():
                 wf.setframerate(RATE)
                 wf.writeframes(audio_data)
             try:
-                # Load input language
                 settings = load_settings()
                 input_choice = settings.get("input_language", "🌐 Auto-detect")
                 input_code = language_options.get(input_choice) if input_choice != "🌐 Auto-detect" else None
 
-                # Transcribe
                 if input_code:
                     print("🔔 Calling model.transcribe with input_code...")
                     result = model.transcribe(WAVE_OUTPUT_FILENAME, language=input_code)
@@ -198,7 +196,6 @@ def transcribe_loop():
                     print(f"🎤 {text} → 💬 {translated}")
                     socketio.emit("subtitle", {"text": translated})
 
-                    # Auto-clear after 3 seconds
                     global clear_timer, subtitles_started
                     subtitles_started = True
                     if clear_timer:
