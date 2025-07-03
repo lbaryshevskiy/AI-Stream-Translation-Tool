@@ -922,7 +922,7 @@ mic_btn.pack(side="left", padx=(0, 6))
         btn_row,
         text="▶️ Start",
         command=toggle_backend,
-        width=140,
+        width=90,
         height=28
     )
     start_btn.pack(side="left", padx=(0, 6))  # small gap before reload
