@@ -904,17 +904,19 @@ def main():
         save_btn.pack(pady=10)
     
     mic_btn = ctk.CTkButton(
-        btn_row,
-        text="🎤",
-        command=open_mic_selection,
-        width=26,
-        height=26,
-        fg_color="transparent",
-        hover_color="gray20",
-        text_color="white",
-        font=("Helvetica", 20)
-    )
-    mic_btn.pack(side="left", padx=(0, 6))  # small gap before start
+    btn_row,
+    text="🎤",
+    command=open_mic_selection,
+    width=26,
+    height=26,
+    fg_color="transparent",
+    hover_color="gray20",
+    text_color="white",  # or "black" if Light mode
+    font=("Helvetica", 18),
+    corner_radius=6
+)
+mic_btn.pack(side="left", padx=(0, 6))
+
 
     start_btn = ctk.CTkButton(
         btn_row,
