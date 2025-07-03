@@ -124,23 +124,19 @@ def test_connect():
 
 def record_audio():
     print("🎤 record_audio() started")
+
     try:
         stream = pa.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK)
-        last_speech_state = None
-
-        while not stop_event.is_set()
-        print("🔄 Checking audio queue, empty status:", audio_queue.empty())
-            frames = []
-            for _ in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
-                if stop_event.is_set():
-                    break
-                try:
-                    data = stream.read(CHUNK, exception_on_overflow=False)
-                    frames.append(data)
-                    print("🎙️ Frame captured, size:", len(data))
-                except Exception as e:
-                    print("⚠️ Mic read error:", e)
-                    break
+        while not stop_event.is_set():
+            data = stream.read(CHUNK, exception_on_overflow=False)
+            audio_queue.put(data)
+            print("✅ Audio data chunk added to queue")
+    except Exception as e:
+        print("❌ Error in record_audio():", e)
+    finally:
+        stream.stop_stream()
+        stream.close()
+        print("🛑 record_audio() stopped")
 
             if frames:
                 audio_data = b''.join(frames)
