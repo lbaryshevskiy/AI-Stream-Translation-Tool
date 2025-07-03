@@ -905,7 +905,7 @@ def main():
     
     mic_btn = ctk.CTkButton(
     btn_row,
-    text="🎤",
+    text="M",
     command=open_mic_selection,
     width=26,
     height=26,
