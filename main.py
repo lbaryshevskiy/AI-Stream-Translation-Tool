@@ -179,47 +179,51 @@ def transcribe_loop():
     print("🧠 transcribe_loop() started")
     while not stop_event.is_set():
         if not audio_queue.empty():
-            frames = []
-            while not audio_queue.empty():
-                frames.append(audio_queue.get())
-
-            # Write frames to WAV file
+            audio_data = audio_queue.get()
             with wave.open(WAVE_OUTPUT_FILENAME, 'wb') as wf:
                 wf.setnchannels(CHANNELS)
                 wf.setsampwidth(pa.get_sample_size(FORMAT))
                 wf.setframerate(RATE)
-                wf.writeframes(b''.join(frames))
-
-            print("💾 Audio file written, calling Whisper...")
-
+                wf.writeframes(audio_data)
             try:
+                # Load input language
+                settings = load_settings()
+                input_choice = settings.get("input_language", "🌐 Auto-detect")
+                input_code = language_options.get(input_choice) if input_choice != "🌐 Auto-detect" else None
+
                 # Transcribe
-                result = model.transcribe(WAVE_OUTPUT_FILENAME)
+                if input_code:
+                    print("🔔 Calling model.transcribe with input_code...")
+                    result = model.transcribe(WAVE_OUTPUT_FILENAME, language=input_code)
+                else:
+                    print("🔔 Calling model.transcribe with auto-detect...")
+                    result = model.transcribe(WAVE_OUTPUT_FILENAME)
+                print("📝 Raw result:", result)
+
                 text = result['text'].strip()
-                print("📝 Transcribed text:", text)
+                print("🔧 Transcribed text:", text)
 
                 if text:
-                    # Translate
                     lang_label = selected_lang.get().strip()
-                    lang_code = language_options.get(lang_label)
-
-                    if not lang_code:
-                        print(f"⚠️ No valid language selected for '{lang_label}', defaulting to English")
-                        lang_code = "en"
+                    lang_code = language_options.get(lang_label, "en")
+                    print(f"🌐 Translating to {lang_code}")
 
                     translated = translator.translate(text, dest=lang_code).text
                     print(f"🎤 {text} → 💬 {translated}")
-
-                    # Emit subtitle
                     socketio.emit("subtitle", {"text": translated})
 
-                    # Clear subtitle after 3s
-                    global clear_timer
+                    # Auto-clear after 3 seconds
+                    global clear_timer, subtitles_started
+                    subtitles_started = True
+                    if clear_timer:
+                        clear_timer.cancel()
                     clear_timer = threading.Timer(3.0, clear_subtitle)
                     clear_timer.start()
-            except Exception as e:
-                print("❌ Error in transcription or translation:", e)
 
+            except Exception as e:
+                print("❌ Error in transcribe_loop:", e)
+        else:
+            time.sleep(0.1)
 
 # --- Launch Backend Threads ---
 def start_backend():
