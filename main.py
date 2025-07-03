@@ -197,8 +197,10 @@ def transcribe_loop():
                 # Transcribe with or without input language specified
                 if input_code:
                     result = model.transcribe(WAVE_OUTPUT_FILENAME, language=input_code)
+                    print("📝 Raw result from model.transcribe:", result)
                 else:
                     result = model.transcribe(WAVE_OUTPUT_FILENAME)
+                    print("📝 Raw result from model.transcribe:", result)
                     
                 text = result['text'].strip()
                 print("🔧 Transcribed text:", text)
