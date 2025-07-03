@@ -159,6 +159,7 @@ def record_audio():
 
                     if speech_check:
                         audio_queue.put(audio_data)
+                        print("🔧 Audio data queued for transcription")
 
                 except Exception as e:
                     print("❌ VAD error:", e)
@@ -179,6 +180,7 @@ def clear_subtitle():
 def transcribe_loop():
     print("🧠 transcribe_loop() started")
     while not stop_event.is_set():
+    print("🔧 transcribe_loop running...")
         if not audio_queue.empty():
             audio_data = audio_queue.get()
             with wave.open(WAVE_OUTPUT_FILENAME, 'wb') as wf:
@@ -199,6 +201,7 @@ def transcribe_loop():
                     result = model.transcribe(WAVE_OUTPUT_FILENAME)
                     
                 text = result['text'].strip()
+                print("🔧 Transcribed text:", text)
                 text = text.replace('\x00', '')  # Optional: remove invisible null chars
                 
                 if text and isinstance(text, str) and text.strip():
