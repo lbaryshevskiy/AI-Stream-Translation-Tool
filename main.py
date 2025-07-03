@@ -158,6 +158,7 @@ def transcribe_loop():
     while not stop_event.is_set():
         if not audio_queue.empty():
             audio_data = audio_queue.get()
+            print("🎤 Processing audio data from queue, size:", len(audio_data))
             with wave.open(WAVE_OUTPUT_FILENAME, 'wb') as wf:
                 wf.setnchannels(CHANNELS)
                 wf.setsampwidth(pa.get_sample_size(FORMAT))
