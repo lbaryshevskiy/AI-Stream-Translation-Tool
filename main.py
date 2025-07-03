@@ -136,6 +136,7 @@ def record_audio():
                 try:
                     data = stream.read(CHUNK, exception_on_overflow=False)
                     frames.append(data)
+                    print("🎙️ Frame captured, size:", len(data))
                 except Exception as e:
                     print("⚠️ Mic read error:", e)
                     break
@@ -180,7 +181,7 @@ def clear_subtitle():
 def transcribe_loop():
     print("🧠 transcribe_loop() started")
     while not stop_event.is_set():
-    print("🔧 transcribe_loop running...")
+    print("🔍 audio_queue.qsize():", audio_queue.qsize())
         if not audio_queue.empty():
             audio_data = audio_queue.get()
             with wave.open(WAVE_OUTPUT_FILENAME, 'wb') as wf:
