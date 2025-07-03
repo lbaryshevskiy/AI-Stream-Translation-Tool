@@ -747,7 +747,7 @@ def show_pro_preferences():
 
         save_btn = ctk.CTkButton(
             right_frame,
-            text="Submit & Close",
+            text="Save & Close",
             command=save_and_close,
             width=140
         )
