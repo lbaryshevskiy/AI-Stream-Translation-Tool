@@ -659,13 +659,9 @@ def show_pro_preferences():
         logging_switch = ctk.CTkSwitch(creator_tab, text="Enable Logging")
         logging_switch.pack(pady=10)
 
-        save_checkbox = ctk.CTkCheckBox(creator_tab, text="Save Settings to File")
-        save_checkbox.pack(pady=10)
-
         if user_plan != "creator":
             model_menu.configure(state="disabled")
             logging_switch.configure(state="disabled")
-            save_checkbox.configure(state="disabled")
 
             upgrade_label = ctk.CTkLabel(
                 creator_tab,
