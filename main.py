@@ -879,7 +879,7 @@ def main():
     def open_mic_selection():
         mic_window = ctk.CTkToplevel()
         mic_window.title("Select Microphone")
-        mic_window.geometry("300x300")
+        mic_window.geometry("250x150")
     
         pa = pyaudio.PyAudio()
         mic_dict = {}
