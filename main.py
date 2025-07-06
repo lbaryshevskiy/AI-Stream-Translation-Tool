@@ -113,17 +113,36 @@ def on_release(key):
         pass
 
 def check_hotkeys():
+    settings = load_settings()
 
-    if keyboard.Key.ctrl_l in current_keys and keyboard.KeyCode.from_char('p') in current_keys:
+    startstop_keys = parse_hotkey(settings.get("startstop_hotkey", "ctrl+p"))
+    overlay_keys = parse_hotkey(settings.get("overlay_hotkey", "ctrl+o"))
+    pause_keys = parse_hotkey(settings.get("pause_hotkey", "ctrl+shift+p"))
+
+    if all(k in current_keys for k in startstop_keys):
         toggle_backend()
 
-    if keyboard.Key.ctrl_l in current_keys and keyboard.KeyCode.from_char('o') in current_keys:
+    if all(k in current_keys for k in overlay_keys):
         toggle_overlay()
 
-    if (keyboard.Key.ctrl_l in current_keys and
-        keyboard.Key.shift in current_keys and
-        keyboard.KeyCode.from_char('p') in current_keys):
+    if all(k in current_keys for k in pause_keys):
         toggle_audio_pause()
+
+def parse_hotkey(hotkey_str):
+    keys = []
+    parts = hotkey_str.lower().split("+")
+    for part in parts:
+        if part == "ctrl":
+            keys.append(keyboard.Key.ctrl_l)
+        elif part == "shift":
+            keys.append(keyboard.Key.shift)
+        elif part == "alt":
+            keys.append(keyboard.Key.alt_l)
+        elif part == "cmd":
+            keys.append(keyboard.Key.cmd)
+        else:
+            keys.append(keyboard.KeyCode.from_char(part))
+    return keys
 
 
 settings = load_settings()
