@@ -761,13 +761,13 @@ def show_pro_preferences():
             popup.destroy()
 
         def save_and_close():
+            existing = load_settings()
             font_size = int(font_slider.get())
             opacity = float(overlay_opacity_slider.get())
             font_family = font_family_var.get()
             existing["vad_mode"] = int(float(vad_slider.get()))
-            existing["transcription_hotkey"] = hotkey_entry.get().strip()
+            vad.set_mode(existing["vad_mode"])
             
-            existing = load_settings()
             box_choice = box_size_var.get()
                                 
             if "Custom" in box_choice:
