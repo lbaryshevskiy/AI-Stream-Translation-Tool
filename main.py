@@ -920,7 +920,7 @@ def main():
         btn_row,
         text="▶️ Start",
         command=toggle_backend,
-        width=90,
+        width=140,
         height=28
     )
     start_btn.pack(side="left", padx=(0, 6))  # small gap before reload
