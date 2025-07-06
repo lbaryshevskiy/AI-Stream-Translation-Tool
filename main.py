@@ -910,7 +910,7 @@ def main():
         fg_color="transparent",
         hover_color="gray20",
         text_color="white",  # or "black" if Light mode
-        font=("Helvetica", 14),
+        font=("Helvetica", 16),
         corner_radius=6
     )
     mic_btn.pack(side="left", padx=(0, 6))
