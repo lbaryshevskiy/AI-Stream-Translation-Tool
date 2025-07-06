@@ -903,7 +903,7 @@ def main():
             mic_window.destroy()
             
         save_btn = ctk.CTkButton(mic_window, text="Save", command=save_mic_choice)
-        save_btn.pack(pady=40)
+        save_btn.pack(pady=30)
     
     mic_btn = ctk.CTkButton(
         btn_row,
