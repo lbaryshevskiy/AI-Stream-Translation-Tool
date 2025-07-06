@@ -244,7 +244,7 @@ def start_flask_once():
 def copy_url():
     root.clipboard_clear()
     root.clipboard_append("http://localhost:5100")
-    status_label.config(text="✅ Copied to clipboard!")
+    status_label.configure(text="✅ Copied to clipboard!")
     
 def show_pro_preferences():
     global is_in_settings
