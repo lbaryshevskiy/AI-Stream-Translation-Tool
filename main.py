@@ -780,6 +780,9 @@ def show_pro_preferences():
 
         saved_hotkey = settings.get("transcription_hotkey", "")
 
+        livecount_label = ctk.CTkLabel(creator_tab, text="Live Count Usage", font=("Helvetica", 12, "bold"))
+        livecount_label.pack(pady=(20, 0))
+
         wordcount_label = ctk.CTkLabel(creator_tab, text="Words: 0 | Characters: 0")
         wordcount_label.pack(pady=(10, 0))
     
