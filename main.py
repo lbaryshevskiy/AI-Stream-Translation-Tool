@@ -165,8 +165,6 @@ def transcribe_loop():
                 wf.setsampwidth(pa.get_sample_size(FORMAT))
                 wf.setframerate(RATE)
                 wf.writeframes(audio_data)
-                
-            print("💾 Saved audio to file, running Whisper transcribe...")
 
             try:
                 print("🔔 Calling Whisper transcribe test...")
