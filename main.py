@@ -676,7 +676,6 @@ def show_pro_preferences():
             vad_mode = int(float(value))
             vad.set_mode(vad_mode)
             vad_value_label.configure(text=str(vad_mode))
-            print(f"✅ VAD mode set to: {vad_mode}")
         
         vad_slider.configure(command=update_vad)
 
