@@ -80,6 +80,7 @@ overlay_visible = True
 
 total_word_count = 0
 total_char_count = 0
+global wordcount_label
 
 def toggle_overlay():
     global overlay_visible
@@ -246,6 +247,19 @@ def transcribe_loop():
                 print("📄 Full Whisper result:", result)
                 text = result['text'].strip()
                 print(f"📝 Transcribed: {text}")
+               
+                global total_word_count, total_char_count
+                
+                words = text.split()
+                total_word_count += len(words)
+                total_char_count += len(text)
+                
+                print(f"🔢 Total words: {total_word_count}, Total characters: {total_char_count}")
+                wordcount_label.configure(
+                    text=f"Words: {total_word_count} | Characters: {total_char_count}"
+                )
+
+
             
                 if text:
                     lang_label = selected_lang.get().strip()
@@ -267,7 +281,10 @@ def start_backend():
     print("🟢 start_backend() triggered")
     stop_event.clear()
 
-    # Create backend threads
+    global total_word_count, total_char_count
+    total_word_count = 0
+    total_char_count = 0
+
     audio_thread = threading.Thread(target=record_audio, daemon=True)
     transcribe_thread = threading.Thread(target=transcribe_loop, daemon=True)
 
@@ -762,6 +779,9 @@ def show_pro_preferences():
         hotkey_btn.pack(pady=(10, 0))
 
         saved_hotkey = settings.get("transcription_hotkey", "")
+
+        wordcount_label = ctk.CTkLabel(creator_tab, text="Words: 0 | Characters: 0")
+        wordcount_label.pack(pady=(10, 0))
     
         if user_plan != "creator":
             model_menu.configure(state="disabled")
