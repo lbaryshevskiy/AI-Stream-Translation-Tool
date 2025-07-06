@@ -77,12 +77,20 @@ pa = pyaudio.PyAudio()
 import keyboard
 
 def listen_for_hotkey():
-    hotkey = settings.get("transcription_hotkey", "")
+    settings = load_settings()
+
+    hotkey = settings.get("startstop_hotkey", "")
     if hotkey:
-        print(f"✅ Hotkey listener active for: {hotkey}")
         keyboard.add_hotkey(hotkey, toggle_backend)
-    else:
-        print("⚠️ No hotkey set for transcription toggle.")
+
+    overlay_hotkey = settings.get("overlay_hotkey", "")
+    if overlay_hotkey:
+        keyboard.add_hotkey(overlay_hotkey, toggle_overlay)
+
+    pause_hotkey = settings.get("pause_hotkey", "")
+    if pause_hotkey:
+        keyboard.add_hotkey(pause_hotkey, toggle_audio_pause)
+
 
 settings = load_settings()
 current_model_name = settings.get("whisper_model", "base")
@@ -690,13 +698,13 @@ def show_pro_preferences():
         vad_slider.configure(command=update_vad)
         
         # --- Hotkey Settings ---
-        hotkey_label = ctk.CTkLabel(creator_tab, text="Start/Stop Transcription Hotkey:")
-        hotkey_label.pack(pady=(10, 0))
-        
-        hotkey_entry = ctk.CTkEntry(creator_tab, placeholder_text="e.g. ctrl+shift+s")
-        hotkey_entry.pack(pady=(0, 10))
-        
-        # Load saved hotkey if exists
+        hotkey_btn = ctk.CTkButton(
+            creator_tab,
+            text="Configure Hotkeys",
+            command=open_hotkey_window
+        )
+        hotkey_btn.pack(pady=(10, 0))
+
         saved_hotkey = settings.get("transcription_hotkey", "")
         hotkey_entry.insert(0, saved_hotkey)
         
@@ -823,6 +831,51 @@ def restart_server():
     stop_event.clear()
     start_flask_once()  # 🟢 Only restart Flask, not audio threads
     print("✅ Restart complete")
+
+def open_hotkey_window():
+    hotkey_window = ctk.CTkToplevel()
+    hotkey_window.title("Hotkey Settings")
+    hotkey_window.geometry("300x320")
+
+    # Start/Stop Transcription Hotkey
+    startstop_label = ctk.CTkLabel(hotkey_window, text="Start/Stop Transcription Hotkey:")
+    startstop_label.pack(pady=(10, 0))
+
+    startstop_entry = ctk.CTkEntry(hotkey_window, placeholder_text="e.g. ctrl+shift+s")
+    startstop_entry.pack(pady=(0, 10))
+
+    # Show/Hide Overlay Hotkey
+    overlay_label = ctk.CTkLabel(hotkey_window, text="Show/Hide Overlay Hotkey:")
+    overlay_label.pack(pady=(10, 0))
+
+    overlay_entry = ctk.CTkEntry(hotkey_window, placeholder_text="e.g. ctrl+shift+o")
+    overlay_entry.pack(pady=(0, 10))
+
+    # Pause/Resume Audio Capture Hotkey
+    pause_label = ctk.CTkLabel(hotkey_window, text="Pause/Resume Audio Capture Hotkey:")
+    pause_label.pack(pady=(10, 0))
+
+    pause_entry = ctk.CTkEntry(hotkey_window, placeholder_text="e.g. ctrl+shift+p")
+    pause_entry.pack(pady=(0, 10))
+
+    # Load saved hotkeys if exist
+    saved_hotkeys = load_settings()
+    startstop_entry.insert(0, saved_hotkeys.get("startstop_hotkey", ""))
+    overlay_entry.insert(0, saved_hotkeys.get("overlay_hotkey", ""))
+    pause_entry.insert(0, saved_hotkeys.get("pause_hotkey", ""))
+
+    # Save button
+    def save_hotkeys():
+        existing = load_settings()
+        existing["startstop_hotkey"] = startstop_entry.get().strip()
+        existing["overlay_hotkey"] = overlay_entry.get().strip()
+        existing["pause_hotkey"] = pause_entry.get().strip()
+        save_settings(existing)
+        hotkey_window.destroy()
+
+    save_btn = ctk.CTkButton(hotkey_window, text="Save Hotkeys", command=save_hotkeys)
+    save_btn.pack(pady=(20, 10))
+    
 
     # MAIN
 def main():
