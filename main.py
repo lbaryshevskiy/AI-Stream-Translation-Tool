@@ -905,8 +905,8 @@ def main():
         btn_row,
         text="♫",
         command=open_mic_selection,
-        width=20,
-        height=20,
+        width=16,
+        height=16,
         fg_color="transparent",
         hover_color="gray20",
         text_color="white",  # or "black" if Light mode
