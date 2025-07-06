@@ -78,6 +78,9 @@ from pynput import keyboard
 
 overlay_visible = True
 
+total_word_count = 0
+total_char_count = 0
+
 def toggle_overlay():
     global overlay_visible
     overlay_visible = not overlay_visible
