@@ -780,10 +780,10 @@ def show_pro_preferences():
 
         saved_hotkey = settings.get("transcription_hotkey", "")
 
-        ctk.CTkLabel(creator_tab, text="Live Count Usage:").pack(pady=(10, 0))
+        livecount_title.pack(pady=(30, 5), padx=10, anchor="w")
 
         wordcount_label = ctk.CTkLabel(creator_tab, text="Words: 0 | Characters: 0")
-        wordcount_label.pack(pady=(10, 0))
+        wordcount_label.pack(pady=(10, 20))  # increase bottom padding
     
         if user_plan != "creator":
             model_menu.configure(state="disabled")
