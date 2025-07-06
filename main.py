@@ -786,10 +786,11 @@ def show_pro_preferences():
             font=("Helvetica", 13, "bold"),
             anchor="w"
         )
-        livecount_title.pack(pady=(30, 5), padx=10, anchor="w")
+        livecount_title.pack(pady=(15, 0), padx=10, anchor="w")  # reduced top padding, no bottom padding
         
         wordcount_label = ctk.CTkLabel(creator_tab, text="Words: 0 | Characters: 0")
-        wordcount_label.pack(pady=(10, 20))
+        wordcount_label.pack(pady=(0, 10), padx=10, anchor="w")  # reduced bottom padding
+
     
         if user_plan != "creator":
             model_menu.configure(state="disabled")
