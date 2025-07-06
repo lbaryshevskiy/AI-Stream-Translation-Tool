@@ -245,7 +245,6 @@ def transcribe_loop():
                 wf.writeframes(audio_data)
 
             try:
-                print("🔔 Calling Whisper transcribe test...")
                 result = model.transcribe(WAVE_OUTPUT_FILENAME, fp16=False)
                 print("📄 Full Whisper result:", result)
                 text = result['text'].strip()
@@ -257,18 +256,13 @@ def transcribe_loop():
                 total_word_count += len(words)
                 total_char_count += len(text)
 
+                print(f"🔢 Total words: {total_word_count}, Total characters: {total_char_count}")
+
                 if wordcount_label:
                     wordcount_label.configure(
                         text=f"Words: {total_word_count} | Characters: {total_char_count}"
                     )
-                
-                print(f"🔢 Total words: {total_word_count}, Total characters: {total_char_count}")
-                wordcount_label.configure(
-                    text=f"Words: {total_word_count} | Characters: {total_char_count}"
-                )
-
-
-            
+                        
                 if text:
                     lang_label = selected_lang.get().strip()
                     lang_code = language_options.get(lang_label, "en")
