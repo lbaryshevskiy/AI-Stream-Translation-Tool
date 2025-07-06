@@ -660,7 +660,7 @@ def show_pro_preferences():
         logging_switch.pack(pady=10)
 
                 # VAD Sensitivity Slider Label
-        vad_label = ctk.CTkLabel(creator_tab, text="Speech Detection Sensitivity (VAD Aggressiveness):")
+        vad_label = ctk.CTkLabel(creator_tab, text="Speech Detection Sensitivity:")
         vad_label.pack(pady=(10, 0))
         
         # Dynamic VAD mode value label
