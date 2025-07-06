@@ -1067,7 +1067,6 @@ def main():
     )
     reload_btn.pack(side="left")
 
-    threading.Thread(target=listen_for_hotkey, daemon=True).start()
     listener = keyboard.Listener(on_press=on_press, on_release=on_release)
     listener.start()
     
