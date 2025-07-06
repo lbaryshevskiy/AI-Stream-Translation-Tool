@@ -882,22 +882,26 @@ def main():
         mic_window.geometry("300x300")
     
         pa = pyaudio.PyAudio()
+        mic_dict = {}
         mic_list = []
+        
         for i in range(pa.get_device_count()):
             info = pa.get_device_info_by_index(i)
-            mic_list.append(f"{i}: {info['name']}")
-    
+            mic_dict[info['name']] = i
+            mic_list.append(info['name'])
+        
         mic_var = ctk.StringVar(value=mic_list[0] if mic_list else "No devices")
-    
+        
         mic_menu = ctk.CTkOptionMenu(mic_window, variable=mic_var, values=mic_list)
         mic_menu.pack(pady=20)
-    
+        
         def save_mic_choice():
-            choice_index = int(mic_var.get().split(":")[0])
+            choice_name = mic_var.get()
+            choice_index = mic_dict[choice_name]
             settings["mic_index"] = choice_index
             save_settings(settings)
             mic_window.destroy()
-    
+            
         save_btn = ctk.CTkButton(mic_window, text="Save", command=save_mic_choice)
         save_btn.pack(pady=10)
     
