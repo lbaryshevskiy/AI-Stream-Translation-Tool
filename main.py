@@ -168,7 +168,7 @@ def transcribe_loop():
                 
             print("💾 Saved audio to file, running Whisper transcribe...")
 
-           try:
+            try:
                 print("🔔 Calling Whisper transcribe test...")
                 result = model.transcribe(WAVE_OUTPUT_FILENAME, fp16=False)
                 print("📄 Full Whisper result:", result)
