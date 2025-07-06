@@ -727,9 +727,7 @@ def show_pro_preferences():
         hotkey_btn.pack(pady=(10, 0))
 
         saved_hotkey = settings.get("transcription_hotkey", "")
-        hotkey_entry.insert(0, saved_hotkey)
-        
-
+    
         if user_plan != "creator":
             model_menu.configure(state="disabled")
             logging_switch.configure(state="disabled")
