@@ -715,6 +715,7 @@ def show_pro_preferences():
             font_size = int(font_slider.get())
             opacity = float(overlay_opacity_slider.get())
             font_family = font_family_var.get()
+            existing["vad_mode"] = int(float(vad_slider.get()))
             
             existing = load_settings()
             box_choice = box_size_var.get()
