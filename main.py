@@ -659,6 +659,21 @@ def show_pro_preferences():
         logging_switch = ctk.CTkSwitch(creator_tab, text="Enable Logging")
         logging_switch.pack(pady=10)
 
+                # --- VAD Sensitivity Slider ---
+        vad_label = ctk.CTkLabel(creator_tab, text="Speech Detection Sensitivity (VAD Aggressiveness):")
+        vad_label.pack(pady=(10, 0))
+        
+        vad_slider = ctk.CTkSlider(creator_tab, from_=0, to=3, number_of_steps=3)
+        vad_slider.set(vad.get_mode())  # current mode
+        vad_slider.pack(pady=(0, 10))
+        
+        def update_vad(value):
+            vad_mode = int(float(value))
+            vad.set_mode(vad_mode)
+            print(f"✅ VAD mode set to: {vad_mode}")
+        
+        vad_slider.configure(command=update_vad)
+
         if user_plan != "creator":
             model_menu.configure(state="disabled")
             logging_switch.configure(state="disabled")
