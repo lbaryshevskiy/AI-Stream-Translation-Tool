@@ -913,7 +913,7 @@ def main():
         font=("Helvetica", 16),
         corner_radius=6
     )
-    mic_btn.pack(side="left", padx=(0, 6), pady=(6, 0))
+    mic_btn.pack(side="left", padx=(0, 6), pady=(15, 0))
 
 
     start_btn = ctk.CTkButton(
