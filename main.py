@@ -780,14 +780,7 @@ def show_pro_preferences():
 
         saved_hotkey = settings.get("transcription_hotkey", "")
 
-        # === Live Count Usage Title (matching Whisper Model style) ===
-        livecount_title = ctk.CTkLabel(
-            creator_tab,
-            text="Live Count Usage:",
-            font=("Helvetica", 12),  
-            anchor="w"  
-        )
-        livecount_title.pack(pady=(20, 0), padx=10, anchor="w")
+        ctk.CTkLabel(creator_tab, text="Live Count Usage:").pack(pady=(10, 0))
 
         wordcount_label = ctk.CTkLabel(creator_tab, text="Words: 0 | Characters: 0")
         wordcount_label.pack(pady=(10, 0))
