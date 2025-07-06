@@ -76,6 +76,27 @@ pa = pyaudio.PyAudio()
 
 import keyboard
 
+overlay_visible = True
+
+def toggle_overlay():
+    global overlay_visible
+    overlay_visible = not overlay_visible
+    if overlay_visible:
+        print("✅ Subtitle overlay shown.")
+    else:
+        print("✅ Subtitle overlay hidden.")
+
+audio_paused = False
+
+def toggle_audio_pause():
+    global audio_paused
+    audio_paused = not audio_paused
+    if audio_paused:
+        print("⏸️ Audio capture paused.")
+    else:
+        print("▶️ Audio capture resumed.")
+
+
 def listen_for_hotkey():
     settings = load_settings()
 
@@ -1034,6 +1055,8 @@ def main():
         font=("Helvetica", 23) 
     )
     reload_btn.pack(side="left")
+
+    threading.Thread(target=listen_for_hotkey, daemon=True).start()
     
     root.mainloop()
     
