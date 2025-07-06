@@ -166,7 +166,7 @@ def transcribe_loop():
                 wf.setframerate(RATE)
                 wf.writeframes(audio_data)
                 
-           print("💾 Saved audio to file, running Whisper transcribe...")
+               print("💾 Saved audio to file, running Whisper transcribe...")
 
            try:
                 print("🔔 Calling Whisper transcribe test...")
