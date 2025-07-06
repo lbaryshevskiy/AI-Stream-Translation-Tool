@@ -74,6 +74,16 @@ RECORD_SECONDS = 10
 WAVE_OUTPUT_FILENAME = "temp.wav"
 pa = pyaudio.PyAudio()
 
+import keyboard
+
+def listen_for_hotkey():
+    hotkey = settings.get("transcription_hotkey", "")
+    if hotkey:
+        print(f"✅ Hotkey listener active for: {hotkey}")
+        keyboard.add_hotkey(hotkey, toggle_backend)
+    else:
+        print("⚠️ No hotkey set for transcription toggle.")
+
 settings = load_settings()
 current_model_name = settings.get("whisper_model", "base")
 model = whisper.load_model(current_model_name)
@@ -678,6 +688,18 @@ def show_pro_preferences():
             vad_value_label.configure(text=str(vad_mode))
         
         vad_slider.configure(command=update_vad)
+        
+        # --- Hotkey Settings ---
+        hotkey_label = ctk.CTkLabel(creator_tab, text="Start/Stop Transcription Hotkey:")
+        hotkey_label.pack(pady=(10, 0))
+        
+        hotkey_entry = ctk.CTkEntry(creator_tab, placeholder_text="e.g. ctrl+shift+s")
+        hotkey_entry.pack(pady=(0, 10))
+        
+        # Load saved hotkey if exists
+        saved_hotkey = settings.get("transcription_hotkey", "")
+        hotkey_entry.insert(0, saved_hotkey)
+        
 
         if user_plan != "creator":
             model_menu.configure(state="disabled")
