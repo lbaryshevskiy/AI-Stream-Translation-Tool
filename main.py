@@ -784,12 +784,11 @@ def show_pro_preferences():
             creator_tab,
             text="Live Count Usage:",
             font=("Helvetica", 13, "bold"),
-            anchor="w"
         )
-        livecount_title.pack(pady=(15, 0), padx=10, anchor="w")  # reduced top padding, no bottom padding
+        livecount_title.pack(pady=(15, 0))  # reduced top padding, no bottom padding
         
         wordcount_label = ctk.CTkLabel(creator_tab, text="Words: 0 | Characters: 0")
-        wordcount_label.pack(pady=(0, 10), padx=10, anchor="w")  # reduced bottom padding
+        wordcount_label.pack(pady=(0, 10))
 
     
         if user_plan != "creator":
