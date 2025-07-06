@@ -78,9 +78,12 @@ from pynput import keyboard
 
 overlay_visible = True
 
+global wordcount_label
+wordcount_label = None
+
 total_word_count = 0
 total_char_count = 0
-global wordcount_label
+
 
 def toggle_overlay():
     global overlay_visible
@@ -253,6 +256,11 @@ def transcribe_loop():
                 words = text.split()
                 total_word_count += len(words)
                 total_char_count += len(text)
+
+                if wordcount_label:
+                    wordcount_label.configure(
+                        text=f"Words: {total_word_count} | Characters: {total_char_count}"
+                    )
                 
                 print(f"🔢 Total words: {total_word_count}, Total characters: {total_char_count}")
                 wordcount_label.configure(
@@ -787,10 +795,10 @@ def show_pro_preferences():
         )
         livecount_title.pack(pady=(20, 0))  # reduced top padding, no bottom padding
         
+        global wordcount_label
         wordcount_label = ctk.CTkLabel(creator_tab, text="Words: 0 | Characters: 0")
         wordcount_label.pack(pady=(0, 15))
 
-    
         if user_plan != "creator":
             model_menu.configure(state="disabled")
             logging_switch.configure(state="disabled")
