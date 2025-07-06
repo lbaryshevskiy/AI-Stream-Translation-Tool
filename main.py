@@ -664,7 +664,7 @@ def show_pro_preferences():
         vad_label.pack(pady=(10, 0))
         
         vad_slider = ctk.CTkSlider(creator_tab, from_=0, to=3, number_of_steps=3)
-        vad_slider.set(vad.get_mode())  # current mode
+        vad_slider.set(2)  # default moderate aggressiveness
         vad_slider.pack(pady=(0, 10))
         
         def update_vad(value):
