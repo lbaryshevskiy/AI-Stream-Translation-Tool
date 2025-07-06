@@ -74,7 +74,7 @@ RECORD_SECONDS = 10
 WAVE_OUTPUT_FILENAME = "temp.wav"
 pa = pyaudio.PyAudio()
 
-import keyboard
+from pynput import keyboard
 
 overlay_visible = True
 
@@ -96,21 +96,34 @@ def toggle_audio_pause():
     else:
         print("▶️ Audio capture resumed.")
 
+# === Hotkey state tracking ===
+current_keys = set()
 
-def listen_for_hotkey():
-    settings = load_settings()
+def on_press(key):
+    try:
+        current_keys.add(key)
+        check_hotkeys()
+    except AttributeError:
+        pass
 
-    hotkey = settings.get("startstop_hotkey", "")
-    if hotkey:
-        keyboard.add_hotkey(hotkey, toggle_backend)
+def on_release(key):
+    try:
+        current_keys.remove(key)
+    except KeyError:
+        pass
 
-    overlay_hotkey = settings.get("overlay_hotkey", "")
-    if overlay_hotkey:
-        keyboard.add_hotkey(overlay_hotkey, toggle_overlay)
+def check_hotkeys():
 
-    pause_hotkey = settings.get("pause_hotkey", "")
-    if pause_hotkey:
-        keyboard.add_hotkey(pause_hotkey, toggle_audio_pause)
+    if keyboard.Key.ctrl_l in current_keys and keyboard.KeyCode.from_char('p') in current_keys:
+        toggle_backend()
+
+    if keyboard.Key.ctrl_l in current_keys and keyboard.KeyCode.from_char('o') in current_keys:
+        toggle_overlay()
+
+    if (keyboard.Key.ctrl_l in current_keys and
+        keyboard.Key.shift in current_keys and
+        keyboard.KeyCode.from_char('p') in current_keys):
+        toggle_audio_pause()
 
 
 settings = load_settings()
@@ -1055,6 +1068,8 @@ def main():
     reload_btn.pack(side="left")
 
     threading.Thread(target=listen_for_hotkey, daemon=True).start()
+    listener = keyboard.Listener(on_press=on_press, on_release=on_release)
+    listener.start()
     
     root.mainloop()
     
