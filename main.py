@@ -265,6 +265,7 @@ def transcribe_loop():
                             text=f"Words: {total_word_count} | Characters: {total_char_count}"
                         )
                     wordcount_label.after(0, update_label)
+                    
                 except Exception as e:
                     print("⚠️ Wordcount label update failed:", e)
 
@@ -280,7 +281,7 @@ def transcribe_loop():
             
             except Exception as e:
                 print("❌ Transcription error:", e)
-        else:
+            
             time.sleep(0.1)  # avoid busy loop
 
 # --- Launch Backend Threads ---
