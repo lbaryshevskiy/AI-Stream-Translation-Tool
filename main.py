@@ -258,10 +258,14 @@ def transcribe_loop():
 
                 print(f"🔢 Total words: {total_word_count}, Total characters: {total_char_count}")
 
-                if wordcount_label:
-                    wordcount_label.configure(
-                        text=f"Words: {total_word_count} | Characters: {total_char_count}"
-                    )
+                try:
+                    if wordcount_label and wordcount_label.winfo_exists():
+                        wordcount_label.configure(
+                            text=f"Words: {total_word_count} | Characters: {total_char_count}"
+                        )
+                except Exception as e:
+                    print("⚠️ Wordcount label update failed:", e)
+
                         
                 if text:
                     lang_label = selected_lang.get().strip()
