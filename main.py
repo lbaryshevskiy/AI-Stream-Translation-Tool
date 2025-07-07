@@ -233,6 +233,7 @@ def clear_subtitle():
 
 def transcribe_loop():
     print("🧠 transcribe_loop() started")
+    global total_word_count, total_char_count, wordcount_label
     while not stop_event.is_set():
         if not audio_queue.empty():
             print("🔄 transcribe_loop() processing audio data...")
@@ -258,11 +259,12 @@ def transcribe_loop():
 
                 print(f"🔢 Total words: {total_word_count}, Total characters: {total_char_count}")
 
-                try:
-                    if wordcount_label and wordcount_label.winfo_exists():
+                if wordcount_label and wordcount_label.winfo_exists():
+                    def update_label():
                         wordcount_label.configure(
                             text=f"Words: {total_word_count} | Characters: {total_char_count}"
                         )
+                    wordcount_label.after(0, update_label)
                 except Exception as e:
                     print("⚠️ Wordcount label update failed:", e)
 
