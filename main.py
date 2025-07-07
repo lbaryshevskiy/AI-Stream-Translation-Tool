@@ -266,8 +266,8 @@ def transcribe_loop():
                         )
                     wordcount_label.after(0, update_label)
                     
-                except Exception as e:
-                    print("⚠️ Wordcount label update failed:", e)
+            except Exception as e:
+                print("⚠️ Wordcount label update failed:", e)
 
                         
                 if text:
