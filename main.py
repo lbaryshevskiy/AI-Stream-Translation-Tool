@@ -571,12 +571,16 @@ def show_pro_preferences():
                 wrap_length = box_size_presets.get(choice, 600)
                 preview_label.configure(wraplength=wrap_length)
 
-        box_size_label = ctk.CTkLabel(page2, text="Subtitle Box Size:", font=label_font)
-        box_size_label.pack(pady=(15, 0))
+        # Create a horizontal frame for label + icon
+        box_size_label_frame = ctk.CTkFrame(page2, fg_color="transparent")
+        box_size_label_frame.pack(pady=(15, 0))
+        
+        box_size_label = ctk.CTkLabel(box_size_label_frame, text="Subtitle Box Size:", font=label_font)
+        box_size_label.pack(side="left")
+        
+        wraplength_tooltip_icon = ctk.CTkLabel(box_size_label_frame, text="❔", font=("Helvetica", 12, "bold"))
+        wraplength_tooltip_icon.pack(side="left", padx=(4, 0))
 
-        # Tooltip icon and definition for wraplength instructions
-        wraplength_tooltip_icon = ctk.CTkLabel(page2, text="❔", font=("Helvetica", 12, "bold"))
-        wraplength_tooltip_icon.pack()
         
         def show_wraplength_tooltip(event):
             tooltip = ctk.CTkToplevel()
