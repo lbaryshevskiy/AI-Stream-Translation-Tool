@@ -581,7 +581,6 @@ def show_pro_preferences():
         wraplength_tooltip_icon = ctk.CTkLabel(box_size_label_frame, text="❔", font=("Helvetica", 12, "bold"))
         wraplength_tooltip_icon.pack(side="left", padx=(4, 0))
 
-        
         def show_wraplength_tooltip(event):
             tooltip = ctk.CTkToplevel()
             tooltip.wm_overrideredirect(True)
@@ -595,6 +594,9 @@ def show_pro_preferences():
             tooltip_label.pack()
             tooltip.geometry(f"+{event.x_root + 10}+{event.y_root + 10}")
             event.widget.tooltip = tooltip
+        def hide_wraplength_tooltip(event):
+            if hasattr(event.widget, "tooltip"):
+                event.widget.tooltip.destroy()
 
         wraplength_tooltip_icon.bind("<Enter>", show_wraplength_tooltip)
         wraplength_tooltip_icon.bind("<Leave>", hide_wraplength_tooltip)
