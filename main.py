@@ -578,7 +578,7 @@ def show_pro_preferences():
         box_size_label = ctk.CTkLabel(box_size_label_frame, text="Subtitle Box Size:", font=label_font)
         box_size_label.pack(side="left")
         
-        wraplength_tooltip_icon = ctk.CTkLabel(box_size_label_frame, text="❔", font=("Helvetica", 12, "bold"))
+        wraplength_tooltip_icon = ctk.CTkLabel(box_size_label_frame, text="?", font=("Helvetica", 12, "bold"), width=12)
         wraplength_tooltip_icon.pack(side="left", padx=(4, 0))
 
         def show_wraplength_tooltip(event):
@@ -587,14 +587,14 @@ def show_pro_preferences():
             tooltip.configure(bg="gray10")
             tooltip_label = ctk.CTkLabel(
                 tooltip,
-                text="OBS source width must match wraplength to show full line.",
-                font=("Helvetica", 9),  # slightly smaller for subtle look
-                text_color="gray",
-                bg_color="gray10"
+                text="OBS source width should match wraplength to avoid line breaks.",
+                font=("Helvetica", 10, "italic"),
+                text_color="gray"
             )
-            tooltip_label.pack(padx=5, pady=2)
+            tooltip_label.pack()
             tooltip.geometry(f"+{event.x_root + 10}+{event.y_root + 10}")
             event.widget.tooltip = tooltip
+
 
         def hide_wraplength_tooltip(event):
             if hasattr(event.widget, "tooltip"):
