@@ -252,10 +252,15 @@ def transcribe_loop():
                 wf.writeframes(audio_data)
 
             try:
-                result = model.transcribe(WAVE_OUTPUT_FILENAME, fp16=False)
-                print("📄 Full Whisper result:", result)
-                text = result['text'].strip()
-                print(f"📝 Transcribed: {text}")
+                if current_model_name == "faster-tiny":
+                    segments, info = model.transcribe(WAVE_OUTPUT_FILENAME)
+                    text = " ".join([segment.text for segment in segments]).strip()
+                    print(f"📝 Transcribed (Faster-Whisper): {text}")
+                else:
+                    result = model.transcribe(WAVE_OUTPUT_FILENAME, fp16=False)
+                    print("📄 Full Whisper result:", result)
+                    text = result['text'].strip()
+                    print(f"📝 Transcribed: {text}")
 
                 words = text.split()
                 total_word_count += len(words)
