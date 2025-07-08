@@ -574,6 +574,32 @@ def show_pro_preferences():
         box_size_label = ctk.CTkLabel(page2, text="Subtitle Box Size:", font=label_font)
         box_size_label.pack(pady=(15, 0))
 
+        # Tooltip icon and definition for wraplength instructions
+        wraplength_tooltip_icon = ctk.CTkLabel(page2, text="❔", font=("Helvetica", 12, "bold"))
+        wraplength_tooltip_icon.pack()
+        
+        def show_wraplength_tooltip(event):
+            tooltip = ctk.CTkToplevel()
+            tooltip.wm_overrideredirect(True)
+            tooltip.configure(bg="gray10")
+            tooltip_label = ctk.CTkLabel(
+                tooltip,
+                text="To display subtitles in one line, set OBS Browser Source width >= selected wraplength.",
+                font=("Helvetica", 10),
+                text_color="white",
+                bg_color="gray10"
+            )
+            tooltip_label.pack()
+            tooltip.geometry(f"+{event.x_root + 10}+{event.y_root + 10}")
+            event.widget.tooltip = tooltip
+        
+        def hide_wraplength_tooltip(event):
+            if hasattr(event.widget, "tooltip"):
+                event.widget.tooltip.destroy()
+        
+        wraplength_tooltip_icon.bind("<Enter>", show_wraplength_tooltip)
+        wraplength_tooltip_icon.bind("<Leave>", hide_wraplength_tooltip)
+
         box_size_presets = {
             "Compact (600x100)": 600,
             "Wide (800x100)": 800,
