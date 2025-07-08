@@ -588,7 +588,7 @@ def show_pro_preferences():
             tooltip.configure(bg="gray10")
             tooltip_label = ctk.CTkLabel(
                 tooltip,
-                text="To display subtitles in one line, set OBS Browser Source width >= selected wraplength.",
+                text="If facing issues, check your applied box size in Browser Source => Properties.",
                 font=("Helvetica", 10),
                 text_color="white",
                 bg_color="gray10"
