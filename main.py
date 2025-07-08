@@ -587,13 +587,15 @@ def show_pro_preferences():
             tooltip.configure(bg="gray10")
             tooltip_label = ctk.CTkLabel(
                 tooltip,
-                text="If facing issues, check your applied box size in Browser Source => Properties.",
-                font=("Helvetica", 10, "italic"),
-                text_color="gray"
+                text="OBS source width must match wraplength to show full line.",
+                font=("Helvetica", 9),  # slightly smaller for subtle look
+                text_color="gray",
+                bg_color="gray10"
             )
-            tooltip_label.pack()
+            tooltip_label.pack(padx=5, pady=2)
             tooltip.geometry(f"+{event.x_root + 10}+{event.y_root + 10}")
             event.widget.tooltip = tooltip
+
         def hide_wraplength_tooltip(event):
             if hasattr(event.widget, "tooltip"):
                 event.widget.tooltip.destroy()
