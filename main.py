@@ -589,18 +589,13 @@ def show_pro_preferences():
             tooltip_label = ctk.CTkLabel(
                 tooltip,
                 text="If facing issues, check your applied box size in Browser Source => Properties.",
-                font=("Helvetica", 10),
-                text_color="white",
-                bg_color="gray10"
+                font=("Helvetica", 10, "italic"),
+                text_color="gray"
             )
             tooltip_label.pack()
             tooltip.geometry(f"+{event.x_root + 10}+{event.y_root + 10}")
             event.widget.tooltip = tooltip
-        
-        def hide_wraplength_tooltip(event):
-            if hasattr(event.widget, "tooltip"):
-                event.widget.tooltip.destroy()
-        
+
         wraplength_tooltip_icon.bind("<Enter>", show_wraplength_tooltip)
         wraplength_tooltip_icon.bind("<Leave>", hide_wraplength_tooltip)
 
