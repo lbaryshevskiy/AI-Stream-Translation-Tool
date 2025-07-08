@@ -587,7 +587,7 @@ def show_pro_preferences():
             tooltip.configure(bg="gray10")
             tooltip_label = ctk.CTkLabel(
                 tooltip,
-                text="OBS source width should match wraplength to avoid line breaks.",
+                text="Check OBS Browser Sourcce => Properties, if encountering issues.",
                 font=("Helvetica", 10, "italic"),
                 text_color="gray"
             )
