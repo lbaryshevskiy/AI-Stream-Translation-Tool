@@ -15,6 +15,7 @@ import customtkinter as ctk
 import json
 import os
 from googletrans import Translator
+from faster_whisper import WhisperModel
 clear_timer = None  # Global timer to auto-clear subtitle
 
 SETTINGS_FILE = "settings.json"
