@@ -154,8 +154,13 @@ def parse_hotkey(hotkey_str):
 
 
 settings = load_settings()
-current_model_name = settings.get("whisper_model", "base")
-model = whisper.load_model(current_model_name)
+settings = load_settings()
+current_model_name = settings.get("whisper_model", "faster-tiny")  # default to faster-tiny
+
+if current_model_name == "faster-tiny":
+    model = WhisperModel("tiny", device="cpu", compute_type="int8")
+else:
+    model = whisper.load_model(current_model_name)
 
 translator = Translator()
 audio_queue = queue.Queue()
@@ -751,10 +756,11 @@ def show_pro_preferences():
         ctk.CTkLabel(creator_tab, text="Whisper Model:").pack(pady=(10, 0))
 
         model_menu = ctk.CTkOptionMenu(creator_tab, values=["Tiny", "Base", "Small", "Medium", "Large"])
-        model_menu.set("Base")
+        model_menu.set("Faster-Tiny")
         model_menu.pack(pady=(0, 10))
 
         whisper_models = {
+            "Faster-Tiny": "faster-tiny",
             "Tiny": "tiny",
             "Base": "base",
             "Small": "small",
@@ -767,14 +773,18 @@ def show_pro_preferences():
             print(f"🔄 Changing Whisper model to: {choice}")
             show_loading_popup("Loading model, please wait...")
             try:
-                selected_model = whisper_models.get(choice, "base")
+                selected_model = whisper_models.get(choice, "faster-tiny")
                 current_model_name = selected_model
-                model = whisper.load_model(selected_model)
+                if selected_model == "faster-tiny":
+                    model = WhisperModel("tiny", device="cpu", compute_type="int8")
+                else:
+                    model = whisper.load_model(selected_model)
                 print(f"✅ Model switched to {selected_model}")
             except Exception as e:
                 print(f"❌ Failed to load model '{selected_model}': {e}")
             finally:
                 close_loading_popup()
+
                 
         model_menu.configure(command=change_model)
 
