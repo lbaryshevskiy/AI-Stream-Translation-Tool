@@ -306,6 +306,16 @@ def start_backend():
         t.start()
         
     start_flask_once()
+
+    settings = load_settings()
+        socketio.emit("style_update", {
+            "font": settings.get("font_family", "Inter"),
+            "size": settings.get("font_size", 20),
+            "opacity": settings.get("opacity", 0.8),
+            "wraplength": settings.get("wraplength", 1000),
+            "box_background": settings.get("box_background", True),
+            "font_color": settings.get("font_color", "white"),
+        })
     
 def stop_backend():
     global backend_threads, flask_thread
