@@ -250,14 +250,10 @@ def transcribe_loop():
                 print("📄 Full Whisper result:", result)
                 text = result['text'].strip()
                 print(f"📝 Transcribed: {text}")
-               
-                global total_word_count, total_char_count
-                
+
                 words = text.split()
                 total_word_count += len(words)
                 total_char_count += len(text)
-
-                print(f"🔢 Total words: {total_word_count}, Total characters: {total_char_count}")
 
                 if wordcount_label and wordcount_label.winfo_exists():
                     def update_label():
@@ -265,11 +261,7 @@ def transcribe_loop():
                             text=f"Words: {total_word_count} | Characters: {total_char_count}"
                         )
                     wordcount_label.after(0, update_label)
-                    
-            except Exception as e:
-                print("⚠️ Wordcount label update failed:", e)
 
-                        
                 if text:
                     lang_label = selected_lang.get().strip()
                     lang_code = language_options.get(lang_label, "en")
@@ -278,10 +270,10 @@ def transcribe_loop():
                     socketio.emit("subtitle", {"text": translated})
                 else:
                     print("⚠️ Whisper returned empty text.")
-            
+
             except Exception as e:
-                print("❌ Transcription error:", e)
-            
+                print("❌ Transcription or emission error:", e)
+
             time.sleep(0.1)  # avoid busy loop
 
 # --- Launch Backend Threads ---
