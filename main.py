@@ -760,7 +760,7 @@ def show_pro_preferences():
 
         ctk.CTkLabel(creator_tab, text="Whisper Model:").pack(pady=(10, 0))
 
-        model_menu = ctk.CTkOptionMenu(creator_tab, values=["Tiny", "Base", "Small", "Medium", "Large"])
+        model_menu = ctk.CTkOptionMenu(creator_tab, values=["Faster-Tiny","Tiny", "Base", "Small", "Medium", "Large"])
         model_menu.set("Faster-Tiny")
         model_menu.pack(pady=(0, 10))
 
