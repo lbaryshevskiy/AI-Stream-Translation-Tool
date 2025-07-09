@@ -869,14 +869,8 @@ def show_pro_preferences():
         if user_plan != "creator":
             model_menu.configure(state="disabled")
             logging_switch.configure(state="disabled")
-
-            upgrade_label = ctk.CTkLabel(
-                creator_tab,
-                text="🔒 Unlock these features with Creator Version",
-                font=("Helvetica", 15, "italic"),
-                text_color="gray"
-            )
-            upgrade_label.place(relx=0.5, rely=1.0, anchor="s", y=-10)
+            vad_slider.configure(state="disabled")
+            hotkey_btn.configure(state="disabled")
 
         footer_frame = ctk.CTkFrame(popup, fg_color="transparent")
         footer_frame.pack(pady=(5, 10), fill="x")
