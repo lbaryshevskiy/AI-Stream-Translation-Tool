@@ -478,7 +478,11 @@ def show_pro_preferences():
             "White", "Yellow", "Cyan", "Green",
             "Black", "Red", "Blue", "Orange", "Purple", "Pink"
         ])
-        color_menu.set("White")
+        saved_color = settings.get("font_color", "White").capitalize()
+        if saved_color in ["White", "Yellow", "Cyan", "Green", "Black", "Red", "Blue", "Orange", "Purple", "Pink"]:
+            color_menu.set(saved_color)
+        else:
+            color_menu.set("White")
 
         if user_plan != "creator":
             color_menu.configure(state="disabled")
@@ -919,6 +923,7 @@ def show_pro_preferences():
                 "last_custom_box_size": width_entry.get().strip() if "Custom" in box_choice else "",
                 "input_language": input_lang_var.get(),
                 "box_background": box_bg_var.get(),
+                "font_color": color_menu.get().lower(),
             })
             
             existing["box_size"] = box_choice
