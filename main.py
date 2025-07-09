@@ -502,7 +502,7 @@ def show_pro_preferences():
         else:
             color_menu.set("White")
 
-        if user_plan != "creator":
+        if user_plan == "studio":
             color_menu.configure(state="disabled")
         color_menu.pack(pady=(0, 10))
         
