@@ -1104,8 +1104,8 @@ def main():
         available_langs = ["🇬🇧 English", "🇫🇷 French", "🇪🇸 Spanish", "🇩🇪 German", "🇮🇹 Italian", "🇵🇹 Portuguese"]
 
     # Add upgrade hint at the bottom (fake entry)
-    upgrade_hint = "🔓 More languages in Creator"
-    if user_plan != "creator":
+    upgrade_hint = "🔒 More languages in Creator"
+    if user_plan == "studio":
         available_langs.append(upgrade_hint)
 
     selected_lang = ctk.StringVar(value="🌐 Language")
