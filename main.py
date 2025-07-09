@@ -1068,14 +1068,14 @@ def main():
     plan_wrapper.place(relx=1.0, rely=1.0, anchor="se", x=-5, y=7)
 
     if user_plan != "free":
-    plan_label = ctk.CTkLabel(
-        plan_wrapper,
-        text=f"{user_plan.title()} Version",
-        text_color=plan_colors.get(user_plan, "gray"),
-        font=("Helvetica", 12, "italic"),
-        fg_color="transparent"
-    )
-    plan_label.pack(padx=0, pady=2)
+        plan_label = ctk.CTkLabel(
+            plan_wrapper,
+            text=f"{user_plan.title()} Version",
+            text_color=plan_colors.get(user_plan, "gray"),
+            font=("Helvetica", 12, "italic"),
+            fg_color="transparent"
+        )
+        plan_label.pack(padx=0, pady=2)
 
     ctk.CTkLabel(frame, text="🎙️ Streamsub", font=("Helvetica", 16, "bold")).pack(pady=(0, 10))
 
