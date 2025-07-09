@@ -70,8 +70,8 @@ backend_threads = []
 CHUNK = 1024
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
-RATE = 44100
-RECORD_SECONDS = 10
+RATE = 32000
+RECORD_SECONDS = 5
 WAVE_OUTPUT_FILENAME = "temp.wav"
 pa = pyaudio.PyAudio()
 
