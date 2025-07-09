@@ -884,7 +884,7 @@ def show_pro_preferences():
         wordcount_label = ctk.CTkLabel(creator_tab, text="Words: 0 | Characters: 0")
         wordcount_label.pack(pady=(0, 15))
 
-        if user_plan != "creator":
+        if user_plan == "studio":
             model_menu.configure(state="disabled")
             logging_switch.configure(state="disabled")
             vad_slider.configure(state="disabled")
