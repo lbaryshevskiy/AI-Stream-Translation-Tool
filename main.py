@@ -283,7 +283,6 @@ def transcribe_loop():
                         socketio.emit("subtitle", {"text": "💬 Free access expired. Please upgrade to continue."})
                         stop_backend()
 
-
                 if wordcount_label and wordcount_label.winfo_exists():
                     def update_label():
                         wordcount_label.configure(
@@ -1202,7 +1201,7 @@ def main():
     if user_plan == "free":
         global char_count_label
         char_count_label = ctk.CTkLabel(frame, text="Characters remaining: 250,000", font=("Helvetica", 12))
-        char_count_label.pack(pady=(5, 0))
+        char_count_label.pack(pady=(0, 0))
         
     root.mainloop()
     
