@@ -280,7 +280,18 @@ def transcribe_loop():
                     remaining = max(0, 250000 - total_char_count)
                     char_count_label.configure(text=f"Characters remaining: {remaining:,}")
                     if remaining == 0:
-                        socketio.emit("subtitle", {"text": "💬 Free access expired. Please upgrade to continue."})
+                        char_count_label.configure(
+                            text="Free access expired – Click here to upgrade",
+                            text_color="blue",
+                            font=("Helvetica", 12, "underline")
+                        )
+                        def open_upgrade(event):
+                            import webbrowser
+                            webbrowser.open("https://yourwebsite.com/upgrade")  # placeholder
+                    
+                        char_count_label.bind("<Button-1>", open_upgrade)
+                    
+                        socketio.emit("subtitle", {"text": "Free access expired – Click here to upgrade"})
                         stop_backend()
 
                 if wordcount_label and wordcount_label.winfo_exists():
