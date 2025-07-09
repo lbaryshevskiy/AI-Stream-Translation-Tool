@@ -1189,7 +1189,12 @@ def main():
 
     listener = keyboard.Listener(on_press=on_press, on_release=on_release)
     listener.start()
-    
+
+    if user_plan == "free":
+        global char_count_label
+        char_count_label = ctk.CTkLabel(frame, text="Characters remaining: 250,000", font=("Helvetica", 12))
+        char_count_label.pack(pady=(5, 0))
+        
     root.mainloop()
     
 if __name__ == "__main__":
