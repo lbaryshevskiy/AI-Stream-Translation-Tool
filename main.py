@@ -1067,6 +1067,7 @@ def main():
     )
     plan_wrapper.place(relx=1.0, rely=1.0, anchor="se", x=-5, y=7)
 
+    if user_plan != "free":
     plan_label = ctk.CTkLabel(
         plan_wrapper,
         text=f"{user_plan.title()} Version",
