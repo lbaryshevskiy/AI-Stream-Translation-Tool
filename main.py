@@ -1200,8 +1200,8 @@ def main():
 
     if user_plan == "free":
         global char_count_label
-        char_count_label = ctk.CTkLabel(frame, text="Characters remaining: 250,000", font=("Helvetica", 13))
-        char_count_label.pack(pady=(0, 0))
+        char_count_label = ctk.CTkLabel(btn_row, text="Characters remaining: 250,000", font=("Helvetica", 12))
+        char_count_label.pack(side="left", padx=(10, 0))
         
     root.mainloop()
     
