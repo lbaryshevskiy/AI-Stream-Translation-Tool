@@ -493,11 +493,15 @@ def show_pro_preferences():
             preview_frame.configure(fg_color="transparent")
 
             if not is_in_settings:
+                current_settings = load_settings()
                 socketio.emit("style_update", {
                     "font": font_family_var.get(),
                     "size": int(font_slider.get()),
                     "opacity": opacity,
-            })
+                    "wraplength": current_settings.get("wraplength", 1000),
+                    "box_background": current_settings.get("box_background", True),
+                    "font_color": current_settings.get("font_color", "white"),
+                })
 
         def update_opacity(value):
             opacity_value_label.configure(text=f"{float(value):.2f}")
