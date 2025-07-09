@@ -1098,12 +1098,10 @@ def main():
     ctk.CTkLabel(frame, text="🎙️ Streamsub", font=("Helvetica", 16, "bold")).pack(pady=(0, 10))
 
         # --- Language Selection Based on Plan ---
-    if user_plan == "creator":
+    if user_plan in ["creator", "free"]:
         available_langs = list(language_options.keys())
     elif user_plan == "studio":
-        available_langs = ["🇬🇧 English", "🇫🇷 French", "🇪🇸 Spanish", "🇩🇪 German", "🇮🇹 Italian"]
-    else:  # free
-        available_langs = ["🇬🇧 English", "🇫🇷 French", "🇪🇸 Spanish"]
+        available_langs = ["🇬🇧 English", "🇫🇷 French", "🇪🇸 Spanish", "🇩🇪 German", "🇮🇹 Italian", "🇵🇹 Portuguese"]
 
     # Add upgrade hint at the bottom (fake entry)
     upgrade_hint = "🔓 More languages in Creator"
