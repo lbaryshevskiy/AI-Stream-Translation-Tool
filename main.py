@@ -1201,7 +1201,7 @@ def main():
     if user_plan == "free":
         global char_count_label
         char_count_label = ctk.CTkLabel(btn_row, text="Characters remaining: 250,000", font=("Helvetica", 12))
-        char_count_label.pack(side="left", padx=(10, 0))
+        char_count_label.place(relx=0.5, rely=1.0, anchor="s", y=-10)
         
     root.mainloop()
     
