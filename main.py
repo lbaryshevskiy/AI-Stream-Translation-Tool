@@ -275,6 +275,14 @@ def transcribe_loop():
                 words = text.split()
                 total_word_count += len(words)
                 total_char_count += len(text)
+                
+                if user_plan == "free" and char_count_label is not None:
+                    remaining = max(0, 250000 - total_char_count)
+                    char_count_label.configure(text=f"Characters remaining: {remaining:,}")
+                    if remaining == 0:
+                        socketio.emit("subtitle", {"text": "💬 Free access expired. Please upgrade to continue."})
+                        stop_backend()
+
 
                 if wordcount_label and wordcount_label.winfo_exists():
                     def update_label():
