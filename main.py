@@ -202,9 +202,19 @@ def test_connect():
     def emit_hello():
         try:
             socketio.emit("subtitle", {"text": "✨ Streamsub is live!"})
+            settings = load_settings()
+            socketio.emit("style_update", {
+                "font": settings.get("font_family", "Inter"),
+                "size": settings.get("font_size", 20),
+                "opacity": settings.get("opacity", 0.8),
+                "wraplength": settings.get("wraplength", 1000),
+                "box_background": bool(settings.get("box_background", True)),
+                "font_color": settings.get("font_color", "white"),
+            })
         except Exception as e:
             print(f"⚠️ OBS closed or emit failed: {e}")
     threading.Timer(0.1, emit_hello).start()
+
 
 def record_audio():
     print("🎤 record_audio() started")
