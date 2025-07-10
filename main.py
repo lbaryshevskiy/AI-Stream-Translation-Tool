@@ -230,8 +230,8 @@ def record_audio():
             audio_array = np.frombuffer(audio_data, dtype=np.int16)
             processed_audio = audio_array.astype(np.int16).tobytes()
 
-            print("✅ Queuing audio data (bypassing VAD for debug)")
-            audio_queue.put(audio_data)
+            #print("✅ Queuing audio data (bypassing VAD for debug)")
+            #audio_queue.put(audio_data)
 
     except Exception as e:
         print("❌ Error in record_audio():", e)
@@ -252,9 +252,9 @@ def transcribe_loop():
     global total_word_count, total_char_count, wordcount_label
     while not stop_event.is_set():
         if not audio_queue.empty():
-            print("🔄 transcribe_loop() processing audio data...")
-            audio_data = audio_queue.get()
-            print("🎤 Processing audio data from queue, size:", len(audio_data))
+            #print("🔄 transcribe_loop() processing audio data...")
+            #audio_data = audio_queue.get()
+            #print("🎤 Processing audio data from queue, size:", len(audio_data))
             with wave.open(WAVE_OUTPUT_FILENAME, 'wb') as wf:
                 wf.setnchannels(CHANNELS)
                 wf.setsampwidth(pa.get_sample_size(FORMAT))
