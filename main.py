@@ -155,7 +155,7 @@ def parse_hotkey(hotkey_str):
 
 settings = load_settings()
 settings = load_settings()
-current_model_name = settings.get("whisper_model", "faster-tiny")  # default to faster-tiny
+current_model_name = settings.get("whisper_model", "base")
 
 if current_model_name == "faster-tiny":
     model = WhisperModel("tiny", device="cpu", compute_type="int8")
@@ -808,7 +808,8 @@ def show_pro_preferences():
         ctk.CTkLabel(creator_tab, text="Whisper Model:").pack(pady=(10, 0))
 
         model_menu = ctk.CTkOptionMenu(creator_tab, values=["Faster-Tiny","Tiny", "Base", "Small", "Medium", "Large"])
-        model_menu.set("Faster-Tiny")
+        saved_model = settings.get("whisper_model", "Base").capitalize()
+        model_menu.set(saved_model if saved_model in ["Faster-Tiny", "Tiny", "Base", "Small", "Medium", "Large"] else "Base")
         model_menu.pack(pady=(0, 10))
 
         whisper_models = {
@@ -936,6 +937,7 @@ def show_pro_preferences():
                 "input_language": input_lang_var.get(),
                 "box_background": box_bg_var.get(),
                 "font_color": color_menu.get().lower(),
+                existing["whisper_model"] = model_menu.get().lower()
             })
             
             existing["box_size"] = box_choice
