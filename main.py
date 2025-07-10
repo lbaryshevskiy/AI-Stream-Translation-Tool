@@ -937,8 +937,9 @@ def show_pro_preferences():
                 "input_language": input_lang_var.get(),
                 "box_background": box_bg_var.get(),
                 "font_color": color_menu.get().lower(),
-                existing["whisper_model"] = model_menu.get().lower()
             })
+
+            existing["whisper_model"] = model_menu.get().lower()
             
             existing["box_size"] = box_choice
             if "Custom" in box_choice:
