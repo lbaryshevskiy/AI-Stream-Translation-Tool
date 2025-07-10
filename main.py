@@ -268,7 +268,6 @@ def transcribe_loop():
                     print(f"📝 Transcribed (Faster-Whisper): {text}")
                 else:
                     result = model.transcribe(WAVE_OUTPUT_FILENAME, fp16=False)
-                    print("📄 Full Whisper result:", result)
                     text = result['text'].strip()
                     print(f"📝 Transcribed: {text}")
 
