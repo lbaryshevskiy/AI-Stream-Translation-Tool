@@ -169,7 +169,7 @@ if current_model_name == "faster-tiny":
     model = WhisperModel("tiny", device="cpu", compute_type="int8")
 else:
     print(f"🔁 Loading WhisperX model: {current_model_name}")
-    whisperx_model = whisperx.load_model(current_model_name, device)
+    whisperx_model = whisperx.load_model(current_model_name, device, compute_type="float32")
     model = whisperx_model  # for compatibility
     print("✅ WhisperX model loaded")
 
