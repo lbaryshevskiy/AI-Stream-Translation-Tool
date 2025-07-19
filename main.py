@@ -157,10 +157,26 @@ settings = load_settings()
 settings = load_settings()
 current_model_name = settings.get("whisper_model", "base")
 
+# --- WHISPERX PATCH ---
+import torch
+import whisperx
+device = "cuda" if torch.cuda.is_available() else "cpu"
+whisperx_model = None
+align_model = None
+align_metadata = None
+
 if current_model_name == "faster-tiny":
     model = WhisperModel("tiny", device="cpu", compute_type="int8")
 else:
-    model = whisper.load_model(current_model_name)
+    print(f"🔁 Loading WhisperX model: {current_model_name}")
+    whisperx_model = whisperx.load_model(current_model_name, device)
+    model = whisperx_model  # for compatibility
+    print("✅ WhisperX model loaded")
+
+    # Load alignment model
+    print("⏳ Loading alignment model for word-level timestamps...")
+    align_model, align_metadata = whisperx.load_align_model(language_code="en", device=device)
+    print("✅ Alignment model loaded")
 
 translator = Translator()
 audio_queue = queue.Queue()
@@ -1218,6 +1234,12 @@ def main():
     
 if __name__ == "__main__":
     main()
+
+
+
+
+
+
 
 
 
