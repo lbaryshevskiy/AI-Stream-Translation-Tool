@@ -283,7 +283,7 @@ def transcribe_loop():
                     text = " ".join([segment.text for segment in segments]).strip()
                     print(f"📝 Transcribed (Faster-Whisper): {text}")
                 else:
-                    result = model.transcribe(WAVE_OUTPUT_FILENAME, fp16=False)
+                    result = model.transcribe(WAVE_OUTPUT_FILENAME)
                     text = result['text'].strip()
                     print(f"📝 Transcribed: {text}")
 
