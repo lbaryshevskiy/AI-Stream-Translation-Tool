@@ -29,7 +29,7 @@ vad.set_mode(2)  # Aggressiveness 0-3 (2 is moderate suppression)
 
 # --- DEVELOPMENT MODE ---
 dev_mode = True
-dev_override_plan = "studio"
+dev_override_plan = "creator"
 
 user_plan = dev_override_plan if dev_mode else "free"
 
