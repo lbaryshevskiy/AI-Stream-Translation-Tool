@@ -284,7 +284,7 @@ def transcribe_loop():
                     print(f"📝 Transcribed (Faster-Whisper): {text}")
                 else:
                     result = model.transcribe(WAVE_OUTPUT_FILENAME)
-                    text = result['text'].strip()
+                    text = " ".join([segment["text"] for segment in result["segments"]]).strip()
                     print(f"📝 Transcribed: {text}")
 
                 words = text.split()
