@@ -483,7 +483,7 @@ def show_pro_preferences():
                 tooltip,
                 text="Unlock this option in Creator version",
                 font=("Helvetica", 10, "italic"),
-                text_color="gray"
+                text_color="#a1a1aa"
             )
             tooltip_label.pack()
             tooltip.geometry(f"+{event.x_root + 10}+{event.y_root + 10}")
@@ -662,7 +662,7 @@ def show_pro_preferences():
                 tooltip,
                 text="Check OBS Browser Sourcce => Properties, if encountering issues.",
                 font=("Helvetica", 10, "italic"),
-                text_color="gray"
+                text_color="#a1a1aa"
             )
             tooltip_label.pack()
             tooltip.geometry(f"+{event.x_root + 10}+{event.y_root + 10}")
@@ -1071,7 +1071,7 @@ def main():
     start_flask_once()
     appearance = settings.get("appearance_mode", "Dark")
     ctk.set_appearance_mode(appearance)
-    ctk.set_default_color_theme("blue")
+    ctk.set_default_color_theme("dark-blue")
 
     global root, selected_lang, start_btn, status_label
 
@@ -1193,7 +1193,7 @@ def main():
         height=26,
         fg_color="transparent",
         hover_color="gray20",
-        text_color="white",  # or "black" if Light mode
+        text_color="#ffffff",  # or "black" if Light mode
         font=("Helvetica", 16),
         corner_radius=6
     )
@@ -1217,7 +1217,7 @@ def main():
         height=26,
         fg_color="transparent",
         hover_color="gray20",
-        text_color="white",
+        text_color="#ffffff",
         font=("Helvetica", 23) 
     )
     reload_btn.pack(side="left")
@@ -1818,6 +1818,18 @@ class StreamSubGUI:
 if __name__ == "__main__":
     app = StreamSubGUI()
     app.run()
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
