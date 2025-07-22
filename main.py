@@ -157,6 +157,11 @@ settings = load_settings()
 settings = load_settings()
 current_model_name = settings.get("whisper_model", "base")
 
+if current_model_name.startswith("faster"):
+    model = WhisperModel("tiny", device="cpu", compute_type="int8")
+else:
+    model = whisper.load_model(current_model_name)
+
 # --- WHISPERX PATCH ---
 import torch
 import whisperx
