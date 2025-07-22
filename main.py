@@ -170,20 +170,24 @@ input_settings = load_settings()
 input_lang = input_settings.get("input_language", "🌐 Auto-detect").strip()
 forced_lang_code = language_options.get(input_lang, None)
 
-if current_model_name == "faster-tiny":
+# Transcription block
+if current_model_name.startswith("faster"):
     if forced_lang_code:
-        segments, info = model.transcribe(WAVE_OUTPUT_FILENAME, language=forced_lang_code)
+        segments, _ = whisper_model.transcribe(WAVE_OUTPUT_FILENAME, language=forced_lang_code)
     else:
-        segments, info = model.transcribe(WAVE_OUTPUT_FILENAME)
+        segments, _ = whisper_model.transcribe(WAVE_OUTPUT_FILENAME)
+
     text = " ".join([segment.text for segment in segments]).strip()
-    print(f"📝 Transcribed (Faster-Whisper): {text}")
+    print(f"🟦 Transcribed (Faster-Whisper): {text}")
 else:
     if forced_lang_code:
         result = model.transcribe(WAVE_OUTPUT_FILENAME, language=forced_lang_code)
     else:
         result = model.transcribe(WAVE_OUTPUT_FILENAME)
+
     text = " ".join([segment["text"] for segment in result["segments"]]).strip()
-    print(f"📝 Transcribed: {text}")
+    print(f"🟨 Transcribed: {text}")
+
 
 translator = Translator()
 audio_queue = queue.Queue()
