@@ -165,18 +165,25 @@ whisperx_model = None
 align_model = None
 align_metadata = None
 
-if current_model_name == "faster-tiny":
-    model = WhisperModel("tiny", device="cpu", compute_type="int8")
-else:
-    print(f"🔁 Loading WhisperX model: {current_model_name}")
-    whisperx_model = whisperx.load_model(current_model_name, device, compute_type="float32")
-    model = whisperx_model  # for compatibility
-    print("✅ WhisperX model loaded")
+# Force language from input settings (not from output lang selection)
+input_settings = load_settings()
+input_lang = input_settings.get("input_language", "🌐 Auto-detect").strip()
+forced_lang_code = language_options.get(input_lang, None)
 
-    # Load alignment model
-    print("⏳ Loading alignment model for word-level timestamps...")
-    align_model, align_metadata = whisperx.load_align_model(language_code="en", device=device)
-    print("✅ Alignment model loaded")
+if current_model_name == "faster-tiny":
+    if forced_lang_code:
+        segments, info = model.transcribe(WAVE_OUTPUT_FILENAME, language=forced_lang_code)
+    else:
+        segments, info = model.transcribe(WAVE_OUTPUT_FILENAME)
+    text = " ".join([segment.text for segment in segments]).strip()
+    print(f"📝 Transcribed (Faster-Whisper): {text}")
+else:
+    if forced_lang_code:
+        result = model.transcribe(WAVE_OUTPUT_FILENAME, language=forced_lang_code)
+    else:
+        result = model.transcribe(WAVE_OUTPUT_FILENAME)
+    text = " ".join([segment["text"] for segment in result["segments"]]).strip()
+    print(f"📝 Transcribed: {text}")
 
 translator = Translator()
 audio_queue = queue.Queue()
