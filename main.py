@@ -4,6 +4,12 @@ import time
 time.sleep(0.5)
 import wave
 import whisper
+
+import tkinter as tk
+from tkinter import ttk
+import ttkbootstrap as tb
+from ttkbootstrap.constants import *
+
 import pyaudio
 from flask import Flask, render_template
 from flask_socketio import SocketIO
@@ -1074,12 +1080,6 @@ def open_hotkey_window():
     save_btn = ctk.CTkButton(hotkey_window, text="Save Hotkeys", command=save_hotkeys)
     save_btn.pack(pady=(20, 10))
     
-
-    # MAIN
-import tkinter as tk
-from tkinter import ttk
-import pyaudio
-
 def main():
     settings = load_settings()
     start_flask_once()
