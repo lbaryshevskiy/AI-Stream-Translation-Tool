@@ -1191,7 +1191,14 @@ def main():
         char_count_label = ttk.Label(frame, text="Characters remaining: 250,000", font=("Helvetica", 10))
         char_count_label.pack(pady=(5, 0))
 
+    root.lift()
+    root.attributes('-topmost', True)
+    root.after_idle(root.attributes, '-topmost', False)
     root.mainloop()
+
+    if __name__ == "__main__":
+    main()
+
 
 
 
