@@ -1196,8 +1196,8 @@ def main():
     root.after_idle(root.attributes, '-topmost', False)
     root.mainloop()
 
-    if __name__ == "__main__":
-        main()
+if __name__ == "__main__":
+    main()
 
 
 
