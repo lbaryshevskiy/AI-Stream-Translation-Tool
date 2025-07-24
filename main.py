@@ -1,6 +1,3 @@
-# main_modern_ttk.py
-# Updated version using tkinter + ttk only (no customtkinter)
-# Black + purple design, layout preserved exactly
 import threading
 import queue
 import time
@@ -1088,9 +1085,8 @@ def main():
     start_flask_once()
 
     user_plan = dev_override_plan if dev_mode else "free"
-    
-    root = tb.Window(themename="darkly")  # darkly, cyborg, superhero are good dark themes
-    
+
+    root = tk.Tk()
     root.title("StreamSub")
     root.geometry("300x360")
     root.resizable(False, False)
@@ -1202,6 +1198,79 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
