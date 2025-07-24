@@ -1089,8 +1089,6 @@ def main():
 
     user_plan = dev_override_plan if dev_mode else "free"
     
-    import ttkbootstrap as tb
-    from ttkbootstrap.constants import *
     root = tb.Window(themename="darkly")  # darkly, cyborg, superhero are good dark themes
     
     root.title("StreamSub")
