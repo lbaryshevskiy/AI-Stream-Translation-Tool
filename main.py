@@ -1088,8 +1088,11 @@ def main():
     start_flask_once()
 
     user_plan = dev_override_plan if dev_mode else "free"
-
-    root = tk.Tk()
+    
+    import ttkbootstrap as tb
+    from ttkbootstrap.constants import *
+    root = tb.Window(themename="darkly")  # darkly, cyborg, superhero are good dark themes
+    
     root.title("StreamSub")
     root.geometry("300x360")
     root.resizable(False, False)
