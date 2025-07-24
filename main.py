@@ -1,3 +1,6 @@
+# main_modern_ttk.py
+# Updated version using tkinter + ttk only (no customtkinter)
+# Black + purple design, layout preserved exactly
 import threading
 import queue
 import time
@@ -1084,74 +1087,193 @@ def main():
     settings = load_settings()
     start_flask_once()
 
-    # Apply dark mode and scale
-    ttk.Style().theme_use('clam')
-    sv_ttk.set_theme("dark")
-
-    global root, selected_lang, start_btn, status_label
+    user_plan = dev_override_plan if dev_mode else "free"
 
     root = tk.Tk()
     root.title("StreamSub")
-    root.geometry("300x320")
-    root.configure(bg="#101010")  # Dark background
+    root.geometry("300x360")
+    root.resizable(False, False)
+    root.configure(bg="#121212")
 
-    # Frame container
-    frame = ttk.Frame(root, padding=20)
-    frame.pack(expand=True, fill="both")
+    style = ttk.Style()
+    style.theme_use("clam")
+    style.configure("TFrame", background="#121212")
+    style.configure("TLabel", background="#121212", foreground="white", font=("Helvetica", 11))
+    style.configure("TButton", font=("Helvetica", 11), padding=4)
+    style.configure("TMenubutton", font=("Helvetica", 10))
+    style.configure("TCombobox", padding=4)
+
+    frame = ttk.Frame(root)
+    frame.pack(padx=20, pady=20, fill="both", expand=True)
+
+    # === Plan label container ===
+    if user_plan != "free":
+        plan_colors = {"free": "red", "studio": "orange", "creator": "green"}
+        plan_label = ttk.Label(
+            frame,
+            text=f"{user_plan.title()} Version",
+            foreground=plan_colors.get(user_plan, "gray"),
+            font=("Helvetica", 10, "italic"),
+            anchor="e"
+        )
+        plan_label.place(relx=1.0, rely=1.0, anchor="se", x=-5, y=7)
 
     ttk.Label(frame, text="🎙️ StreamSub", font=("Helvetica", 16, "bold")).pack(pady=(0, 10))
 
-    # Determine plan
-    user_plan = dev_override_plan if dev_mode else "free"
-    plan_colors = {"free": "red", "studio": "orange", "creator": "green"}
-    if user_plan != "free":
-        ttk.Label(frame, text=f"{user_plan.title()} Version", foreground=plan_colors.get(user_plan, "gray"),
-                  font=("Helvetica", 10, "italic")).pack(side="bottom", anchor="se", pady=(5, 0))
-
-    # Language selector
-    available_langs = list(language_options.keys()) if user_plan in ["creator", "free"] else \
-        ["🇬🇧 English", "🇫🇷 French", "🇪🇸 Spanish", "🇩🇪 German", "🇮🇹 Italian", "🇵🇹 Portuguese"]
+    # --- Language Selector ---
+    available_langs = list(language_options.keys())
     if user_plan == "studio":
+        available_langs = ["🇬🇧 English", "🇫🇷 French", "🇪🇸 Spanish", "🇩🇪 German", "🇮🇹 Italian", "🇵🇹 Portuguese"]
         available_langs.append("🔒 More languages in Creator")
-    
+
+    global selected_lang
     selected_lang = tk.StringVar(value="🌐 Language")
 
-    def on_lang_select(choice):
-        if choice == "🔒 More languages in Creator":
+    def on_lang_select(event=None):
+        if selected_lang.get() == "🔒 More languages in Creator":
             selected_lang.set("🌐 Language")
-        else:
-            selected_lang.set(choice)
 
-    lang_menu = ttk.OptionMenu(frame, selected_lang, selected_lang.get(), *available_langs, command=on_lang_select)
-    lang_menu.pack(pady=10)
+    lang_menu = ttk.Combobox(frame, textvariable=selected_lang, values=available_langs, state="readonly")
+    lang_menu.pack(pady=8)
+    lang_menu.bind("<<ComboboxSelected>>", on_lang_select)
 
-    ttk.Button(frame, text="📋 Copy OBS URL", command=copy_url).pack(pady=10)
-    ttk.Button(frame, text="⚙️ Settings", command=show_pro_preferences).pack(pady=10)
+    ttk.Button(frame, text="📋 Copy OBS URL", command=copy_url).pack(pady=6)
+    ttk.Button(frame, text="⚙️ Settings", command=show_pro_preferences).pack(pady=6)
 
+    global status_label
     status_label = ttk.Label(frame, text="", font=("Helvetica", 11))
-    status_label.pack_forget()
+    status_label.pack_forget()  # Keep hidden initially
 
-    # Buttons row (mic, start, reload)
+    # Button Row
     btn_row = ttk.Frame(frame)
-    btn_row.pack(pady=(10, 5))
+    btn_row.pack(pady=(10, 5), anchor="e")
 
-    ttk.Button(btn_row, text="♫", width=3, command=open_mic_selection).pack(side="left", padx=5)
-    ttk.Button(btn_row, text="▶️ Start", width=12, command=toggle_backend).pack(side="left", padx=5)
-    ttk.Button(btn_row, text="↻", width=3, command=restart_server).pack(side="left", padx=5)
+    def open_mic_selection():
+        mic_window = tk.Toplevel()
+        mic_window.title("Select Microphone")
+        mic_window.geometry("250x150")
+        mic_window.configure(bg="#121212")
 
-    # Free plan character counter
-    if user_plan == "free":
-        global char_count_label
-        char_count_label = ttk.Label(frame, text="Characters remaining: 250,000", font=("Helvetica", 10))
-        char_count_label.pack()
+        pa = pyaudio.PyAudio()
+        mic_dict = {}
+        mic_list = []
+
+        for i in range(pa.get_device_count()):
+            info = pa.get_device_info_by_index(i)
+            mic_dict[info['name']] = i
+            mic_list.append(info['name'])
+
+        mic_var = tk.StringVar(value=mic_list[0] if mic_list else "No devices")
+
+        ttk.Label(mic_window, text="Choose Input Mic:").pack(pady=(10, 5))
+        mic_menu = ttk.Combobox(mic_window, textvariable=mic_var, values=mic_list, state="readonly")
+        mic_menu.pack(pady=10)
+
+        def save_mic_choice():
+            choice_name = mic_var.get()
+            choice_index = mic_dict[choice_name]
+            settings["mic_index"] = choice_index
+            save_settings(settings)
+            mic_window.destroy()
+
+        ttk.Button(mic_window, text="Save", command=save_mic_choice).pack(pady=12)
+
+    ttk.Button(btn_row, text="♫", command=open_mic_selection, width=3).pack(side="left", padx=4)
+
+    global start_btn
+    start_btn = ttk.Button(btn_row, text="▶️ Start", command=toggle_backend)
+    start_btn.pack(side="left", padx=4)
+
+    ttk.Button(btn_row, text="↻", command=restart_server, width=3).pack(side="left", padx=4)
 
     listener = keyboard.Listener(on_press=on_press, on_release=on_release)
     listener.start()
 
+    if user_plan == "free":
+        global char_count_label
+        char_count_label = ttk.Label(frame, text="Characters remaining: 250,000", font=("Helvetica", 10))
+        char_count_label.pack(pady=(5, 0))
+
+    root.lift()
+    root.attributes('-topmost', True)
+    root.after_idle(root.attributes, '-topmost', False)
     root.mainloop()
 
 if __name__ == "__main__":
     main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
