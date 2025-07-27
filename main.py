@@ -1095,19 +1095,22 @@ def main():
 }
 
     from PIL import Image, ImageTk
-
-    root = ctk.CTk()
+    from customtkinter import CTk, CTkImage, CTkLabel
+    
+    root = CTk()
     root.title("Streamsub")
     root.geometry("300x300")
     root.resizable(False, False)
-
-    root.configure(fg_color="#1a1a1a")   # or try #222222 or #2b2b2b
-
-    from customtkinter import CTkImage
     
-    bg_image = CTkImage(Image.open("background_gradient.png"), size=(300, 300))
-    bg_label = ctk.CTkLabel(root, image=bg_image, text="")
+    # 📸 Background gradient
+    bg_raw = Image.open("background_gradient.png")
+    bg_image = CTkImage(light_image=bg_raw, dark_image=bg_raw, size=(300, 300))
+    bg_label = CTkLabel(root, image=bg_image, text="")
     bg_label.place(x=0, y=0, relwidth=1, relheight=1)
+    
+    # 🎯 Add your widgets after this line
+    # (they’ll be layered above the image)
+
 
 
     # Determine plan (simulate during dev)
