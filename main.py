@@ -1105,8 +1105,8 @@ def main():
     
     from customtkinter import CTkImage
 
-    bg_image = CTkImage(Image.open("background_gradient.png"), size=(300, 300))
-    bg_label = ctk.CTkLabel(root, image=bg_image, text="")
+    bg_image = Image.open("background_gradient.png")
+    bg_photo = CTkImage(dark_image=bg_image, light_image=bg_image, size=(250, 300))
 
     bg_label = ctk.CTkLabel(master=root, image=bg_photo, text="")
     bg_label.place(x=0, y=0, relwidth=1, relheight=1)
