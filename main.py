@@ -1118,7 +1118,7 @@ def main():
     bg_label.place(x=0, y=0, relwidth=1, relheight=1)
 
     frame = ctk.CTkFrame(master=root, fg_color="transparent")
-    frame.place(relx=0.5, rely=0.5, anchor="center")
+    frame.pack(fill="both", expand=True)  # this replaces place()
 
     # Determine plan (simulate during dev)
     if dev_mode:
