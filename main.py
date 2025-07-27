@@ -1094,24 +1094,28 @@ def main():
     "font": ("Inter", 12)
 }
 
-    from PIL import Image, ImageTk
-    from customtkinter import CTk, CTkImage, CTkLabel
+    from customtkinter import CTk, CTkImage, CTkLabel, CTkButton
+    from PIL import Image
     
     root = CTk()
     root.title("Streamsub")
     root.geometry("300x300")
     root.resizable(False, False)
     
-    # 📸 Background gradient
-    bg_raw = Image.open("background_gradient.png")
-    bg_image = CTkImage(light_image=bg_raw, dark_image=bg_raw, size=(300, 300))
-    bg_label = CTkLabel(root, image=bg_image, text="")
+    # DO NOT SET any fg_color on root (that’s what causes the gray box)
+    # root.configure(...) ← leave this out
+    
+    # Load and place full-size background image
+    gradient = Image.open("background_gradient.png")
+    bg_image = CTkImage(light_image=gradient, dark_image=gradient, size=(300, 300))
+    bg_label = CTkLabel(master=root, image=bg_image, text="", fg_color="transparent")
     bg_label.place(x=0, y=0, relwidth=1, relheight=1)
     
-    # 🎯 Add your widgets after this line
-    # (they’ll be layered above the image)
-
-
+    # Place your widgets ABOVE the image — they’ll float
+    btn = CTkButton(root, text="Start", fg_color="#8c34eb")  # example
+    btn.place(relx=0.5, rely=0.7, anchor="center")
+    
+    root.mainloop()
 
     # Determine plan (simulate during dev)
     if dev_mode:
