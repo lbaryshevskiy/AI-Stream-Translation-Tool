@@ -1102,23 +1102,18 @@ def main():
     root.geometry("300x350")
     root.resizable(False, False)
     
-    # DO NOT SET any fg_color on root (that’s what causes the gray box)
-    # root.configure(...) ← leave this out
-    
-    # Load and place full-size background image
+
     from PIL import Image, ImageTk
     from customtkinter import CTkImage
     
-    # Load gradient background image
     bg_image_raw = Image.open("background_gradient.png")
     bg_image = CTkImage(light_image=bg_image_raw, dark_image=bg_image_raw, size=(300, 350))
     
-    # Background image label (sits behind everything)
-    bg_label = ctk.CTkLabel(master=root, image=bg_image, text="")
-    bg_label.place(x=0, y=0, relwidth=1, relheight=1)
+    bg_label = ctk.CTkLabel(master=frame, image=bg_image, text="")
+    bg_label.place(relx=0, rely=0, relwidth=1, relheight=1)
 
     frame = ctk.CTkFrame(master=root, fg_color="transparent")
-    frame.pack(fill="both", expand=True)  # this replaces place()
+    frame.pack(fill="both", expand=True)  
 
     # Determine plan (simulate during dev)
     if dev_mode:
