@@ -1094,19 +1094,18 @@ def main():
     "font": ("Inter", 12)
 }
 
+    from PIL import Image, ImageTk
+
     root = ctk.CTk()
     root.title("Streamsub")
     root.geometry("300x300")
     root.resizable(False, False)
     
-    from PIL import Image, ImageTk
-
-    # Load background image (ensure it's in your project folder)
-    bg_image = Image.open("background_gradient.png")
-    bg_image = bg_image.resize((300, 300))  # same as window size
+    # Set window background
+    bg_image = Image.open("background_gradient.png").resize((300, 300))
     bg_photo = ImageTk.PhotoImage(bg_image)
     
-    bg_label = ctk.CTkLabel(root, image=bg_photo, text="")
+    bg_label = ctk.CTkLabel(master=root, image=bg_photo, text="")
     bg_label.place(x=0, y=0, relwidth=1, relheight=1)
 
     # Determine plan (simulate during dev)
