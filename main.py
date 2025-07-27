@@ -1101,8 +1101,8 @@ def main():
     root.geometry("300x300")
     root.resizable(False, False)
 
-    root.configure(fg_color="#000000")  # or any solid color like black
-    
+    root.configure(fg_color="#0d001a")  # replace with a dark tone from your gradient
+
     from customtkinter import CTkImage
 
     bg_image = Image.open("background_gradient.png")
@@ -1110,6 +1110,7 @@ def main():
 
     bg_label = ctk.CTkLabel(master=root, image=bg_photo, text="")
     bg_label.place(x=0, y=0, relwidth=1, relheight=1)
+    bg_label.lower()
 
     # Determine plan (simulate during dev)
     if dev_mode:
