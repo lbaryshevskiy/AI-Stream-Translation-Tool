@@ -1100,6 +1100,8 @@ def main():
     root.title("Streamsub")
     root.geometry("300x300")
     root.resizable(False, False)
+
+    root.configure(fg_color="transparent")
     
     # Set window background
     bg_image = Image.open("background_gradient.png").resize((300, 300))
