@@ -1098,6 +1098,16 @@ def main():
     root.title("Streamsub")
     root.geometry("300x300")
     root.resizable(False, False)
+    
+    from PIL import Image, ImageTk
+
+    # Load background image (ensure it's in your project folder)
+    bg_image = Image.open("background_gradient.png")
+    bg_image = bg_image.resize((300, 300))  # same as window size
+    bg_photo = ImageTk.PhotoImage(bg_image)
+    
+    bg_label = ctk.CTkLabel(root, image=bg_photo, text="")
+    bg_label.place(x=0, y=0, relwidth=1, relheight=1)
 
     # Determine plan (simulate during dev)
     if dev_mode:
@@ -1105,7 +1115,7 @@ def main():
     else:
         user_plan = "free"  # placeholder for future licensing logic
 
-    frame = ctk.CTkFrame(root)
+    frame = ctk.CTkFrame(root, fg_color="transparent")
     frame.pack(padx=20, pady=20, fill="both", expand=True)
     
     plan_colors = {
