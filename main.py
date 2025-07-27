@@ -1103,10 +1103,11 @@ def main():
 
     root.configure(fg_color="transparent")
     
-    # Set window background
-    bg_image = Image.open("background_gradient.png").resize((300, 300))
-    bg_photo = ImageTk.PhotoImage(bg_image)
-    
+    from customtkinter import CTkImage
+
+    bg_image = CTkImage(Image.open("background_gradient.png"), size=(300, 300))
+    bg_label = ctk.CTkLabel(root, image=bg_image, text="")
+
     bg_label = ctk.CTkLabel(master=root, image=bg_photo, text="")
     bg_label.place(x=0, y=0, relwidth=1, relheight=1)
 
