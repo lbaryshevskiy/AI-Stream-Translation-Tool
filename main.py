@@ -1086,6 +1086,14 @@ def main():
 
     global root, selected_lang, start_btn, status_label
 
+    modern_button_styles = {
+    "fg_color": "#6a0dad",         # purple
+    "hover_color": "#7d3cff",      # lighter purple
+    "text_color": "white",
+    "corner_radius": 12,
+    "font": ("Inter", 12)
+}
+
     root = ctk.CTk()
     root.title("Streamsub")
     root.geometry("300x300")
@@ -1153,11 +1161,22 @@ def main():
     )
     lang_menu.pack(pady=10)
 
-    copy_btn = ctk.CTkButton(frame, text="📋 Copy OBS URL ", command=copy_url)
+    copy_btn = ctk.CTkButton(
+        frame,
+        text="📋 Copy OBS URL",
+        command=copy_url,
+        **modern_button_styles
+    )
     copy_btn.pack(pady=10)
 
-    settings_btn = ctk.CTkButton(frame, text="⚙️ Settings", command=show_pro_preferences)
+    settings_btn = ctk.CTkButton(
+        frame,
+        text="⚙️ Settings",
+        command=show_pro_preferences,
+        **modern_button_styles
+    )
     settings_btn.pack(pady=10)
+
 
     global status_label
     status_label = ctk.CTkLabel(frame, text="", font=("Helvetica", 12))
@@ -1202,34 +1221,27 @@ def main():
         command=open_mic_selection,
         width=26,
         height=26,
-        fg_color="transparent",
-        hover_color="gray20",
-        text_color="white",  # or "black" if Light mode
-        font=("Helvetica", 16),
-        corner_radius=6
+        **modern_button_styles
     )
     mic_btn.pack(side="left", padx=(0, 6), pady=(8, 0))
-
-
+    
     start_btn = ctk.CTkButton(
         btn_row,
         text="▶️ Start",
         command=toggle_backend,
         width=140,
-        height=28
+        height=28,
+        **modern_button_styles
     )
-    start_btn.pack(side="left", padx=(0, 6))  # small gap before reload
-
+    start_btn.pack(side="left", padx=(0, 6))
+    
     reload_btn = ctk.CTkButton(
         btn_row,
         text="↻",
         command=restart_server,
         width=26,
         height=26,
-        fg_color="transparent",
-        hover_color="gray20",
-        text_color="white",
-        font=("Helvetica", 23) 
+        **modern_button_styles
     )
     reload_btn.pack(side="left")
 
