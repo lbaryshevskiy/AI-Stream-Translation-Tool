@@ -1101,7 +1101,7 @@ def main():
     root.geometry("300x300")
     root.resizable(False, False)
 
-    root.configure(fg_color="transparent")
+    root.configure(fg_color="#000000")  # or any solid color like black
     
     from customtkinter import CTkImage
 
