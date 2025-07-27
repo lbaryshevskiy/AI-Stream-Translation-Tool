@@ -1101,7 +1101,7 @@ def main():
     root.geometry("300x300")
     root.resizable(False, False)
 
-    root.configure(fg_color="#0d001a")  # replace with a dark tone from your gradient
+    root.configure(fg_color="#1a1a1a")   # or try #222222 or #2b2b2b
 
     from customtkinter import CTkImage
     
