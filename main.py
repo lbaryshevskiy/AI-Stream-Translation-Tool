@@ -1111,7 +1111,7 @@ def main():
     
     # Load gradient background image
     bg_image_raw = Image.open("background_gradient.png")
-    bg_image = CTkImage(light_image=bg_image_raw, dark_image=bg_image_raw, size=(300, 300))
+    bg_image = CTkImage(light_image=bg_image_raw, dark_image=bg_image_raw, size=(300, 350))
     
     # Background image label (sits behind everything)
     bg_label = ctk.CTkLabel(master=root, image=bg_image, text="")
