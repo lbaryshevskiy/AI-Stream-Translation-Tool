@@ -1106,11 +1106,20 @@ def main():
     # root.configure(...) ← leave this out
     
     # Load and place full-size background image
-    gradient = Image.open("background_gradient.png")
-    bg_image = CTkImage(light_image=gradient, dark_image=gradient, size=(300, 300))
-    bg_label = CTkLabel(master=root, image=bg_image, text="", fg_color="transparent")
-    bg_label.place(x=0, y=0, relwidth=1, relheight=1)
+    from PIL import Image, ImageTk
+    from customtkinter import CTkImage
     
+    # Load gradient background image
+    bg_image_raw = Image.open("background_gradient.png")
+    bg_image = CTkImage(light_image=bg_image_raw, dark_image=bg_image_raw, size=(300, 300))
+    
+    # Background image label (sits behind everything)
+    bg_label = ctk.CTkLabel(master=root, image=bg_image, text="")
+    bg_label.place(x=0, y=0, relwidth=1, relheight=1)
+
+    frame = ctk.CTkFrame(master=root, fg_color="transparent")
+    frame.place(relx=0.5, rely=0.5, anchor="center")
+
     # Place your widgets ABOVE the image — they’ll float
     btn = CTkButton(root, text="Start", fg_color="#8c34eb")  # example
     btn.place(relx=0.5, rely=0.7, anchor="center")
