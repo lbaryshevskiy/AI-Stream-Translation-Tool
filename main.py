@@ -1120,9 +1120,6 @@ def main():
         user_plan = dev_override_plan
     else:
         user_plan = "free"  # placeholder for future licensing logic
-
-    frame = ctk.CTkFrame(root, fg_color="transparent")
-    frame.pack(padx=20, pady=20, fill="both", expand=True)
     
     plan_colors = {
         "free": "red",
