@@ -1099,7 +1099,7 @@ def main():
     
     root = CTk()
     root.title("Streamsub")
-    root.geometry("300x300")
+    root.geometry("300x350")
     root.resizable(False, False)
     
     # DO NOT SET any fg_color on root (that’s what causes the gray box)
