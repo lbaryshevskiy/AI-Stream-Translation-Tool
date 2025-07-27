@@ -1120,10 +1120,6 @@ def main():
     frame = ctk.CTkFrame(master=root, fg_color="transparent")
     frame.place(relx=0.5, rely=0.5, anchor="center")
 
-    # Place your widgets ABOVE the image — they’ll float
-    btn = CTkButton(root, text="Start", fg_color="#8c34eb")  # example
-    btn.place(relx=0.5, rely=0.7, anchor="center")
-
     # Determine plan (simulate during dev)
     if dev_mode:
         user_plan = dev_override_plan
