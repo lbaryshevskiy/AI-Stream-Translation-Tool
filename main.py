@@ -1178,9 +1178,17 @@ def main():
         frame,
         variable=selected_lang,
         values=available_langs,
-        command=on_lang_select
+        command=on_lang_select,
+        fg_color=modern_button_styles["fg_color"],
+        button_color=modern_button_styles["fg_color"],
+        button_hover_color=modern_button_styles["hover_color"],
+        text_color=modern_button_styles["text_color"],
+        font=modern_button_styles["font"],
+        dropdown_fg_color="#2a003f",
+        dropdown_text_color="white",
+        dropdown_hover_color="#4e007a",
+        corner_radius=modern_button_styles["corner_radius"]
     )
-    lang_menu.pack(pady=10)
 
     copy_btn = ctk.CTkButton(
         frame,
