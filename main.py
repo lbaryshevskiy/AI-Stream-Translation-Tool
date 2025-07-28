@@ -1123,9 +1123,9 @@ def main():
         bg_label.lower()
     
     # Now add the frame ABOVE the background
-    frame = ctk.CTkFrame(master=root, fg_color="transparent", corner_radius=0)
-    frame.place(relx=0.5, rely=0.5, anchor="center")
-    frame.configure(width=300, height=350)
+    #frame = ctk.CTkFrame(master=root, fg_color="transparent", corner_radius=0)
+    #frame.place(relx=0.5, rely=0.5, anchor="center")
+    #frame.configure(width=300, height=350)
 
     # Determine plan (simulate during dev)
     if dev_mode:
