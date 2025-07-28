@@ -1200,8 +1200,6 @@ def main():
         dropdown_text_color="white",
         dropdown_hover_color="#560099",
         corner_radius=12,
-        border_width=0,
-        border_color="transparent",
         bg_color="transparent"
     )
     lang_menu.pack(pady=10)
