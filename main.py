@@ -1108,15 +1108,16 @@ def main():
     # Load the background gradient image
     bg_image_raw = Image.open("background_gradient.png")
     bg_image = CTkImage(light_image=bg_image_raw, dark_image=bg_image_raw, size=(300, 350))
-    
-    # Create the frame FIRST (important!)
-    frame = ctk.CTkFrame(master=root, fg_color="transparent")
-    frame.pack(fill="both", expand=True)
-    
+
     # Add the background image to root (not frame)
     bg_label = ctk.CTkLabel(master=root, image=bg_image, text="")
     bg_label.place(relx=0, rely=0, relwidth=1, relheight=1)
     bg_label.lower()  # Push it behind everything
+    
+    
+    # Create the frame FIRST (important!)
+    frame = ctk.CTkFrame(master=root, fg_color="transparent")
+    frame.pack(fill="both", expand=True)
     
     
     # Determine plan (simulate during dev)
