@@ -1101,22 +1101,21 @@ def main():
     root.title("Streamsub")
     root.geometry("300x350")
     root.resizable(False, False)
+    
 
     from PIL import Image, ImageTk
     from customtkinter import CTkImage
+    
+    bg_image_raw = Image.open("background_gradient.png")
+    bg_image = CTkImage(light_image=bg_image_raw, dark_image=bg_image_raw, size=(300, 350))
 
     frame = ctk.CTkFrame(master=root, fg_color="transparent")
-    frame.place(relx=0, rely=0, relwidth=1, relheight=1)
-
-    bg_raw = Image.open("background_gradient.png")
-    bg_image = CTkImage(light_image=bg_raw, dark_image=bg_raw, size=(300, 350))
-
-    bg_label = ctk.CTkLabel(master=root, image=bg_image, text="")
-    bg_label.place(relx=0, rely=0, relwidth=1, relheight=1)
-
+    frame.pack(fill="both", expand=True) 
+    
     bg_label = ctk.CTkLabel(master=frame, image=bg_image, text="")
     bg_label.place(relx=0, rely=0, relwidth=1, relheight=1)
-    bg_label.lower()
+
+     
 
     # Determine plan (simulate during dev)
     if dev_mode:
@@ -1155,7 +1154,7 @@ def main():
         text_color="white",
         fg_color="transparent"
     ).pack(pady=(10, 5))
-    
+
         # --- Language Selection Based on Plan ---
     if user_plan in ["creator", "free"]:
         available_langs = list(language_options.keys())
@@ -1194,7 +1193,7 @@ def main():
         width=180,
         height=36
     )
-
+    copy_btn.pack(pady=10)
 
     settings_btn = ctk.CTkButton(
         frame,
@@ -1284,6 +1283,78 @@ def main():
     
 if __name__ == "__main__":
     main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
