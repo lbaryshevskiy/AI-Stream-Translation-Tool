@@ -1199,7 +1199,7 @@ def main():
         corner_radius=12
     )
 
-    lang_menu.pack(pady=10)
+    lang_menu.pack()
     
     copy_btn = ctk.CTkButton(
         root,
