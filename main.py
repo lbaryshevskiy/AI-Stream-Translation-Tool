@@ -1110,10 +1110,14 @@ def main():
     
     try:
         bg_image_raw = Image.open("background_gradient.png")
-        bg_image_raw.verify()
+        bg_image_raw.verify()  # Verify image is not corrupted
+        bg_image_raw = Image.open("background_gradient.png")  # Reopen after verify
+        bg_image = CTkImage(light_image=bg_image_raw, dark_image=bg_image_raw, size=(300, 350))
+        print("✅ Background image loaded successfully.")
     except Exception as e:
-        print("❌ Background image loading failed:", e)
-
+        print("❌ Background image failed to load:", e)
+        bg_image = None
+        
     # Determine plan (simulate during dev)
     if dev_mode:
         user_plan = dev_override_plan
@@ -1286,10 +1290,11 @@ def main():
         char_count_label = ctk.CTkLabel(frame, text="Characters remaining: 250,000", font=("Helvetica", 12))
         char_count_label.pack(pady=(0, 0))
 
-    bg_label = ctk.CTkLabel(master=frame, image=bg_image, text="")
-    bg_label.place(relx=0, rely=0, relwidth=1, relheight=1)
-    bg_label.lower()  # Ensure it's behind everything
-        
+    if bg_image:
+        bg_label = ctk.CTkLabel(master=frame, image=bg_image, text="", fg_color="transparent")
+        bg_label.place(relx=0, rely=0, relwidth=1, relheight=1)
+        bg_label.lower()
+
     root.mainloop()
     
 if __name__ == "__main__":
