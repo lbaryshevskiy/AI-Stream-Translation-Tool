@@ -14,9 +14,6 @@ logging.getLogger('werkzeug').setLevel(logging.ERROR)
 import customtkinter as ctk
 import json
 import os
-import customtkinter as ctk
-from PIL import Image
-from customtkinter import CTkImage
 from googletrans import Translator
 from faster_whisper import WhisperModel
 clear_timer = None  # Global timer to auto-clear subtitle
@@ -1097,29 +1094,29 @@ def main():
     "font": ("Inter", 12)
 }
 
+    from customtkinter import CTk, CTkImage, CTkLabel, CTkButton
+    from PIL import Image
     
-    ctk.set_appearance_mode("dark")
-    ctk.set_default_color_theme("blue")
-    
-    root = ctk.CTk()
-    root.geometry("300x350")
+    root = CTk()
     root.title("Streamsub")
+    root.geometry("300x350")
+    root.resizable(False, False)
     
-    # 🟣 Load the gradient PNG
+
+    from PIL import Image, ImageTk
+    from customtkinter import CTkImage
+    
     bg_image_raw = Image.open("background_gradient.png")
     bg_image = CTkImage(light_image=bg_image_raw, dark_image=bg_image_raw, size=(300, 350))
-    
-    # 🟣 Show the image in a Label directly on root (not frame!)
-    bg_label = ctk.CTkLabel(master=root, image=bg_image, text="", fg_color="transparent")
-    bg_label.place(relx=0, rely=0, relwidth=1, relheight=1)
-    
-    # 🟣 Create your main widget container on top of the background
+
     frame = ctk.CTkFrame(master=root, fg_color="transparent")
-    frame.pack(fill="both", expand=True)
+    frame.pack(fill="both", expand=True) 
     
-    # 🟣 Lower the bg_label so it stays behind
-    bg_label.lower()
-        
+    bg_label = ctk.CTkLabel(master=frame, image=bg_image, text="")
+    bg_label.place(relx=0, rely=0, relwidth=1, relheight=1)
+
+     
+
     # Determine plan (simulate during dev)
     if dev_mode:
         user_plan = dev_override_plan
@@ -1151,13 +1148,13 @@ def main():
         plan_label.pack(padx=0, pady=2)
 
     ctk.CTkLabel(
-            frame,
-            text="🎙️ Streamsub",
-            font=("Helvetica", 18, "bold"),
-            text_color="white",
-            fg_color="transparent"
-        ).pack(pady=(10, 5))
-        
+        frame,
+        text="🎙️ Streamsub",
+        font=("Helvetica", 18, "bold"),
+        text_color="white",
+        fg_color="transparent"
+    ).pack(pady=(10, 5))
+
         # --- Language Selection Based on Plan ---
     if user_plan in ["creator", "free"]:
         available_langs = list(language_options.keys())
@@ -1296,6 +1293,150 @@ def main():
     
 if __name__ == "__main__":
     main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
