@@ -1110,7 +1110,7 @@ def main():
     bg_image = CTkImage(light_image=bg_image_raw, dark_image=bg_image_raw, size=(300, 350))
     
     # 🟣 Show the image in a Label directly on root (not frame!)
-    bg_label = CTkLabel(master=root, image=bg_image, text="", fg_color="transparent")
+    bg_label = ctk.CTkLabel(master=root, image=bg_image, text="", fg_color="transparent")
     bg_label.place(relx=0, rely=0, relwidth=1, relheight=1)
     
     # 🟣 Create your main widget container on top of the background
