@@ -1102,7 +1102,7 @@ def main():
     root.geometry("300x350")
     root.resizable(False, False)
 
-    frame = ctk.CTkFrame(master=root, fg_color="transparent")
+    frame = ctk.CTkFrame(master=root)
     frame.place(relx=0, rely=0, relwidth=1, relheight=1)
 
     from PIL import Image, ImageTk
@@ -1119,7 +1119,7 @@ def main():
         bg_image = None
 
     if bg_image:
-        bg_label = ctk.CTkLabel(master=frame, image=bg_image, text="", fg_color="transparent")
+        bg_label = ctk.CTkLabel(master=root, image=bg_image, text="", fg_color="transparent")
         bg_label.place(relx=0, rely=0, relwidth=1, relheight=1)
         bg_label.lower()
         
