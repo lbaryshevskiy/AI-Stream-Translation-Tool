@@ -1149,7 +1149,7 @@ def main():
         text_color="white",
         fg_color="transparent"
     ).pack(pady=(10, 5))
-
+    
         # --- Language Selection Based on Plan ---
     if user_plan in ["creator", "free"]:
         available_langs = list(language_options.keys())
