@@ -1297,11 +1297,6 @@ def main():
         char_count_label = ctk.CTkLabel(frame, text="Characters remaining: 250,000", font=("Helvetica", 12))
         char_count_label.pack(pady=(0, 0))
 
-    if bg_image:
-        bg_label = ctk.CTkLabel(master=frame, image=bg_image, text="", fg_color="transparent")
-        bg_label.place(relx=0, rely=0, relwidth=1, relheight=1)
-        bg_label.lower()
-
     root.mainloop()
     
 if __name__ == "__main__":
