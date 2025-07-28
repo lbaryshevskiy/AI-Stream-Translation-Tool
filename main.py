@@ -1102,10 +1102,6 @@ def main():
     root.geometry("300x350")
     root.resizable(False, False)
 
-    frame = ctk.CTkFrame(master=root, fg_color="transparent")
-    frame.place(relx=0.5, rely=0.5, anchor="center")
-    frame.configure(width=300, height=350)
-    
     from PIL import Image, ImageTk
     from customtkinter import CTkImage
     
@@ -1125,6 +1121,10 @@ def main():
         bg_label = ctk.CTkLabel(master=root, image=bg_image, text="", fg_color="transparent")
         bg_label.place(relx=0, rely=0, relwidth=1, relheight=1)
         bg_label.lower()
+
+    frame = ctk.CTkFrame(master=root, fg_color="transparent")
+    frame.place(relx=0.5, rely=0.5, anchor="center")
+    frame.configure(width=300, height=350)
 
     # Determine plan (simulate during dev)
     if dev_mode:
