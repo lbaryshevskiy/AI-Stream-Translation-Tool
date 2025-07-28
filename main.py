@@ -1108,21 +1108,23 @@ def main():
     from PIL import Image, ImageTk
     from customtkinter import CTkImage
     
+    # Load background image
     try:
         bg_image_raw = Image.open("background_gradient.png")
-        bg_image_raw.verify()  # Verify image is not corrupted
-        bg_image_raw = Image.open("background_gradient.png")  # Reopen after verify
-        bg_image = CTkImage(light_image=bg_image_raw, dark_image=bg_image_raw, size=(300, 350))
+        bg_image_raw.verify()
+        bg_image_raw = Image.open("background_gradient.png")
+        bg_image = ctk.CTkImage(light_image=bg_image_raw, dark_image=bg_image_raw, size=(300, 350))
         print("✅ Background image loaded successfully.")
     except Exception as e:
         print("❌ Background image failed to load:", e)
         bg_image = None
-
+    
+    # Place background image behind everything
     if bg_image:
-        bg_label = ctk.CTkLabel(master=root, image=bg_image, text="", fg_color="transparent")
+        bg_label = ctk.CTkLabel(master=frame, image=bg_image, text="", fg_color="transparent")
         bg_label.place(relx=0, rely=0, relwidth=1, relheight=1)
         bg_label.lower()
-        
+
     # Determine plan (simulate during dev)
     if dev_mode:
         user_plan = dev_override_plan
