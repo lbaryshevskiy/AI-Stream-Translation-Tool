@@ -1116,15 +1116,16 @@ def main():
         print("❌ Background image failed to load:", e)
         bg_image = None
 
+    # Place background image behind everything (attach to root, not frame)
+    if bg_image:
+        bg_label = ctk.CTkLabel(master=root, image=bg_image, text="", fg_color="transparent")
+        bg_label.place(relx=0, rely=0, relwidth=1, relheight=1)
+        bg_label.lower()
+    
+    # Now add the frame ABOVE the background
     frame = ctk.CTkFrame(master=root, fg_color="transparent", corner_radius=0)
     frame.place(relx=0.5, rely=0.5, anchor="center")
     frame.configure(width=300, height=350)
-    
-    # Place background image behind everything
-    if bg_image:
-        bg_label = ctk.CTkLabel(master=frame, image=bg_image, text="", fg_color="transparent")
-        bg_label.place(relx=0, rely=0, relwidth=1, relheight=1)
-        bg_label.lower()
 
     # Determine plan (simulate during dev)
     if dev_mode:
