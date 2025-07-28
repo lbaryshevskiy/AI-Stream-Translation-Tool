@@ -1122,7 +1122,7 @@ def main():
         bg_label.place(relx=0, rely=0, relwidth=1, relheight=1)
         bg_label.lower()
 
-    frame = ctk.CTkFrame(master=root, fg_color="transparent")
+    frame = ctk.CTkFrame(master=root, fg_color="transparent", corner_radius=0)
     frame.place(relx=0.5, rely=0.5, anchor="center")
     frame.configure(width=300, height=350)
 
