@@ -1121,7 +1121,7 @@ def main():
     
     # Place background image behind everything
     if bg_image:
-        bg_label = ctk.CTkLabel(master=frame, image=bg_image, text="", fg_color="transparent")
+        bg_label = ctk.CTkLabel(master=root, image=bg_image, text="", fg_color="transparent")
         bg_label.place(relx=0, rely=0, relwidth=1, relheight=1)
         bg_label.lower()
 
