@@ -1114,7 +1114,7 @@ def main():
     bg_label.place(relx=0, rely=0, relwidth=1, relheight=1)
     
     # 🟣 Create your main widget container on top of the background
-    frame = CTkFrame(master=root, fg_color="transparent")
+    frame = ctk.CTkFrame(master=root, fg_color="transparent")
     frame.pack(fill="both", expand=True)
     
     # 🟣 Lower the bg_label so it stays behind
