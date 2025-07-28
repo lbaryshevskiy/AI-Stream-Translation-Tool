@@ -1184,7 +1184,7 @@ def main():
         variable=selected_lang,
         values=available_langs,
         command=on_lang_select,
-        fg_color="#6a0dad",
+        fg_color="#6a0dad",               # purple
         button_color="#6a0dad",
         button_hover_color="#7d3cff",
         text_color="white",
@@ -1193,8 +1193,7 @@ def main():
         dropdown_text_color="white",
         dropdown_hover_color="#560099",
         corner_radius=12,
-        border_width=0,                # ✨ Remove grey edge
-        border_color="transparent"     # ✨ Ensure no fallback border
+        bg_color="transparent"            # ✨ this hides the outer box
     )
 
     lang_menu.pack(pady=10)
