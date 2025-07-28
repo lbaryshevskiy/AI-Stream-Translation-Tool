@@ -1086,19 +1086,42 @@ def main():
 
     global root, selected_lang, start_btn, status_label
 
-    root = ctk.CTk()
+    modern_button_styles = {
+    "fg_color": "#6a0dad",         # purple
+    "hover_color": "#7d3cff",      # lighter purple
+    "text_color": "white",
+    "corner_radius": 12,
+    "font": ("Inter", 12)
+}
+
+    from customtkinter import CTk, CTkImage, CTkLabel, CTkButton
+    from PIL import Image
+    
+    root = CTk()
     root.title("Streamsub")
-    root.geometry("300x300")
+    root.geometry("300x350")
     root.resizable(False, False)
+    
+
+    from PIL import Image, ImageTk
+    from customtkinter import CTkImage
+    
+    bg_image_raw = Image.open("background_gradient.png")
+    bg_image = CTkImage(light_image=bg_image_raw, dark_image=bg_image_raw, size=(300, 350))
+
+    frame = ctk.CTkFrame(master=root, fg_color="transparent")
+    frame.pack(fill="both", expand=True) 
+    
+    bg_label = ctk.CTkLabel(master=frame, image=bg_image, text="")
+    bg_label.place(relx=0, rely=0, relwidth=1, relheight=1)
+
+     
 
     # Determine plan (simulate during dev)
     if dev_mode:
         user_plan = dev_override_plan
     else:
         user_plan = "free"  # placeholder for future licensing logic
-
-    frame = ctk.CTkFrame(root)
-    frame.pack(padx=20, pady=20, fill="both", expand=True)
     
     plan_colors = {
         "free": "red",
@@ -1124,7 +1147,13 @@ def main():
         )
         plan_label.pack(padx=0, pady=2)
 
-    ctk.CTkLabel(frame, text="🎙️ Streamsub", font=("Helvetica", 16, "bold")).pack(pady=(0, 10))
+    ctk.CTkLabel(
+        frame,
+        text="🎙️ Streamsub",
+        font=("Helvetica", 18, "bold"),
+        text_color="white",
+        fg_color="transparent"
+    ).pack(pady=(10, 5))
 
         # --- Language Selection Based on Plan ---
     if user_plan in ["creator", "free"]:
@@ -1149,15 +1178,41 @@ def main():
         frame,
         variable=selected_lang,
         values=available_langs,
-        command=on_lang_select
+        command=on_lang_select,
+        fg_color="#6a0dad",               # matches buttons
+        button_color="#6a0dad",
+        button_hover_color="#7d3cff",
+        text_color="white",
+        font=("Inter", 12),
+        dropdown_fg_color="#3b006b",      # darker purple dropdown
+        dropdown_text_color="white",
+        dropdown_hover_color="#560099",
+        corner_radius=12
     )
     lang_menu.pack(pady=10)
-
-    copy_btn = ctk.CTkButton(frame, text="📋 Copy OBS URL ", command=copy_url)
+    
+    copy_btn = ctk.CTkButton(
+        frame,
+        text="📋 Copy OBS URL",
+        command=copy_url,
+        width=150,
+        height=36,
+        fg_color="#6a0dad",
+        hover_color="#7d3cff",
+        text_color="white",
+        corner_radius=12,
+        font=("Inter", 12)
+    )
     copy_btn.pack(pady=10)
 
-    settings_btn = ctk.CTkButton(frame, text="⚙️ Settings", command=show_pro_preferences)
+    settings_btn = ctk.CTkButton(
+        frame,
+        text="⚙️ Settings",
+        command=show_pro_preferences,
+        **modern_button_styles
+    )
     settings_btn.pack(pady=10)
+
 
     global status_label
     status_label = ctk.CTkLabel(frame, text="", font=("Helvetica", 12))
@@ -1202,34 +1257,27 @@ def main():
         command=open_mic_selection,
         width=26,
         height=26,
-        fg_color="transparent",
-        hover_color="gray20",
-        text_color="white",  # or "black" if Light mode
-        font=("Helvetica", 16),
-        corner_radius=6
+        **modern_button_styles
     )
     mic_btn.pack(side="left", padx=(0, 6), pady=(8, 0))
-
-
+    
     start_btn = ctk.CTkButton(
         btn_row,
         text="▶️ Start",
         command=toggle_backend,
         width=140,
-        height=28
+        height=28,
+        **modern_button_styles
     )
-    start_btn.pack(side="left", padx=(0, 6))  # small gap before reload
-
+    start_btn.pack(side="left", padx=(0, 6))
+    
     reload_btn = ctk.CTkButton(
         btn_row,
         text="↻",
         command=restart_server,
         width=26,
         height=26,
-        fg_color="transparent",
-        hover_color="gray20",
-        text_color="white",
-        font=("Helvetica", 23) 
+        **modern_button_styles
     )
     reload_btn.pack(side="left")
 
@@ -1245,6 +1293,150 @@ def main():
     
 if __name__ == "__main__":
     main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
