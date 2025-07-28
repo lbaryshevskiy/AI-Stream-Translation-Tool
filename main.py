@@ -14,6 +14,9 @@ logging.getLogger('werkzeug').setLevel(logging.ERROR)
 import customtkinter as ctk
 import json
 import os
+import customtkinter as ctk
+from PIL import Image
+from customtkinter import CTkImage
 from googletrans import Translator
 from faster_whisper import WhisperModel
 clear_timer = None  # Global timer to auto-clear subtitle
@@ -1094,9 +1097,6 @@ def main():
     "font": ("Inter", 12)
 }
 
-    import customtkinter as ctk
-    from PIL import Image
-    from customtkinter import CTkImage
     
     ctk.set_appearance_mode("dark")
     ctk.set_default_color_theme("blue")
