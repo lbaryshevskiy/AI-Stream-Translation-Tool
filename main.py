@@ -1150,9 +1150,11 @@ def main():
     ctk.CTkLabel(
         frame,
         text="🎙️ Streamsub",
-        font=("Helvetica", 16, "bold"),
+        font=("Helvetica", 18, "bold"),
+        text_color="white",
         fg_color="transparent"
-    ).pack(pady=(0, 10))
+    ).pack(pady=(10, 5))
+
         # --- Language Selection Based on Plan ---
     if user_plan in ["creator", "free"]:
         available_langs = list(language_options.keys())
