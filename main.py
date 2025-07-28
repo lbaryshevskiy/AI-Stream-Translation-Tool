@@ -1146,13 +1146,17 @@ def main():
         )
         plan_label.pack(padx=0, pady=2)
 
-    ctk.CTkLabel(
-        frame,
+    title_container = ctk.CTkFrame(frame, fg_color="transparent")
+    title_container.pack(pady=(10, 5))
+    
+    title_label = ctk.CTkLabel(
+        title_container,
         text="🎙️ Streamsub",
         font=("Helvetica", 18, "bold"),
         text_color="white",
         fg_color="transparent"
-    ).pack(pady=(10, 5))
+    )
+    title_label.pack()
 
         # --- Language Selection Based on Plan ---
     if user_plan in ["creator", "free"]:
