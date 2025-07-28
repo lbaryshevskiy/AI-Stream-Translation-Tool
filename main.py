@@ -1094,28 +1094,31 @@ def main():
     "font": ("Inter", 12)
 }
 
-    from customtkinter import CTk, CTkImage, CTkLabel, CTkButton
+    import customtkinter as ctk
     from PIL import Image
-    
-    root = CTk()
-    root.title("Streamsub")
-    root.geometry("300x350")
-    root.resizable(False, False)
-    
-
-    from PIL import Image, ImageTk
     from customtkinter import CTkImage
     
+    ctk.set_appearance_mode("dark")
+    ctk.set_default_color_theme("blue")
+    
+    root = ctk.CTk()
+    root.geometry("300x350")
+    root.title("Streamsub")
+    
+    # Load the background gradient image
     bg_image_raw = Image.open("background_gradient.png")
     bg_image = CTkImage(light_image=bg_image_raw, dark_image=bg_image_raw, size=(300, 350))
     
+    # Create the frame FIRST (important!)
+    frame = ctk.CTkFrame(master=root, fg_color="transparent")
+    frame.pack(fill="both", expand=True)
+    
+    # Add the background image to root (not frame)
     bg_label = ctk.CTkLabel(master=root, image=bg_image, text="")
     bg_label.place(relx=0, rely=0, relwidth=1, relheight=1)
-    bg_label.lower()
-
-    frame = ctk.CTkFrame(master=root, fg_color="transparent")
-    frame.pack(fill="both", expand=True) 
-
+    bg_label.lower()  # Push it behind everything
+    
+    
     # Determine plan (simulate during dev)
     if dev_mode:
         user_plan = dev_override_plan
@@ -1146,18 +1149,14 @@ def main():
         )
         plan_label.pack(padx=0, pady=2)
 
-    title_container = ctk.CTkFrame(frame, fg_color="transparent")
-    title_container.pack(pady=(10, 5))
-    
-    title_label = ctk.CTkLabel(
-        title_container,
-        text="🎙️ Streamsub",
-        font=("Helvetica", 18, "bold"),
-        text_color="white",
-        fg_color="transparent"
-    )
-    title_label.pack()
-
+    ctk.CTkLabel(
+            frame,
+            text="🎙️ Streamsub",
+            font=("Helvetica", 18, "bold"),
+            text_color="white",
+            fg_color="transparent"
+        ).pack(pady=(10, 5))
+        
         # --- Language Selection Based on Plan ---
     if user_plan in ["creator", "free"]:
         available_langs = list(language_options.keys())
