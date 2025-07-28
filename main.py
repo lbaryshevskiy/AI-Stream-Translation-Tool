@@ -1105,12 +1105,6 @@ def main():
     frame = ctk.CTkFrame(master=root, fg_color="transparent")
     frame.place(relx=0, rely=0, relwidth=1, relheight=1)
 
-    if bg_image:
-        bg_label = ctk.CTkLabel(master=frame, image=bg_image, text="", fg_color="transparent")
-        bg_label.place(relx=0, rely=0, relwidth=1, relheight=1)
-        bg_label.lower()
-
-
     from PIL import Image, ImageTk
     from customtkinter import CTkImage
     
@@ -1123,6 +1117,11 @@ def main():
     except Exception as e:
         print("❌ Background image failed to load:", e)
         bg_image = None
+
+    if bg_image:
+        bg_label = ctk.CTkLabel(master=frame, image=bg_image, text="", fg_color="transparent")
+        bg_label.place(relx=0, rely=0, relwidth=1, relheight=1)
+        bg_label.lower()
         
     # Determine plan (simulate during dev)
     if dev_mode:
