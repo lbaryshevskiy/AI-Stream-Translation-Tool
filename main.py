@@ -1111,11 +1111,6 @@ def main():
 
     frame = ctk.CTkFrame(master=root, fg_color="transparent")
     frame.pack(fill="both", expand=True) 
-    
-    bg_label = ctk.CTkLabel(master=frame, image=bg_image, text="")
-    bg_label.place(relx=0, rely=0, relwidth=1, relheight=1)
-
-     
 
     # Determine plan (simulate during dev)
     if dev_mode:
@@ -1273,6 +1268,10 @@ def main():
 
     listener = keyboard.Listener(on_press=on_press, on_release=on_release)
     listener.start()
+
+    bg_label = ctk.CTkLabel(master=frame, image=bg_image, text="")
+    bg_label.place(relx=0, rely=0, relwidth=1, relheight=1)
+    bg_label.lower()
 
     if user_plan == "free":
         global char_count_label
