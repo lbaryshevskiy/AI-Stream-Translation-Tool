@@ -1194,7 +1194,7 @@ def main():
         width=180,
         height=36
     )
-    copy_btn.pack(pady=10)
+
 
     settings_btn = ctk.CTkButton(
         frame,
