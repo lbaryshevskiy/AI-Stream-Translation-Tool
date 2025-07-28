@@ -1187,7 +1187,7 @@ def main():
     lang_frame.pack(pady=10)
     
     lang_menu = ctk.CTkOptionMenu(
-        lang_frame,
+        root,
         variable=selected_lang,
         values=available_langs,
         command=on_lang_select,
@@ -1200,11 +1200,12 @@ def main():
         dropdown_text_color="white",
         dropdown_hover_color="#560099",
         corner_radius=12,
+        border_width=0,
+        border_color="transparent",
         bg_color="transparent"
     )
-    lang_menu.pack()
+    lang_menu.pack(pady=10)
 
-    
     copy_btn = ctk.CTkButton(
         root,
         text="📋 Copy OBS URL",
