@@ -1195,10 +1195,15 @@ def main():
         frame,
         text="📋 Copy OBS URL",
         command=copy_url,
-        **modern_button_styles,
         width=180,
-        height=36
+        height=36,
+        fg_color="#6a0dad",
+        hover_color="#7d3cff",
+        text_color="white",
+        corner_radius=12,
+        font=("Inter", 12)
     )
+    copy_btn.pack(pady=10)
 
     settings_btn = ctk.CTkButton(
         frame,
