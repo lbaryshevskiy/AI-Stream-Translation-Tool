@@ -1102,7 +1102,7 @@ def main():
     root.geometry("300x350")
     root.resizable(False, False)
 
-   frame = ctk.CTkFrame(master=root, fg_color="transparent")
+    frame = ctk.CTkFrame(master=root, fg_color="transparent")
     frame.pack(fill="both", expand=True)
     
     from PIL import Image, ImageTk
