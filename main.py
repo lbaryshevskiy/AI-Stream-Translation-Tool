@@ -1113,7 +1113,6 @@ def main():
     
     bg_label = ctk.CTkLabel(master=frame, image=bg_image, text="")
     bg_label.place(relx=0, rely=0, relwidth=1, relheight=1)
-    bg_label.lower()  # Ensure it's behind everything
 
     # Determine plan (simulate during dev)
     if dev_mode:
@@ -1286,6 +1285,8 @@ def main():
         global char_count_label
         char_count_label = ctk.CTkLabel(frame, text="Characters remaining: 250,000", font=("Helvetica", 12))
         char_count_label.pack(pady=(0, 0))
+
+    bg_label.lower()  # Ensure it's behind everything
         
     root.mainloop()
     
