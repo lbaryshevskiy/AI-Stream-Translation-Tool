@@ -1121,12 +1121,7 @@ def main():
         bg_label = ctk.CTkLabel(master=root, image=bg_image, text="", fg_color="transparent")
         bg_label.place(relx=0, rely=0, relwidth=1, relheight=1)
         bg_label.lower()
-    
-    # Now add the frame ABOVE the background
-    #frame = ctk.CTkFrame(master=root, fg_color="transparent", corner_radius=0)
-    #frame.place(relx=0.5, rely=0.5, anchor="center")
-    #frame.configure(width=300, height=350)
-
+   
     # Determine plan (simulate during dev)
     if dev_mode:
         user_plan = dev_override_plan
@@ -1141,7 +1136,7 @@ def main():
 
     # === Plan label container (bottom-right inside frame) ===
     plan_wrapper = ctk.CTkFrame(
-        frame,
+        root,
         fg_color="transparent",
         corner_radius=0
     )
@@ -1158,7 +1153,7 @@ def main():
         plan_label.pack(padx=0, pady=2)
 
     ctk.CTkLabel(
-        frame,
+        root,
         text="🎙️ Streamsub",
         font=("Helvetica", 18, "bold"),
         text_color="white",
@@ -1185,7 +1180,7 @@ def main():
             selected_lang.set(choice)
 
     lang_menu = ctk.CTkOptionMenu(
-        frame,
+        root,
         variable=selected_lang,
         values=available_langs,
         command=on_lang_select,
@@ -1202,7 +1197,7 @@ def main():
     lang_menu.pack(pady=10)
     
     copy_btn = ctk.CTkButton(
-        frame,
+        root,
         text="📋 Copy OBS URL",
         command=copy_url,
         width=150,
@@ -1216,7 +1211,7 @@ def main():
     copy_btn.pack(pady=10)
 
     settings_btn = ctk.CTkButton(
-        frame,
+        root,
         text="⚙️ Settings",
         command=show_pro_preferences,
         **modern_button_styles
