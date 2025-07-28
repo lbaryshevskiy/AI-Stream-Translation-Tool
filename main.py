@@ -1101,16 +1101,19 @@ def main():
     root.title("Streamsub")
     root.geometry("300x350")
     root.resizable(False, False)
-    
 
     from PIL import Image, ImageTk
     from customtkinter import CTkImage
+
+    frame = ctk.CTkFrame(master=root, fg_color="transparent")
+    frame.place(relx=0, rely=0, relwidth=1, relheight=1)
     
     bg_label = ctk.CTkLabel(master=root, image=bg_image, text="")
     bg_label.place(relx=0, rely=0, relwidth=1, relheight=1)
-    
-    frame = ctk.CTkFrame(master=root, fg_color="transparent")
-    frame.place(relx=0, rely=0, relwidth=1, relheight=1)
+
+    bg_label = ctk.CTkLabel(master=frame, image=bg_image, text="")
+    bg_label.place(relx=0, rely=0, relwidth=1, relheight=1)
+    bg_label.lower()
 
     # Determine plan (simulate during dev)
     if dev_mode:
@@ -1268,10 +1271,6 @@ def main():
 
     listener = keyboard.Listener(on_press=on_press, on_release=on_release)
     listener.start()
-
-    bg_label = ctk.CTkLabel(master=frame, image=bg_image, text="")
-    bg_label.place(relx=0, rely=0, relwidth=1, relheight=1)
-    bg_label.lower()
 
     if user_plan == "free":
         global char_count_label
