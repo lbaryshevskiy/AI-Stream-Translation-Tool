@@ -1101,21 +1101,24 @@ def main():
     ctk.set_appearance_mode("dark")
     ctk.set_default_color_theme("blue")
     
-    root = ctk.CTk()
+    root = CTk()
     root.geometry("300x350")
     root.title("Streamsub")
     
+    # 🟣 Load the gradient PNG
     bg_image_raw = Image.open("background_gradient.png")
     bg_image = CTkImage(light_image=bg_image_raw, dark_image=bg_image_raw, size=(300, 350))
     
-    # ✅ Place background FIRST
-    bg_label = ctk.CTkLabel(master=root, image=bg_image, text="")
+    # 🟣 Show the image in a Label directly on root (not frame!)
+    bg_label = CTkLabel(master=root, image=bg_image, text="", fg_color="transparent")
     bg_label.place(relx=0, rely=0, relwidth=1, relheight=1)
-    bg_label.lower()  # Push behind everything
     
-    # ✅ THEN pack your main frame
-    frame = ctk.CTkFrame(master=root, fg_color="transparent")
+    # 🟣 Create your main widget container on top of the background
+    frame = CTkFrame(master=root, fg_color="transparent")
     frame.pack(fill="both", expand=True)
+    
+    # 🟣 Lower the bg_label so it stays behind
+    bg_label.lower()
         
     # Determine plan (simulate during dev)
     if dev_mode:
