@@ -1112,10 +1112,10 @@ def main():
     frame = ctk.CTkFrame(master=root, fg_color="transparent")
     frame.pack(fill="both", expand=True) 
     
-    bg_label = ctk.CTkLabel(master=root, image=bg_image, text="")
+    bg_label = ctk.CTkLabel(master=frame, image=bg_image, text="")
     bg_label.place(relx=0, rely=0, relwidth=1, relheight=1)
     bg_label.lower()
-     
+
     # Determine plan (simulate during dev)
     if dev_mode:
         user_plan = dev_override_plan
