@@ -1195,7 +1195,7 @@ def main():
         frame,
         text="📋 Copy OBS URL",
         command=copy_url,
-        width=180,
+        width=1150,
         height=36,
         fg_color="#6a0dad",
         hover_color="#7d3cff",
