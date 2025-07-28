@@ -1102,9 +1102,10 @@ def main():
     root.geometry("300x350")
     root.resizable(False, False)
 
-    frame = ctk.CTkFrame(master=root)
-    frame.place(relx=0, rely=0, relwidth=1, relheight=1)
-
+    frame = ctk.CTkFrame(master=root, fg_color="transparent")
+    frame.place(relx=0.5, rely=0.5, anchor="center")
+    frame.configure(width=300, height=350)
+    
     from PIL import Image, ImageTk
     from customtkinter import CTkImage
     
