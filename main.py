@@ -1103,8 +1103,8 @@ def main():
     root.resizable(False, False)
 
     frame = ctk.CTkFrame(master=root, fg_color="transparent")
-    frame.pack(fill="both", expand=True)
-    
+    frame.place(relx=0, rely=0, relwidth=1, relheight=1)
+
     from PIL import Image, ImageTk
     from customtkinter import CTkImage
     
