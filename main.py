@@ -1220,11 +1220,11 @@ def main():
 
 
     global status_label
-    status_label = ctk.CTkLabel(frame, text="", font=("Helvetica", 12))
+    status_label = ctk.CTkLabel(root, text="", font=("Helvetica", 12))
     status_label.place_forget()  # Keeps it invisible
 
    # --- Right-aligned Start + Reload (aligned with buttons above) ---
-    btn_row = ctk.CTkFrame(frame, fg_color="transparent")
+    btn_row = ctk.CTkFrame(root, fg_color="transparent")
     btn_row.pack(pady=(7, 5), anchor="e", padx=(0, 25))  # anchor to right + padding
 
     def open_mic_selection():
