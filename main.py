@@ -1183,8 +1183,11 @@ def main():
     lang_wrapper = ctk.CTkFrame(root, fg_color="transparent", corner_radius=0)
     lang_wrapper.pack(pady=(10, 0))  # use 0 or minimal padding to reduce visual box
     
+    lang_frame = ctk.CTkFrame(root, fg_color="transparent")
+    lang_frame.pack(pady=10)
+    
     lang_menu = ctk.CTkOptionMenu(
-        lang_wrapper,
+        lang_frame,
         variable=selected_lang,
         values=available_langs,
         command=on_lang_select,
@@ -1196,10 +1199,11 @@ def main():
         dropdown_fg_color="#3b006b",
         dropdown_text_color="white",
         dropdown_hover_color="#560099",
-        corner_radius=12
+        corner_radius=12,
+        bg_color="transparent"
     )
-
     lang_menu.pack()
+
     
     copy_btn = ctk.CTkButton(
         root,
