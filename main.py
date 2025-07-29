@@ -1183,22 +1183,21 @@ def main():
     lang_menu = ctk.CTkOptionMenu(
         root,
         values=["English", "French", "German"],
-        command=change_language,
+        command=change_language,  # this should be defined!
         width=200,
         height=35,
-        fg_color=("#7e2df0", "#7e2df0"),
-        button_color=("#7e2df0", "#7e2df0"),
-        button_hover_color=("#a347ff", "#a347ff"),
         text_color="white",
         font=("Arial", 14),
         corner_radius=20,
+        fg_color="#7e2df0",             # no transparent!
+        button_color="#7e2df0",
+        button_hover_color="#a347ff",
         dropdown_fg_color="#1a1a1a",
         dropdown_text_color="white",
         dropdown_hover_color="#333333",
     )
     
     lang_menu.pack(pady=10)
-    lang_menu.configure(fg_color="transparent")
     
     copy_btn = ctk.CTkButton(
         root,
