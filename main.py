@@ -1180,25 +1180,23 @@ def main():
             selected_lang.set(choice)
 
     # Create a transparent container for alignment and background fix
-    lang_container = ctk.CTkFrame(root, fg_color="transparent")
-    lang_container.pack(pady=10)
-    
     lang_menu = ctk.CTkOptionMenu(
-        lang_container,
+        root,
         variable=selected_lang,
         values=available_langs,
         command=on_lang_select,
-        fg_color="#6a0dad",
+        fg_color="#6a0dad",               # Purple fill
         button_color="#6a0dad",
         button_hover_color="#7d3cff",
         text_color="white",
         font=("Inter", 12),
-        dropdown_fg_color="#3b006b",
+        dropdown_fg_color="#6a0dad",      # Make dropdown match
+        dropdown_hover_color="#7d3cff",
         dropdown_text_color="white",
-        dropdown_hover_color="#560099",
-        corner_radius=12
+        border_width=0,                   # ✅ Remove border
+        corner_radius=20                  # Optional: make it rounder
     )
-    lang_menu.pack()
+    lang_menu.pack(pady=10)
 
     copy_btn = ctk.CTkButton(
         root,
