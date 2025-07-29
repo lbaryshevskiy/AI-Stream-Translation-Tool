@@ -1182,23 +1182,23 @@ def main():
     
     lang_menu = ctk.CTkOptionMenu(
         root,
-        values=["English", "French", "German"],
-        command=change_language,  # this should be defined!
-        width=200,
-        height=35,
+        variable=selected_lang,
+        values=available_langs,
+        command=on_lang_select,
+        fg_color="transparent",            # remove grey box
+        button_color="transparent",        # remove grey box
+        button_hover_color="#a347ff",      # keep hover purple
         text_color="white",
-        font=("Arial", 14),
+        font=("Inter", 14),
         corner_radius=20,
-        fg_color="#7e2df0",             # no transparent!
-        button_color="#7e2df0",
-        button_hover_color="#a347ff",
         dropdown_fg_color="#1a1a1a",
         dropdown_text_color="white",
         dropdown_hover_color="#333333",
+        width=200,
+        height=35
     )
-    
     lang_menu.pack(pady=10)
-    
+
     copy_btn = ctk.CTkButton(
         root,
         text="📋 Copy OBS URL",
