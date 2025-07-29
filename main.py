@@ -1184,15 +1184,15 @@ def main():
         variable=selected_lang,
         values=available_langs,
         command=on_lang_select,
-        fg_color="#1a001f",  # Match background
-        button_color="#8a2be2",  # Main purple
-        button_hover_color="#a64aff",
+        fg_color="#7b1fa2",  # Match vibrant purple
+        button_color="#7b1fa2",
+        button_hover_color="#9c27b0",  # Slightly lighter on hover
         text_color="white",
-        font=("Inter", 12),
-        dropdown_fg_color="#2e003f",
+        font=("Inter", 13),
+        dropdown_fg_color="#4a0072",  # Darker purple for dropdown
         dropdown_text_color="white",
-        dropdown_hover_color="#560099",
-        corner_radius=20
+        dropdown_hover_color="#6a1b9a",
+        corner_radius=30
     )
     lang_menu.pack(pady=10)
 
