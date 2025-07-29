@@ -1179,21 +1179,24 @@ def main():
         else:
             selected_lang.set(choice)
 
+    
     lang_menu = ctk.CTkOptionMenu(
-        master=root,
-        variable=selected_lang,
-        values=available_langs,
-        command=on_lang_select,
-        fg_color="transparent",                 # REMOVE outer border
-        button_color="#6a0dad",                 # purple
-        button_hover_color="#7d3cff",           # hover
+        root,
+        values=["English", "French", "German"],
+        command=change_language,
+        width=200,
+        height=35,
+        fg_color=("#7e2df0", "#7e2df0"),
+        button_color=("#7e2df0", "#7e2df0"),
+        button_hover_color=("#a347ff", "#a347ff"),
         text_color="white",
-        font=("Inter", 12),
-        dropdown_fg_color="#3b006b",
+        font=("Arial", 14),
+        corner_radius=20,
+        dropdown_fg_color="#1a1a1a",
         dropdown_text_color="white",
-        dropdown_hover_color="#560099",
-        corner_radius=12
+        dropdown_hover_color="#333333",
     )
+    
     lang_menu.pack(pady=10)
     lang_menu.configure(fg_color="transparent")
     
