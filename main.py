@@ -1228,7 +1228,15 @@ def main():
         
         mic_var = ctk.StringVar(value=mic_list[0] if mic_list else "No devices")
         
-        mic_menu = ctk.CTkOptionMenu(mic_window, variable=mic_var, values=mic_list)
+        mic_menu = ctk.CTkOptionMenu(
+            mic_window,
+            variable=mic_var,
+            values=mic_list,
+            fg_color="#6A1B9A",
+            button_color="#6A1B9A",
+            button_hover_color="#AB47BC",
+            text_color="white"
+        )
         mic_menu.pack(pady=20)
         
         def save_mic_choice():
