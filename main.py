@@ -1091,10 +1091,15 @@ def open_hotkey_window():
         hotkey_window.destroy()
 
     save_btn = ctk.CTkButton(
-    hotkey_window, text="Save Hotkeys", command=save_hotkeys, fg_color="#9C27B0", hover_color="#BA68C8", text_color="white", corner_radius=8),
+        hotkey_window,
+        text="Save Hotkeys",
+        command=save_hotkeys,
+        fg_color="#9C27B0",
+        hover_color="#BA68C8",
+        text_color="white",
+        corner_radius=8
+    )
     save_btn.pack(pady=(20, 10))
-)
-    
 
     # MAIN
 def main():
