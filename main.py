@@ -1236,10 +1236,16 @@ def main():
             mic_window.destroy()
             
         save_btn = ctk.CTkButton(
-    mic_window, text="Save", command=save_mic_choice, fg_color="#9C27B0", hover_color="#BA68C8", text_color="white", corner_radius=8),
-    save_btn.pack(pady=27)
-)
-    
+            mic_window,
+            text="Save",
+            command=save_mic_choice,
+            fg_color="#9C27B0",
+            hover_color="#BA68C8",
+            text_color="white",
+            corner_radius=8
+        )
+        save_btn.pack(pady=27)
+
     mic_btn = ctk.CTkButton(
     btn_row,,
     fg_color="#6A1B9A", hover_color="#AB47BC", text_color="white", corner_radius=8,
