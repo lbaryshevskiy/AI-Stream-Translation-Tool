@@ -433,6 +433,8 @@ def show_pro_preferences():
     )
     tabview.add("Studio")
     tabview.add("Creator")
+
+    tabview.pack(pady=15, padx=15, fill="both", expand=True)
     
     # Apply purple theme to tabs
     tabview._segmented_button.configure(
