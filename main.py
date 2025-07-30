@@ -1247,45 +1247,43 @@ def main():
         save_btn.pack(pady=27)
 
     mic_btn = ctk.CTkButton(
-    btn_row,,
-    fg_color="#6A1B9A", hover_color="#AB47BC", text_color="white", corner_radius=8,
-    text="♫",,
-    command=open_mic_selection,,
-    width=26,,
-    height=26,,
-    fg_color="transparent",,
-    hover_color="gray20",,
-    text_color="white",  # or "black" if Light mode,
-    font=("Helvetica", 16),
-)
-        corner_radius=6
+        btn_row,
+        text="♫",
+        command=open_mic_selection,
+        width=26,
+        height=26,
+        fg_color="#6A1B9A",
+        hover_color="#AB47BC",
+        text_color="white",  # or "black" if Light mode
+        font=("Helvetica", 16),
+        corner_radius=8
     )
     mic_btn.pack(side="left", padx=(0, 6), pady=(8, 0))
 
-
     start_btn = ctk.CTkButton(
-    btn_row,,
-    ),
-    fg_color="#9C27B0", hover_color="#BA68C8", text_color="white", corner_radius=8,
-    text="▶️ Start",,
-    command=toggle_backend,,
-    width=140,,
-    height=28
-)
-    start_btn.pack(side="left", padx=(0, 6))  # small gap before reload
+        btn_row,
+        text="▶️ Start",
+        command=toggle_backend,
+        width=140,
+        height=28,
+        fg_color="#9C27B0",
+        hover_color="#BA68C8",
+        text_color="white",
+        corner_radius=8
+    )
+    start_btn.pack(side="left", padx=(0, 6))
 
     reload_btn = ctk.CTkButton(
-    btn_row,,
-    fg_color="#6A1B9A", hover_color="#AB47BC", text_color="white", corner_radius=8,
-    text="↻",,
-    command=restart_server,,
-    width=26,,
-    height=26,,
-    fg_color="transparent",,
-    hover_color="gray20",,
-    text_color="white",,
-    font=("Helvetica", 23)
-)
+        btn_row,
+        text="↻",
+        command=restart_server,
+        width=26,
+        height=26,
+        fg_color="#6A1B9A",
+        hover_color="#AB47BC",
+        text_color="white",
+        font=("Helvetica", 23),
+        corner_radius=8
     )
     reload_btn.pack(side="left")
 
