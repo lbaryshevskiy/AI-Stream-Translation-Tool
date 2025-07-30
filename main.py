@@ -538,14 +538,26 @@ def show_pro_preferences():
             if hasattr(event.widget, "tooltip"):
                 event.widget.tooltip.destroy()
 
-        # --- Font Color ---
-
+              # --- Font Color ---
         color_label_frame = ctk.CTkFrame(page1, fg_color="transparent")
         color_label_frame.pack(pady=(10, 0))
         
-        font_color_label = ctk.CTkLabel(page1, text="Font Color:")
-        font_color_label.pack(pady=(10, 0))
+        font_color_label = ctk.CTkLabel(color_label_frame, text="Font Color:")
+        font_color_label.pack(side="left")
         
+        tooltip_icon = ctk.CTkLabel(
+            color_label_frame,
+            text="?",
+            font=("Helvetica", 12, "bold"),
+            width=12
+        )
+        tooltip_icon.pack(side="left", padx=(5, 0))
+        
+        if user_plan != "creator":
+            tooltip_icon.bind("<Enter>", show_tooltip)
+            tooltip_icon.bind("<Leave>", hide_tooltip)
+        
+        # Purple styled dropdown
         color_menu = ctk.CTkOptionMenu(
             page1,
             values=[
@@ -557,30 +569,20 @@ def show_pro_preferences():
             button_hover_color="#AB47BC",
             text_color="white"
         )
-        color_menu.set(settings.get("font_color", "White"))  # ✅ set to saved color
-        color_menu.pack(pady=(0, 10))
-
-        tooltip_icon = ctk.CTkLabel(color_label_frame, text="?", font=("Helvetica", 12, "bold"), width=12)
-        tooltip_icon.pack(side="left", padx=(2, 0))
         
-        if user_plan != "creator":
-            tooltip_icon.bind("<Enter>", show_tooltip)
-            tooltip_icon.bind("<Leave>", hide_tooltip)
-
-        color_menu = ctk.CTkOptionMenu(page1, values=[
-            "White", "Yellow", "Cyan", "Green",
-            "Black", "Red", "Blue", "Orange", "Purple", "Pink"
-        ])
+        # Restore saved color
         saved_color = settings.get("font_color", "White").capitalize()
         if saved_color in ["White", "Yellow", "Cyan", "Green", "Black", "Red", "Blue", "Orange", "Purple", "Pink"]:
             color_menu.set(saved_color)
         else:
             color_menu.set("White")
-
+        
+        # Disable if needed
         if user_plan == "studio":
             color_menu.configure(state="disabled")
-        color_menu.pack(pady=(0, 10))
         
+        color_menu.pack(pady=(0, 10))
+
         # --- Preview Box ---
         font_family_var = ctk.StringVar(value="Inter")
         
