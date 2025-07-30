@@ -1179,14 +1179,27 @@ def main():
     lang_menu.pack(pady=10)
 
     copy_btn = ctk.CTkButton(
-    frame, text="📋 Copy OBS URL ", command=copy_url, fg_color="#9C27B0", hover_color="#BA68C8", text_color="white", corner_radius=8),
+        frame,
+        text="📋 Copy OBS URL ",
+        command=copy_url,
+        fg_color="#9C27B0",
+        hover_color="#BA68C8",
+        text_color="white",
+        corner_radius=8
+    )
     copy_btn.pack(pady=10)
-)
-
+    
     settings_btn = ctk.CTkButton(
-    frame, text="⚙️ Settings", command=show_pro_preferences, fg_color="#9C27B0", hover_color="#BA68C8", text_color="white", corner_radius=8),
+        frame,
+        text="⚙️ Settings",
+        command=show_pro_preferences,
+        fg_color="#9C27B0",
+        hover_color="#BA68C8",
+        text_color="white",
+        corner_radius=8
+    )
     settings_btn.pack(pady=10)
-)
+
 
     global status_label
     status_label = ctk.CTkLabel(frame, text="", font=("Helvetica", 12))
