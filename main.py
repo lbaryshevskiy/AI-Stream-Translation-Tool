@@ -902,12 +902,14 @@ def show_pro_preferences():
         
         # --- Hotkey Settings ---
         hotkey_btn = ctk.CTkButton(
-    creator_tab,,
-    ),
-    fg_color="#6A1B9A", hover_color="#AB47BC", text_color="white", corner_radius=8,
-    text="Configure Hotkeys",,
-    command=open_hotkey_window
-)
+            creator_tab,
+            text="Configure Hotkeys",
+            command=open_hotkey_window,
+            fg_color="#6A1B9A",
+            hover_color="#AB47BC",
+            text_color="white",
+            corner_radius=8
+        )
         hotkey_btn.pack(pady=(10, 0))
 
         saved_hotkey = settings.get("transcription_hotkey", "")
