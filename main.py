@@ -429,13 +429,17 @@ def show_pro_preferences():
         popup,
         width=360,
         height=300,
-        fg_color="transparent",
-        segmented_button_fg_color="#6A1B9A",
-        segmented_button_selected_color="#AB47BC",
-        segmented_button_selected_hover_color="#AB47BC",
-        segmented_button_unselected_color="#6A1B9A",
-        segmented_button_unselected_hover_color="#AB47BC",
-        segmented_button_text_color="white"
+        fg_color="transparent"
+    )
+    
+    # Apply purple theme to tabs
+    tabview._segmented_button.configure(
+        fg_color="#6A1B9A",
+        selected_color="#AB47BC",
+        selected_hover_color="#AB47BC",
+        unselected_color="#6A1B9A",
+        unselected_hover_color="#AB47BC",
+        text_color="white"
     )
 
     tabview.add("Studio")
