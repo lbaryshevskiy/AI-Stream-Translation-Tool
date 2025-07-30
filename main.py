@@ -613,7 +613,7 @@ def show_pro_preferences():
         )
         input_lang_menu.pack(pady=(0, 8))
 
-        back_btn = ctk.CTkButton(fg_color="#6A1B9A", hover_color="#AB47BC", text_color="white", corner_radius=8, 
+        back_btn = ctk.CTkButton(fg_color="#6A1B9A", hover_color="#AB47BC", text_color="white", corner_radius=8)
             studio_tab,
             text="←",
             width=30,
@@ -626,7 +626,7 @@ def show_pro_preferences():
         back_btn.place(relx=0.0, rely=1.0, anchor="sw", x=10, y=-10)
         back_btn.place_forget()
 
-        next_btn = ctk.CTkButton(fg_color="#6A1B9A", hover_color="#AB47BC", text_color="white", corner_radius=8, 
+        next_btn = ctk.CTkButton(fg_color="#6A1B9A", hover_color="#AB47BC", text_color="white", corner_radius=8)
             studio_tab,
             text="→",
             width=30,
@@ -719,7 +719,7 @@ def show_pro_preferences():
         width_entry = ctk.CTkEntry(custom_frame, placeholder_text="Width", width=80)
         width_entry.pack(side="left", padx=(0, 5))
 
-        apply_btn = ctk.CTkButton(fg_color="#9C27B0", hover_color="#BA68C8", text_color="white", corner_radius=8, custom_frame, text="Apply", width=60, command=lambda: apply_custom_width())
+        apply_btn = ctk.CTkButton(custom_frame, text="Apply", width=60, command=lambda: apply_custom_width(fg_color="#9C27B0", hover_color="#BA68C8", text_color="white", corner_radius=8)
         apply_btn.pack(side="left")
 
         custom_frame.pack_forget()
@@ -891,7 +891,7 @@ def show_pro_preferences():
         vad_slider.configure(command=update_vad)
         
         # --- Hotkey Settings ---
-        hotkey_btn = ctk.CTkButton(fg_color="#6A1B9A", hover_color="#AB47BC", text_color="white", corner_radius=8, 
+        hotkey_btn = ctk.CTkButton(fg_color="#6A1B9A", hover_color="#AB47BC", text_color="white", corner_radius=8)
             creator_tab,
             text="Configure Hotkeys",
             command=open_hotkey_window
@@ -990,7 +990,7 @@ def show_pro_preferences():
             popup.destroy()
 
 
-        save_btn = ctk.CTkButton(fg_color="#9C27B0", hover_color="#BA68C8", text_color="white", corner_radius=8, 
+        save_btn = ctk.CTkButton(fg_color="#9C27B0", hover_color="#BA68C8", text_color="white", corner_radius=8)
             right_frame,
             text="Save & Close",
             command=save_and_close,
@@ -1072,7 +1072,7 @@ def open_hotkey_window():
         save_settings(existing)
         hotkey_window.destroy()
 
-    save_btn = ctk.CTkButton(fg_color="#9C27B0", hover_color="#BA68C8", text_color="white", corner_radius=8, hotkey_window, text="Save Hotkeys", command=save_hotkeys)
+    save_btn = ctk.CTkButton(hotkey_window, text="Save Hotkeys", command=save_hotkeys, fg_color="#9C27B0", hover_color="#BA68C8", text_color="white", corner_radius=8)
     save_btn.pack(pady=(20, 10))
     
 
@@ -1153,10 +1153,10 @@ def main():
     )
     lang_menu.pack(pady=10)
 
-    copy_btn = ctk.CTkButton(fg_color="#9C27B0", hover_color="#BA68C8", text_color="white", corner_radius=8, frame, text="📋 Copy OBS URL ", command=copy_url)
+    copy_btn = ctk.CTkButton(frame, text="📋 Copy OBS URL ", command=copy_url, fg_color="#9C27B0", hover_color="#BA68C8", text_color="white", corner_radius=8)
     copy_btn.pack(pady=10)
 
-    settings_btn = ctk.CTkButton(fg_color="#9C27B0", hover_color="#BA68C8", text_color="white", corner_radius=8, frame, text="⚙️ Settings", command=show_pro_preferences)
+    settings_btn = ctk.CTkButton(frame, text="⚙️ Settings", command=show_pro_preferences, fg_color="#9C27B0", hover_color="#BA68C8", text_color="white", corner_radius=8)
     settings_btn.pack(pady=10)
 
     global status_label
@@ -1193,10 +1193,10 @@ def main():
             save_settings(settings)
             mic_window.destroy()
             
-        save_btn = ctk.CTkButton(fg_color="#9C27B0", hover_color="#BA68C8", text_color="white", corner_radius=8, mic_window, text="Save", command=save_mic_choice)
+        save_btn = ctk.CTkButton(mic_window, text="Save", command=save_mic_choice, fg_color="#9C27B0", hover_color="#BA68C8", text_color="white", corner_radius=8)
         save_btn.pack(pady=27)
     
-    mic_btn = ctk.CTkButton(fg_color="#6A1B9A", hover_color="#AB47BC", text_color="white", corner_radius=8, 
+    mic_btn = ctk.CTkButton(fg_color="#6A1B9A", hover_color="#AB47BC", text_color="white", corner_radius=8)
         btn_row,
         text="♫",
         command=open_mic_selection,
@@ -1211,7 +1211,7 @@ def main():
     mic_btn.pack(side="left", padx=(0, 6), pady=(8, 0))
 
 
-    start_btn = ctk.CTkButton(fg_color="#9C27B0", hover_color="#BA68C8", text_color="white", corner_radius=8, 
+    start_btn = ctk.CTkButton(fg_color="#9C27B0", hover_color="#BA68C8", text_color="white", corner_radius=8)
         btn_row,
         text="▶️ Start",
         command=toggle_backend,
@@ -1220,7 +1220,7 @@ def main():
     )
     start_btn.pack(side="left", padx=(0, 6))  # small gap before reload
 
-    reload_btn = ctk.CTkButton(fg_color="#6A1B9A", hover_color="#AB47BC", text_color="white", corner_radius=8, 
+    reload_btn = ctk.CTkButton(fg_color="#6A1B9A", hover_color="#AB47BC", text_color="white", corner_radius=8)
         btn_row,
         text="↻",
         command=restart_server,
@@ -1245,6 +1245,78 @@ def main():
     
 if __name__ == "__main__":
     main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
