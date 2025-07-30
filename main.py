@@ -660,9 +660,12 @@ def show_pro_preferences():
         input_lang_menu = ctk.CTkOptionMenu(
             page1,
             variable=input_lang_var,
-            values=["🌐 Auto-detect"] + list(language_options.keys())
+            values=["🌐 Auto-detect"] + list(language_options.keys()),
+            fg_color="#6A1B9A",
+            button_color="#6A1B9A",
+            button_hover_color="#AB47BC",
+            text_color="white"
         )
-        input_lang_menu.pack(pady=(0, 8))
 
         back_btn = ctk.CTkButton(
             studio_tab,
