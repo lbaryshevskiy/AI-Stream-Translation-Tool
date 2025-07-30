@@ -538,10 +538,6 @@ def show_pro_preferences():
             if hasattr(event.widget, "tooltip"):
                 event.widget.tooltip.destroy()
 
-        # --- Font Color Section ---
-        color_label_frame = ctk.CTkFrame(page1, fg_color="transparent")
-        color_label_frame.pack(pady=(10, 0))
-
         # --- Font Color ---
         font_color_label = ctk.CTkLabel(page1, text="Font Color:")
         font_color_label.pack(pady=(10, 0))
