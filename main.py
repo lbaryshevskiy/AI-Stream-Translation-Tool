@@ -539,6 +539,10 @@ def show_pro_preferences():
                 event.widget.tooltip.destroy()
 
         # --- Font Color ---
+
+        color_label_frame = ctk.CTkFrame(page1, fg_color="transparent")
+        color_label_frame.pack(pady=(10, 0))
+        
         font_color_label = ctk.CTkLabel(page1, text="Font Color:")
         font_color_label.pack(pady=(10, 0))
         
