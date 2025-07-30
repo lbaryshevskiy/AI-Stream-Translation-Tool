@@ -542,8 +542,23 @@ def show_pro_preferences():
         color_label_frame = ctk.CTkFrame(page1, fg_color="transparent")
         color_label_frame.pack(pady=(10, 0))
 
-        font_color_label = ctk.CTkLabel(color_label_frame, text="Font Color:", font=label_font)
-        font_color_label.pack(side="left", pady=(0, 0))
+        # --- Font Color ---
+        font_color_label = ctk.CTkLabel(page1, text="Font Color:")
+        font_color_label.pack(pady=(10, 0))
+        
+        color_menu = ctk.CTkOptionMenu(
+            page1,
+            values=[
+                "White", "Yellow", "Cyan", "Green",
+                "Black", "Red", "Blue", "Orange", "Purple", "Pink"
+            ],
+            fg_color="#6A1B9A",
+            button_color="#6A1B9A",
+            button_hover_color="#AB47BC",
+            text_color="white"
+        )
+        color_menu.set(settings.get("font_color", "White"))  # ✅ set to saved color
+        color_menu.pack(pady=(0, 10))
 
         tooltip_icon = ctk.CTkLabel(color_label_frame, text="?", font=("Helvetica", 12, "bold"), width=12)
         tooltip_icon.pack(side="left", padx=(2, 0))
