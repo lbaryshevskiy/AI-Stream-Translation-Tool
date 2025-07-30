@@ -495,7 +495,9 @@ def show_pro_preferences():
         font_slider.pack(pady=(0, 8))
 
         # --- Opacity ---
-        # --- Opacity ---
+        opacity_label = ctk.CTkLabel(page1, text="Overlay Opacity:")
+        opacity_label.pack(pady=(10, 0))
+        
         saved_opacity = settings.get("opacity", 0.1)
         if isinstance(saved_opacity, list):
             saved_opacity = saved_opacity[0]
@@ -510,13 +512,13 @@ def show_pro_preferences():
             button_color="#6A1B9A",
             button_hover_color="#AB47BC"
         )
-        overlay_opacity_slider.set(saved_opacity)  # ✅ restore position
+        overlay_opacity_slider.set(saved_opacity)
         
         opacity_value_label = ctk.CTkLabel(page1, text=f"{saved_opacity:.2f}")
         opacity_value_label.pack(pady=(0, 2))
         
         overlay_opacity_slider.pack(pady=(0, 8))
-
+        
         # --- Tooltip Definitions (must come before used) ---
         def show_tooltip(event):
             tooltip = ctk.CTkToplevel()
