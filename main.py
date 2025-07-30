@@ -540,7 +540,7 @@ def show_pro_preferences():
 
               # --- Font Color ---
         color_label_frame = ctk.CTkFrame(page1, fg_color="transparent")
-        color_label_frame.pack(pady=(10, 0))
+        color_label_frame.pack(pady=(5, 0))
         
         font_color_label = ctk.CTkLabel(color_label_frame, text="Font Color:")
         font_color_label.pack(side="left")
@@ -581,7 +581,7 @@ def show_pro_preferences():
         if user_plan == "studio":
             color_menu.configure(state="disabled")
         
-        color_menu.pack(pady=(0, 10))
+        color_menu.pack(pady=(0, 5))
 
         # --- Preview Box ---
         font_family_var = ctk.StringVar(value="Inter")
