@@ -614,7 +614,7 @@ def show_pro_preferences():
         input_lang_menu.pack(pady=(0, 8))
 
         back_btn = ctk.CTkButton(
-    studio_tab,,
+    studio_tab,
     ),
     fg_color="#6A1B9A", hover_color="#AB47BC", text_color="white", corner_radius=8,
     text="←",,
