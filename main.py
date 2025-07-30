@@ -431,6 +431,8 @@ def show_pro_preferences():
         height=300,
         fg_color="transparent"
     )
+    tabview.add("Studio")
+    tabview.add("Creator")
     
     # Apply purple theme to tabs
     tabview._segmented_button.configure(
@@ -441,9 +443,6 @@ def show_pro_preferences():
         unselected_hover_color="#AB47BC",
         text_color="white"
     )
-
-    tabview.add("Studio")
-    tabview.add("Creator")
 
     try:
         # Load saved settings
