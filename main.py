@@ -1005,13 +1005,15 @@ def show_pro_preferences():
 
 
         save_btn = ctk.CTkButton(
-    right_frame,,
-    ),
-    fg_color="#9C27B0", hover_color="#BA68C8", text_color="white", corner_radius=8,
-    text="Save & Close",,
-    command=save_and_close,,
-    width=140
-)
+            right_frame,
+            text="Save & Close",
+            command=save_and_close,
+            width=140,
+            fg_color="#9C27B0",
+            hover_color="#BA68C8",
+            text_color="white",
+            corner_radius=8
+        )
         save_btn.pack(side="right", padx=10, pady=10)
     except KeyError:
         pass
