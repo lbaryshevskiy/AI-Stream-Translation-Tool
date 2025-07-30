@@ -1094,8 +1094,8 @@ def open_hotkey_window():
         hotkey_window,
         text="Save Hotkeys",
         command=save_hotkeys,
-        fg_color="#9C27B0",
-        hover_color="#BA68C8",
+        fg_color="#6A1B9A",
+        hover_color="#AB47BC",
         text_color="white",
         corner_radius=8
     )
