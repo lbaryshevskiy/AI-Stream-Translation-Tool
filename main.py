@@ -1174,7 +1174,11 @@ def main():
         frame,
         variable=selected_lang,
         values=available_langs,
-        command=on_lang_select
+        command=on_lang_select,
+        fg_color="#6A1B9A",
+        button_color="#6A1B9A",
+        button_hover_color="#AB47BC",
+        text_color="white"
     )
     lang_menu.pack(pady=10)
 
