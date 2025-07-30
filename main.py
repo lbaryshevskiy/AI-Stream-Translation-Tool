@@ -722,16 +722,15 @@ def show_pro_preferences():
         width_entry.pack(side="left", padx=(0, 5))
 
         apply_btn = ctk.CTkButton(
-        custom_frame, 
-        text="Apply",
-        width=60, 
-        command=lambda: apply_custom_width(),
-        fg_color="#9C27B0",
-        hover_color="#BA68C8",
-        text_color="white",
-        corner_radius=8),
-        )
-            
+            custom_frame, 
+            text="Apply",
+            width=60, 
+            command=lambda: apply_custom_width(),
+            fg_color="#9C27B0",
+            hover_color="#BA68C8",
+            text_color="white",
+            corner_radius=8),
+        )  
         apply_btn.pack(side="left")
         custom_frame.pack_forget()
 
