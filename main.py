@@ -427,7 +427,7 @@ def show_pro_preferences():
 
     tabview = ctk.CTkTabview(
         popup,
-        width=360,
+        width=350,
         height=300,
         fg_color="transparent"
     )
