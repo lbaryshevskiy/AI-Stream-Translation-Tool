@@ -425,8 +425,18 @@ def show_pro_preferences():
     user_plan = dev_override_plan if dev_mode else "free"
 
 
-    tabview = ctk.CTkTabview(popup, width=360, height=300)
-    tabview.pack(padx=10, pady=10, fill="both", expand=True)
+    tabview = ctk.CTkTabview(
+        popup,
+        width=360,
+        height=300,
+        fg_color="transparent",
+        segmented_button_fg_color="#6A1B9A",
+        segmented_button_selected_color="#AB47BC",
+        segmented_button_selected_hover_color="#AB47BC",
+        segmented_button_unselected_color="#6A1B9A",
+        segmented_button_unselected_hover_color="#AB47BC",
+        segmented_button_text_color="white"
+    )
 
     tabview.add("Studio")
     tabview.add("Creator")
@@ -459,8 +469,17 @@ def show_pro_preferences():
         font_size_value_label = ctk.CTkLabel(page1, text=str(saved_size))
         font_size_value_label.pack(pady=(0, 2))
 
-        font_slider = ctk.CTkSlider(page1, from_=12, to=48, number_of_steps=36, command=update_font_size)
-        font_slider.set(saved_size)
+        font_slider = ctk.CTkSlider(
+            page1,
+            from_=12,
+            to=48,
+            number_of_steps=36,
+            command=update_font_size,
+            fg_color="#6A1B9A",
+            progress_color="#AB47BC",
+            button_color="#6A1B9A",
+            button_hover_color="#AB47BC"
+        )
 
         settings = load_settings()
         saved_size = settings.get("font_size", 20)
@@ -470,8 +489,17 @@ def show_pro_preferences():
         font_slider.pack(pady=(0, 8))
 
         # --- Opacity ---
-        opacity_label = ctk.CTkLabel(page1, text="Overlay Opacity:", font=label_font)
-        opacity_label.pack(pady=(5, 0))
+        
+        overlay_opacity_slider = ctk.CTkSlider(
+            page1,
+            from_=0.1,
+            to=1.0,
+            number_of_steps=18,
+            fg_color="#6A1B9A",
+            progress_color="#AB47BC",
+            button_color="#6A1B9A",
+            button_hover_color="#AB47BC"
+        )
 
         opacity_value_label = ctk.CTkLabel(page1, text=f"{saved_opacity:.2f}")
         opacity_value_label.pack(pady=(0, 2))
