@@ -490,7 +490,8 @@ def show_pro_preferences():
         saved_size = settings.get("font_size", 20)
         if isinstance(saved_size, list):  # due to prior tuple saving
             saved_size = saved_size[0]
-
+            
+        font_slider.set(saved_size)
         font_slider.pack(pady=(0, 8))
 
         # --- Opacity ---
