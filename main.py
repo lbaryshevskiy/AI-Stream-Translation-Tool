@@ -1265,13 +1265,13 @@ def main():
         command=toggle_backend,
         width=140,
         height=28,
-        fg_color="#9C27B0",
-        hover_color="#BA68C8",
+        fg_color="#6A1B9A",
+        hover_color="#AB47BC",
         text_color="white",
         corner_radius=8
     )
     start_btn.pack(side="left", padx=(0, 6))
-
+    
     reload_btn = ctk.CTkButton(
         btn_row,
         text="↻",
