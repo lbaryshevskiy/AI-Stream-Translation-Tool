@@ -1006,7 +1006,7 @@ def show_pro_preferences():
         footer_frame.pack(pady=(5, 10), fill="x")
 
         right_frame = ctk.CTkFrame(footer_frame, fg_color="transparent")
-        right_frame.pack(side="right", padx=(30, 25))
+        right_frame.pack(side="right", padx=(100, 25))
 
         dark_mode_switch = ctk.CTkSwitch(
             right_frame,
