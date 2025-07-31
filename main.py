@@ -1342,14 +1342,14 @@ def main():
     mic_btn = ctk.CTkButton(
         btn_row,
         text="♫",
+        command=open_mic_selection,
         width=40,
         height=40,
         fg_color="#6A1B9A",
         hover_color="#AB47BC",
         text_color="white",
-        font=("Helvetica", 18),  # smaller font for better proportion
-        corner_radius=8,
-        command=open_mic_selection
+        font=("Helvetica", 18),
+        corner_radius=8
     )
     mic_btn.pack(side="left", padx=(0, 6), pady=(0, 0))
     
@@ -1358,7 +1358,7 @@ def main():
         text="▶️ Start",
         command=toggle_backend,
         width=140,
-        height=button_height,
+        height=40,
         fg_color="#6A1B9A",
         hover_color="#AB47BC",
         text_color="white",
@@ -1369,14 +1369,14 @@ def main():
     reload_btn = ctk.CTkButton(
         btn_row,
         text="↻",
+        command=restart_server,  # ✅ correct reference from your code
         width=40,
         height=40,
         fg_color="#6A1B9A",
         hover_color="#AB47BC",
         text_color="white",
         font=("Helvetica", 18),
-        corner_radius=8,
-        command=reload_app
+        corner_radius=8
     )
     reload_btn.pack(side="left", pady=(0, 0))
 
