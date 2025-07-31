@@ -1006,7 +1006,7 @@ def show_pro_preferences():
         footer_frame.pack(pady=(5, 10), fill="x") # ✅ shift whole row right
 
         right_wrapper = ctk.CTkFrame(footer_frame, fg_color="transparent")
-        right_wrapper.pack(side="right", padx=(15, 0))
+        right_wrapper.pack(anchor="e", padx=100)  # moves whole row left from right edge
         
         right_frame = ctk.CTkFrame(right_wrapper, fg_color="transparent")
         right_frame.pack()
