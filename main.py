@@ -898,7 +898,14 @@ def show_pro_preferences():
 
         ctk.CTkLabel(creator_tab, text="Whisper Model:").pack(pady=(10, 0))
 
-        model_menu = ctk.CTkOptionMenu(creator_tab, values=["Faster-Tiny","Tiny", "Base", "Small", "Medium", "Large"])
+        model_menu = ctk.CTkOptionMenu(
+            creator_tab,
+            values=["Faster-Tiny","Tiny", "Base", "Small", "Medium", "Large"],
+            fg_color="#6A1B9A",
+            button_color="#6A1B9A",
+            button_hover_color="#AB47BC",
+            text_color="white"
+        )
         saved_model = settings.get("whisper_model", "Base").capitalize()
         model_menu.set(saved_model if saved_model in ["Faster-Tiny", "Tiny", "Base", "Small", "Medium", "Large"] else "Base")
         model_menu.pack(pady=(0, 10))
@@ -944,7 +951,16 @@ def show_pro_preferences():
         vad_value_label.pack(pady=(0, 0))
         
         # VAD Slider
-        vad_slider = ctk.CTkSlider(creator_tab, from_=0, to=3, number_of_steps=3)
+        vad_slider = ctk.CTkSlider(
+            creator_tab,
+            from_=0,
+            to=3,
+            number_of_steps=3,
+            fg_color="#6A1B9A",
+            progress_color="#AB47BC",
+            button_color="#6A1B9A",
+            button_hover_color="#AB47BC"
+        )
         vad_slider.set(2)  # set default mode
         vad_slider.pack(pady=(0, 10))
         
