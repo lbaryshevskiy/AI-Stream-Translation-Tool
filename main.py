@@ -1003,7 +1003,7 @@ def show_pro_preferences():
             hotkey_btn.configure(state="disabled")
 
         footer_frame = ctk.CTkFrame(popup, fg_color="transparent")
-        footer_frame.pack(pady=(5, 10), fill="x", padx=(40, 0))  # ✅ shift whole row right
+        footer_frame.pack(pady=(5, 10), fill="x") # ✅ shift whole row right
 
 
         right_frame = ctk.CTkFrame(footer_frame, fg_color="transparent")
