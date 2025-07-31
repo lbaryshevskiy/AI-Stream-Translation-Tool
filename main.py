@@ -1090,7 +1090,7 @@ def show_pro_preferences():
             text_color="white",
             corner_radius=8
         )
-        save_btn.pack(side="right", padx=10, pady=10)
+        save_btn.pack(side="right", padx=(20, 10), pady=5, anchor="center") 
     except KeyError:
         pass
 
