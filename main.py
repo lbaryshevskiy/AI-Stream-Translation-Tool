@@ -992,7 +992,12 @@ def show_pro_preferences():
         right_frame = ctk.CTkFrame(footer_frame, fg_color="transparent")
         right_frame.pack(side="right", padx=(0, 25))
 
-        dark_mode_switch = ctk.CTkSwitch(right_frame, text="Dark Mode", command=toggle_dark_mode)
+        dark_mode_switch = ctk.CTkSwitch(
+            right_frame,
+            text="Dark Mode",
+            command=toggle_dark_mode,
+            progress_color="#AB47BC"  # Purple instead of default blue
+        )
 
         if ctk.get_appearance_mode() == "Dark":
             dark_mode_switch.select()
