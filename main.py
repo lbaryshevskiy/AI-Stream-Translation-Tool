@@ -1336,46 +1336,49 @@ def main():
         )
         save_btn.pack(pady=27)
     
+    button_height = 28
+    side_button_width = 40  # gives a bit more room for icon centering
+    
     mic_btn = ctk.CTkButton(
         btn_row,
         text="♫",
         command=open_mic_selection,
-        width=26,
-        height=26,
+        width=side_button_width,
+        height=button_height,
         fg_color="#6A1B9A",
         hover_color="#AB47BC",
-        text_color="white",  # or "black" if Light mode
-        font=("Helvetica", 16),
+        text_color="white",
+        font=("Helvetica", 18),  # same visual size for both side buttons
         corner_radius=8
     )
-    mic_btn.pack(side="left", padx=(0, 6), pady=(8, 0))
-
+    mic_btn.pack(side="left", padx=(0, 6), pady=(0, 0))
+    
     start_btn = ctk.CTkButton(
         btn_row,
         text="▶️ Start",
         command=toggle_backend,
         width=140,
-        height=28,
+        height=button_height,
         fg_color="#6A1B9A",
         hover_color="#AB47BC",
         text_color="white",
         corner_radius=8
     )
-    start_btn.pack(side="left", padx=(0, 6))
+    start_btn.pack(side="left", padx=(0, 6), pady=(0, 0))
     
     reload_btn = ctk.CTkButton(
         btn_row,
         text="↻",
         command=restart_server,
-        width=26,
-        height=26,
+        width=side_button_width,
+        height=button_height,
         fg_color="#6A1B9A",
         hover_color="#AB47BC",
         text_color="white",
-        font=("Helvetica", 23),
+        font=("Helvetica", 18),  # matches mic_btn
         corner_radius=8
     )
-    reload_btn.pack(side="left")
+    reload_btn.pack(side="left", pady=(0, 0))
 
     listener = keyboard.Listener(on_press=on_press, on_release=on_release)
     listener.start()
