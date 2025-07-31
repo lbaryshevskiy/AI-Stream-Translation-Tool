@@ -1005,9 +1005,11 @@ def show_pro_preferences():
         footer_frame = ctk.CTkFrame(popup, fg_color="transparent")
         footer_frame.pack(pady=(5, 10), fill="x") # ✅ shift whole row right
 
-
-        right_frame = ctk.CTkFrame(footer_frame, fg_color="transparent")
-        right_frame.pack(side="right", padx=(100, 25))
+        right_wrapper = ctk.CTkFrame(footer_frame, fg_color="transparent")
+        right_wrapper.pack(side="right", padx=(40, 0))  # ✅ moves whole row inward
+        
+        right_frame = ctk.CTkFrame(right_wrapper, fg_color="transparent")
+        right_frame.pack()
 
         dark_mode_switch = ctk.CTkSwitch(
             right_frame,
