@@ -1367,7 +1367,7 @@ def main():
         text_color="white",
         corner_radius=8
     )
-    start_btn.pack(side="left", padx=(0, 2))
+    start_btn.pack(side="left", padx=(0, 7))
     
     # Reload button
     reload_btn = ctk.CTkButton(
