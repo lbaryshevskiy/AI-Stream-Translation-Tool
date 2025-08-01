@@ -328,13 +328,12 @@ def transcribe_loop():
                     wordcount_label.after(0, update_label)
 
                 if text:
-                    # Get chosen input language
+                    # Get chosen input language from settings
                     input_lang_label = settings.get("input_language", "🌐 Auto-detect").strip()
                     forced_lang_code = language_options.get(input_lang_label, None)
                 
-                    # Always pass chosen language unless Auto-detect is selected
+                    # Always transcribe with forced language if not Auto-detect
                     if forced_lang_code and input_lang_label != "🌐 Auto-detect":
-                        # Force transcription in chosen language
                         if current_model_name == "faster-tiny":
                             segments, info = model.transcribe(WAVE_OUTPUT_FILENAME, language=forced_lang_code)
                             text = " ".join([segment.text for segment in segments]).strip()
@@ -342,7 +341,7 @@ def transcribe_loop():
                             result = model.transcribe(WAVE_OUTPUT_FILENAME, language=forced_lang_code)
                             text = " ".join([segment["text"] for segment in result["segments"]]).strip()
                     else:
-                        # Auto-detect mode
+                        # Pure Auto-detect
                         if current_model_name == "faster-tiny":
                             segments, info = model.transcribe(WAVE_OUTPUT_FILENAME)
                             text = " ".join([segment.text for segment in segments]).strip()
@@ -350,7 +349,7 @@ def transcribe_loop():
                             result = model.transcribe(WAVE_OUTPUT_FILENAME)
                             text = " ".join([segment["text"] for segment in result["segments"]]).strip()
                 
-                    # Translate into the selected output language
+                    # Translate into selected output language
                     lang_label = selected_lang.get().strip()
                     lang_code = language_options.get(lang_label, "en")
                     translated = translator.translate(text, dest=lang_code).text
