@@ -1336,13 +1336,13 @@ def main():
         )
         save_btn.pack(pady=27)
     
-        # Frame for the row
+       # Row frame - always pack this
     btn_row = ctk.CTkFrame(frame, fg_color="transparent")
-    btn_row.pack(pady=(7, 5), anchor="center")  # ✅ center entire row
+    btn_row.pack(pady=(7, 5), anchor="center")  # ✅ center the whole row
     
     # Sizes
     button_height = 28
-    side_button_width = 36  # ✅ smaller side buttons
+    side_button_width = 36
     
     # Mic button
     mic_btn = ctk.CTkButton(
@@ -1377,7 +1377,7 @@ def main():
     reload_btn = ctk.CTkButton(
         btn_row,
         text="↻",
-        command=restart_server,  # ✅ keep your original function
+        command=restart_server,
         width=side_button_width,
         height=button_height,
         fg_color="#6A1B9A",
