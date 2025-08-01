@@ -1336,11 +1336,7 @@ def main():
         )
         save_btn.pack(pady=27)
     
-       # Row frame - always pack this
-    btn_row = ctk.CTkFrame(frame, fg_color="transparent")
-    btn_row.pack(pady=(7, 5), anchor="center")  # ✅ center the whole row
-    
-    # Sizes
+
     button_height = 28
     side_button_width = 36
     
