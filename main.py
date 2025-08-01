@@ -1289,7 +1289,7 @@ def main():
 
    # --- Right-aligned Start + Reload (aligned with buttons above) ---
     btn_row = ctk.CTkFrame(frame, fg_color="transparent")
-    btn_row.pack(pady=(7, 5), anchor="e", padx=(0, 10))
+    btn_row.pack(pady=(7, 5), anchor="e", padx=(0, 15))
 
     def open_mic_selection():
         mic_window = ctk.CTkToplevel()
