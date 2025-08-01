@@ -1382,7 +1382,7 @@ def main():
         font=("Helvetica", 16),
         corner_radius=8
     )
-    reload_btn.pack(side="left", padx=(5, 0))
+    reload_btn.pack(side="left", padx=(2, 0))
 
     listener = keyboard.Listener(on_press=on_press, on_release=on_release)
     listener.start()
