@@ -1336,49 +1336,57 @@ def main():
         )
         save_btn.pack(pady=27)
     
-    button_height = 28
-    side_button_width = 40  # gives a bit more room for icon centering
+        # Frame for the row
+    btn_row = ctk.CTkFrame(frame, fg_color="transparent")
+    btn_row.pack(pady=(7, 5), anchor="center")  # ✅ center entire row
     
+    # Sizes
+    button_height = 28
+    side_button_width = 36  # ✅ smaller side buttons
+    
+    # Mic button
     mic_btn = ctk.CTkButton(
         btn_row,
         text="♫",
         command=open_mic_selection,
-        width=40,
-        height=40,
+        width=side_button_width,
+        height=button_height,
         fg_color="#6A1B9A",
         hover_color="#AB47BC",
         text_color="white",
-        font=("Helvetica", 18),
+        font=("Helvetica", 16),
         corner_radius=8
     )
-    mic_btn.pack(side="left", padx=(0, 6), pady=(0, 0))
+    mic_btn.pack(side="left", padx=(0, 5))
     
+    # Start button
     start_btn = ctk.CTkButton(
         btn_row,
         text="▶️ Start",
         command=toggle_backend,
-        width=140,
-        height=40,
+        width=120,
+        height=button_height,
         fg_color="#6A1B9A",
         hover_color="#AB47BC",
         text_color="white",
         corner_radius=8
     )
-    start_btn.pack(side="left", padx=(0, 6), pady=(0, 0))
+    start_btn.pack(side="left", padx=(0, 5))
     
+    # Reload button
     reload_btn = ctk.CTkButton(
         btn_row,
         text="↻",
-        command=restart_server,  # ✅ correct reference from your code
-        width=40,
-        height=40,
+        command=restart_server,  # ✅ keep your original function
+        width=side_button_width,
+        height=button_height,
         fg_color="#6A1B9A",
         hover_color="#AB47BC",
         text_color="white",
-        font=("Helvetica", 18),
+        font=("Helvetica", 16),
         corner_radius=8
     )
-    reload_btn.pack(side="left", pady=(0, 0))
+    reload_btn.pack(side="left", padx=(5, 0))
 
     listener = keyboard.Listener(on_press=on_press, on_release=on_release)
     listener.start()
