@@ -1379,7 +1379,7 @@ def main():
         fg_color="#6A1B9A",
         hover_color="#AB47BC",
         text_color="white",
-        font=("Helvetica", 16),
+        font=("Helvetica", 20),
         corner_radius=8
     )
     reload_btn.pack(side="left", padx=(0, 0))
