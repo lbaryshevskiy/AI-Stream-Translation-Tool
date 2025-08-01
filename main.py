@@ -328,9 +328,32 @@ def transcribe_loop():
                     wordcount_label.after(0, update_label)
 
                 if text:
+                    # Force Whisper to transcribe in the chosen input language
+                    input_lang_label = settings.get("input_language", "🌐 Auto-detect").strip()
+                    forced_lang_code = language_options.get(input_lang_label, None)
+                
+                    if forced_lang_code:
+                        # Force model to use the selected input language
+                        if current_model_name == "faster-tiny":
+                            segments, info = model.transcribe(WAVE_OUTPUT_FILENAME, language=forced_lang_code)
+                            text = " ".join([segment.text for segment in segments]).strip()
+                        else:
+                            result = model.transcribe(WAVE_OUTPUT_FILENAME, language=forced_lang_code)
+                            text = " ".join([segment["text"] for segment in result["segments"]]).strip()
+                    else:
+                        # Auto-detect language
+                        if current_model_name == "faster-tiny":
+                            segments, info = model.transcribe(WAVE_OUTPUT_FILENAME)
+                            text = " ".join([segment.text for segment in segments]).strip()
+                        else:
+                            result = model.transcribe(WAVE_OUTPUT_FILENAME)
+                            text = " ".join([segment["text"] for segment in result["segments"]]).strip()
+                
+                    # Translate into the selected output language
                     lang_label = selected_lang.get().strip()
                     lang_code = language_options.get(lang_label, "en")
                     translated = translator.translate(text, dest=lang_code).text
+                
                     print(f"🌐 Translation: {translated}")
                     socketio.emit("subtitle", {"text": translated})
                 else:
