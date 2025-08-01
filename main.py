@@ -1367,7 +1367,7 @@ def main():
         text_color="white",
         corner_radius=8
     )
-    start_btn.pack(side="left", padx=(10, 5))  # ⬅ increase the first value to "extend" left side visually
+    start_btn.pack(side="left", padx=(0, 5))
     
     # Reload button
     reload_btn = ctk.CTkButton(
