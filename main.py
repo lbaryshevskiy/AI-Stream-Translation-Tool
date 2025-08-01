@@ -328,28 +328,33 @@ def transcribe_loop():
                     wordcount_label.after(0, update_label)
 
                 if text:
-                    # Get the chosen input language
+                    # Get chosen input language
                     input_lang_label = settings.get("input_language", "🌐 Auto-detect").strip()
                     forced_lang_code = language_options.get(input_lang_label, None)
                 
-                    # Always pass the chosen language to Whisper unless Auto-detect is selected
-                    if current_model_name == "faster-tiny":
-                        if forced_lang_code and input_lang_label != "🌐 Auto-detect":
+                    # Always pass chosen language unless Auto-detect is selected
+                    if forced_lang_code and input_lang_label != "🌐 Auto-detect":
+                        # Force transcription in chosen language
+                        if current_model_name == "faster-tiny":
                             segments, info = model.transcribe(WAVE_OUTPUT_FILENAME, language=forced_lang_code)
+                            text = " ".join([segment.text for segment in segments]).strip()
                         else:
-                            segments, info = model.transcribe(WAVE_OUTPUT_FILENAME)
-                        text = " ".join([segment.text for segment in segments]).strip()
-                    else:
-                        if forced_lang_code and input_lang_label != "🌐 Auto-detect":
                             result = model.transcribe(WAVE_OUTPUT_FILENAME, language=forced_lang_code)
+                            text = " ".join([segment["text"] for segment in result["segments"]]).strip()
+                    else:
+                        # Auto-detect mode
+                        if current_model_name == "faster-tiny":
+                            segments, info = model.transcribe(WAVE_OUTPUT_FILENAME)
+                            text = " ".join([segment.text for segment in segments]).strip()
                         else:
                             result = model.transcribe(WAVE_OUTPUT_FILENAME)
-                        text = " ".join([segment["text"] for segment in result["segments"]]).strip()
+                            text = " ".join([segment["text"] for segment in result["segments"]]).strip()
                 
                     # Translate into the selected output language
                     lang_label = selected_lang.get().strip()
                     lang_code = language_options.get(lang_label, "en")
                     translated = translator.translate(text, dest=lang_code).text
+                
                     print(f"🌐 Translation: {translated}")
                     socketio.emit("subtitle", {"text": translated})
                 else:
