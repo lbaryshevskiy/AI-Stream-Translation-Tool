@@ -767,7 +767,11 @@ def show_pro_preferences():
             box_size_container,
             variable=box_size_var,
             values=list(box_size_presets.keys()),
-            command=update_box_size
+            command=update_box_size,
+            fg_color="#6A1B9A",
+            button_color="#6A1B9A",
+            button_hover_color="#AB47BC",
+            text_color="white"
         )
         box_size_menu.pack(side="left", padx=(15, 10))
 
@@ -807,7 +811,11 @@ def show_pro_preferences():
             page2,
             values=font_choices,
             variable=font_family_var,
-            command=update_font_family
+            command=update_font_family,
+            fg_color="#6A1B9A",
+            button_color="#6A1B9A",
+            button_hover_color="#AB47BC",
+            text_color="white"
         )
         font_family_menu.pack(pady=(0, 10))
 
@@ -815,7 +823,11 @@ def show_pro_preferences():
         box_bg_toggle = ctk.CTkCheckBox(
             page2,
             text="Enable Subtitle Background Box",
-            variable=box_bg_var
+            variable=box_bg_var,
+            fg_color="#6A1B9A",
+            hover_color="#AB47BC",
+            text_color="white",
+            checkmark_color="white"
         )
         box_bg_toggle.pack(pady=(20, 20))
 
