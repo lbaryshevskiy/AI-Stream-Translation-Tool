@@ -1360,7 +1360,7 @@ def main():
         btn_row,
         text="▶️ Start",
         command=toggle_backend,
-        width=120,
+        width=140,
         height=button_height,
         fg_color="#6A1B9A",
         hover_color="#AB47BC",
