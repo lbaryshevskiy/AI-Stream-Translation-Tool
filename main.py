@@ -673,7 +673,7 @@ def show_pro_preferences():
         input_lang_var = ctk.StringVar(value=saved_input_lang)
     
         input_lang_menu = ctk.CTkOptionMenu(
-            studio_tab,
+            page1,
             variable=input_lang_var,
             values=list(language_options.keys()),
             fg_color="#6A1B9A",
