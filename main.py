@@ -683,6 +683,7 @@ def show_pro_preferences():
             text_color="white"
         )
         input_lang_menu.pack(pady=(0, 5))
+        input_lang_menu.configure(state="disabled")
     
         # --- Navigation Buttons ---
         back_btn = ctk.CTkButton(
