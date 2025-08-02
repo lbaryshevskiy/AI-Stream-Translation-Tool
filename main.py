@@ -670,13 +670,17 @@ def show_pro_preferences():
         input_lang_label = ctk.CTkLabel(page1, text="Input Language:", font=label_font)
         input_lang_label.pack(pady=(5, 0))
         
-        saved_input_lang = settings.get("input_language", "🇬🇧 English")
+        # Build list without English
+        lang_list_no_english = [lang for lang in language_options.keys() if lang != "🇬🇧 English"]
+        lang_list_no_english.append("(Coming soon...)")
+        
+        # Always start as English
         input_lang_var = ctk.StringVar(value="🇬🇧 English")
-
+        
         input_lang_menu = ctk.CTkOptionMenu(
             page1,
             variable=input_lang_var,
-            values=list(language_options.keys()) + ["(Coming soon...)"],
+            values=lang_list_no_english,
             fg_color="#6A1B9A",
             button_color="#6A1B9A",
             button_hover_color="#AB47BC",
@@ -684,11 +688,10 @@ def show_pro_preferences():
         )
         
         def on_input_lang_select(choice):
-            if choice != "🇬🇧 English":
-                input_lang_var.set("🇬🇧 English")
+            # Ignore any selection, revert to English
+            input_lang_var.set("🇬🇧 English")
         
         input_lang_menu.configure(command=on_input_lang_select)
-        
         input_lang_menu.pack(pady=(0, 5))
 
         # --- Navigation Buttons ---
