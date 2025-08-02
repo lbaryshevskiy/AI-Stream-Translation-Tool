@@ -664,56 +664,58 @@ def show_pro_preferences():
             back_btn.place_forget()
             next_btn.place(relx=1.0, rely=1.0, anchor="se", x=-10, y=-10)
             next_btn.update_idletasks()
-
-    input_lang_label = ctk.CTkLabel(page1, text="Input Language:", font=label_font)
-    input_lang_label.pack(pady=(5, 0))
-
-    saved_input_lang = settings.get("input_language", "🇬🇧 English")
-    input_lang_var = ctk.StringVar(value=saved_input_lang)
-
-    input_lang_menu = ctk.CTkOptionMenu(
-        page1,
-        variable=input_lang_var,
-        values=list(language_options.keys()),
-        fg_color="#6A1B9A",
-        button_color="#6A1B9A",
-        button_hover_color="#AB47BC",
-        text_color="white"
-    )
-    input_lang_menu.pack(pady=(0, 5))
     
-            back_btn = ctk.CTkButton(
-                studio_tab,
-                text="←",
-                width=30,
-                height=25,
-                fg_color="#6A1B9A", 
-                hover_color="#AB47BC", 
-                text_color="white", 
-                corner_radius=8,
-                command=go_to_page1,
-            )
-            back_btn.place(relx=0.0, rely=1.0, anchor="sw", x=10, y=-10)
-            back_btn.place_forget()
-        
-            next_btn = ctk.CTkButton(
-                studio_tab,
-                text="→",
-                width=30,
-                height=25,
-                fg_color="#6A1B9A",
-                hover_color="#AB47BC",
-                text_color="white", 
-                corner_radius=8,
-                command=go_to_page2,
-            )
-            next_btn.place(relx=1.0, rely=1.0, anchor="se", x=-10, y=-10)
-            next_btn.update_idletasks()
+        # --- Input Language ---
+        input_lang_label = ctk.CTkLabel(studio_tab, text="Input Language:", font=label_font)
+        input_lang_label.pack(pady=(5, 0))
     
-            arrow_color = "black" if ctk.get_appearance_mode() == "Light" else "white"
+        saved_input_lang = settings.get("input_language", "🇬🇧 English")
+        input_lang_var = ctk.StringVar(value=saved_input_lang)
     
-            next_btn.configure(text_color=arrow_color)
-            back_btn.configure(text_color=arrow_color)
+        input_lang_menu = ctk.CTkOptionMenu(
+            studio_tab,
+            variable=input_lang_var,
+            values=list(language_options.keys()),
+            fg_color="#6A1B9A",
+            button_color="#6A1B9A",
+            button_hover_color="#AB47BC",
+            text_color="white"
+        )
+        input_lang_menu.pack(pady=(0, 5))
+    
+        # --- Navigation Buttons ---
+        back_btn = ctk.CTkButton(
+            studio_tab,
+            text="◀",
+            width=30,
+            height=25,
+            fg_color="#6A1B9A",
+            hover_color="#AB47BC",
+            text_color="white",
+            corner_radius=8,
+            command=go_to_page1,
+        )
+        back_btn.place(relx=0.0, rely=1.0, anchor="sw", x=10, y=-10)
+        back_btn.place_forget()
+    
+        next_btn = ctk.CTkButton(
+            studio_tab,
+            text="▶",
+            width=30,
+            height=25,
+            fg_color="#6A1B9A",
+            hover_color="#AB47BC",
+            text_color="white",
+            corner_radius=8,
+            command=go_to_page2,
+        )
+        next_btn.place(relx=1.0, rely=1.0, anchor="se", x=-10, y=-10)
+        next_btn.update_idletasks()
+    
+        arrow_color = "black" if ctk.get_appearance_mode() == "Light" else "white"
+    
+        next_btn.configure(text_color=arrow_color)
+        back_btn.configure(text_color=arrow_color)
 
         # --- Page 2: Box Size Selector ---
 
