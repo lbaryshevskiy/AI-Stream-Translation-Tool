@@ -687,7 +687,7 @@ def show_pro_preferences():
         # --- Navigation Buttons ---
         back_btn = ctk.CTkButton(
             studio_tab,
-            text="◀",
+            text="←"
             width=30,
             height=25,
             fg_color="#6A1B9A",
@@ -701,7 +701,7 @@ def show_pro_preferences():
     
         next_btn = ctk.CTkButton(
             studio_tab,
-            text="▶",
+            text="→"
             width=30,
             height=25,
             fg_color="#6A1B9A",
