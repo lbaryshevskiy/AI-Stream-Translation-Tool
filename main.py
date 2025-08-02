@@ -672,7 +672,7 @@ def show_pro_preferences():
         
         # Build list without English
         lang_list_no_english = [lang for lang in language_options.keys() if lang != "🇬🇧 English"]
-        lang_list_no_english.append("(Coming soon...)")
+        lang_list_no_english.append("🌍 Language Support Soon")
         
         # Always start as English
         input_lang_var = ctk.StringVar(value="🇬🇧 English")
