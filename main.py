@@ -330,19 +330,15 @@ def transcribe_loop():
                 if text:
                     # Get chosen input language from settings
                     input_lang_label = settings.get("input_language", "🇬🇧 English").strip()  # default now always a real language
-                    forced_lang_code = language_options.get(input_lang_label, None)
-                
-                    if forced_lang_code:
-                        # Always transcribe with the selected language
-                        if current_model_name == "faster-tiny":
-                            segments, info = model.transcribe(WAVE_OUTPUT_FILENAME, language=forced_lang_code)
-                            text = " ".join([segment.text for segment in segments]).strip()
-                        else:
-                            result = model.transcribe(WAVE_OUTPUT_FILENAME, language=forced_lang_code)
-                            text = " ".join([segment["text"] for segment in result["segments"]]).strip()
+                    # Always force the selected language
+                    forced_lang_code = language_options[input_lang_label]  # guaranteed to exist
+                    
+                    if current_model_name == "faster-tiny":
+                        segments, info = model.transcribe(WAVE_OUTPUT_FILENAME, language=forced_lang_code)
+                        text = " ".join([segment.text for segment in segments]).strip()
                     else:
-                        print(f"⚠️ No valid language code found for: {input_lang_label}")
-                        text = ""
+                        result = model.transcribe(WAVE_OUTPUT_FILENAME, language=forced_lang_code)
+                        text = " ".join([segment["text"] for segment in result["segments"]]).strip()
                         
                     # Translate into selected output language
                     lang_label = selected_lang.get().strip()
