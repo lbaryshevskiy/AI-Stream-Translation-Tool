@@ -677,13 +677,13 @@ def show_pro_preferences():
         input_lang_label = ctk.CTkLabel(page1, text="Input Language:", font=label_font)
         input_lang_label.pack(pady=(15, 0))
 
-        saved_input_lang = settings.get("input_language", "🌐 Auto-detect")
+        saved_input_lang = settings.get("input_language", "🇬🇧 English")
         input_lang_var = ctk.StringVar(value=saved_input_lang)
 
-        input_lang_menu = ctk.CTkOptionMenu(
+       input_lang_menu = ctk.CTkOptionMenu(
             page1,
             variable=input_lang_var,
-            values=["🌐 Auto-detect"] + list(language_options.keys()),
+            values=list(language_options.keys()),
             fg_color="#6A1B9A",
             button_color="#6A1B9A",
             button_hover_color="#AB47BC",
