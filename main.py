@@ -665,11 +665,11 @@ def show_pro_preferences():
             next_btn.place(relx=1.0, rely=1.0, anchor="se", x=-10, y=-10)
             next_btn.update_idletasks()
 
-            input_lang_label = ctk.CTkLabel(page1, text="Input Language:", font=label_font)
-            input_lang_label.pack(pady=(15, 0))
+           input_lang_label = ctk.CTkLabel(page1, text="Input Language:", font=label_font)
+           input_lang_label.pack(pady=(15, 0))
     
-            saved_input_lang = settings.get("input_language", "🇬🇧 English")
-            input_lang_var = ctk.StringVar(value=saved_input_lang)
+           saved_input_lang = settings.get("input_language", "🇬🇧 English")
+           input_lang_var = ctk.StringVar(value=saved_input_lang)
     
            input_lang_menu = ctk.CTkOptionMenu(
                 page1,
