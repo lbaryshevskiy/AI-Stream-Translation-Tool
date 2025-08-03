@@ -1289,7 +1289,11 @@ def main():
     if user_plan == "studio":
         available_langs.append(upgrade_hint)
 
+    page1_langs = ["🇬🇧 English", "🇪🇸 Spanish", "🇫🇷 French", "🇩🇪 German", "🇮🇹 Italian", "➡ More languages"]
+    page2_langs = ["🇵🇹 Portuguese", "🇺🇦 Ukrainian", "🇨🇳 Chinese", "🇯🇵 Japanese", "⬅ Back"]
+    
     selected_lang = ctk.StringVar(value="🌐 Language")
+    current_lang_page = 1
 
     def on_lang_select(choice):
         if choice == upgrade_hint:
