@@ -686,6 +686,15 @@ def show_pro_preferences():
             button_hover_color="#AB47BC",
             text_color="white"
         )
+        # Access the Tkinter dropdown menu object
+        menu = input_lang_menu._dropdown_menu  
+        
+        for index, item in enumerate(lang_list_no_english):
+            if item != "🌍 Language Support Soon":
+                menu.entryconfig(index, foreground="gray")   # Grey text
+            else:
+                menu.entryconfig(index, foreground="white")  # Normal/visible
+
         
         def on_input_lang_select(choice):
             # Ignore any selection, revert to English
