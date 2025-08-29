@@ -319,7 +319,7 @@ def transcribe_loop():
                     
                         socketio.emit("subtitle", {"text": "Free access expired – Click here to upgrade"})
                         stop_backend()
-
+                        
                 if wordcount_label and wordcount_label.winfo_exists():
                     def update_label():
                         wordcount_label.configure(
