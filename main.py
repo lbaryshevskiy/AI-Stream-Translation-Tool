@@ -51,7 +51,7 @@ language_options = {
     "🇪🇸 Spanish": "es",
     "🇫🇷 French": "fr",
     "🇩🇪 German": "de",
-    "🇮🇹 Italian": "it",
+    "🇮🇹 Italian": "itl",
     "🇵🇹 Portuguese": "pt",
     "🇺🇦 Ukrainian": "uk",
     "🇨🇳 Chinese": "zh-cn",
